@@ -1,0 +1,97 @@
+<!--
+  Generated template for the SettingsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="danger" hideBackButton>
+      <ion-title style="text-align:center;">{{'settings'| translate}}</ion-title>
+      <!-- *ngIf="langdirection=='ltr'" -->
+      <!-- [ngClass]="scaleClass" -->
+    <ion-buttons right >
+      <button ion-button (click)="ViewCtrl.dismiss()">
+          <ion-icon *ngIf="langdirection=='ltr'" md="ios-arrow-forward" ios="ios-arrow-forward"  style="font-size: 2.5rem;color:white;transform: scale(-1,1);" ></ion-icon>
+          <ion-icon *ngIf="langdirection=='rtl'" md="ios-arrow-forward" ios="ios-arrow-forward"  style="font-size: 2.5rem;color:white;transform: scale(-1,1);" ></ion-icon>
+      </button>
+      </ion-buttons>
+      <!-- <ion-buttons right *ngIf="langdirection=='rtl'">
+        <button ion-button (click)="ViewCtrl.dismiss()">
+            <ion-icon md="ios-arrow-back-outline"  ios="ios-arrow-back-outline" style="font-size: 2.5rem;color:white;" ></ion-icon>
+        </button>
+    </ion-buttons> -->
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+<p style="text-align:center;" (click)="getimg()">
+    <img dir="*ngif(this.platform.isRTL)? rtl : ltr" src="{{photo}}" class="circle-pic"
+    onerror="this.onerror=null;this.src='assets/imgs/camera.png';">
+  
+
+</p>
+<ion-list>
+        <!-- [dir]="langdirection" -->
+<ion-item  (click)="changelang()">
+<ion-row>
+<ion-icon name="md-globe" style="color:#e26c40"></ion-icon>
+<p style="color:#e26c40;margin-left: 8px;margin-right: 8px;margin-top: 2px;">{{'changlang' | translate}}</p>
+</ion-row>
+</ion-item>
+<ion-item  (click)="changepass()">
+<ion-row >
+<ion-icon name="ios-unlock" style="color:#e26c40"></ion-icon>
+<p style="color:#e26c40;margin-left: 8px;margin-right: 8px;margin-top: 2px;">{{'changpass' | translate}}</p>
+</ion-row>
+</ion-item>
+<ion-item >
+<ion-row>
+<ion-icon name="ios-notifications" style="color:#e26c40"></ion-icon>
+<p style="color:#e26c40;margin-left: 8px;margin-right: 8px;margin-top: 2px;">{{'notification' | translate}}</p>
+</ion-row>
+<ion-icon *ngIf="!open" (click)="toggleSection()" [dir]="langdirection" item-end name="ios-arrow-down-outline" style="color:#e26c40;font-size: 1.2em; margin-right: 15px;"></ion-icon>
+<ion-icon *ngIf="open" (click)="toggleSection()" [dir]="langdirection" item-end name="ios-arrow-up-outline" style="color:#e26c40;font-size: 1.2em; margin-right: 15px;"></ion-icon>
+
+</ion-item>
+
+<ion-item   *ngIf="open" >
+    <ion-label style="color:#e26c40;margin-left: 8px;margin-right: 8px;margin-top: 2px;font-size: 1.4rem;">  {{"productsRecentlyAdded" | translate}}</ion-label>
+    <ion-toggle [(ngModel)]="recentProduct" (ionChange)="recentProductNotificationChanged()" ></ion-toggle>
+</ion-item>
+
+<ion-item   *ngIf="open" >
+    <ion-label style="color:#e26c40;margin-left: 8px;margin-right: 8px;margin-top: 2px;font-size: 1.4rem;">  {{"offers" | translate}}</ion-label>
+    <ion-toggle [(ngModel)]="offers" (ionChange)="offersNotificationChanged()" ></ion-toggle>
+</ion-item>
+
+ 
+
+<ion-item (click)="shareapp()" >
+<ion-row >
+<ion-icon name="md-share" style="color:#e26c40"></ion-icon>
+<p style="color:#e26c40;margin-left: 8px;margin-right: 8px;margin-top: 2px;">{{'share' | translate}}</p>
+</ion-row>
+</ion-item>
+</ion-list>
+<p style="text-align:center;font-weight: bold;font-size: 1.4em;">{{'scan' | translate}}</p>
+<p style="text-align: center;">
+    <ion-card *ngIf="createdCode">
+        <ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>
+        
+      </ion-card>
+    </p>
+<p style="text-align:center;font-weight: bold;font-size: 16px;"> {{'follow' | translate}}</p>
+<p style="text-align:center;">
+    
+        <!-- https://www.instagram.com/makady/
+        https://www.facebook.com/makady/
+        https://twitter.com/makady -->
+<a href="" style="text-decoration: none;color:#3878ab"><ion-icon  name="logo-instagram" style="color:red;margin-left: 10px;font-size: 1.8em;color: rgba(233, 30, 99, 0.8313725490196079);"></ion-icon></a>
+<a href="" style="text-decoration: none;color:#3878ab"><ion-icon  name="logo-facebook" style=" margin-left: 10px;margin-right: 10px;font-size: 1.8em;color: #0707b7;"></ion-icon></a>
+<a href="" style="text-decoration: none;color:#3878ab"><ion-icon  name="logo-twitter" style="color:red;margin-right: 10px;font-size: 1.8em;color: #03A9F4;"></ion-icon></a>
+</p>
+</ion-content>

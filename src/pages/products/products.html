@@ -1,0 +1,80 @@
+<!--
+  Generated template for the ProductsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar  color="danger" hideBackButton>
+    <ion-title style="text-align:center;">{{'products' | translate}}</ion-title>
+
+    <ion-buttons right *ngIf="langdirection=='ltr'">
+        <button ion-button (click)="ViewCtrl.dismiss()">
+            <ion-icon md="ios-arrow-forward" ios="ios-arrow-forward"  style="font-size: 2.5rem;color:white;" ></ion-icon>
+        </button>
+        </ion-buttons>
+        <ion-buttons right *ngIf="langdirection=='rtl'">
+          <button ion-button (click)="ViewCtrl.dismiss()">
+              <ion-icon md="ios-arrow-back-outline"  ios="ios-arrow-back-outline" style="font-size: 2.5rem;color:white;" ></ion-icon>
+          </button>
+      </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-searchbar *ngIf="langdirection=='ltr'" [dir]="langdirection" style="margin-top: 0px;" placeholder="Search For Product" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput">
+  </ion-searchbar>
+  <ion-searchbar *ngIf="langdirection=='rtl'" [dir]="langdirection" style="margin-top: 0px;" placeholder="البحث عن منتج" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput">
+  </ion-searchbar>
+  <div style="border:1px solid #e26c40; border-radius: 15px;margin-top:10px;"  *ngFor="let item of products">
+  <ion-row style="  margin-bottom: -25px;">
+    <ion-col col-2>
+      <p [dir]="langdirection"><img  src="{{item.product_image}}" class="circle-pic"
+        onerror="this.onerror=null;this.src='assets/imgs/Bread.jpg';">
+      </p>
+    </ion-col>
+    <ion-col col-4>
+      <p style="margin-top: 25px;">{{item.product_name}}</p>
+    </ion-col>
+    <ion-col col-6>
+      <ion-row style="margin-top: 20px;">
+        <ion-col col-4>
+          <ion-fab *ngIf="!this.platform.isRTL" left bottom style="bottom: 1px;">
+              <button (click)="AddQuantityNum(item.product_id)" ion-fab color=danger style="width: 16px;height: 19px;"><ion-icon name="add" style="font-size: 1.8rem;"></ion-icon></button>
+            </ion-fab>
+            <ion-fab *ngIf="this.platform.isRTL" right bottom style="bottom: 1px;">
+              <button (click)="AddQuantityNum(item.product_id)" ion-fab color=danger style="width: 16px;height: 19px;"><ion-icon name="add" style="font-size: 1.8rem;"></ion-icon></button>
+            </ion-fab>     
+        </ion-col>
+        <ion-col col-4 style="text-align: center">
+          <!-- <span style="text-align: center;color:#84bb53"> {{ qNum }} </span> -->
+          <span style="text-align: center;">{{item.count}} </span>
+        </ion-col>
+        <ion-col col-4>
+          <ion-fab *ngIf="!this.platform.isRTL" right bottom style="bottom: 1px;">
+              <button (click)="minusQuantityNum(item.product_id)" ion-fab color=danger style="width: 16px;height: 19px;"><ion-icon name="remove" style="font-size: 1.8rem;"></ion-icon></button>
+            </ion-fab>
+            <ion-fab *ngIf="this.platform.isRTL" left bottom style="bottom: 1px;">
+              <button (click)="minusQuantityNum(item.product_id)" ion-fab color=danger style="width: 16px;height: 19px;"><ion-icon name="remove" style="font-size: 1.8rem;"></ion-icon></button>
+            </ion-fab>
+        </ion-col>
+        </ion-row>
+    </ion-col>
+  </ion-row>
+    <ion-row style="text-align: center;width:100%;">
+      <ion-col col-3></ion-col>
+      <ion-col col-6>
+        <p style="text-align:center;margin-top: 0px;">
+          <button ion-button style="background-color:#e26c40;color:white;text-align:center;width: 100px;border-radius: 14px;" (click)="addtomenu(item)">{{'add' | translate}}</button>
+          </p>
+      </ion-col>
+  
+      <ion-col col-3></ion-col>
+  
+    </ion-row>
+  
+</div>
+</ion-content>

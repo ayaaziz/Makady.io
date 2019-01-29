@@ -1,0 +1,47 @@
+page-creategroup {
+    .circle-pic{
+        border:0px;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        text-align: center;
+        margin-top: 30px;
+        margin-left: 1px;
+    }
+    .checkbox-md .checkbox-checked {
+        border-color: #e46f3f !important;
+        background-color: #e46f3f !important;
+    }
+    .checkbox-ios .checkbox-checked {
+        border-color: #e46f3f !important;
+        background-color: #e46f3f !important;
+    }
+    .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+
+        border-bottom-color: white;
+        -webkit-box-shadow: inset 0 -1px 0 0 white;
+        box-shadow: inset 0 -1px 0 0 white;
+    
+    }
+    .item-ios.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-ios.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+
+        border-bottom-color: white;
+        -webkit-box-shadow: inset 0 -1px 0 0 white;
+        box-shadow: inset 0 -1px 0 0 white;
+    
+    }
+    .item-md.item-input.item-input-has-focus .item-inner, .item-md.item-input.input-has-focus .item-inner {
+
+        border-bottom-color: white;
+        -webkit-box-shadow: inset 0 -1px 0 0 white;
+        box-shadow: inset 0 -1px 0 0 white;
+    
+    }
+    .item-ios.item-input.item-input-has-focus .item-inner, .item-ios.item-input.input-has-focus .item-inner {
+
+        border-bottom-color: white;
+        -webkit-box-shadow: inset 0 -1px 0 0 white;
+        box-shadow: inset 0 -1px 0 0 white;
+    
+    }
+}
