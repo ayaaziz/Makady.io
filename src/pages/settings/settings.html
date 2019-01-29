@@ -10,17 +10,27 @@
       <ion-title style="text-align:center;">{{'settings'| translate}}</ion-title>
       <!-- *ngIf="langdirection=='ltr'" -->
       <!-- [ngClass]="scaleClass" -->
-    <ion-buttons right >
+    <!-- <ion-buttons right >
       <button ion-button (click)="ViewCtrl.dismiss()">
           <ion-icon *ngIf="langdirection=='ltr'" md="ios-arrow-forward" ios="ios-arrow-forward"  style="font-size: 2.5rem;color:white;transform: scale(-1,1);" ></ion-icon>
           <ion-icon *ngIf="langdirection=='rtl'" md="ios-arrow-forward" ios="ios-arrow-forward"  style="font-size: 2.5rem;color:white;transform: scale(-1,1);" ></ion-icon>
       </button>
-      </ion-buttons>
+      </ion-buttons> -->
       <!-- <ion-buttons right *ngIf="langdirection=='rtl'">
         <button ion-button (click)="ViewCtrl.dismiss()">
             <ion-icon md="ios-arrow-back-outline"  ios="ios-arrow-back-outline" style="font-size: 2.5rem;color:white;" ></ion-icon>
         </button>
     </ion-buttons> -->
+    <ion-buttons right *ngIf="langdirection=='ltr'">
+            <button ion-button (click)="ViewCtrl.dismiss()">
+                <ion-icon md="ios-arrow-forward" ios="ios-arrow-forward"  style="font-size: 2.5rem;color:white;" ></ion-icon>
+            </button>
+            </ion-buttons>
+            <ion-buttons right *ngIf="langdirection=='rtl'">
+              <button ion-button (click)="ViewCtrl.dismiss()">
+                  <ion-icon md="ios-arrow-back-outline"  ios="ios-arrow-back-outline" style="font-size: 2.5rem;color:white;" ></ion-icon>
+              </button>
+          </ion-buttons>
   </ion-navbar>
 
 </ion-header>
