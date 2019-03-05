@@ -94,5 +94,8 @@
     <plugin name="cordova-plugin-telerik-imagepicker" spec="^2.2.2">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="To allow user to upload select images" />
     </plugin>
-    <engine name="android" spec="^7.1.4" />
+    <plugin name="cordova-plugin-googleplus" spec="7.0.0">
+        <variable name="REVERSED_CLIENT_ID" value="651484334747-hg2uqdf63o2vus6er099d4ia6dmgeae2.apps.googleusercontent.com" />
+    </plugin>
+    <engine name="android" spec="7.1.4" />
 </widget>

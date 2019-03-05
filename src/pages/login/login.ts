@@ -9,6 +9,7 @@ import { Storage } from '@ionic/storage';
 import { ForgetpasswordPage } from '../forgetpassword/forgetpassword';
 import { MainproviderProvider } from '../../providers/mainprovider/mainprovider';
 
+import { GooglePlus } from '@ionic-native/google-plus';
 
 @Component({
   selector: 'page-login',
@@ -20,7 +21,7 @@ export class LoginPage {
   logInForm: FormGroup;
   username: any = ""
   Password: any = ""
-  constructor(public provider: MainproviderProvider,public event: Events, public storage: Storage, public toastCtrl: ToastController, public helper: HelperProvider, public formBuilder: FormBuilder, public translate: TranslateService, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private googlePlus: GooglePlus,public provider: MainproviderProvider,public event: Events, public storage: Storage, public toastCtrl: ToastController, public helper: HelperProvider, public formBuilder: FormBuilder, public translate: TranslateService, public navCtrl: NavController, public navParams: NavParams) {
 
     this.langdirection = this.helper.langdirection
     console.log("langdirection from login : ",this.langdirection)
@@ -88,5 +89,25 @@ export class LoginPage {
 
     });
     toast.present();
+  }
+
+  googleLogin(){
+    console.log("googleLogin ")
+    // 651484334747-hg2uqdf63o2vus6er099d4ia6dmgeae2.apps.googleusercontent.com
+    // ionic cordova plugin add cordova-plugin-googleplus --variable REVERSED_CLIENT_ID=651484334747-hg2uqdf63o2vus6er099d4ia6dmgeae2.apps.googleusercontent.com
+    // npm install --save @ionic-native/google-plus@4
+
+//     accessToken: "ya29.GlvDBm-g_1Z1KN3Z_ePZpXSQKfz7s5eINcjHTzOkMDwwmMjjEaVP2F1cr7khqdjkfPokV6QAUMOPJpIaL1yY0xSmCt6LNj1-tbVpGQxAuueRY1TmP8pymSsrJmVY"
+// displayName: "itroots net"
+// email: "itroots.net@gmail.com"
+// expires: 1551804153
+// expires_in: 3597
+// familyName: "net"
+// givenName: "itroots"
+// userId: "102929510784780528383"
+
+    this.googlePlus.login({})
+  .then(res => console.log("res: ",res))
+  .catch(err => console.error("err: ",err));
   }
 }

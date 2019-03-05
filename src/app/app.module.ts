@@ -37,6 +37,8 @@ import { FriendlistPage } from '../pages/friendlist/friendlist';
 import { ListdetailsPage } from '../pages/listdetails/listdetails';
 import { CreatemenuPage } from '../pages/createmenu/createmenu';
 import { PopoverPage } from '../pages/popover/popover';
+import { GooglePlus } from '@ionic-native/google-plus';
+
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -115,7 +117,8 @@ export function createTranslateLoader(http: HttpClient) {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     MainproviderProvider,
-    HelperProvider
+    HelperProvider,
+    GooglePlus
   ]
 })
 export class AppModule {}
