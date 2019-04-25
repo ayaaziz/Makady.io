@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, ViewController ,ActionSheetController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, ViewController ,ActionSheetController, Toggle} from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { HelperProvider } from '../../providers/helper/helper';
 import { MainproviderProvider } from '../../providers/mainprovider/mainprovider';
@@ -9,6 +9,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { TabsPage } from '../tabs/tabs';
+import { SettingsProvider } from '../../providers/settings/settings';
 
 
 @Component({
@@ -19,16 +20,45 @@ export class SettingsPage {
   langdirection:any
   scaleClass="";
   
-  name:any
+  name:any;
   photo:any
   createdCode:any
-  recentProduct = true
-  offers = true
-  constructor(public actionSheetCtrl: ActionSheetController,public camera:Camera,public ViewCtrl:ViewController,public socialSharing:SocialSharing,public plt:Platform,public inap:InAppBrowser,public storage:Storage,public platform:Platform,public provider:MainproviderProvider,public helper:HelperProvider,public translate:TranslateService,public navCtrl: NavController, public navParams: NavParams) {
-    this.langdirection=this.helper.langdirection
+  // recentProduct = true
+  offers = true;
+  productNotificationStatus: boolean = false;
+  offersNotificationStatus: boolean = false;
+
+  constructor(public actionSheetCtrl: ActionSheetController,
+              public camera:Camera,
+              public ViewCtrl:ViewController,
+              public socialSharing:SocialSharing,
+              public plt:Platform,
+              public inap:InAppBrowser,
+              public storage:Storage,
+              public platform:Platform,
+              public provider:MainproviderProvider,
+              public helper:HelperProvider,
+              public translate:TranslateService,
+              public navCtrl: NavController, 
+              public navParams: NavParams,
+              private settingsService:SettingsProvider,
+              // private pushObject: PushObject
+            ) {
+
+
+                this.langdirection=this.helper.langdirection;
+
+                //Get Current Notificatiopns Status
+                this.productNotificationStatus = this.settingsService.returnNotification();
+                this.offersNotificationStatus = this.settingsService.returnOffersNotification();
     
-    if(this.langdirection == "rtl")
-      this.scaleClass="scaleClass";
+
+                console.log("product notification constructor..:"+JSON.stringify(this.productNotificationStatus));
+                console.log("offers notification constructor..:"+JSON.stringify(this.offersNotificationStatus));
+              
+                
+                if(this.langdirection == "rtl")
+                  this.scaleClass="scaleClass";
 
   }
  
@@ -107,75 +137,86 @@ export class SettingsPage {
     this.storage.get("makadyaccess").then((val)=>{
       if(val)
       {
-    this.provider.getuser(val,(data)=>{
-      console.log(JSON.stringify(data))
-      let Dataparsed=JSON.parse(data)
-      if(Dataparsed.success==true)
-      {
-       this.createdCode=(Dataparsed.user.id).toString()
-        console.log(this.createdCode)
-      } 
-    },(data)=>{})
-  }
-})
+        this.provider.getuser(val,(data)=> {
+          console.log(JSON.stringify(data))
+          let Dataparsed=JSON.parse(data)
+          if(Dataparsed.success==true) {
+            this.createdCode=(Dataparsed.user.id).toString();
+            console.log(this.createdCode);
+          } 
+        },
+        (data)=>{})
+      }
+    });
     this.storage.get("Makadyuser_name").then((val)=>{
       this.name=val
     })
 
     console.log('ionViewDidLoad SettingsPage');
   }
+
+
+  // changelang() {
+  //   console.log(this.langdirection);
+  //   //"this.lang" will come from dropdown
+  //   this.translate.use(this.langdirection);
+
+  //   //save selected language in local storage
+  //   this.settingsService.setLang(this.langdirection);
+  // }
+
   changelang()
   {
     this.storage.get("makadyaccess").then((val)=>{
       if(val)
       {
-    if(this.helper.langdirection=="ltr")
-    {
-      this.provider.changelang(2,val,(data)=>{
-        console.log(JSON.stringify(data))
-        this.translate.setDefaultLang('ar');  
-        this.translate.use('ar');    
-        this.platform.setDir('rtl', true);
-        this.helper.langdirection = "rtl"; 
-        this.scaleClass="scaleClass";
-        this.storage.set('Mlanguage', 'ar').then(resp=>{
-          console.log("resp set('language',: ",resp)
-        });
-        this.navCtrl.setRoot(TabsPage)
-      },(data)=>{
-        this.translate.setDefaultLang('ar');  
-        this.translate.use('ar');    
-        this.platform.setDir('rtl', true);
-        this.helper.langdirection = "rtl"; 
-        this.scaleClass="scaleClass";
-        this.navCtrl.setRoot(TabsPage)
-      })
-    }
-    else{
-      this.provider.changelang(1,val,(data)=>{
-        console.log(JSON.stringify(data))
-        this.translate.setDefaultLang('en');
-        this.translate.use('en');
-        this.platform.setDir('ltr', true);
-        this.helper.langdirection = "ltr";
-        this.storage.set('Mlanguage', 'en').then(resp=>{
-          console.log("resp set('language',: ",resp)
-        });
-        this.navCtrl.setRoot(TabsPage)
-        // this.scaleClass="scaleClass";
-       
-      },(data)=>{
-        this.translate.setDefaultLang('en');
-        this.translate.use('en');
-        this.platform.setDir('ltr', true);
-        this.helper.langdirection = "ltr";
-        this.navCtrl.setRoot(TabsPage)
-        // this.scaleClass="scaleClass";
-      })
-    }
+        if(this.helper.langdirection == "ltr")
+        {
+          // this.provider.changelang(2,val,(data)=> {
+
+          // console.log(JSON.stringify(data))
+          this.translate.setDefaultLang('ar');  
+          this.translate.use('ar');    
+          this.platform.setDir('rtl', true);
+          this.helper.langdirection = "rtl"; 
+          this.scaleClass="scaleClass";
+          this.storage.set('Mlanguage', 'ar').then(resp=>{
+            console.log("resp set('language',: ",resp);
+          });
+          this.navCtrl.setRoot(TabsPage);
+          // },(data)=>{
+          //   this.translate.setDefaultLang('ar');  
+          //   this.translate.use('ar');    
+          //   this.platform.setDir('rtl', true);
+          //   this.helper.langdirection = "rtl"; 
+          //   this.scaleClass="scaleClass";
+          //   this.navCtrl.setRoot(TabsPage)
+          // })
+        } else {
+          // this.provider.changelang(1,val,(data)=> {
+            // console.log(JSON.stringify(data));
+            this.translate.setDefaultLang('en');
+            this.translate.use('en');
+            this.platform.setDir('ltr', true);
+            this.helper.langdirection = "ltr";
+            this.storage.set('Mlanguage', 'en').then(resp=>{
+              console.log("resp set('language',: ",resp)
+            });
+            this.navCtrl.setRoot(TabsPage);
+          
+          // },
+          // (data)=> {
+          //   this.translate.setDefaultLang('en');
+          //   this.translate.use('en');
+          //   this.platform.setDir('ltr', true);
+          //   this.helper.langdirection = "ltr";
+          //   this.navCtrl.setRoot(TabsPage)
+          // })
+        }
+      }
+    })
   }
-})
-  }
+
   changepass()
   {
     this.navCtrl.push(ChangepasswordPage)
@@ -221,19 +262,24 @@ export class SettingsPage {
 //   });
 // }
 }
-open = false
-toggleSection(){
- 
-  if(this.open == true)
-  this.open=false
-  else  if(this.open == false)
-  this.open=true
-}
+  open = false;
+  toggleSection(){
+  
+    if(this.open) this.open=false;
+    else this.open = true;
+  }
 
-recentProductNotificationChanged(){
+  onToggleProductNotification(toggle:Toggle) {
+    this.settingsService.changeProductNotificationToggle(toggle.checked);
+    
+    //open or close product notification
 
-}
-offersNotificationChanged(){
+  }
 
-}
+  onToggleOffersNotification(toggle:Toggle) {
+    this.settingsService.changeOffersNotificationToggle(toggle.checked);
+
+    //open or close product notification
+     
+  }
 }

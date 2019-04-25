@@ -3,12 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 import { HelperProvider } from '../helper/helper';
 import { LoadingController } from 'ionic-angular';
 
-/*
-  Generated class for the MainproviderProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class MainproviderProvider {
 
@@ -51,6 +46,7 @@ export class MainproviderProvider {
         }
       )
   }
+
   login(username,password,id,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
@@ -163,33 +159,36 @@ export class MainproviderProvider {
         }
       )
   }
-  changelang(lang,access,successCallback, failureCallback) {
-    let loader = this.loadingCtrl.create({
-      content: "",
-    });
-    loader.present();
-    let headers = new HttpHeaders();
-    let parameter = {
-      'lang':lang,
-     
-    }
-    headers = headers.set('Authorization', 'Bearer '+access);
-    let serviceUrl = this.helper.serviceurl + 'changeLanguage';
-    //
-    this.http.post(serviceUrl, parameter, { headers: headers })
-      .subscribe(
-        data => {
-          loader.dismiss();
 
-          successCallback(JSON.stringify(data))
-        },
-        err => {
-          loader.dismiss();
 
-          failureCallback(err);
-        }
-      )
-  }
+  // changelang(lang,access,successCallback, failureCallback) {
+  //   let loader = this.loadingCtrl.create({
+  //     content: "",
+  //   });
+  //   loader.present();
+  //   let headers = new HttpHeaders();
+  //   let parameter = {
+  //     'lang':lang     
+  //   }
+  //   headers = headers.set('Authorization', 'Bearer '+access);
+  //   let serviceUrl = this.helper.serviceurl + 'changeLanguage';
+  //   //
+  //   this.http.post(serviceUrl, parameter, { headers: headers })
+  //     .subscribe(
+  //       data => {
+  //         loader.dismiss();
+
+  //         successCallback(JSON.stringify(data))
+  //       },
+  //       err => {
+  //         loader.dismiss();
+
+  //         failureCallback(err);
+  //       }
+  //     )
+  // }
+
+
   checkpass(pass,access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
@@ -214,9 +213,10 @@ export class MainproviderProvider {
           loader.dismiss();
 
           failureCallback(err);
-        }
-      )
+        })
   }
+
+
   changepass(pass,newpass,confirm,access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
@@ -246,6 +246,8 @@ export class MainproviderProvider {
         }
       )
   }
+
+
   getuser(access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
@@ -295,6 +297,8 @@ export class MainproviderProvider {
         }
       )
   }
+
+
   getproducts(id,search,access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
@@ -322,6 +326,8 @@ export class MainproviderProvider {
         }
       )
   }
+
+
   offers(search,access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
@@ -348,6 +354,8 @@ export class MainproviderProvider {
         }
       )
   }
+
+
   friends(access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
@@ -357,7 +365,7 @@ export class MainproviderProvider {
   
     headers = headers.set('Authorization', 'Bearer '+access);
     let serviceUrl = this.helper.serviceurl + 'friends';
-    //
+  
     this.http.get(serviceUrl, { headers: headers })
       .subscribe(
         data => {
@@ -372,15 +380,17 @@ export class MainproviderProvider {
         }
       )
   }
+
+
   deletefriends(id,access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
     });
     loader.present();
     let headers = new HttpHeaders();
-  let parameter={
-    'user_id':id
-  }
+    let parameter={
+      'user_id':id
+    }
     headers = headers.set('Authorization', 'Bearer '+access);
     let serviceUrl = this.helper.serviceurl + 'deleteFriend';
     //
@@ -398,18 +408,20 @@ export class MainproviderProvider {
         }
       )
   }
+
+
   addfriends(id,access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
     });
     loader.present();
     let headers = new HttpHeaders();
-  let parameter={
-    'user_id':id
-  }
+    let parameter={
+      'user_id':id
+    }
     headers = headers.set('Authorization', 'Bearer '+access);
     let serviceUrl = this.helper.serviceurl + 'addFriend';
-    //
+   
     this.http.post(serviceUrl, parameter,{ headers: headers })
       .subscribe(
         data => {
@@ -424,18 +436,21 @@ export class MainproviderProvider {
         }
       )
   }
+
+
+
   deletegroups(id,access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
     });
     loader.present();
     let headers = new HttpHeaders();
-  let parameter={
-    'group_id':id
-  }
+    let parameter={
+      'group_id':id
+    }
     headers = headers.set('Authorization', 'Bearer '+access);
     let serviceUrl = this.helper.serviceurl + 'deleteGroup';
-    //
+ 
     this.http.post(serviceUrl, parameter,{ headers: headers })
       .subscribe(
         data => {
@@ -450,18 +465,21 @@ export class MainproviderProvider {
         }
       )
   }
+
+
+
   searchgroups(name,access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
     });
     loader.present();
     let headers = new HttpHeaders();
-  let parameter={
-    'name':name
-  }
+    let parameter={
+      'name':name
+    }
     headers = headers.set('Authorization', 'Bearer '+access);
     let serviceUrl = this.helper.serviceurl + 'searchGroup';
-    //
+   
     this.http.post(serviceUrl, parameter,{ headers: headers })
       .subscribe(
         data => {
@@ -476,16 +494,18 @@ export class MainproviderProvider {
         }
       )
   }
+
+
   creategroup(name,ids,access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
     });
     loader.present();
     let headers = new HttpHeaders();
-  let parameter={
-    'name':name,
-    'users_ids':ids
-  }
+    let parameter={
+      'name':name,
+      'users_ids':ids
+    }
     headers = headers.set('Authorization', 'Bearer '+access);
     let serviceUrl = this.helper.serviceurl + 'createGroup';
     //
@@ -503,17 +523,19 @@ export class MainproviderProvider {
         }
       )
   }
+
+
   editgroup(name,ids,groupid,access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
     });
     loader.present();
     let headers = new HttpHeaders();
-  let parameter={
-    'name':name,
-    'users_ids':ids,
-    'group_id':groupid
-  }
+    let parameter={
+      'name':name,
+      'users_ids':ids,
+      'group_id':groupid
+    }
   console.log(access)
   console.log(parameter)
     headers = headers.set('Authorization', 'Bearer '+access);
@@ -533,17 +555,19 @@ export class MainproviderProvider {
         }
       )
   }
+
+
   menus(type,search,access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
     });
     loader.present();
     let headers = new HttpHeaders();
-  let parameter={
-    'type':type,
-    'search':search,
-   
-  }
+    let parameter={
+      'type':type,
+      'search':search,
+    
+    }
     headers = headers.set('Authorization', 'Bearer '+access);
     let serviceUrl = this.helper.serviceurl + 'menus';
     //
@@ -561,17 +585,17 @@ export class MainproviderProvider {
         }
       )
   }
+
+
   deletemenu(id,access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
     });
     loader.present();
     let headers = new HttpHeaders();
-  let parameter={
-    'menu_id':id,
-    
-   
-  }
+    let parameter={
+      'menu_id':id
+    }
     headers = headers.set('Authorization', 'Bearer '+access);
     let serviceUrl = this.helper.serviceurl + 'deleteMenu';
     //
@@ -589,6 +613,8 @@ export class MainproviderProvider {
         }
       )
   }
+
+
   addtomenu(id,products,access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
@@ -617,6 +643,9 @@ export class MainproviderProvider {
         }
       )
   }
+
+
+
   home(access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
@@ -641,6 +670,9 @@ export class MainproviderProvider {
         }
       )
   }
+
+
+
   friendrequests(access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
@@ -665,15 +697,17 @@ export class MainproviderProvider {
         }
       )
   }
+
+
   acceptfriendrequests(id,access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
     });
     loader.present();
     let headers = new HttpHeaders();
-let parameter={
-  'user_id':id
-}
+    let parameter={
+      'user_id':id
+    }
     headers = headers.set('Authorization', 'Bearer '+access);
     let serviceUrl = this.helper.serviceurl + 'acceptFriendRequest';
     //
@@ -691,6 +725,8 @@ let parameter={
         }
       )
   }
+
+
   updateproduct(id,quantity,access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
@@ -719,6 +755,8 @@ let parameter={
         }
       )
   }
+
+
   getMenudetails(id,access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
@@ -731,7 +769,7 @@ let parameter={
     headers = headers.set('Authorization', 'Bearer '+access);
     let serviceUrl = this.helper.serviceurl + 'getMenu';
     //
-    this.http.post(serviceUrl,parameter, { headers: headers })
+    this.http.post(serviceUrl,parameter,{ headers: headers })
       .subscribe(
         data => {
           loader.dismiss();
@@ -743,6 +781,8 @@ let parameter={
         }
       )
   }
+
+
   createmenu(name,ids,access,successCallback, failureCallback) {
     
     let loader = this.loadingCtrl.create({
@@ -754,6 +794,8 @@ let parameter={
     'name':name,
     'users_ids':ids
   }
+
+
   console.log(parameter)
     headers = headers.set('Authorization', 'Bearer '+access);
     let serviceUrl = this.helper.serviceurl + 'createMenu';
@@ -772,6 +814,7 @@ let parameter={
         }
       )
   }
+
   editmenu(name,ids,menuid,access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
@@ -800,6 +843,8 @@ let parameter={
         }
       )
   }
+
+ 
   addproduct(id,useid,quantity,price,access,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",

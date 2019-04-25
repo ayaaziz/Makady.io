@@ -3,7 +3,7 @@ import { Platform, Nav,NavController, ActionSheetController, Events } from 'ioni
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from '../pages/tabs/tabs';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { HelperProvider } from '../providers/helper/helper';
 import { LoginPage } from '../pages/login/login';
 import { Storage } from '@ionic/storage';
@@ -16,85 +16,202 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ProductsPage } from '../pages/products/products';
 import { AboutPage } from '../pages/about/about';
 import { dateDataSortValue } from 'ionic-angular/util/datetime-util';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
+import { SettingsProvider } from '../providers/settings/settings';
+
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) navctrl: Nav;
-  @ViewChild("content") nav: NavController
+  @ViewChild("content") nav: NavController;
   rootPage:any;
-  userLang:any
-  photo:any
+  userLang:any;
+  photo:any;
   username;
-  langdirection
+  langdirection;
+  side:string;
+  userLoged: boolean = false;
+  prodNotification: boolean = false;
+  offersNotification: boolean = false;
 
-  // {"username":"test","name":"test","email":"test@gmail.com","password":"1234","password_confirmation":"1234","phone":"1234567890","profile_pic":null,"profile_pic_ext":null,"social_type":4,"firebase_id":"4rtghju98jhjk","type":"1","lang":"2"}
-  constructor(public actionSheetCtrl: ActionSheetController,public camera:Camera,public event: Events,public imagepicker:ImagePicker,public provider:MainproviderProvider,public storage:Storage,public menu: MenuController,public translate:TranslateService,public helper:HelperProvider,public platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(public actionSheetCtrl: ActionSheetController,
+              public camera:Camera,
+              public event: Events,
+              public imagepicker:ImagePicker,
+              public provider:MainproviderProvider,
+              public storage:Storage,
+              public menu: MenuController,
+              public translate:TranslateService,
+              public helper:HelperProvider,
+              public platform: Platform, 
+              statusBar: StatusBar,
+              splashScreen: SplashScreen,
+              private push: Push,
+              private settingsService:SettingsProvider,
+              // private pushObject: PushObject
+            ) {
+
     platform.ready().then(() => {
       this.event.subscribe("login", ()=>{
         this.storage.get("user_info").then((val)=>{
-          this.username = val.user.username
-          this.photo = val.user.profile_pic 
-          console.log("user_info : ",val)
-        })
-      })
-      // this.helper.langdirection="rtl"
-      // this.langdirection = "rtl"
-      // if(this.helper.langdirection=="ltr")
-      // {dateDataSortValue
-      // this.userLang = 'en';
-      // this.translate.setDefaultLang('en');
-      // }else{
-      //   this.userLang = 'ar';
-      // this.translate.setDefaultLang('ar');
-      // }
-      // if (this.userLang == 'ar') {
-      //   this.translate.setDefaultLang('ar');  
-      //   this.translate.use('ar');    
-      //   this.platform.setDir('rtl', true);
-      //   this.helper.langdirection = "rtl";   
-      //   this.langdirection = "rtl"
-      // }else {
-      //       this.translate.setDefaultLang('en');
-      //       this.translate.use('en');
-      //       this.platform.setDir('ltr', true);
-      //       this.helper.langdirection = "ltr";
-      //       this.langdirection = "ltr"
-      //     }
+          this.userLoged = true;
+          this.username = val.user.username;
+          this.photo = val.user.profile_pic ;
+          console.log("user_info : ",val);
+        });
+      });
 
-      if(this.platform.is('ios'))
-      {
+      if(this.platform.is('ios')) {
         this.helper.type="2"
-      }
-      else
-      {
+      } else {
         this.helper.type="1"
       }
       statusBar.styleDefault();
-      statusBar.backgroundColorByHexString("#696767");
+      statusBar.backgroundColorByHexString("#f2622c");
       splashScreen.hide();
-      this.initLang()
-      this.storage.get("Makadyusername").then((val)=>{
-        this.storage.get("user_info").then((val)=>{
-          this.username = val.user.username
-        })
-           if(val=="true")
-           {
-           this.navctrl.setRoot(TabsPage)
-           }
-           else{
-   
+      this.initLang();
+
+      //push notification setup
+      this.pushSetup();
+    
+
+      //this is to determine the text direction depending on the selected language
+      this.translate.onLangChange.subscribe((event: LangChangeEvent) =>
+      { 
+        if(event.lang == 'ar') {
+            platform.setDir('rtl', true);
+            platform.setDir('ltr', false);
+            // this.side = "right";   
+          } else {
+            platform.setDir('ltr', true);
+            platform.setDir('rtl', false);
+            // this.side = "left";          
+          }     
+      });
+
+      this.storage.get("Makadyusername").then((val)=> {
+        if(!val){
           this.navctrl.push(LoginPage)
-   
+          return
+        }
+        this.storage.get("user_info").then((userInfo)=> {
+          if(!userInfo) {
+            this.navctrl.push(LoginPage);
+            return;
+          }
+          this.username = userInfo.user.username;
+        })
+           if(val=="true") {
+             this.event.publish("login");
+             this.navctrl.setRoot(TabsPage);
+           } else {
+              this.navctrl.push(LoginPage);
            }
-         })
+      });
+
+
+      //************************** Product Settings ************************//
+      this.settingsService.getNotificationStatus()
+      .then(data => {  
+        if(data === null ) data = true; 
+        this.prodNotification = data;    
+                 
+          console.log("product notification..:"+JSON.stringify(this.prodNotification));     
+          this.settingsService.sendNotificstionStatus(this.prodNotification);
+      });      
+
+       //************************** Offers Settings ************************//
+       this.settingsService.getOffersNotificationStatus()
+       .then(data => {
+          if(data === null) data = true;
+        this.offersNotification = data;    
+          
+          console.log("offers notification..:"+JSON.stringify(this.offersNotification));                   
+          this.settingsService.sendOffersNotificstionStatus(this.offersNotification);   
+          
+          // //open or close Offers notification
+          // if(data) {
+          //   // pushObject.subscribe("Offers")
+          //   .then(data => {
+          //     console.log(data);
+          //   });
+          // } else {
+          //   // pushObject.unsubscribe("Offers")
+          //   .then(data => {
+          //     console.log(data);
+          //   });
+          // }
+          
+       });
     });
   }
+
+  //************************ Push Notification ****************************//
+  pushSetup() {
+
+    // to initialize push notifications
+    const options: PushOptions = {
+      android: {
+        forceShow: true
+      },
+      ios: {
+          alert: 'true',
+          badge: true,
+          sound: 'false'
+      }
+    }
+
+    const pushObject:PushObject = this.push.init(options);
+
+    // open or close product notification
+    // if(this.prodNotification) {
+    //   pushObject.subscribe("Product")
+    //   .then(data => {
+    //     console.log(data);
+    //   });           
+    // } else {
+    //   pushObject.unsubscribe("Product")
+    //   .then(data => {
+    //     console.log(data);
+    //   });
+    // }
+
+    // //open or close offers notification
+    // if(this.offersNotification) {
+    //   pushObject.subscribe("Offers")
+    //   .then(data => {
+    //     console.log(data);
+    //   });           
+    // } else {
+    //   pushObject.unsubscribe("Offers")
+    //   .then(data => {
+    //     console.log(data);
+    //   });
+    // }
+
+
+    pushObject.on('notification').subscribe((notification: any) => {
+
+      //handle notification
+      console.log('Received a notification', notification);
+      alert(JSON.stringify(notification));
+      
+    }); 
+
+    pushObject.on('registration').subscribe((registration: any) => console.log('Device registered', registration));
+
+    pushObject.on('error').subscribe(error => {
+      console.error('Error with Push plugin', error);
+    });
+    
+    }
+
   openhome()
   {
       this.navctrl.setRoot(TabsPage, { tabIndex: 0 });
-    this.menu.close()
+      this.menu.close()
 
   }
   openlists()
@@ -128,7 +245,7 @@ export class MyApp {
   settings()
   {
      this.navctrl.setRoot(TabsPage).then(() => {
-this.navctrl.push(SettingsPage)
+      this.navctrl.push(SettingsPage)
      })
   }
   logout()
@@ -137,6 +254,7 @@ this.navctrl.push(SettingsPage)
       if(val)
       {
         this.provider.logout(1,val,(data)=>{
+          this.userLoged = false
           this.navctrl.push(LoginPage)
           this.storage.remove("Makadyusername")
           this.storage.remove("Mlanguage")
@@ -243,38 +361,32 @@ this.navctrl.push(SettingsPage)
           this.translate.use('ar');    
           this.platform.setDir('rtl', true);
           this.helper.langdirection = "rtl";   
-          //this.menuSide = "right";
 
-        }else{
+        } else {
           console.log("form initializeLang: ",val);
           this.translate.setDefaultLang('en');
           this.translate.use('en');
           this.platform.setDir('ltr', true);
           this.helper.langdirection = "ltr";
-         // this.menuSide = "left";
         }
-      }else{
+      } else{
         console.log("lang value not detected",val);
         var userLang = navigator.language.split('-')[0];
         console.log("navigator.language",navigator.language);
         console.log("userlang",userLang);
-        
-      //  userLang = 'ar';
     
         if (userLang == 'ar') {
           this.translate.setDefaultLang('ar');  
           this.translate.use('ar');    
           this.platform.setDir('rtl', true);
           this.helper.langdirection = "rtl";   
-         // this.menuSide = "right";
-        }else {
-              this.translate.setDefaultLang('en');
-              this.translate.use('en');
-              this.platform.setDir('ltr', true);
-              this.helper.langdirection = "ltr";
-             // this.menuSide = "left";
-        }
 
+        } else {
+            this.translate.setDefaultLang('en');
+            this.translate.use('en');
+            this.platform.setDir('ltr', true);
+            this.helper.langdirection = "ltr";
+        }
       }
     });
 

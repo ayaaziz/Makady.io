@@ -8,4 +8,15 @@ page-products {
         margin-top: 0px;
         margin-left: 1px;
     }
+    .fab{
+        box-shadow: none !important;
+        border-radius: 20% !important;
+        color: black !important;
+    }
+    .rtl .circle-pic{
+        max-width: 50px; right: -30px !important; position: relative !important;
+    }
+    .ltr .circle-pic{
+        max-width: 50px; left: -30px !important; position: relative !important;
+    }
 }

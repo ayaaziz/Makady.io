@@ -19,31 +19,34 @@ name:any = ""
 id:any=""
 page:any
 groupid:any
-groupname:any
+groupname:any;
+pageType:string;
+
   constructor(public ViewCtrl:ViewController,public toastCtrl:ToastController,public storage:Storage,public provider:MainproviderProvider,public platform:Platform,public helper:HelperProvider,public translate:TranslateService,public navCtrl: NavController, public navParams: NavParams) {
- this.page=this.navParams.get("page")
- this.groupid=this.navParams.get("groupid")
-this.groupname=this.navParams.get("name")
+    this.page = this.navParams.get("page");
+    this.groupid = this.navParams.get("groupid");
+    this.groupname = this.navParams.get("name");
   }
 
   ionViewDidLoad() {
-if(this.page=="edit")
-{
-this.name=this.groupname
-}
+    if(this.page=="edit") {
+      this.name = this.groupname;
+      this.pageType = "Edit";
+    } else {
+      this.pageType = "Create";      
+    }
   
-     this.langdirection=this.helper.langdirection
-     this.storage.get("makadyaccess").then((val)=>{
-      if(val)
-      {
-    this.provider.friends(val,(data)=>{
-      console.log(JSON.stringify(data))
-      let parsedData=JSON.parse(data)
-      this.friends=parsedData.friends
-    },(data)=>{
+    this.langdirection=this.helper.langdirection
+    this.storage.get("makadyaccess").then((val)=> {
 
-    })
+    if(val) {
+        this.provider.friends(val,(data)=>{
+          console.log(JSON.stringify(data))
+          let parsedData=JSON.parse(data)
+          this.friends=parsedData.friends
+        },(data)=>{
 
+        })
       }
     })
   }

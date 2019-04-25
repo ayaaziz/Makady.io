@@ -4,31 +4,50 @@
   <ion-navbar color="danger" hideBackButton>
     <ion-title style="text-align:center;">{{'friends' | translate}}</ion-title>
     <ion-buttons right *ngIf="langdirection=='ltr'">
-      <button ion-button (click)="ViewCtrl.dismiss()">
-          <ion-icon md="ios-arrow-forward" ios="ios-arrow-forward"  style="font-size: 2.5rem;color:white;" ></ion-icon>
-      </button>
+        <button ion-button  menuToggle>
+            <ion-icon  class="menuToggle" ios="md-list" md="md-list" style="font-size: 3.2rem;    margin-left: 0px;
+            margin-right: 0px;"></ion-icon>
+        </button>
+        <button ion-button (click)="ViewCtrl.dismiss()">
+            <ion-icon md="ios-arrow-forward" ios="ios-arrow-forward"  style="font-size: 2.5rem;color:white;" ></ion-icon>
+        </button>
       </ion-buttons>
-      <ion-buttons right *ngIf="langdirection=='rtl'">
+      <!-- <ion-buttons right *ngIf="langdirection=='rtl'">
         <button ion-button (click)="ViewCtrl.dismiss()">
             <ion-icon md="ios-arrow-back-outline"  ios="ios-arrow-back-outline" style="font-size: 2.5rem;color:white;" ></ion-icon>
         </button>
-    </ion-buttons>
+      </ion-buttons> -->
   </ion-navbar>
 
 </ion-header>
-
-
 <ion-content padding>
 <ion-searchbar *ngIf="langdirection=='ltr'" [dir]="langdirection" placeholder="Search For A Friend" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput">
     </ion-searchbar>
     <ion-searchbar *ngIf="langdirection=='rtl'" [dir]="langdirection" placeholder="البحث عن صديق" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput">
       </ion-searchbar>
-    <ion-row style="margin-top: 5px;" >
-    <ion-col col-4 style="box-shadow: 1px 3px 6px 1px lightgrey;margin-right: 5px;margin-left: 5px;" *ngFor="let item of groups">
-    <p style="text-align:center;margin-bottom: 2px;"><img style="text-align:center;margin-top: 0px;" class="circle-pic" src="assets/imgs/camera.png"></p>
-    <p style="text-align:center;">{{item.group_name}}</p>
-    </ion-col>
-    </ion-row>
+      <ion-scroll scrollX="true" style="height:150px;white-space: nowrap;;text-align: right;margin-top: 5px;">
+    
+    <div class="subcat" style="box-shadow: 1px 3px 6px 1px lightgrey;margin-right: 5px;margin-left: 5px;text-align: center;height: 150px" *ngFor="let item of groups">
+    
+      <div *ngIf="item.members?.length == 0 || !item.members" style="text-align:center;margin-bottom: 2px;"><img style="text-align:center;margin-top: 0px;" class="circle-pic" src="assets/imgs/error.png">
+      </div>
+      <div *ngIf="item.members?.length == 1" style="width:100px;height:100px;margin:auto;overflow: hidden;border-radius: 50%;">
+          <img *ngFor="let member of item.members; let i = index" style="width:80px;border-radius: 50%" src="{{member.profile_pic}}">
+          
+       </div>
+       <div *ngIf="item.members?.length > 2" style="width:50px;height:100px;margin:auto;overflow: hidden;border-radius: 50%;">
+          <img *ngFor="let member of item.members; let i = index" style="width:40px;border-radius: 50%" src="{{member.profile_pic}}">
+          
+       </div>
+      <div *ngIf="item.members?.length > 3" style="width:100px;height:100px;margin:auto;overflow: hidden;border-radius: 50%;">
+        <img *ngFor="let member of item.members; let i = index" style="width:40px;border-radius: 50%" src="{{member.profile_pic}}">
+        
+     </div>
+    <div style="text-align:center;">{{item.group_name}}</div>
+   
+  </div>
+    
+  </ion-scroll>
     <div style="box-shadow:1px 1px 1px 1px lightgray">
     <p [dir]="langdirection" style="color:#e26c40;font-weight:bold;font-size:1.2em;margin-left: 10px;margin-right: 10px;">{{'friendlist'| translate}}</p>
        <p [dir]="langdirection" style="color:#e26c40;font-weight:bold;font-size:1.2em" (click)="addfriend()"><ion-icon name="md-add-circle" style="color:#e26c40;margin-right: 10px;margin-left: 10px;"></ion-icon>{{'addnewfriend'| translate}}</p>

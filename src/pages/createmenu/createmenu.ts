@@ -19,18 +19,21 @@ export class CreatemenuPage {
   id:any=""
   page:any
   menuid:any
-  menuname:any
+  menuname:any;
+
   constructor(public ViewCtrl:ViewController,public toastCtrl:ToastController,public storage:Storage,public provider:MainproviderProvider,public platform:Platform,public helper:HelperProvider,public translate:TranslateService,public navCtrl: NavController, public navParams: NavParams) {
-    this.page=this.navParams.get("page")
-    this.menuid=this.navParams.get("menuid")
-    this.menuname=this.navParams.get("name")
+
+        this.page=this.navParams.get("page")
+        this.menuid=this.navParams.get("menuid")
+        this.menuname=this.navParams.get("name")
   }
   
   ionViewDidEnter() {
 
-    if(this.page=="edit")
+    if(this.page === "edit")
     {
-      this.name=this.menuname
+      this.name = this.menuname;
+
     }
     this.langdirection=this.helper.langdirection
     this.storage.get("makadyaccess").then((val)=>{

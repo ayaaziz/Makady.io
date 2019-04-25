@@ -4,7 +4,12 @@ page-listdetails {
         //background: color($colors, light);
         height: 100%;
       }
-    
+    .rtl .saveBtn{
+      float:left;
+    }
+    .ltr .saveBtn{
+      float:right;
+    }
       .section {
         background: #fff;
         color: white;
@@ -42,8 +47,8 @@ page-listdetails {
       }
     .circle-pic{
         border:0px;
-        width: 48px;
-        height: 48px;
+        width: 60px;
+        height: 60px;
         border-radius: 2% !important;
         text-align: center;
         margin-top: 0px;
@@ -51,17 +56,17 @@ page-listdetails {
     }
     .text-input-md {
 
-        margin: 1px 8px !important;
+        margin: 1px !important;
         padding: 0;
-        width: calc(100% - 8px - 8px);
+        width: 100%;
         text-align: center !important;
     
     }
     .text-input-ios {
 
-        margin: 1px 8px !important; 
+        margin: 1px !important; 
         padding: 0;
-        width: calc(100% - 8px - 8px);
+        width: 100%;
         text-align: center !important;
     
     }

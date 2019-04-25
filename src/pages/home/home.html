@@ -1,75 +1,81 @@
 <ion-header>
-    <ion-navbar color=danger>
-    <ion-buttons left *ngIf="langdirection=='ltr'">
+    <ion-navbar color="danger">     
+      <ion-buttons left>
+          <button ion-button menuToggle>
+            <ion-icon  class="menuToggle" ios="md-list" md="md-list" style="font-size: 3.2rem"></ion-icon>
+          </button>
+      </ion-buttons>
+      <ion-row>
+        <ion-col>
+          <img src="../../assets/imgs/homelogo.png" alt="home">
+        </ion-col>
+      </ion-row>
+      <ion-buttons right (click)="friendlist()">
+        <button ion-button icon-only>
+          <ion-icon name="search" style="font-size: 2.2rem;color:white"></ion-icon>
+        </button>
+      </ion-buttons>
+   
+  
+  
+    <!-- <ion-buttons right *ngIf="langdirection=='rtl'">
         <button ion-button  menuToggle>
         <ion-icon  class="menuToggle" ios="md-list" md="md-list" style="font-size: 3.2rem;    margin-left: 0px;
         margin-right: 0px;"></ion-icon>
       </button>
-      </ion-buttons>
-       <ion-buttons right *ngIf="langdirection=='rtl'">
-        <button ion-button  menuToggle>
-        <ion-icon  class="menuToggle" ios="md-list" md="md-list" style="font-size: 3.2rem;    margin-left: 0px;
-        margin-right: 0px;"></ion-icon>
-      </button>
-      </ion-buttons>
-     <!-- <p style="text-align: center;"><img style="text-align: center;" src="assets/imgs/homelogo.png"></p> -->
-<ion-buttons right *ngIf="langdirection=='ltr'" (click)="friendlist()">
+    </ion-buttons> -->
+    
+<!-- <ion-buttons right (click)="friendlist()">
   <button ion-button icon-only>
       <ion-icon name="md-people" style="font-size: 2.2rem;color:white"></ion-icon>
-
   </button>
-</ion-buttons>
-<ion-buttons left *ngIf="langdirection=='rtl'" (click)="friendlist()">
+</ion-buttons> -->
+<!-- <ion-buttons left *ngIf="langdirection=='rtl'" (click)="friendlist()">
   <button ion-button icon-only>
-      <ion-icon name="md-people" style="font-size: 2.2rem;color:white"></ion-icon>
-
+    <ion-icon name="md-people" style="font-size: 2.2rem;color:white"></ion-icon>
   </button>
-</ion-buttons>
+</ion-buttons> -->
   </ion-navbar>
 </ion-header>
 
 <ion-content padding style="background-color: #f3f3f3">
   <div style="background-color: white;padding:2px;">
   <p style="margin-right: 5px;color: #e26c40;font-weight: bold;font-size: 1.4em;margin-left: 5px;" [dir]="langdirection"> {{'mostsell' | translate}}</p>
-  <!-- <button ion-button (click)="login()"> login </button> -->
-  <ion-row *ngIf="langdirection=='rtl'">
-<ion-col col-12>
-    <section class="chart-wrapper">
+  <!-- <ion-row *ngIf="langdirection=='rtl'">
+    <ion-col col-12>
+      <section class="chart-wrapper">
         <canvas class="canvas1" #polarChart ></canvas>
       </section>
-</ion-col>
+    </ion-col>
+  </ion-row> -->
+  <ion-row>
+    <ion-col col-12>
+      <section class="chart-wrapper2">
+        <canvas class="canvas1" #polarChart></canvas>
+      </section>
+    </ion-col>
   </ion-row>
-  <ion-row *ngIf="langdirection=='ltr'">
-      <ion-col col-12>
-          <section class="chart-wrapper2">
-              <canvas class="canvas1" #polarChart ></canvas>
-            </section>
+</div>
+
+
+
+<!-- <div style="background-color: white;padding:2px;">
+  
+</div> -->
+  <div style="background-color: white;padding:2px;margin-top: 5px;">
+    <p style="margin-right: 5px;color: #e26c40;font-weight: bold;font-size: 1.4em;margin-left: 5px;" [dir]="langdirection"> {{'money' | translate}}</p>
+    <ion-row>
+      <ion-col col-8>
+        <p style="margin-right: 5px;font-size: 1.1em;margin-left: 5px;width:100%;" [dir]="langdirection"> {{'total' | translate}}</p>
       </ion-col>
-        </ion-row>
-</div>
-
-
-
-<div style="background-color: white;padding:2px;">
-  
-    <!-- <progress-bar [progress]="80" [color]="'#e46f3f'">
-      </progress-bar> -->
-  
-</div>
-<div style="background-color: white;padding:2px;margin-top: 5px;">
-  <p style="margin-right: 5px;color: #e26c40;font-weight: bold;font-size: 1.4em;margin-left: 5px;" [dir]="langdirection"> {{'money' | translate}}</p>
- <ion-row>
-<ion-col col-8>
-  <p style="margin-right: 5px;font-size: 1.1em;margin-left: 5px;width:100%;" [dir]="langdirection"> {{'total' | translate}}</p>
-</ion-col>
-<ion-col col-4>
-  <p style="margin-right: 5px;font-size: 1.1em;margin-left: 5px;text-align: right;width:100%;" [dir]="langdirection">{{price}} {{'R.s' | translate}}</p>
-</ion-col>
- </ion-row>
- <ion-row *ngFor="let item of data">
-   <ion-col col-2><p [dir]="langdirection" style="margin-top: 10px;"><img src="assets/imgs/camera.png" class="circle-pic"></p></ion-col>
-   <ion-col col-5><p [dir]="langdirection">{{item.name}}</p></ion-col>
-   <ion-col col-5><p style="text-align: center;">{{item.price}} {{'R.s' | translate}} </p></ion-col>
- </ion-row>
-</div>
+      <ion-col col-4>
+        <p style="font-size: 1.1em;text-align: center;width:100%;" [dir]="langdirection">{{price}} {{'R.s' | translate}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let item of data">
+      <ion-col col-2><p [dir]="langdirection" style="margin-top: 10px;"><img src="assets/imgs/camera.png" class="circle-pic"></p></ion-col>
+      <ion-col col-6><p [dir]="langdirection">{{item.name}}</p></ion-col>
+      <ion-col col-4><p style="text-align: center;">{{item.price}} {{'R.s' | translate}} </p></ion-col>
+    </ion-row>
+  </div>
 </ion-content>

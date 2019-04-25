@@ -27,22 +27,21 @@ export class GroupsPage {
       if(val1)
       {
        this.username=val1
-  }
-})
+      }
+    })
      this.langdirection=this.helper.langdirection
      this.storage.get("makadyaccess").then((val)=>{
       if(val)
       {
-    this.provider.friends(val,(data)=>{
-      console.log(JSON.stringify(data))
-      let parsedData=JSON.parse(data)
-      this.groups=parsedData.groups
-      console.log("groupsss"+JSON.stringify(this.groups))
-   
-    },(data)=>{
+        this.provider.friends(val,(data)=>{
+          console.log(JSON.stringify(data))
+          let parsedData=JSON.parse(data)
+          this.groups=parsedData.groups
+          console.log("groupsss"+JSON.stringify(this.groups))
+      
+        },(data)=>{
 
-    })
-
+        })
       }
     })
   }
@@ -93,7 +92,6 @@ this.myInput=""
 editgroup(id,name)
 {
   this.navCtrl.push(CreategroupPage,{page:"edit",groupid:id,name:name})
-
 }
 addgroup()
 {

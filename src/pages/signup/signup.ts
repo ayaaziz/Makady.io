@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Tabs, ToastController, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Tabs, ToastController, Events, ActionSheetController } from 'ionic-angular';
 import { HelperProvider } from '../../providers/helper/helper';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -7,10 +7,12 @@ import { LoginPage } from '../login/login';
 import { TabsPage } from '../tabs/tabs';
 import { MainproviderProvider } from '../../providers/mainprovider/mainprovider';
 import { Storage } from '@ionic/storage';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Component({
   selector: 'page-signup',
   templateUrl: 'signup.html',
+  providers: [Camera]
 })
 export class SignupPage {
   langdirection:any
@@ -22,7 +24,12 @@ export class SignupPage {
   email:any=""
   confirmPassword:any=""
   lang:any
-  constructor(public storage:Storage,public provider:MainproviderProvider,public event: Events,public toastCtrl:ToastController,public formBuilder:FormBuilder,public translate:TranslateService,public helper:HelperProvider,public navCtrl: NavController, public navParams: NavParams) {
+  imgdata = null;
+  userImageUrl = ""
+  constructor(public storage:Storage,public provider:MainproviderProvider,public event: Events,
+    private camera: Camera,public toastCtrl:ToastController,public formBuilder:FormBuilder,
+    public translate:TranslateService,public helper:HelperProvider,public navCtrl: NavController, 
+    public navParams: NavParams, public actionSheetCtrl: ActionSheetController) {
    if(this.helper.langdirection=="ltr")
    {
      this.lang="1"
@@ -31,6 +38,57 @@ export class SignupPage {
     this.lang="2"
    }
   
+  }
+
+  selectImage() {
+
+    let actionSheet = this.actionSheetCtrl.create({
+      title: this.translate.instant("SelectImageSource"),
+      buttons: [
+        {
+          text: this.translate.instant("LoadfromLibrary"),
+          handler: () => {
+            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: this.translate.instant("UseCamera"),
+          handler: () => {
+            this.takePicture(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: this.translate.instant("canceltxt"),
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+
+  }
+
+  public takePicture(sourceType) {
+    // Create options for the Camera Dialog
+    var options = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: sourceType,
+      saveToPhotoAlbum: false,
+      correctOrientation: true
+    };
+    this.camera.getPicture(options).then((imageData: string) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64:
+      this.storage.get("user_login_token").then((val) => {
+        this.userImageUrl = 'data:image/jpeg;base64,' + imageData
+        //this.storage.set("user_image",this.userImageUrl)
+        this.imgdata = encodeURIComponent(imageData)
+      })
+    }, (err) => {
+      // Handle error
+    });
   }
 
   ionViewDidLoad() {
@@ -44,7 +102,8 @@ export class SignupPage {
   }
   signup()
   {
-     if(this.phone=="" || this.username=="" || this.Password=="" || this.confirmPassword=="" || this.email==""|| this.name=="")
+    console.log("all data ",this.phone,this.username,this.Password,this.confirmPassword,this.email,this.name)
+     if(!this.phone || !this.username || !this.Password || !this.confirmPassword || !this.email|| !this.name)
     {
       this.presentToast(this.translate.instant('alldata'))
 
@@ -54,7 +113,7 @@ export class SignupPage {
       this.presentToast(this.translate.instant('dontmatch'))
 
     }
-    else if(!(this.email.includes('@')|| this.email.includes('.com') || this.email.includes('.net')))
+    else if(!(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(String(this.email).trim()) == true || /^[\u0621-\u064A\s\p{N}]+$/.test(String(this.email).trim()) == true))
     {
       this.presentToast(this.translate.instant('invalidemail'))
 
@@ -68,7 +127,7 @@ export class SignupPage {
   
     else
     {
-      this.provider.signup(this.username,this.name,this.email,this.Password,this.confirmPassword,this.phone,null,null,4,"4rtghju98jhjk","1",this.lang,(data)=>{
+      this.provider.signup(this.username,this.name,this.email,this.Password,this.confirmPassword,this.phone,this.imgdata,null,4,"4rtghju98jhjk","1",this.lang,(data)=>{
        let parsedData=JSON.parse(data)
        console.log(parsedData)
        if(parsedData.success==false)
@@ -80,8 +139,6 @@ export class SignupPage {
          {
            this.presentToast(this.translate.instant("emailExist"))
          }
-         
-        this.presentToast(parsedData.errors)
        }
        else{
          this.provider.getuser(parsedData.access_token, (data)=>{

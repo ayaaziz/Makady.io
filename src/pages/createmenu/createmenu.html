@@ -5,15 +5,19 @@
     <ion-title style="text-align:center;">{{'listes' | translate}}</ion-title>
 
     <ion-buttons right *ngIf="langdirection=='ltr'">
+        <button ion-button  menuToggle>
+          <ion-icon  class="menuToggle" ios="md-list" md="md-list" style="font-size: 3.2rem;    margin-left: 0px;
+          margin-right: 0px;"></ion-icon>
+        </button>
         <button ion-button (click)="ViewCtrl.dismiss()">
             <ion-icon md="ios-arrow-forward" ios="ios-arrow-forward"  style="font-size: 2.5rem;color:white;" ></ion-icon>
         </button>
-        </ion-buttons>
-        <ion-buttons right *ngIf="langdirection=='rtl'">
+    </ion-buttons>
+        <!-- <ion-buttons right *ngIf="langdirection=='rtl'">
           <button ion-button (click)="ViewCtrl.dismiss()">
               <ion-icon md="ios-arrow-back-outline"  ios="ios-arrow-back-outline" style="font-size: 2.5rem;color:white;" ></ion-icon>
           </button>
-      </ion-buttons>
+      </ion-buttons> -->
   </ion-navbar>
 
 </ion-header>

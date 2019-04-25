@@ -28,7 +28,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { ShoppinglistPage } from '../pages/shoppinglist/shoppinglist';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {ProgressBarModule} from "angular-progress-bar"
@@ -38,7 +37,11 @@ import { ListdetailsPage } from '../pages/listdetails/listdetails';
 import { CreatemenuPage } from '../pages/createmenu/createmenu';
 import { PopoverPage } from '../pages/popover/popover';
 import { GooglePlus } from '@ionic-native/google-plus';
-
+import { Facebook } from '@ionic-native/facebook';
+import { TwitterConnect } from '@ionic-native/twitter-connect';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { SettingsProvider } from '../providers/settings/settings';
+import { Push } from '@ionic-native/push';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -109,7 +112,6 @@ export function createTranslateLoader(http: HttpClient) {
   providers: [
     Camera,
     ImagePicker,
-    BarcodeScanner,
     SocialSharing,
     InAppBrowser,
     HttpClient,
@@ -118,7 +120,12 @@ export function createTranslateLoader(http: HttpClient) {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     MainproviderProvider,
     HelperProvider,
-    GooglePlus
+    GooglePlus,
+    Facebook,
+    BarcodeScanner,
+    TwitterConnect,
+    SettingsProvider,
+    Push
   ]
 })
 export class AppModule {}

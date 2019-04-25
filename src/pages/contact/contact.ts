@@ -80,6 +80,7 @@ export class ContactPage {
       this.offers.forEach(element => {
         if(element.offer_id==id)
         {
+          if(element.count > 1)
           element.count-=1
         }
             });

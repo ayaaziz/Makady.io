@@ -1,4 +1,17 @@
 page-home {
+
+    ion-header {
+
+        ion-col {
+            text-align: center;
+
+            img {
+                width: 70px;
+            }
+        }
+        
+    }
+
     .chart-wrapper2 {
         width: 100%;
         display: inline-block;

@@ -22,6 +22,8 @@
     <preference name="AutoHideSplashScreen" value="false" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="loadUrlTimeoutValue" value="700000" />
+    <preference name="TwitterConsumerKey" value="tz3iikzuLonpOXvsQLANdR7LK" />
+    <preference name="TwitterConsumerSecret" value="UNmP4liBwaREw43CFpyOqkUEUYJIunLdy1hzZOrJDzrz0hR6UI" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -88,14 +90,18 @@
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <plugin name="cordova-plugin-x-socialsharing" spec="^5.4.3" />
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
-    <plugin name="phonegap-plugin-barcodescanner" spec="^8.0.1">
-        <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
-    </plugin>
     <plugin name="cordova-plugin-telerik-imagepicker" spec="^2.2.2">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="To allow user to upload select images" />
     </plugin>
-    <plugin name="cordova-plugin-googleplus" spec="7.0.0">
-        <variable name="REVERSED_CLIENT_ID" value="651484334747-hg2uqdf63o2vus6er099d4ia6dmgeae2.apps.googleusercontent.com" />
+    <plugin name="cordova-plugin-googleplus" spec="7.0.1">
+        <variable name="REVERSED_CLIENT_ID" value="832939987990-qkfbtvd8gc0runckq4qqtqpcguhtbgtg.apps.googleusercontent.com" />
+        <variable name="PLAY_SERVICES_VERSION" value="11.8.0" />
     </plugin>
-    <engine name="android" spec="7.1.4" />
+    <plugin name="phonegap-plugin-barcodescanner" spec="^8.0.1">
+        <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.1.1" />
+    </plugin>
+    <plugin name="cordova-plugin-facebook4" spec="1.7.4">
+        <variable name="APP_ID" value="1207157036107811" />
+        <variable name="APP_NAME" value="MakadyApp" />
+    </plugin>
 </widget>

@@ -13,11 +13,11 @@ export class TabsPage {
 
   tab1Root = HomePage;
   tab2Root = ShoppinglistPage;
-  tab3Root =ContactPage;
+  tab3Root = ContactPage;
   tab4Root = GroupsPage;
   tabIndex: Number = 0;
   constructor(public params: NavParams) {
- let tabIndex2 = this.params.get('tabIndex');
+  let tabIndex2 = this.params.get('tabIndex');
     if (parseInt(tabIndex2) > -1) {
       this.tabIndex = tabIndex2;
     }

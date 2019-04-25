@@ -64,7 +64,6 @@ export class ProductsPage {
   }
   AddQuantityNum(id)
   {
-    
     this.products.forEach(element => {
       if(element.product_id==id)
       {
@@ -80,6 +79,7 @@ export class ProductsPage {
       this.products.forEach(element => {
         if(element.product_id==id)
         {
+          if(element.count > 1)
           element.count-=1
         }
             });

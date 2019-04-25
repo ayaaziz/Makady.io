@@ -1,7 +1,7 @@
 
 
 
-<ion-content padding style=" background-size: contain;;background-image: url('assets/imgs/background.jpg')">
+<ion-content padding style=" background-size: contain;;background-image: url('assets/imgs/background.jpg');background-repeat: no-repeat; background-size: cover;">
   <p style="margin-top: -23px;margin-bottom: 0px;text-align:center;margin-top: 0px;"><img style="text-align: center; width: 150px;" src="assets/imgs/logo.png"></p>
   <h2 style="margin-bottom: 20px;margin-top: 0px;text-align: center;color: white;font-weight: bold;">{{'login' | translate}}</h2>
 <div style="box-shadow: 1px 5px 2px 0px #d3d3d3b8;background-color: white;border-radius: 15px;border:1px solid lightgray;">
@@ -42,7 +42,10 @@
   <ion-col col-5></ion-col>
 
 </ion-row>
-<ion-row style="margin-top: 10px;">
+<ion-row (click)="openVerify()">
+  <ion-col col-12>verify</ion-col>
+</ion-row>
+<ion-row style="margin-top: 10px;" (click)="facebookLogin()">
   <ion-col col-2></ion-col> 
   <ion-col col-8 style="background-color: #4444ec;">
     <ion-col col-2 style="background-color: #6363f3;"><ion-icon name="logo-facebook" style="color:white;"></ion-icon> </ion-col>
@@ -62,7 +65,7 @@
      <ion-col col-2></ion-col>
   
   </ion-row>
-<ion-row style="margin-top:5px;margin-bottom: 30px;">
+<ion-row style="margin-top:5px;margin-bottom: 30px;" (click)="doTwLogin()">
     <ion-col col-2></ion-col> 
     <ion-col col-8 style="background-color: #03A9F4;">
       <ion-col col-2 style="background-color: #43baf1;"><ion-icon name="logo-twitter" style="color:white;"></ion-icon> </ion-col>
@@ -74,7 +77,7 @@
   </ion-row>
 
 </div>
-<ion-row>
+<ion-row >
   <ion-col col-2></ion-col>
   <ion-col col-8 >
     <p style="text-align: center;">{{'noaccount' | translate}}<span (click)="opensign()" style="color: #f2622b;">{{'restno' | translate}}</span></p>
