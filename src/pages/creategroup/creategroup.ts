@@ -20,7 +20,7 @@ id:any=""
 page:any
 groupid:any
 groupname:any;
-pageType:string;
+// pageType:string;
 
   constructor(public ViewCtrl:ViewController,public toastCtrl:ToastController,public storage:Storage,public provider:MainproviderProvider,public platform:Platform,public helper:HelperProvider,public translate:TranslateService,public navCtrl: NavController, public navParams: NavParams) {
     this.page = this.navParams.get("page");
@@ -31,9 +31,9 @@ pageType:string;
   ionViewDidLoad() {
     if(this.page=="edit") {
       this.name = this.groupname;
-      this.pageType = "Edit";
+      // this.pageType = "Edit";
     } else {
-      this.pageType = "Create";      
+      // this.pageType = "Create";      
     }
   
     this.langdirection=this.helper.langdirection

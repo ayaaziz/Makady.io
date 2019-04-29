@@ -14,7 +14,7 @@ import { MainproviderProvider } from '../providers/mainprovider/mainprovider';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ProductsPage } from '../pages/products/products';
-import { AboutPage } from '../pages/about/about';
+import { CategoriesPage } from '../pages/categories/categories';
 import { dateDataSortValue } from 'ionic-angular/util/datetime-util';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { SettingsProvider } from '../providers/settings/settings';
@@ -49,17 +49,19 @@ export class MyApp {
               statusBar: StatusBar,
               splashScreen: SplashScreen,
               private push: Push,
-              private settingsService:SettingsProvider,
+              private settingsService:SettingsProvider
               // private pushObject: PushObject
             ) {
 
     platform.ready().then(() => {
-      this.event.subscribe("login", ()=>{
-        this.storage.get("user_info").then((val)=>{
-          this.userLoged = true;
-          this.username = val.user.username;
-          this.photo = val.user.profile_pic ;
+      this.event.subscribe("login", () => {
+        this.storage.get("user_info").then(val => {
           console.log("user_info : ",val);
+          if(val) {
+            this.userLoged = true;
+            this.username = val.user.username;
+            this.photo = val.user.profile_pic;
+          }
         });
       });
 
@@ -92,9 +94,9 @@ export class MyApp {
       });
 
       this.storage.get("Makadyusername").then((val)=> {
-        if(!val){
-          this.navctrl.push(LoginPage)
-          return
+        if(!val) {
+          this.navctrl.push(LoginPage);
+          return;
         }
         this.storage.get("user_info").then((userInfo)=> {
           if(!userInfo) {
@@ -208,118 +210,98 @@ export class MyApp {
     
     }
 
-  openhome()
-  {
+  openhome() {
       this.navctrl.setRoot(TabsPage, { tabIndex: 0 });
-      this.menu.close()
-
+      this.menu.close();
   }
-  openlists()
-  {
+
+  openlists() {
     this.navctrl.setRoot(TabsPage, { tabIndex: 1 });
-    this.menu.close()
+    this.menu.close();
   }
-  products()
-  {
-    this.navctrl.setRoot(TabsPage).then(()=>{
-      this.navctrl.push(AboutPage)
+
+  products() {
+    this.navctrl.setRoot(TabsPage).then(()=> {
+      this.navctrl.push(CategoriesPage);
     });
-
   }
-  offers()
-  {
+
+  offers() {
     this.navctrl.setRoot(TabsPage, { tabIndex: 2 });
+  }
 
+  friends() {
+    this.navctrl.setRoot(TabsPage).then(() => {
+      this.navctrl.push(FriendsPage);
+    });
   }
-  friends()
-  {
- this.navctrl.setRoot(TabsPage).then(() => {
-   this.navctrl.push(FriendsPage)
- })
-  }
-  groups()
-  {
+
+  groups() {
     this.navctrl.setRoot(TabsPage, { tabIndex: 3 });
+  }
 
+  settings() {
+      this.navctrl.setRoot(TabsPage).then(() => {
+        this.navctrl.push(SettingsPage);
+     });
   }
-  settings()
-  {
-     this.navctrl.setRoot(TabsPage).then(() => {
-      this.navctrl.push(SettingsPage)
-     })
-  }
-  logout()
-  {
-    this.storage.get("makadyaccess").then((val)=>{
-      if(val)
-      {
-        this.provider.logout(1,val,(data)=>{
-          this.userLoged = false
-          this.navctrl.push(LoginPage)
-          this.storage.remove("Makadyusername")
-          this.storage.remove("Mlanguage")
+
+  logout() {
+    this.storage.get("makadyaccess").then((val)=> {
+      if(val) {
+        this.provider.logout(1,val,(data) => {
+          this.userLoged = false;
+          this.storage.remove("Makadyusername");
+          this.storage.remove("Mlanguage");
+
+          this.storage.remove("Makadyuser_name");
+          this.storage.remove("makadyaccess");
+          this.storage.remove("user_info");
+          this.navctrl.push(LoginPage);
+        
           console.log(JSON.stringify(data))
         },(data)=>{})
       }
-    })
-    
+    });
   }
   
-
-  getimg()
-  {
+  getimg() {
     let actionSheet = this.actionSheetCtrl.create({
       buttons: [
         {
           text: this.translate.instant('takepic'),
           handler: () => {
-            // this.take()
-            this.take(this.camera.PictureSourceType.CAMERA)
+            this.take(this.camera.PictureSourceType.CAMERA);
           }
         },
         {
           text: this.translate.instant('choose'),
           handler: () => {
-          //  this.choose()
-          this.take(this.camera.PictureSourceType.PHOTOLIBRARY)
+            this.take(this.camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
         {
           text: this.translate.instant('cancel'),
-          role: 'cancel',
-          handler: () => {
-          }
+          role: 'cancel'
         }
       ]
     });
- 
-    actionSheet.present();
-   
-    
+    actionSheet.present(); 
   }
-  choose()
-  {
-    let options= {
-      maximumImagesCount: 1,
-    }
-    this.imagepicker.getPictures(options)
-    .then((results) => {
-      this.photo=results
+
+  // choose() {
+  //   let options = {
+  //     maximumImagesCount: 1,
+  //   }
+  //   this.imagepicker.getPictures(options)
+  //   .then((results) => {
+  //     this.photo=results
      
-    }, (err) => { console.log(err) });
-  }
+  //   }, (err) => { console.log(err) });
+  // }
 
-
-
-  take(sourceType)
-  {
-    console.log("take pic")
-    //  const options: CameraOptions = {
-    //   quality: 100,
-    //   destinationType: this.camera.DestinationType.FILE_URI,
-    //   encodingType: this.camera.EncodingType.JPEG,
-    //   mediaType: this.camera.MediaType.PICTURE
-    // }
+  take(sourceType) {
+  
     var options = {
       quality: 100, //50
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -332,20 +314,21 @@ export class MyApp {
       // targetWidth:200,
       // targetHeight:200
     };
+
     this.camera.getPicture(options).then((imageData: string) => {
-     console.log(JSON.stringify(imageData))
+     console.log(JSON.stringify(imageData));
      let base64Image = 'data:image/jpeg;base64,' + imageData;  
-     let imgdata = encodeURIComponent(imageData)
-     this.photo=base64Image
-        console.log( "base64Image: ",JSON.stringify(base64Image))
+     let imgdata = encodeURIComponent(imageData);
+     this.photo = base64Image;
+        console.log( "base64Image: ",JSON.stringify(base64Image));
         // this.service.changeJSProfilePic(imgdata, 'jpeg'
         this.storage.get('user_info').then((val) => {
           console.log("val from get user_info", val);
           if (val) {
-            var newuserData = val;
-            newuserData.user.profile_pic = this.photo;
+            // var newuserData = val;
+            val.user.profile_pic = this.photo;
             // this.helper.storeJSInfo(newuserData);
-            this.storage.set("user_info", newuserData)
+            this.storage.set("user_info", val);
           }});
     }, (err) => {
       console.log(JSON.stringify(err))

@@ -1,60 +1,47 @@
-
 <ion-header>
-
-  <ion-navbar  color="danger" hideBackButton>
-    <ion-title style="text-align:center;">{{'listes' | translate}}</ion-title>
-
-    <ion-buttons right *ngIf="langdirection=='ltr'">
-        <button ion-button  menuToggle>
-          <ion-icon  class="menuToggle" ios="md-list" md="md-list" style="font-size: 3.2rem;    margin-left: 0px;
-          margin-right: 0px;"></ion-icon>
-        </button>
-        <button ion-button (click)="ViewCtrl.dismiss()">
-            <ion-icon md="ios-arrow-forward" ios="ios-arrow-forward"  style="font-size: 2.5rem;color:white;" ></ion-icon>
-        </button>
+  <ion-navbar  color="danger" hideBackButton style="text-align:center;">
+    <ion-title *ngIf="page === 'edit'" >{{ 'editlist' | translate }}</ion-title>
+    <ion-title *ngIf="page !== 'edit'">{{ 'createlist' | translate }}</ion-title>
+    <ion-buttons left>
+      <button ion-button (click)="ViewCtrl.dismiss()">
+        <ion-icon md="ios-arrow-back" ios="ios-arrow-back"  style="font-size: 2.5rem;color:white;" ></ion-icon>
+      </button>
     </ion-buttons>
-        <!-- <ion-buttons right *ngIf="langdirection=='rtl'">
-          <button ion-button (click)="ViewCtrl.dismiss()">
-              <ion-icon md="ios-arrow-back-outline"  ios="ios-arrow-back-outline" style="font-size: 2.5rem;color:white;" ></ion-icon>
-          </button>
-      </ion-buttons> -->
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-    <p *ngIf="page!='edit'" [dir]="langdirection" style="color:#e26c40;font-weight:bold;font-size: 1.2em;">{{'creatmenu' | translate}}</p>
-<p *ngIf="page=='edit'" [dir]="langdirection" style="color:#e26c40;font-weight:bold;font-size: 1.2em;">{{'editmenu' | translate}}</p>
-<ion-label [dir]="langdirection" style="color:black;">{{'menuname' | translate}}</ion-label>
-<ion-item no-lines>
-<ion-input [(ngModel)]="name" type="text" style="border:1px solid lightgray;border-radius: 15px;"></ion-input>
-</ion-item>
-<p [dir]="langdirection">{{'choosemenu' | translate}}</p>
-<div>
+  <ion-row>
+    <ion-col col-12>
+      <ion-label style="font-size: 18px; color: #e26c40;">{{'menuname' | translate}}</ion-label>
+    </ion-col>
+    <ion-col col-12>
+      <ion-input [(ngModel)]="name" type="text" placeholder="{{'menuName' | translate}}" [dir]="langdirection" style="border:1px solid lightgray;border-radius: 10px;"></ion-input>     
+    </ion-col>
+  </ion-row>
+ 
+  <ion-row>
+    <ion-col>
+      <p style="font-size: 18px; color: #e26c40;">{{'choosemenu' | translate}}</p>      
+    </ion-col>
+  </ion-row>
 
   <ion-row *ngFor="let item of friends">
-      <ion-col col-3>
-      <img [dir]="langdirection" class="circle-pic" src="assets/imgs/camera.png" style="margin-top: 0px;margin-left: 0px;margin-right: 0px;">
+    <ion-col col-3>
+      <img class="circle-pic" src="assets/imgs/camera.png" style="margin-top: 0px;margin-left: 0px;margin-right: 0px;">
       </ion-col>
-       <ion-col col-6>
-         <p [dir]="langdirection" > {{item.username}}</p> 
-          <p [dir]="langdirection" > {{item.phone}}</p>  
-     </ion-col>
-       <ion-col col-3>
-        <ion-item>
-          <ion-checkbox   (ionChange)="checkfriend(item.id)"></ion-checkbox>
-        </ion-item> 
-           </ion-col> 
-  
-</ion-row>
-</div>
-<p style="text-align:center;" *ngIf="page!='edit'">
-  <button ion-button style="background-color:#e26c40;color:white; width: 150px;border-radius: 11px;" (click)="create()">{{'create' | translate}}
-  </button>
+        <ion-col col-6>
+          <p>{{item.username}}</p> 
+          <p>{{item.phone}}</p>  
+      </ion-col>
+      <ion-col col-3>
+      <ion-item>
+        <ion-checkbox (ionChange)="checkfriend(item.id)"></ion-checkbox>
+      </ion-item> 
+    </ion-col> 
+  </ion-row>
+
+  <p style="text-align:center;">
+    <button ion-button style="background-color:#e26c40;color:white; width: 150px;border-radius: 11px;" (click)="create()">{{'save' | translate}}</button>
   </p>
-  <p style="text-align:center;" *ngIf="page=='edit'">
-    <button ion-button style="background-color:#e26c40;color:white; width: 150px;border-radius: 11px;" (click)="create()">{{'modify' | translate}}
-    </button>
-    </p>
 </ion-content>

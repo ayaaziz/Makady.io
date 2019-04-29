@@ -48,6 +48,7 @@ export class MainproviderProvider {
   }
 
   login(username,password,id,successCallback, failureCallback) {
+  
     let loader = this.loadingCtrl.create({
       content: "",
     });
@@ -76,6 +77,8 @@ export class MainproviderProvider {
         }
       )
   }
+
+  //return emailcode
   forgetpass(username,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
@@ -83,26 +86,30 @@ export class MainproviderProvider {
     loader.present();
     let headers = new HttpHeaders();
     let parameter = {
-      'username':username,
-     
+      'username':username 
     }
+
     headers = headers.set('Content-Type', 'application/json');
     let serviceUrl = this.helper.serviceurl + 'forgetPassword';
-    //
+  
     this.http.post(serviceUrl, parameter, { headers: headers })
       .subscribe(
         data => {
           loader.dismiss();
 
-          successCallback(JSON.stringify(data))
+          successCallback(JSON.stringify(data));
         },
         err => {
+          alert("errrrrrrrrrrrrrrror");
+          alert(err.message);
+
           loader.dismiss();
 
           failureCallback(err);
         }
       )
   }
+
   updatepass(username,emailcode,password,successCallback, failureCallback) {
     let loader = this.loadingCtrl.create({
       content: "",
@@ -875,4 +882,40 @@ export class MainproviderProvider {
         }
       )
   }
+
+
+  setVerified(userId,successCallback,failureCallback) {
+    
+    let spinner = this.loadingCtrl.create();
+    spinner.present();
+
+    let headers = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    let parameter = {
+      'id':userId,
+      //must add "verified" column in db 
+      'verified':true
+    }
+    let serviceUrl = this.helper.serviceurl + 'updateVerificationStatus';
+
+    // this.http.post(serviceUrl, parameter, { headers: headers })
+    // .subscribe(
+    //   data => {
+    //     spinner.dismiss();
+
+    //     successCallback(JSON.stringify(data))
+    //   },
+    //   err => {
+    //     spinner.dismiss();
+
+    //     failureCallback(err);
+    //   });
+
+    
+    //test
+    return true;
+  }
+
+
+
 }

@@ -11,48 +11,38 @@ import { MainproviderProvider } from '../../providers/mainprovider/mainprovider'
   templateUrl: 'forgetpassword.html',
 })
 export class ForgetpasswordPage {
-langdirection:any
-Email:any=""
-emailcode:any
-username:any
-  constructor(public provider:MainproviderProvider,public helper:HelperProvider,public toastCtrl:ToastController,public translate :TranslateService,public navCtrl: NavController, public navParams: NavParams) {
+langdirection:any;
+Email:any="";
+emailcode:any;
+username:any;
+
+  constructor(public provider:MainproviderProvider,
+              public helper:HelperProvider,
+              public toastCtrl:ToastController,
+              public translate :TranslateService,
+              public navCtrl: NavController,
+              public navParams: NavParams) {
+
+              this.langdirection=this.helper.langdirection;
   }
 
-  ionViewDidLoad() {
-    this.langdirection=this.helper.langdirection
-    console.log('ionViewDidLoad ForgetpasswordPage');
-  }
-send()
-{
-  if(this.Email=="")
-  {
-      this.presentToast(this.translate.instant('enteryouremail'))
+  send() {
+    if(this.Email=="") {
+      this.helper.presentToast(this.translate.instant('enteryouremail'));
 
-  }
- 
-  else{
-    this.provider.forgetpass(this.Email,(data)=>{
-      console.log(JSON.stringify(data))
-      let dataparsed=JSON.parse(data)
-      this.username=dataparsed.data.username
-      this.emailcode=dataparsed.data.email_code
-      console.log(this.emailcode)
-      console.log(this.username)
-      this.navCtrl.push(VerificationPage,{"username":this.username,"emailcode":this.emailcode})
+    } else {
+      this.provider.forgetpass(this.Email,(data) => {
+        console.log(JSON.stringify(data));
+        let dataparsed = JSON.parse(data);
+        this.username = dataparsed.data.username;
+        this.emailcode = dataparsed.data.email_code;
+        console.log(this.emailcode);
+        console.log(this.username);
+        this.navCtrl.push(VerificationPage,{"pageType":"forgetPass","username":this.username,"emailcode":this.emailcode});
 
-    },(data)=>{
-
-    })
-  }
-}
- presentToast(msg)
-  {
-    let toast = this.toastCtrl.create({
-      message: msg,
-      duration: 3000,
-      position: 'bottom',
-    
-    });
-    toast.present();
+      },(error)=>{
+        console.log(error);
+      });
+    }
   }
 }

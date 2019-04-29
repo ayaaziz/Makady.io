@@ -104,4 +104,5 @@
         <variable name="APP_ID" value="1207157036107811" />
         <variable name="APP_NAME" value="MakadyApp" />
     </plugin>
+    <engine name="android" spec="8.0.0" />
 </widget>

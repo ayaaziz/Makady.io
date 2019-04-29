@@ -89,9 +89,8 @@ oncancel()
 this.myInput=""
 
 }
-editgroup(id,name)
-{
-  this.navCtrl.push(CreategroupPage,{page:"edit",groupid:id,name:name})
+editgroup(id,name) {
+  this.navCtrl.push(CreategroupPage,{page:"edit",groupid:id,name:name});
 }
 addgroup()
 {

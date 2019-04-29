@@ -2,8 +2,8 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
+import { CategoriesPage } from '../pages/categories/categories';
+import { OffersPage } from '../pages/offers/offers';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -61,10 +61,10 @@ export function createTranslateLoader(http: HttpClient) {
     GroupsPage,
     VerificationPage,
     ChangepasswordPage,
-    AboutPage,
+    CategoriesPage,
     ForgetpasswordPage,
     SettingsPage,
-    ContactPage,
+    OffersPage,
     HomePage,
     SignupPage,
     TabsPage
@@ -103,8 +103,8 @@ export function createTranslateLoader(http: HttpClient) {
     ForgetpasswordPage,
     LoginPage,
     VerificationPage,
-    AboutPage,
-    ContactPage,
+    CategoriesPage,
+    OffersPage,
     SettingsPage,
     HomePage,
     TabsPage

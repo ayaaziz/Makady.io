@@ -1,11 +1,11 @@
 <ion-header>
 
-  <ion-navbar  color="danger" hideBackButton>
-    <ion-title style="text-align:center;">{{'friendreq' | translate}}</ion-title>
+  <ion-navbar color="danger" hideBackButton style="text-align:center;">
+    <ion-title>{{'friendreq' | translate}}</ion-title>
 
     <ion-buttons right *ngIf="langdirection=='ltr'">
         <button ion-button  menuToggle>
-            <ion-icon  class="menuToggle" ios="md-list" md="md-list" style="font-size: 3.2rem;    margin-left: 0px;
+            <ion-icon  class="menuToggle" ios="ios-list" md="ios-list" style="font-size: 3.2rem;    margin-left: 0px;
             margin-right: 0px;"></ion-icon>
         </button>
         <button ion-button (click)="ViewCtrl.dismiss()">

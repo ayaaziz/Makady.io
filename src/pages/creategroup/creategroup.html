@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-navbar color="danger" hideBackButton>
-    <ion-title style="text-align:center;" *ngIf="page === 'edit'" >{{ 'Edit Group' | translate }}</ion-title>
-    <ion-title style="text-align:center;" *ngIf="page !== 'edit'">{{ 'Create Group' | translate }}</ion-title>
+  <ion-navbar color="danger" hideBackButton style="text-align:center;">
+    <ion-title *ngIf="page === 'edit'" >{{ 'editgroup' | translate }}</ion-title>
+    <ion-title *ngIf="page !== 'edit'">{{ 'creatgroup' | translate }}</ion-title>
     <ion-buttons left>
       <button ion-button (click)="ViewCtrl.dismiss()">
         <ion-icon md="ios-arrow-back" ios="ios-arrow-back" style="font-size: 2.5rem;color:white;" ></ion-icon>
@@ -12,11 +12,11 @@
 
 <ion-content padding>
   <ion-row>
-    <ion-col col-5>
+    <ion-col col-12>
       <ion-label style="font-size: 18px; color: #e26c40;">{{'Group Name' | translate}}</ion-label>
     </ion-col>
-    <ion-col col-7>
-      <ion-input [(ngModel)]="name" type="text" placeholder="{{'Group Name' | translate}}" style="border:1px solid lightgray;border-radius: 10px;"></ion-input>
+    <ion-col col-12>
+      <ion-input [(ngModel)]="name" type="text" placeholder="{{'Group Name' | translate}}" [dir]="langdirection" style="border:1px solid lightgray;border-radius: 10px;"></ion-input>
     </ion-col>
   </ion-row>
   

@@ -35,4 +35,26 @@ page-login {
         border-style: solid;
         border-color: #f46629 !important;
     }
+
+    .separator {
+        &::before,
+        &::after {
+            content: "";
+            display: inline-block;
+            width: 42%;
+            height: 2px;
+            background-color: #afaeae;
+        }
+    }
+
+    // ion-input.auth-input {
+    //     flex-direction: row;
+    //     &::before {
+    //         content: "";
+    //         display: inline-block;
+    //         width: 2px;
+    //         height: 100px;
+    //         background-color: lightgray;
+    //     }
+    // }
 }

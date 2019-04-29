@@ -1,55 +1,43 @@
 <ion-header>
-  <ion-navbar color="danger">
-   <ion-buttons left>
+  <ion-navbar color="danger" style="text-align:center;">
+    <ion-title>{{'groups' | translate}}</ion-title>
+    <ion-buttons left>
       <button ion-button  menuToggle>
-        <ion-icon  class="menuToggle" ios="md-list" md="md-list" style="font-size: 3.2rem;margin-left: 0px;
+        <ion-icon  class="menuToggle" ios="ios-list" md="ios-list" style="font-size: 3.2rem;margin-left: 0px;
         margin-right: 0px;"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-title style="text-align:center;">{{'groups' | translate}}</ion-title>
-    <ion-buttons right *ngIf="langdirection=='ltr'" (click)="friendlist()">
-      <button ion-button icon-only>
-        <ion-icon name="md-people" style="font-size: 2.2rem;color:white"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-buttons left *ngIf="langdirection=='rtl'" (click)="friendlist()">
-      <button ion-button icon-only>
-        <ion-icon name="md-people" style="font-size: 2.2rem;color:white"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-row>
-    <ion-col>
-      <ion-searchbar style="margin-top: 10px;" placeholder="{{'Search by group name' | translate}}" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput">
-      </ion-searchbar>
-    </ion-col>
-  </ion-row>
+  <ion-searchbar style="padding:0;margin-bottom: 20px;" placeholder="{{'searchgroup' | translate}}" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput"></ion-searchbar>
  
   <ion-row style="margin-top: 5px;" *ngIf="show">
-    <ion-col col-6 style="box-shadow: 1px 3px 6px 1px lightgrey;" *ngFor="let item of groups">
-      <p style="font-size: 1.5em;top: -13px;left: 13px;position: absolute;width: 30px;" (click)="deletegroup(item.group_id)"><ion-icon name="ios-close"></ion-icon></p>
-      <p *ngIf="item.members?.length == 0 || !item.members" style="text-align:center;margin-bottom: 2px;"><img style="text-align:center;margin-top: 0px;" class="circle-pic" src="assets/imgs/error.png"></p>
-      <div *ngIf="item.members?.length == 1" style="width:108px;height:108px;margin:auto;overflow: hidden;text-align:center;border-radius: 50%;">
-        <img *ngFor="let member of item.members; let i = index" style="width:90px;border-radius: 50%" src="{{member.profile_pic}}">         
+    <ion-col col-6 *ngFor="let item of groups" style="justify-content:center;">
+      <div style="box-shadow: 0px 2px 6px 1px lightgrey;border-radius:7px; padding: 1px 0;">
+        <p style="font-size: 1.5em;top: -13px;left: 13px;position: absolute;width: 20px;text-align:center;" (click)="deletegroup(item.group_id)"><ion-icon name="ios-close"></ion-icon></p>
+        <p *ngIf="item.members?.length == 0 || !item.members" style="text-align:center;margin-bottom: 2px;"><img style="text-align:center;margin-top:15px;" class="circle-pic" src="assets/imgs/error.png"></p>
+        <div *ngIf="item.members?.length == 1" style="width:108px;height:108px;margin:auto;overflow: hidden;text-align:center;border-radius: 50%;">
+          <img *ngFor="let member of item.members; let i = index" style="width:90px;border-radius: 50%;margin-top:15px;" src="{{member.profile_pic}}">         
+        </div>
+        <div *ngIf="item.members?.length > 2" style="width:50px;height:100px;margin:auto;overflow: hidden;border-radius: 50%;">
+          <img *ngFor="let member of item.members; let i = index" style="width:45px;border-radius: 50%;margin-top:15px;" src="{{member.profile_pic}}">   
+        </div>
+        <div *ngIf="item.members?.length > 3" style="width:100px;height:100px;margin:auto;overflow: hidden;border-radius: 50%;">
+          <img *ngFor="let member of item.members; let i = index" style="width:45px;border-radius: 50%;margin-top:15px;" src="{{member.profile_pic}}"> 
+        </div>
+        <p style="text-align:center;margin: 4px;">{{item.group_name}}</p>
+        <p style="text-align:center;">
+          <button ion-button style="background-color:#e26c40;color:white" (click)="editgroup(item.group_id,item.group_name)">{{'modify' | translate}}
+          </button>
+        </p>
       </div>
-      <div *ngIf="item.members?.length > 2" style="width:50px;height:100px;margin:auto;overflow: hidden;border-radius: 50%;">
-        <img *ngFor="let member of item.members; let i = index" style="width:45px;border-radius: 50%" src="{{member.profile_pic}}">   
-      </div>
-      <div *ngIf="item.members?.length > 3" style="width:100px;height:100px;margin:auto;overflow: hidden;border-radius: 50%;">
-        <img *ngFor="let member of item.members; let i = index" style="width:45px;border-radius: 50%" src="{{member.profile_pic}}"> 
-      </div>
-      <p style="text-align:center;margin: 4px;">{{item.group_name}}</p>
-      <p style="text-align:center;">
-        <!-- <button ion-button style="background-color:#e26c40;color:white" (click)="editgroup(item.group_id,item.group_name)" *ngIf="item.admin.username==username">{{'modify' | translate}}
-        </button> -->
-        <button ion-button style="background-color:#e26c40;color:white" (click)="editgroup(item.group_id,item.group_name)">{{'modify' | translate}}
-        </button>
-      </p>
     </ion-col>
   </ion-row>
+
+
+  <!--??????????????????????????????????????????-->
   <ion-row style="margin-top: 5px;" *ngIf="!show">
     <ion-col col-6 style="box-shadow: 1px 3px 6px 1px lightgrey;" *ngFor="let item of groups">
       <p style="font-size: 1.5em;top: -13px;left: 13px;position: absolute;width: 30px;" (click)="deletegroup(item.id)"><ion-icon name="ios-close"></ion-icon></p>
@@ -72,6 +60,7 @@
       </p>
     </ion-col>  
   </ion-row>
+
   <ion-fab bottom [ngClass]="{'left-fab':langdirection === 'ltr','right-fab':langdirection === 'rtl'}">
     <button ion-fab style="background:#e26c40;" (click)="addgroup()"><ion-icon style="color:white;" name="add"></ion-icon></button>
   </ion-fab>

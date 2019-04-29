@@ -1,13 +1,21 @@
 page-products {
     .circle-pic{
-        border:0px;
-        width: 48px;
-        height: 48px;
+        border: 0px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
         text-align: center;
-        margin-top: 0px;
-        margin-left: 1px;
+        position: absolute;
+        bottom: 11px;
+        left: -18px;
     }
+
+    .addBtn {
+        position: absolute;
+        bottom: 6px;
+        right: -18px;
+    }
+
     .fab{
         box-shadow: none !important;
         border-radius: 20% !important;
@@ -19,4 +27,7 @@ page-products {
     .ltr .circle-pic{
         max-width: 50px; left: -30px !important; position: relative !important;
     }
+
+
+
 }

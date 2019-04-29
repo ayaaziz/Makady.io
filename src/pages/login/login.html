@@ -1,88 +1,65 @@
-
-
-
 <ion-content padding style=" background-size: contain;;background-image: url('assets/imgs/background.jpg');background-repeat: no-repeat; background-size: cover;">
   <p style="margin-top: -23px;margin-bottom: 0px;text-align:center;margin-top: 0px;"><img style="text-align: center; width: 150px;" src="assets/imgs/logo.png"></p>
   <h2 style="margin-bottom: 20px;margin-top: 0px;text-align: center;color: white;font-weight: bold;">{{'login' | translate}}</h2>
-<div style="box-shadow: 1px 5px 2px 0px #d3d3d3b8;background-color: white;border-radius: 15px;border:1px solid lightgray;">
 
-  <ion-item no-lines style="border-radius: 10px;margin-top: 20px;border: 2px solid lightgray;margin-right: 15px;margin-left: 15px;width: 90%;">
-<ion-label style="margin-left: 10px;"><ion-icon name="md-person"></ion-icon></ion-label>
-<ion-input [dir]="langdirection" type="text" [(ngModel)]="username" placeholder="{{'username'| translate}}" ></ion-input>
-</ion-item>
-<ion-item no-lines style="border-radius: 10px;margin-top: 20px;border: 2px solid lightgray;margin-right: 15px;margin-left: 15px;width: 90%;">
-    <ion-label style="margin-left: 10px;"><ion-icon name="md-key"></ion-icon></ion-label>
-    <ion-input [dir]="langdirection" type="password" [(ngModel)]="Password" placeholder="{{'password' | translate}}" ></ion-input>
+  <div style="box-shadow: 1px 5px 2px 0px #d3d3d3b8;background-color: white;border-radius: 15px;border:1px solid lightgray;">
+    <ion-item no-lines style="border-radius: 10px;margin-top: 20px;border: 2px solid lightgray;margin-right: 15px;margin-left: 15px;width: 90%;">
+      <ion-label style="margin-left: 10px;"><ion-icon name="md-person"></ion-icon></ion-label>
+      <ion-input [dir]="langdirection" type="text" [(ngModel)]="username" placeholder="{{'username'| translate}}" ></ion-input>
     </ion-item>
- 
 
-<ion-row>
-    <ion-col col-6>
-<p [dir]="langdirection" style="color:gray;margin-right: 10px;color:gray;margin-left: 10px;" (click)="forget()">{{'forget' | translate}}</p>
-</ion-col>
-<ion-col col-6>
-<ion-item  [dir]="langdirection" no-lines >
-  <ion-label style="color:#f2622c;font-size: .8em;">{{'remember' | translate}}</ion-label>
-  <ion-checkbox [(ngModel)]="remember" ></ion-checkbox>
-</ion-item>
-</ion-col>
-</ion-row>
-<ion-row>
-  <ion-col col-3></ion-col>
-  <ion-col col-6>
-    <button ion-button style="color:white;background-color:#f2622c;border-radius: 15px;width: 100%;" (click)="login()">{{'login' |translate}}</button>
-  </ion-col>
-  <ion-col col-3></ion-col>
-</ion-row>
-<ion-row style="text-align: center;">
-  <ion-col col-5></ion-col>
-  <ion-col col-2>
-  <p style="font-size: 1.5em;color:gray;text-align: center;margin-top: 0px;margin-bottom: 0px;">{{'or' |translate}}</p>
-</ion-col>
-  <ion-col col-5></ion-col>
+    <ion-item no-lines style="border-radius: 10px;margin-top: 20px;border: 2px solid lightgray;margin-right: 15px;margin-left: 15px;width: 90%;">
+      <ion-label style="margin-left: 10px;"><ion-icon name="md-key"></ion-icon></ion-label>
+      <ion-input [dir]="langdirection" type="password" [(ngModel)]="Password" placeholder="{{'password' | translate}}" ></ion-input>
+    </ion-item>
 
-</ion-row>
-<ion-row (click)="openVerify()">
-  <ion-col col-12>verify</ion-col>
-</ion-row>
-<ion-row style="margin-top: 10px;" (click)="facebookLogin()">
-  <ion-col col-2></ion-col> 
-  <ion-col col-8 style="background-color: #4444ec;">
-    <ion-col col-2 style="background-color: #6363f3;"><ion-icon name="logo-facebook" style="color:white;"></ion-icon> </ion-col>
-    <ion-col col-6 style="color:white;"> {{'facebook' | translate}}</ion-col>
-  </ion-col>
+    <ion-row>
+      <ion-col>
+        <p style="color:gray;margin-right: 10px;color:gray;margin-left: 10px;" (click)="forget()">{{'forget' | translate}}</p>
+      </ion-col>
+    </ion-row>
 
-   <ion-col col-2></ion-col>
+    <ion-row style="justify-content: center;">
+      <ion-col col-6>
+        <button ion-button style="color:white;background-color:#f2622c;border-radius: 15px;width: 100%;" (click)="login()">{{'login' |translate}}</button>
+      </ion-col>
+    </ion-row>
 
-</ion-row>
-<ion-row style="margin-top:5px;" (click)="googleLogin()">
-    <ion-col col-2></ion-col> 
-    <ion-col col-8 style="background-color: #e26c40;">
-      <ion-col col-2 style="background-color: #ea8058;"><ion-icon name="logo-googleplus" style="color:white;"></ion-icon> </ion-col>
-      <ion-col col-6 style="color:white;"> {{'google'| translate}}</ion-col>
+    <ion-row>
+      <ion-col style="text-align: center;">
+        <p class="separator" style="font-size: 1.5em;color:gray;text-align: center;margin-top: 0px;margin-bottom: 0px;">{{'or' |translate}}</p>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row (click)="openVerify()">
+      <ion-col col-12>verify</ion-col>
+    </ion-row> -->
+
+    <ion-row style="margin-top: 10px;" (click)="facebookLogin()">
+      <ion-col col-10 style="background-color: #4444ec;margin: 0 auto;">
+        <ion-col col-2 style="background-color: #6363f3;"><ion-icon name="logo-facebook" style="color:white;"></ion-icon> </ion-col>
+        <ion-col col-8 style="color:white;"> {{'facebook' | translate}}</ion-col>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="margin-top:5px;" (click)="googleLogin()">
+      <ion-col col-10 style="background-color: #e26c40;margin: 0 auto;">
+        <ion-col col-2 style="background-color: #ea8058;"><ion-icon name="logo-googleplus" style="color:white;"></ion-icon> </ion-col>
+        <ion-col col-8 style="color:white;"> {{'google'| translate}}</ion-col>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="margin-top:5px;margin-bottom: 30px;" (click)="doTwLogin()">
+      <ion-col col-10 style="background-color: #03A9F4;margin: 0 auto;">
+        <ion-col col-2 style="background-color: #43baf1;"><ion-icon name="logo-twitter" style="color:white;"></ion-icon> </ion-col>
+        <ion-col col-8 style="color:white;"> {{'twitter' |translate}}</ion-col>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <ion-row>
+    <ion-col>
+      <p style="text-align: center;">{{'noaccount' | translate}} <span (click)="opensign()" style="color: #f2622b;">{{'restno' | translate}}</span></p>
     </ion-col>
-  
-     <ion-col col-2></ion-col>
-  
   </ion-row>
-<ion-row style="margin-top:5px;margin-bottom: 30px;" (click)="doTwLogin()">
-    <ion-col col-2></ion-col> 
-    <ion-col col-8 style="background-color: #03A9F4;">
-      <ion-col col-2 style="background-color: #43baf1;"><ion-icon name="logo-twitter" style="color:white;"></ion-icon> </ion-col>
-      <ion-col col-6 style="color:white;"> {{'twitter' |translate}}</ion-col>
-    </ion-col>
-  
-     <ion-col col-2></ion-col>
-  
-  </ion-row>
-
-</div>
-<ion-row >
-  <ion-col col-2></ion-col>
-  <ion-col col-8 >
-    <p style="text-align: center;">{{'noaccount' | translate}}<span (click)="opensign()" style="color: #f2622b;">{{'restno' | translate}}</span></p>
-  </ion-col>
-  <ion-col col-2></ion-col>
-
-</ion-row>
 </ion-content>

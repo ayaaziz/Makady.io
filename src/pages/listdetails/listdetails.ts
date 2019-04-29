@@ -6,7 +6,7 @@ import { HelperProvider } from '../../providers/helper/helper';
 import { Storage } from '@ionic/storage';
 import { TabsPage } from '../tabs/tabs';
 import { PopoverPage } from '../popover/popover';
-import { AboutPage } from '../about/about';
+import { CategoriesPage } from '../categories/categories';
 
 
 @Component({
@@ -156,7 +156,7 @@ services
   addproduct()
   {
     this.navCtrl.setRoot(TabsPage).then(()=>{
-      this.navCtrl.push(AboutPage)
+      this.navCtrl.push(CategoriesPage);
     })
   }
   

@@ -63,6 +63,7 @@ export class ChangepasswordPage {
     })
   }
   }
+  
   presentToast(msg)
   {
     let toast = this.toastCtrl.create({

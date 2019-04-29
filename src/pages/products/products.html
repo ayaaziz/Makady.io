@@ -1,72 +1,51 @@
 <ion-header>
-
-  <ion-navbar  color="danger" hideBackButton>
-    <ion-title style="text-align:center;">{{'products' | translate}}</ion-title>
-    <ion-buttons right *ngIf="langdirection=='ltr'">
-        <button ion-button (click)="ViewCtrl.dismiss()">
-            <ion-icon md="ios-arrow-forward" ios="ios-arrow-forward"  style="font-size: 2.5rem;color:white;" ></ion-icon>
-        </button>
-        <button ion-button menuToggle>
-          <ion-icon  class="menuToggle" ios="md-list" md="md-list" style="font-size: 3.2rem;    margin-left: 0px;
-          margin-right: 0px;"></ion-icon>
-        </button>
-        </ion-buttons>
-        <ion-buttons right *ngIf="langdirection=='rtl'">
-          <button ion-button (click)="ViewCtrl.dismiss()">
-              <ion-icon md="ios-arrow-back-outline"  ios="ios-arrow-back-outline" style="font-size: 2.5rem;color:white;" ></ion-icon>
-          </button>
-      </ion-buttons>
+  <ion-navbar color="danger" hideBackButton style="text-align:center;">
+    <ion-title>{{ categoryName }}</ion-title>
+    <ion-buttons left>
+      <button ion-button (click)="ViewCtrl.dismiss()">
+        <ion-icon md="ios-arrow-back" ios="ios-arrow-back" style="font-size: 2.5rem;color:white;" ></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
-
-<ion-content padding class="{{langdirection}}">
-  <ion-searchbar *ngIf="langdirection=='ltr'" [dir]="langdirection" style="margin-top: 0px;" placeholder="Search by namw or barcode" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput">
-  </ion-searchbar>
-  <ion-searchbar *ngIf="langdirection=='rtl'" [dir]="langdirection" style="margin-top: 0px;" placeholder="ابحث بالاسم أو الباركود" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput">
+<ion-content padding>
+  <ion-searchbar [dir]="langdirection" style="margin-top: 0px;" placeholder="Search by namw or barcode" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput">
   </ion-searchbar>
   <div style="border:1px solid #e26c40; border-radius: 15px;margin:10px 14px;"  *ngFor="let item of products">
-  <ion-row >
-    <ion-col col-1>
-      <p [dir]="langdirection" style="margin: 0.5em 0;"><img  src="{{item.product_image}}" class="circle-pic"
-        onerror="this.onerror=null;this.src='assets/imgs/error.png';">
-      </p>
-    </ion-col>
-    <ion-col col-5>
-      <p style="margin-top: 25px;">{{item.product_name}}</p>
-    </ion-col>
-    <ion-col col-5>
-      <ion-row style="margin-top: 20px;">
-        <ion-col col-4>
-          <ion-fab *ngIf="!this.platform.isRTL" left bottom style="bottom: 1px;">
-              <button (click)="AddQuantityNum(item.product_id)" ion-fab color=quantityColor style="width: 16px;height: 19px;"><ion-icon name="add" style="font-size: 1.8rem;"></ion-icon></button>
-            </ion-fab>
-            <ion-fab *ngIf="this.platform.isRTL" right bottom style="bottom: 1px;">
-              <button (click)="AddQuantityNum(item.product_id)" ion-fab color=quantityColor style="width: 16px;height: 19px;"><ion-icon name="add" style="font-size: 1.8rem;"></ion-icon></button>
-            </ion-fab>     
-        </ion-col>
-        <ion-col col-4 style="text-align: center">
-          <!-- <span style="text-align: center;color:#84bb53"> {{ qNum }} </span> -->
-          <span style="text-align: center;">{{item.count}} </span>
-        </ion-col>
-        <ion-col col-4>
-          <ion-fab *ngIf="!this.platform.isRTL" right bottom style="bottom: 1px;">
-              <button (click)="minusQuantityNum(item.product_id)" ion-fab color=quantityColor style="width: 16px;height: 19px;"><ion-icon name="remove" style="font-size: 1.8rem;"></ion-icon></button>
-            </ion-fab>
-            <ion-fab *ngIf="this.platform.isRTL" left bottom style="bottom: 1px;">
-              <button (click)="minusQuantityNum(item.product_id)" ion-fab color=quantityColor style="width: 16px;height: 19px;"><ion-icon name="remove" style="font-size: 1.8rem;"></ion-icon></button>
-            </ion-fab>
-        </ion-col>
-        </ion-row>
-    </ion-col>
-    <ion-col col-1>
-      <p style="text-align:center;">
-        <button ion-button style="background-color:#e26c40;width: 36px; height: 40px; font-size: 13px;color:white;text-align:center;width: 40px;white-space: normal;border-radius: 14px;" (click)="addtomenu(item)">{{'addTo' | translate}}</button>
-        </p>
-    </ion-col>
-  </ion-row>
+    <ion-row style="position:relative;">
+      <img src="{{item.product_image}}" class="circle-pic"
+          onerror="this.onerror=null;this.src='assets/imgs/error.png';">
+          
+      <ion-col col-1></ion-col>
 
-  
-</div>
+      <ion-col col-5>
+        <p style="margin-top: 15px;">{{item.product_name}}</p>
+      </ion-col>
+
+      <ion-col col-5>
+        <ion-row style="margin-top: 9px;">
+          <ion-col col-4>
+            <ion-fab left bottom style="bottom: 1px;">
+              <button (click)="AddQuantityNum(item.product_id)" ion-fab color=quantityColor style="width: 16px;height: 19px;"><ion-icon name="add" style="font-size: 1.8rem;"></ion-icon></button>
+            </ion-fab>
+          </ion-col>
+
+          <ion-col col-4 style="text-align: center">
+            <span style="text-align: center;">{{item.count}} </span>
+          </ion-col>
+
+          <ion-col col-4>
+            <ion-fab right bottom style="bottom: 1px;">
+              <button (click)="minusQuantityNum(item.product_id)" ion-fab color=quantityColor style="width: 16px;height: 19px;"><ion-icon name="remove" style="font-size: 1.8rem;"></ion-icon></button>
+            </ion-fab>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+
+      <ion-col col-1></ion-col>
+
+      <button class="addBtn" ion-button style="background-color:#e26c40;width: 36px; height: 40px; font-size: 13px;color:white;text-align:center;width: 40px;white-space: normal;border-radius: 14px;" (click)="addtomenu(item)">{{'addTo' | translate}}</button>
+    </ion-row>
+  </div>
 </ion-content>

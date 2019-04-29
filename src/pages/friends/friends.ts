@@ -16,9 +16,6 @@ export class FriendsPage {
   friends:any=[]
   groups:any=[]
   constructor(public alertCtrl:AlertController,public barcodeScanner:BarcodeScanner  ,public ViewCtrl:ViewController,public storage :Storage,public provider:MainproviderProvider,public platform:Platform,public helper:HelperProvider,public translate:TranslateService,public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
     this.langdirection=this.helper.langdirection
     this.storage.get("makadyaccess").then((val)=>{
       if(val)
@@ -34,6 +31,11 @@ export class FriendsPage {
 
       }
     })
+  
+  }
+
+  ionViewDidLoad() {
+ 
 
   }
   delete(id)

@@ -4,9 +4,9 @@ import { ToastController } from 'ionic-angular';
 
 @Injectable()
 export class HelperProvider {
-  langdirection:any="ltr"
+  langdirection:any="ltr";
   accesstoken:any
-  type:any
+  type:any;
   user_id;
   serviceurl:any="http://itrootsdemos.com/makady/phase1/api/"
   constructor(public toastCtrl:ToastController, public http: HttpClient) {
@@ -21,10 +21,20 @@ export class HelperProvider {
   {
     let toast = this.toastCtrl.create({
       message: msg,
-      duration: 3000,
-      position: 'bottom',
-    
+      duration: 4000,
+      position: 'top',
+      showCloseButton: true,
+      closeButtonText: "OK",
     });
     toast.present();
+  }
+
+  //check matching between codes
+  verifyAccount(userCode:string,emailcode:string) {   
+    if(userCode === emailcode) {
+      return true;
+    } else {
+        return false;
+    }
   }
 }

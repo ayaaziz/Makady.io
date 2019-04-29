@@ -1,18 +1,5 @@
 page-shoppinglist {
-    // .segment-md .segment-button.activated, .segment-md .segment-button.segment-activated {
-    //     border-color: #e46f3f !important;
-    //     opacity: 1;
-    // }
-    // .segment-ios .segment-button.activated, .segment-ios .segment-button.segment-activated {
-    //     border-color: #e46f3f !important;
-    //     opacity: 1;
-    // }
-    // .segment-md .segment-button {
-    //     color: #e46f3f !important;
-    // }
-    // .segment-ios .segment-button {
-    //     color: #e46f3f !important;
-    // }
+   
     .segment-button.segment-activated {
         background-color: #cfe4ba !important;
         color: black !important;
@@ -27,6 +14,13 @@ page-shoppinglist {
         color: black !important;
     } 
 
-    
+    ion-segment {
+        display:flex;
+        width: 100%;
+        position: relative;
+        width: 100%;
+        z-index: 1;
+        top: 56px;
+    }
     
 }
