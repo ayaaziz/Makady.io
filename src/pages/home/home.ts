@@ -74,7 +74,6 @@ export class HomePage {
                                                   'rgba(185, 17, 17,.5)',
                                                   'rgba(165, 96, 164,.5)',
                                                   'rgba(255, 99, 132, .5)'],
-                   
                      }],
                   labels:this.names
                  },

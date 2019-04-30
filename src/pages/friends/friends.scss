@@ -18,18 +18,10 @@ page-friends {
         border: 1px solid #dbdada;   
     }
 
-    // [dir="rtl"] ion-scroll .scroll-content {
-    //     left: 0 !important;
-    //     right: -19px !important;
-    // }
-
-    // [dir="ltr"] ion-scroll .scroll-content {
-    //     right: 0 !important;
-    //     left: -19px !important;
-    // }
-
-
     ion-scroll .scroll-content {
         padding-right: 0 !important; 
+        margin-right: -4px !important;
+        padding-left: 0 !important; 
+        margin-left: -4px !important;
     }
 }

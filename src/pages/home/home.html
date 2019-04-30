@@ -1,40 +1,20 @@
 <ion-header>
-    <ion-navbar color="danger">     
-      <ion-buttons left>
-          <button ion-button menuToggle>
-            <ion-icon  class="menuToggle" ios="ios-list" md="ios-list" style="font-size: 3.2rem"></ion-icon>
-          </button>
-      </ion-buttons>
-      <ion-row>
-        <ion-col>
-          <img src="../../assets/imgs/homelogo.png" alt="home">
-        </ion-col>
-      </ion-row>
-      <ion-buttons right (click)="friendlist()">
-        <button ion-button icon-only>
-          <ion-icon name="search" style="font-size: 2.2rem;color:white"></ion-icon>
+  <ion-navbar color="danger">     
+    <ion-buttons left>
+        <button ion-button menuToggle>
+          <ion-icon  class="menuToggle" ios="ios-list" md="ios-list" style="font-size: 3.2rem"></ion-icon>
         </button>
-      </ion-buttons>
-   
-  
-  
-    <!-- <ion-buttons right *ngIf="langdirection=='rtl'">
-        <button ion-button  menuToggle>
-        <ion-icon  class="menuToggle" ios="md-list" md="md-list" style="font-size: 3.2rem;    margin-left: 0px;
-        margin-right: 0px;"></ion-icon>
+    </ion-buttons>
+    <ion-row>
+      <ion-col>
+        <img src="../../assets/imgs/homelogo.png" alt="home">
+      </ion-col>
+    </ion-row>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="friendlist()">
+        <ion-icon ios="md-person-add" md="md-person-add" style="font-size: 2.2rem;color:white"></ion-icon>
       </button>
-    </ion-buttons> -->
-    
-<!-- <ion-buttons right (click)="friendlist()">
-  <button ion-button icon-only>
-      <ion-icon name="md-people" style="font-size: 2.2rem;color:white"></ion-icon>
-  </button>
-</ion-buttons> -->
-<!-- <ion-buttons left *ngIf="langdirection=='rtl'" (click)="friendlist()">
-  <button ion-button icon-only>
-    <ion-icon name="md-people" style="font-size: 2.2rem;color:white"></ion-icon>
-  </button>
-</ion-buttons> -->
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
