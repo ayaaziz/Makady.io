@@ -14,7 +14,7 @@ import { CategoriesPage } from '../categories/categories';
   templateUrl: 'listdetails.html',
 })
 export class ListdetailsPage {
-langdirection:any
+langdirection:any;
 id:any
 name:any
 purchase:any

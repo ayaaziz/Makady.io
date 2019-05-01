@@ -133,23 +133,23 @@ export class SettingsPage {
       console.log(JSON.stringify(err))
     });
   }
+
   ionViewDidLoad() {
-    this.storage.get("makadyaccess").then((val)=>{
-      if(val)
-      {
-        this.provider.getuser(val,(data)=> {
-          console.log(JSON.stringify(data))
-          let Dataparsed=JSON.parse(data)
-          if(Dataparsed.success==true) {
-            this.createdCode=(Dataparsed.user.id).toString();
+    this.storage.get("makadyaccess").then((val) => { 
+      if(val) {
+        this.provider.getuser(val,(data) => {
+          console.log(JSON.stringify(data));
+          let Dataparsed=JSON.parse(data);
+          if(Dataparsed.success) {
+            this.createdCode = (Dataparsed.user.id).toString();
             console.log(this.createdCode);
           } 
         },
-        (data)=>{})
+        (error) => {});
       }
     });
-    this.storage.get("Makadyuser_name").then((val)=>{
-      this.name=val
+    this.storage.get("Makadyuser_name").then((val) => {
+      this.name = val;
     })
 
     console.log('ionViewDidLoad SettingsPage');

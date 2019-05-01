@@ -25,13 +25,15 @@
 				<p style="color:#e26c40;margin-left: 8px;margin-right: 8px;margin-top: 2px;">{{'changlang' | translate}}</p>
 			</ion-row>
 		</ion-item>
+
 		<ion-item  (click)="changepass()">
 			<ion-row >
 				<ion-icon name="ios-unlock" style="color:#e26c40"></ion-icon>
 				<p style="color:#e26c40;margin-left: 8px;margin-right: 8px;margin-top: 2px;">{{'changpass' | translate}}</p>
 			</ion-row>
 		</ion-item>
-		<ion-item >
+
+		<ion-item>
 			<ion-row>
 				<ion-icon name="ios-notifications" style="color:#e26c40"></ion-icon>
 				<p style="color:#e26c40;margin-left: 8px;margin-right: 8px;margin-top: 2px;">{{'notification' | translate}}</p>
@@ -51,30 +53,27 @@
 				<ion-toggle (ionChange)="onToggleOffersNotification($event)" [checked]="offersNotificationStatus"></ion-toggle>
 		</ion-item>
 
-	
-
-	<ion-item (click)="shareapp()" >
-	<ion-row >
-	<ion-icon name="md-share" style="color:#e26c40"></ion-icon>
-	<p style="color:#e26c40;margin-left: 8px;margin-right: 8px;margin-top: 2px;">{{'share' | translate}}</p>
-	</ion-row>
-	</ion-item>
+		<ion-item (click)="shareapp()">
+			<ion-row>
+				<ion-icon name="md-share" style="color:#e26c40"></ion-icon>
+				<p style="color:#e26c40;margin-left: 8px;margin-right: 8px;margin-top: 2px;">{{'share' | translate}}</p>
+			</ion-row>
+		</ion-item>
 	</ion-list>
+
 	<p style="text-align:center;font-weight: bold;font-size: 1.4em;">{{'scan' | translate}}</p>
 	<p style="text-align: center;">
-			<ion-card *ngIf="createdCode">
-					<ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>
-					
-				</ion-card>
-			</p>
+	<ion-card *ngIf="createdCode">
+		<ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>		
+	</ion-card>
+	</p>
 	<p style="text-align:center;font-weight: bold;font-size: 16px;"> {{'follow' | translate}}</p>
-	<p style="text-align:center;">
-			
-					<!-- https://www.instagram.com/makady/
-					https://www.facebook.com/makady/
-					https://twitter.com/makady -->
-	<a href="" style="text-decoration: none;color:#3878ab"><ion-icon  name="logo-instagram" style="color:red;margin-left: 10px;font-size: 1.8em;color: rgba(233, 30, 99, 0.8313725490196079);"></ion-icon></a>
-	<a href="" style="text-decoration: none;color:#3878ab"><ion-icon  name="logo-facebook" style=" margin-left: 10px;margin-right: 10px;font-size: 1.8em;color: #0707b7;"></ion-icon></a>
-	<a href="" style="text-decoration: none;color:#3878ab"><ion-icon  name="logo-twitter" style="color:red;margin-right: 10px;font-size: 1.8em;color: #03A9F4;"></ion-icon></a>
+	<p style="text-align:center;">		
+		<!-- https://www.instagram.com/makady/
+		https://www.facebook.com/makady/
+		https://twitter.com/makady -->
+		<a href="" style="text-decoration: none;color:#3878ab"><ion-icon  name="logo-instagram" style="color:red;margin-left: 10px;font-size: 1.8em;color: rgba(233, 30, 99, 0.8313725490196079);"></ion-icon></a>
+		<a href="" style="text-decoration: none;color:#3878ab"><ion-icon  name="logo-facebook" style=" margin-left: 10px;margin-right: 10px;font-size: 1.8em;color: #0707b7;"></ion-icon></a>
+		<a href="" style="text-decoration: none;color:#3878ab"><ion-icon  name="logo-twitter" style="color:red;margin-right: 10px;font-size: 1.8em;color: #03A9F4;"></ion-icon></a>
 	</p>
 </ion-content>

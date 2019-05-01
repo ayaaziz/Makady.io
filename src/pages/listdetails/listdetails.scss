@@ -70,4 +70,19 @@ page-listdetails {
         text-align: center !important;
     
     }
+
+    .child-details {
+      display: flex;      
+      align-items: center;
+    }
+
+    .details-col {
+      text-align: center;
+    }
+
+    .header-details {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 }
