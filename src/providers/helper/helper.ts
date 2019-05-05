@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ToastController } from 'ionic-angular';
+import { ToastController, Events } from 'ionic-angular';
 
 @Injectable()
 export class HelperProvider {
@@ -9,7 +9,10 @@ export class HelperProvider {
   type:any;
   user_id;
   serviceurl:any="http://itrootsdemos.com/makady/phase1/api/"
-  constructor(public toastCtrl:ToastController, public http: HttpClient) {
+
+  constructor(public toastCtrl:ToastController, 
+              public http: HttpClient,
+              public event:Events) {
     console.log('Hello HelperProvider Provider');
   }
   parseArabic(str) {
@@ -37,4 +40,5 @@ export class HelperProvider {
         return false;
     }
   }
+
 }

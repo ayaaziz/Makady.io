@@ -27,6 +27,7 @@ export class SettingsPage {
   offers = true;
   productNotificationStatus: boolean = false;
   offersNotificationStatus: boolean = false;
+  username:string;
 
   constructor(public actionSheetCtrl: ActionSheetController,
               public camera:Camera,
@@ -142,6 +143,7 @@ export class SettingsPage {
           let Dataparsed=JSON.parse(data);
           if(Dataparsed.success) {
             this.createdCode = (Dataparsed.user.id).toString();
+            this.username = Dataparsed.user.username;
             console.log(this.createdCode);
           } 
         },

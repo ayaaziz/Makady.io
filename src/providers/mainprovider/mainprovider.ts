@@ -52,6 +52,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
+            this.helper.presentToast(err.message);
           }
         )
     } else {
@@ -68,25 +69,26 @@ export class MainproviderProvider {
       loader.present();
       let headers = new HttpHeaders();
       let parameter = {
-        'username':username,
-        'password':password,
-        'firebase_id':id
+        "username":username,
+        "password":password,
+        "firebase_id":id
         
       }
       headers = headers.set('Content-Type', 'application/json');
-      let serviceUrl = this.helper.serviceurl + 'user_login';
-      //
+      let serviceUrl = this.helper.serviceurl + "user_login";
+      
       this.http.post(serviceUrl, parameter, { headers: headers })
         .subscribe(
           data => {
             loader.dismiss();
-
+           
+            console.log(data);
             successCallback(JSON.stringify(data))
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -119,12 +121,11 @@ export class MainproviderProvider {
           },
           err => {
             this.helper.presentToast(err.message);
-            alert("errrrrrrrrrrrrrrror");
-            alert(err.message);
 
             loader.dismiss();
 
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
       } else {
@@ -158,8 +159,8 @@ export class MainproviderProvider {
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -186,13 +187,12 @@ export class MainproviderProvider {
         .subscribe(
           data => {
             loader.dismiss();
-
-            successCallback(JSON.stringify(data))
+            successCallback(JSON.stringify(data));
           },
           err => {
             loader.dismiss();
-
-            failureCallback(err);
+            failureCallback(err);        
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -253,8 +253,8 @@ export class MainproviderProvider {
         },
         err => {
           loader.dismiss();
-
           failureCallback(err);
+          this.helper.presentToast(err.message);          
         })
     } else {
       this.helper.presentToast(this.translate.instant("offline"));
@@ -286,8 +286,8 @@ export class MainproviderProvider {
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -312,13 +312,12 @@ export class MainproviderProvider {
         .subscribe(
           data => {
             loader.dismiss();
-
-            successCallback("change pwd data"+JSON.stringify(data))
+            successCallback(JSON.stringify(data))
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -346,8 +345,8 @@ export class MainproviderProvider {
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -375,13 +374,12 @@ export class MainproviderProvider {
       .subscribe(
         data => {
           loader.dismiss();
-
           successCallback(JSON.stringify(data))
         },
         err => {
           loader.dismiss();
-
           failureCallback(err);
+          this.helper.presentToast(err.message);          
         }
       )
     } else {
@@ -412,8 +410,8 @@ export class MainproviderProvider {
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -443,8 +441,8 @@ export class MainproviderProvider {
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -475,8 +473,8 @@ export class MainproviderProvider {
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -507,8 +505,8 @@ export class MainproviderProvider {
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -539,8 +537,8 @@ export class MainproviderProvider {
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -571,8 +569,8 @@ export class MainproviderProvider {
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -605,8 +603,8 @@ export class MainproviderProvider {
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -642,8 +640,8 @@ export class MainproviderProvider {
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -676,8 +674,8 @@ export class MainproviderProvider {
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -709,8 +707,8 @@ export class MainproviderProvider {
         },
         err => {
           loader.dismiss();
-
           failureCallback(err);
+          this.helper.presentToast(err.message);          
         }
       )
     } else {
@@ -744,8 +742,8 @@ export class MainproviderProvider {
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -774,8 +772,8 @@ export class MainproviderProvider {
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -804,8 +802,8 @@ export class MainproviderProvider {
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -836,8 +834,8 @@ export class MainproviderProvider {
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -870,8 +868,8 @@ export class MainproviderProvider {
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -902,6 +900,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -935,8 +934,8 @@ export class MainproviderProvider {
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -969,8 +968,8 @@ export class MainproviderProvider {
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {
@@ -1006,8 +1005,8 @@ export class MainproviderProvider {
           },
           err => {
             loader.dismiss();
-
             failureCallback(err);
+            this.helper.presentToast(err.message);            
           }
         )
     } else {

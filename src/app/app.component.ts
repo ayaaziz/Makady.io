@@ -56,7 +56,8 @@ export class MyApp {
     platform.ready().then(() => {
       this.event.subscribe("login", () => {
         this.storage.get("user_info").then(val => {
-          console.log("user_info : ",val);
+          console.log("user_info : ",JSON.stringify(val));
+           
           if(val) {
             this.userLoged = true;
             this.username = val.user.username;
@@ -64,6 +65,7 @@ export class MyApp {
           }
         });
       });
+    
 
       if(this.platform.is('ios')) {
         this.helper.type="2"

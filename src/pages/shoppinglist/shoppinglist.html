@@ -23,7 +23,7 @@
     <ion-searchbar style="margin-top: 35px;padding-bottom: 0;" placeholder="{{'searchYours' | translate }}" (ionInput)="onInput(myInput)" (ionCancel)="onCancel()" [(ngModel)]="myInput" [hidden]="hide2" [dir]="langdirection"></ion-searchbar>
       <ion-col>       
         <p style="text-align: center;color:#e26c40;font-size: 1.4em;font-weight: bold;" [hidden]="hide">{{'nolistes'| translate}}</p>
-        <ion-item  style="border:1px solid #e26c40; border-radius: 10px;margin-top: 15px;" *ngFor="let item of listes">
+        <ion-item  style="border:1px solid #e26c40; border-radius: 10px;margin-top: 15px;" *ngFor="let item of listes" [hidden]="hide2">
             <ion-row>
               <ion-col col-1 (click)="opendetails(item.menu_id,item.menu_name)">
                 <p [dir]="langdirection"><ion-icon name="ios-list-outline" style="color:#666;font-size: 2.2em;"></ion-icon></p>
@@ -55,7 +55,7 @@
     <ion-searchbar style="margin-top: 35px;padding-bottom: 0;" placeholder="{{'searchinvited' | translate }}" (ionInput)="onInputinvited(myInput)" (ionCancel)="onCancel()" [(ngModel)]="myInput" [hidden]="hide1"  [dir]="langdirection"></ion-searchbar>
     <ion-col>
       <p style="text-align: center;color:#e26c40;font-size: 1.4em;font-weight: bold;" [hidden]="show">{{'nolistes'| translate}}</p>
-      <ion-item style="border:1px solid #e26c40; border-radius: 10px;margin-top: 10px;" *ngFor="let item of inlistes">
+      <ion-item style="border:1px solid #e26c40; border-radius: 10px;margin-top: 10px;" *ngFor="let item of inlistes" [hidden]="hide1">
         <ion-row style="margin-top: -8px;">
           <ion-col col-1 (click)="opendetails(item.menu_id,item.menu_name)">
             <p [dir]="langdirection"><ion-icon name="ios-list-outline" style="color:#666;font-size: 2.2em;"></ion-icon></p>

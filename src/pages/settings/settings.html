@@ -10,13 +10,29 @@
 </ion-header>
 
 <ion-content padding>
-	<div style="text-align: center;">
+	<!-- <div style="text-align: center;">
 		<div class="takePhoto">
-				<img style="text-align:center;" src="{{photo}}" class="circle-pic"
-				onerror="this.onerror=null;this.src='assets/imgs/user.png';">   
-				<ion-icon name="ios-camera" (click)="getimg()"></ion-icon>
+			<img style="text-align:center;" src="{{photo}}" class="circle-pic"
+			onerror="this.onerror=null;this.src='assets/imgs/user.png';">   
+			<ion-icon name="ios-camera" (click)="getimg()"></ion-icon>
 		</div>
-	</div>
+	</div> -->
+	<!-- <p style="text-align:center;font-weight: bold;font-size: 1.4em;">{{'scan' | translate}}</p> -->
+	<!-- <p style="text-align: center;"> -->
+		<ion-row>
+			<ion-col style="justify-content: center;display: flex;">
+				<ion-card *ngIf="createdCode">
+					<ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>		
+				</ion-card>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col style="justify-content: center;display: flex;font-size: 22px;margin-top: -20px;">
+				<p>{{ username }}</p>
+			</ion-col>
+		</ion-row>
+		
+	<!-- </p> -->
 
 	<ion-list>
 		<ion-item  (click)="changelang()">
@@ -61,19 +77,24 @@
 		</ion-item>
 	</ion-list>
 
-	<p style="text-align:center;font-weight: bold;font-size: 1.4em;">{{'scan' | translate}}</p>
+	<!-- <p style="text-align:center;font-weight: bold;font-size: 1.4em;">{{'scan' | translate}}</p>
 	<p style="text-align: center;">
 	<ion-card *ngIf="createdCode">
 		<ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>		
 	</ion-card>
-	</p>
+	</p> -->
 	<p style="text-align:center;font-weight: bold;font-size: 16px;"> {{'follow' | translate}}</p>
 	<p style="text-align:center;">		
 		<!-- https://www.instagram.com/makady/
 		https://www.facebook.com/makady/
 		https://twitter.com/makady -->
+
+
 		<a href="" style="text-decoration: none;color:#3878ab"><ion-icon  name="logo-instagram" style="color:red;margin-left: 10px;font-size: 1.8em;color: rgba(233, 30, 99, 0.8313725490196079);"></ion-icon></a>
-		<a href="" style="text-decoration: none;color:#3878ab"><ion-icon  name="logo-facebook" style=" margin-left: 10px;margin-right: 10px;font-size: 1.8em;color: #0707b7;"></ion-icon></a>
+		<a href="" style="text-decoration: none;color:#3878ab"><ion-icon  name="logo-facebook" style=" margin-left: 10px;margin-right: 10px;font-size: 1.8em;color: #3b5a98;"></ion-icon></a>
 		<a href="" style="text-decoration: none;color:#3878ab"><ion-icon  name="logo-twitter" style="color:red;margin-right: 10px;font-size: 1.8em;color: #03A9F4;"></ion-icon></a>
+
+	
+			
 	</p>
 </ion-content>

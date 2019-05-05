@@ -57,6 +57,7 @@ export class LoginPage {
           } else { 
               this.provider.getuser(Dataparsed.access_token, (data) => {
                 let pdata = JSON.parse(data);
+                console.log("parsed data: "+JSON.stringify(pdata));
          
                 // if (this.remember == true) {
                   this.storage.set("Makadyusername", "true");

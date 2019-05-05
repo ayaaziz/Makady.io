@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, AlertController, Events } from 'ionic-angular';
 import { MainproviderProvider } from '../../providers/mainprovider/mainprovider';
 import { HelperProvider } from '../../providers/helper/helper';
 import { Storage } from '@ionic/storage';
@@ -29,18 +29,22 @@ export class ShoppinglistPage {
               public helper:HelperProvider,
               public provider:MainproviderProvider,
               public navCtrl: NavController,
-              public navParams: NavParams) {
+              public navParams: NavParams,
+              public event:Events) {
+
   }
 
   ionViewDidLoad() {
     this.hide2=false;
     this.hide1=true;
     this.langdirection = this.helper.langdirection;
+   
+    
     this.storage.get("makadyaccess").then((val) => {
       if(val) {
         this.provider.menus(1,"",val,(data) => {
           console.log(JSON.stringify(data));
-          let parsedData=JSON.parse(data);
+          let parsedData = JSON.parse(data);
           this.listes = parsedData.data;
         
           if(this.listes.length==0) {
@@ -82,7 +86,7 @@ export class ShoppinglistPage {
   onInputinvited(input) {
     this.listes=[];
 
-    this.storage.get("makadyaccess").then((val)=>{
+    this.storage.get("makadyaccess").then((val) => {
       if(val) {
         this.provider.menus(2,input,val,(data) => {
           console.log(JSON.stringify(data));

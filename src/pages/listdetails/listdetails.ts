@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, PopoverController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, PopoverController, Events } from 'ionic-angular';
 import { MainproviderProvider } from '../../providers/mainprovider/mainprovider';
 import { TranslateService } from '@ngx-translate/core';
 import { HelperProvider } from '../../providers/helper/helper';
@@ -30,7 +30,16 @@ detailsdata:any=[]
 products:any=[]
 members:any=[]
 services
-  constructor(public popoverCtrl:PopoverController,public storage:Storage,public ViewCtrl:ViewController,public translate:TranslateService,public provider:MainproviderProvider,public helper:HelperProvider,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public popoverCtrl:PopoverController,
+              public storage:Storage,
+              public ViewCtrl:ViewController,
+              public translate:TranslateService,
+              public provider:MainproviderProvider,
+              public helper:HelperProvider,
+              public navCtrl: NavController,
+              public navParams: NavParams,
+              public event:Events) {
+
   this.name=this.navParams.get("name")
   this.id=this.navParams.get("id")
 
@@ -46,6 +55,7 @@ services
    });
     this.services[x].open = !this.services[x].open
   }
+
   ionViewDidEnter() {
     this.langdirection=this.helper.langdirection
     this.storage.get("makadyaccess").then((val)=>{
@@ -58,7 +68,7 @@ services
          // this.details=parsedData.data.menu_items
           this.services = parsedData.data.menu_items
           this.services.forEach(element => {
-            element.open = false
+            element.open = false;
           });
           console.log("this.services"+this.services)
           // this.details.forEach(element => {
@@ -130,13 +140,14 @@ services
           this.helper.presentToast("يجب ألا تكون الكمية التي تم شراؤها أكبر من الكمية المطلوبة")
           return
         }
-    this.provider.addproduct(id,this.helper.user_id,quant_count,price,val,(data)=>{
+    this.provider.addproduct(id,this.helper.user_id,quant_count,price,val,(data) => {
       
      if(data.success){
        this.helper.presentToast("تم حفظ الشراء بنجاح")
        this.price= ''
        this.buy = ''
-       this.ionViewDidEnter()
+       this.ionViewDidEnter();
+ 
      }
      else{
        this.helper.presentToast(data.errors)
