@@ -137,98 +137,18 @@
         </ion-list>
       </span>
     </ion-list>
-    <!-- <ion-row [hidden]="show" [dir]="langdirection" *ngFor="let item of detailsdata" style="border-bottom: 1px solid lightgray;width: 100%;">
-      <ion-col col-2 (click)="opendetails(item.name)">
-        <ion-icon [dir]="langdirection" name="ios-arrow-down-outline" style="color:#e26c40;font-size: 2em; margin-right: 15px;"></ion-icon>
-      </ion-col>
-      <ion-col col-10 *ngIf="item.quantity != item.purchase">
-        <p [dir]="langdirection" style="color:#e26c40;font-size: 1.2em;margin-top:2px;">{{item.name}}</p>
-      </ion-col>
-      <ion-col col-10 *ngIf="item.quantity == item.purchase">
-        <del [dir]="langdirection" style="color:#e26c40;font-size: 1.2em;margin-top:10px;">{{item.name}} ( {{item.quantity }} / {{item.purchase}} ) </del>
-      </ion-col>
-    </ion-row>
-
-    <div [hidden]="hide" [dir]="langdirection" style="border-bottom: 1px solid lightgray;width: 100%;">
-      <ion-row>
-        <ion-col col-2 (click)="closedetails()">
-          <ion-icon [dir]="langdirection" name="ios-arrow-up-outline" style="color:#e26c40;font-size: 2em; margin-right: 15px;"></ion-icon>
-        </ion-col>
-        <ion-col col-10 *ngIf="quantity != purchase">
-          <p [dir]="langdirection" style="color:#e26c40;font-size: 1.2em;margin-top:2px;">{{category_name}}</p>
-        </ion-col>
-        <ion-col col-10 *ngIf="quantity == purchase">
-          <del [dir]="langdirection" style="color:#e26c40;font-size: 1.2em;margin-top:10px;">{{category_name}} ( {{quantity }} / {{purchase}} ) </del>
-        </ion-col>
-      </ion-row>
-      <ion-row style="border-bottom: 1px solid lightgray;width: 100%;" *ngFor="let item of products">
-        <ion-col col-4>
-          <p style="text-align: center;">{{'ordered' | translate}}</p>
-          <p style="text-align: center;">{{item.total_quantity}}</p>
-        </ion-col>
-        <ion-col col-4>
-          <p [dir]="langdirection">
-            <img src="{{item.product_image}}" class="circle-pic" onerror="this.onerror=null;this.src='assets/imgs/Bread.jpg';">
-          </p>
-        </ion-col>
-        <ion-col col-4>
-          <p>{{item.product_name}}</p>
-        </ion-col>
-        <ion-row style="width:100%;">
-          <ion-col col-3>
-            <p style="text-align: center;margin-top: 3px;">{{'buy' | translate}}</p>
-            <ion-input style="margin-top: -10px;
-            margin-right: 22px;
-            margin-left: 22px;
-            text-align: center;
-            border: 1px solid lightgray;
-            width: 30px;
-            height: 20px;
-            font-size: 10px;" [(ngModel)]="buy"> </ion-input>
-          </ion-col>
-          <ion-col col-3>
-            <p style="text-align: center;margin-top: 3px;">{{'price' | translate}}</p>
-            <ion-input style="margin-top: -10px;
-            margin-right: 22px;
-            margin-left: 22px;
-            text-align: center;
-            border: 1px solid lightgray;
-            width: 30px;
-            height: 20px;
-            font-size: 10px;" [(ngModel)]="price"> </ion-input>
-          </ion-col>
-          <ion-col col-2>
-            <button ion-button style="background-color: #e26c40;width:40px;height:40px; color:white;width:100%;" (click)="save(item.menu_item_id)">{{'save' | translate}}</button>
-          </ion-col>
-          <ion-col col-2>
-            <ion-icon style="color:#e26c40;margin-top: 14px;margin-right: 20px; margin-left: 20px;" name="md-checkbox" *ngIf="item.total_quantity==item.total_quantity_purchase"></ion-icon>
-          </ion-col>
-          <ion-col col-2>
-            <ion-icon style="color:#e26c40;margin-top: 14px;" name="md-more" (click)="openpop(item.menu_item_id,item.product_name)"></ion-icon>
-          </ion-col>
-        </ion-row>
-      </ion-row>
-      <ion-row [dir]="langdirection" *ngFor="let item of detailsdata" style="border-bottom: 1px solid lightgray;width: 100%;">
-        <ion-col col-2 (click)="opendetails(item.name)">
-          <ion-icon [dir]="langdirection" name="ios-arrow-down-outline" style="color:#e26c40;font-size: 2em; margin-right: 15px;"></ion-icon>
-        </ion-col>
-        <ion-col col-10 *ngIf="item.quantity != item.purchase">
-          <p [dir]="langdirection" style="color:#e26c40;font-size: 1.2em;margin-top:2px;">{{item.name}}</p>
-        </ion-col>
-        <ion-col col-10 *ngIf="item.quantity == item.purchase">
-          <del [dir]="langdirection" style="color:#e26c40;font-size: 1.2em;margin-top:10px;">{{item.name}} ( {{item.quantity }} / {{item.purchase}} ) </del>
-        </ion-col>
-      </ion-row>
-    </div>
+    
     <ion-row style="width:100%;">
       <ion-col col-1></ion-col>
       <ion-col col-10>
         <p>
-          <button ion-button style="background-color:#e26c40;width:100%;font-size: 1.5em;" (click)="addproduct()">{{'addproduct' | translate}}</button>
+          <button ion-button block style="background-color:#e26c40;" (click)="addproduct()" icon-start>
+            <ion-icon name="add" [ngClass]="{'left-fab':langdirection === 'ltr','right-fab':langdirection === 'rtl'}">{{'addproduct' | translate}}</ion-icon>
+          </button>
         </p>
       </ion-col>
       <ion-col col-1></ion-col>
-    </ion-row>-->
+    </ion-row>
 
   </div> 
 </ion-content>
