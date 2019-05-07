@@ -71,8 +71,7 @@ export class MainproviderProvider {
       let parameter = {
         "username":username,
         "password":password,
-        "firebase_id":id
-        
+        "firebase_id":id       
       }
       headers = headers.set('Content-Type', 'application/json');
       let serviceUrl = this.helper.serviceurl + "user_login";
@@ -275,13 +274,13 @@ export class MainproviderProvider {
       
       }
       headers = headers.set('Authorization', 'Bearer '+access);
-      let serviceUrl = this.helper.serviceurl + 'checkPassword';
+      let serviceUrl = this.helper.serviceurl + 'changePassword';
       //
       this.http.post(serviceUrl, parameter, { headers: headers })
         .subscribe(
           data => {
             loader.dismiss();
-
+            alert("from changepassword api: "+ JSON.stringify(data));
             successCallback(JSON.stringify(data))
           },
           err => {

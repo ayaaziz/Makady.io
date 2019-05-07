@@ -26,6 +26,7 @@ export class ChangepasswordPage {
   {
     if(this.confirm=="" || this.current=="" || this.new=="" )
     {
+    
       this.presentToast(this.translate.instant('alldata'))
 
     }
@@ -43,9 +44,12 @@ export class ChangepasswordPage {
           let dataparsed=JSON.parse(data)
           if(dataparsed.success==false)
           {
+            alert("error");            
             this.presentToast(dataparsed.error.password)
           }
           else{
+            alert("success");
+            console.log("successs");
             this.provider.changepass(this.current,this.new,this.confirm,val,(data)=>{
               console.log(JSON.stringify(data))
               this.current=""

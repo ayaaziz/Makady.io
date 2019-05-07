@@ -25,7 +25,8 @@ export class LoginPage {
   username: any = "";
   Password: any = "";
 
-  constructor(private googlePlus: GooglePlus,
+  constructor(
+              private googlePlus: GooglePlus,
               public provider: MainproviderProvider,
               public event: Events, 
               public storage: Storage,
