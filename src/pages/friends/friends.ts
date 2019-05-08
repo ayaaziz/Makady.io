@@ -24,6 +24,7 @@ export class FriendsPage {
       console.log(JSON.stringify(data))
       let parsedData=JSON.parse(data)
       this.friends=parsedData.friends
+      console.log("friends: "+JSON.stringify(this.friends));
       this.groups=parsedData.groups
     },(data)=>{
 
@@ -35,7 +36,6 @@ export class FriendsPage {
   }
 
   ionViewDidLoad() {
- 
 
   }
   delete(id)
@@ -73,6 +73,7 @@ export class FriendsPage {
     alert.present();
 
   }
+
   addfriend()
   {
     // Optionally request the permission early
@@ -138,6 +139,11 @@ export class FriendsPage {
     }, (err) => {
         console.log('Error: ', err);
     });
+  }
+
+
+  onInput(text:string) {
+    
   }
   
 }

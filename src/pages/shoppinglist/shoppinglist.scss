@@ -1,5 +1,9 @@
 page-shoppinglist {
    
+    ion-header {
+        position: relative !important;
+    }
+
     .segment-button.segment-activated {
         background-color: #cfe4ba !important;
         color: black !important;
@@ -20,7 +24,12 @@ page-shoppinglist {
         position: relative;
         width: 100%;
         z-index: 1;
-        top: 56px;
+        // top: 56px;
+    }
+
+    .segment-ios .segment-button {
+        height: 4.2rem !important;
+        line-height: 4rem !important;
     }
     
 }

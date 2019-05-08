@@ -1,0 +1,50 @@
+
+<ion-header>
+
+  <ion-navbar color="danger" hideBackButton>
+    <ion-title style="text-align:center;">{{'friends' | translate}}</ion-title>
+    <ion-buttons right *ngIf="langdirection=='ltr'">
+      <button ion-button (click)="ViewCtrl.dismiss()">
+          <ion-icon md="ios-arrow-forward" ios="ios-arrow-forward"  style="font-size: 2.5rem;color:white;" ></ion-icon>
+      </button>
+      </ion-buttons>
+      <ion-buttons right *ngIf="langdirection=='rtl'">
+        <button ion-button (click)="ViewCtrl.dismiss()">
+            <ion-icon md="ios-arrow-back-outline"  ios="ios-arrow-back-outline" style="font-size: 2.5rem;color:white;" ></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<ion-searchbar *ngIf="langdirection=='ltr'" [dir]="langdirection" placeholder="Search For A Friend" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput">
+    </ion-searchbar>
+    <ion-searchbar *ngIf="langdirection=='rtl'" [dir]="langdirection" placeholder="البحث عن صديق" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput">
+      </ion-searchbar>
+    <ion-row style="margin-top: 5px;" >
+    <ion-col col-4 style="box-shadow: 1px 3px 6px 1px lightgrey;margin-right: 5px;margin-left: 5px;" *ngFor="let item of groups">
+    <p style="text-align:center;margin-bottom: 2px;"><img style="text-align:center;margin-top: 0px;" class="circle-pic" src="assets/imgs/camera.png"></p>
+    <p style="text-align:center;">{{item.group_name}}</p>
+    </ion-col>
+    </ion-row>
+    <div style="box-shadow:1px 1px 1px 1px lightgray">
+    <p [dir]="langdirection" style="color:#e26c40;font-weight:bold;font-size:1.2em;margin-left: 10px;margin-right: 10px;">{{'friendlist'| translate}}</p>
+       <p [dir]="langdirection" style="color:#e26c40;font-weight:bold;font-size:1.2em" (click)="addfriend()"><ion-icon name="md-add-circle" style="color:#e26c40;margin-right: 10px;margin-left: 10px;"></ion-icon>{{'addnewfriend'| translate}}</p>
+      <ion-row *ngFor="let item of friends">
+       <ion-col col-3>
+          <img dir="*ngif(this.platform.isRTL)? rtl : ltr" src="{{item.profile_pic}}" class="circle-pic"
+          onerror="this.onerror=null;this.src='assets/imgs/camera.png';" style="margin-top: 0px;margin-left: 0px;margin-right: 0px;">
+               </ion-col>
+        <ion-col col-6>
+          <p [dir]="langdirection" > {{item.username}}</p> 
+           <p [dir]="langdirection" > {{item.phone}}</p>  
+      </ion-col>
+        <ion-col col-3>
+       <p [dir]="langdirection" style="color:gray;text-align: center;" (click)="delete(item.id)">{{'delete' | translate}}</p>
+       </ion-col>
+      </ion-row>
+       
+    </div>
+</ion-content>

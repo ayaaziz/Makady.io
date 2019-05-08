@@ -45,6 +45,7 @@ export class GroupsPage {
       }
     })
   }
+  
 onInput(input)
 {
   if(input=="")

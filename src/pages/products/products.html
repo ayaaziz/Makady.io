@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-searchbar [dir]="langdirection" style="margin-top: 0px;" placeholder="Search by namw or barcode" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput">
+  <ion-searchbar [dir]="langdirection" style="margin-top: 0px;" placeholder="Search by name or barcode" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput">
   </ion-searchbar>
   <div style="border:1px solid #e26c40; border-radius: 15px;margin:10px 14px;"  *ngFor="let item of products">
     <ion-row style="position:relative;">

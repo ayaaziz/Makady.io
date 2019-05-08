@@ -120,7 +120,7 @@ export function createTranslateLoader(http: HttpClient) {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     MainproviderProvider,
     HelperProvider,
-    GooglePlus,
+    // GooglePlus,
     Facebook,
     BarcodeScanner,
     TwitterConnect,

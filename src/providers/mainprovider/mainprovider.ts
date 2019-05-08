@@ -71,9 +71,10 @@ export class MainproviderProvider {
       let parameter = {
         "username":username,
         "password":password,
-        "firebase_id":id       
+        "firebase_id":id
       }
       headers = headers.set('Content-Type', 'application/json');
+                        // .set('Access-Control-Allow-Origin',"*");
       let serviceUrl = this.helper.serviceurl + "user_login";
       
       this.http.post(serviceUrl, parameter, { headers: headers })
@@ -274,13 +275,13 @@ export class MainproviderProvider {
       
       }
       headers = headers.set('Authorization', 'Bearer '+access);
-      let serviceUrl = this.helper.serviceurl + 'changePassword';
+      let serviceUrl = this.helper.serviceurl + 'checkPassword';
       //
       this.http.post(serviceUrl, parameter, { headers: headers })
         .subscribe(
           data => {
             loader.dismiss();
-            alert("from changepassword api: "+ JSON.stringify(data));
+
             successCallback(JSON.stringify(data))
           },
           err => {
@@ -760,6 +761,7 @@ export class MainproviderProvider {
       let headers = new HttpHeaders();
 
       headers = headers.set('Authorization', 'Bearer '+access);
+                        // .set('Access-Control-Allow-Origin',"*");
       let serviceUrl = this.helper.serviceurl + 'home';
       //
       this.http.get(serviceUrl, { headers: headers })

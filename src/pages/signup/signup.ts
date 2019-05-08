@@ -41,6 +41,12 @@ export class SignupPage {
               public actionSheetCtrl: ActionSheetController) {
 
             this.langdirection = this.helper.langdirection;
+
+            if(this.helper.langdirection=="ltr") {
+              this.lang="1";
+            } else { 
+             this.lang="2";
+            }
   }
 
 
@@ -84,13 +90,14 @@ export class SignupPage {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64:
       this.storage.get("user_login_token").then((val) => {
-
         //to display
         this.userImageUrl = 'data:image/jpeg;base64,' + imageData;
         //this.storage.set("user_image",this.userImageUrl)
 
         //to save in db 
-        this.imgdata = encodeURIComponent(imageData);  
+        this.imgdata = imageData;          
+        // this.imgdata = encodeURIComponent(imageData);  
+        // http://itrootsdemos.com/makady/phase1/public/uploads/images/users/"
        
         console.log("imge when take pic :"+this.imgdata);
       })
@@ -120,12 +127,12 @@ export class SignupPage {
       this.helper.presentToast(this.translate.instant('invalidphone'));
 
     } else {
-      this.provider.signup(this.username,this.name,this.email,this.Password,this.confirmPassword,this.phone,this.imgdata,null,4,"4rtghju98jhjk","1",this.lang,(data) => {
+      this.provider.signup(this.username,this.name,this.email,this.Password,this.confirmPassword,this.phone,this.imgdata,"jpeg",4,"4rtghju98jhjk","1",this.lang,(data) => {
        let parsedData=JSON.parse(data)
-       console.log("imge when signup :"+this.imgdata);
+       console.log("signup data: "+JSON.stringify(data));
 
        console.log(parsedData)
-       if(!parsedData.success) {
+       if(parsedData.success==false) {
 
          if(parsedData.errors.username) {
            this.helper.presentToast(this.translate.instant("username"));
@@ -133,6 +140,7 @@ export class SignupPage {
          } else if(parsedData.errors.email_exist) {
            this.helper.presentToast(this.translate.instant("emailExist"));
          }
+
        } else {
          this.provider.getuser(parsedData.access_token, (data) => {
           data = JSON.parse(data);
@@ -144,16 +152,18 @@ export class SignupPage {
             this.event.publish("login");
           });
 
-          //cal api to return verification code to the user email and return with code          
-          this.provider.forgetpass(this.username,data => {
-            if(data) {
-              console.log(JSON.stringify(data));
-              let dataparsed = JSON.parse(data);
-              this.navCtrl.push(VerificationPage,{"pageType":"AuthPage","username": dataparsed.data.username,"userId":data.user.id,"emailcode":dataparsed.data.email_code});
-            }
-          },error => {});
-        
-          //********************************************//  
+           //********************************************//           
+
+        //cal api to return verification code to the user email and return with code          
+        // this.provider.forgetpass(this.username,data => {
+        //   if(data) {
+        //     console.log(JSON.stringify(data));
+        //     let dataparsed = JSON.parse(data);
+        //     this.navCtrl.push(VerificationPage,{"pageType":"AuthPage","username": dataparsed.data.username,"userId":data.user.id,"emailcode":dataparsed.data.email_code});
+        //   }
+        // },error => {});
+
+        //********************************************//  
           
          },
          (error) => {

@@ -94,6 +94,7 @@ services
               purchase+=element1.total_quantity_purchase
               element1.price = '' 
               element1.quant_count = ''
+              //xxxxxxxxxxxxxxxx
               element1.require_quan = parseInt(element1.total_quantity) - element1.total_quantity_purchase
             });
             

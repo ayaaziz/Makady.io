@@ -15,7 +15,9 @@
   
   <ion-scroll scrollX="true" style="height:175px;white-space: nowrap;margin-top: 5px;">   
     <div class="subcat" style="box-shadow: 0px 2px 8px #ebe9e9;margin-right: 5px;margin-left: 5px;text-align: center;height: 150px" *ngFor="let item of groups">
-      <div *ngIf="item.members?.length == 0 || !item.members" style="text-align:center;margin-bottom: 2px;"><img style="text-align:center;margin-top: 0px;" class="circle-pic" src="assets/imgs/error.png">
+
+      <div *ngIf="item.members?.length == 0 || !item.members" style="width:100px;height:100px;margin:auto;">
+        <img style="text-align:center;margin-top: 0px;" class="circle-pic" src="assets/imgs/error.png">
       </div>
 
       <div *ngIf="item.members?.length == 1" style="width:100px;height:100px;margin:auto;overflow: hidden;border-radius: 50%;">

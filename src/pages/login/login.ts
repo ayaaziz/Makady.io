@@ -26,7 +26,7 @@ export class LoginPage {
   Password: any = "";
 
   constructor(
-              private googlePlus: GooglePlus,
+    // private googlePlus: GooglePlus,
               public provider: MainproviderProvider,
               public event: Events, 
               public storage: Storage,
@@ -106,7 +106,7 @@ export class LoginPage {
     console.log('Logged into Facebook!', res)
     let userId = res.authResponse.userID;
     let params = new Array<string>();
-    this.fb.api("/me?fields=name,gender", params)
+    this.fb.api("/me?fields=name,gender", params) //get user details
       .then(user => {
         console.log("Facebook user ", user)
         this.fb.logout().then(() => {
@@ -121,71 +121,71 @@ export class LoginPage {
 
   }
 
-  googleLogin() {
-    console.log("googleLogin ")
-    // 651484334747-hg2uqdf63o2vus6er099d4ia6dmgeae2.apps.googleusercontent.com
-    // ionic cordova plugin add cordova-plugin-googleplus --variable REVERSED_CLIENT_ID=651484334747-hg2uqdf63o2vus6er099d4ia6dmgeae2.apps.googleusercontent.com
-    // npm install --save @ionic-native/google-plus@4
+  // googleLogin() {
+  //   console.log("googleLogin ")
+  //   // 651484334747-hg2uqdf63o2vus6er099d4ia6dmgeae2.apps.googleusercontent.com
+  //   // ionic cordova plugin add cordova-plugin-googleplus --variable REVERSED_CLIENT_ID=651484334747-hg2uqdf63o2vus6er099d4ia6dmgeae2.apps.googleusercontent.com
+  //   // npm install --save @ionic-native/google-plus@4
 
-    //     accessToken: "ya29.GlvDBm-g_1Z1KN3Z_ePZpXSQKfz7s5eINcjHTzOkMDwwmMjjEaVP2F1cr7khqdjkfPokV6QAUMOPJpIaL1yY0xSmCt6LNj1-tbVpGQxAuueRY1TmP8pymSsrJmVY"
-    // displayName: "itroots net"
-    // email: "itroots.net@gmail.com"
-    // expires: 1551804153
-    // expires_in: 3597
-    // familyName: "net"
-    // givenName: "itroots"
-    // userId: "102929510784780528383"
+  //   //     accessToken: "ya29.GlvDBm-g_1Z1KN3Z_ePZpXSQKfz7s5eINcjHTzOkMDwwmMjjEaVP2F1cr7khqdjkfPokV6QAUMOPJpIaL1yY0xSmCt6LNj1-tbVpGQxAuueRY1TmP8pymSsrJmVY"
+  //   // displayName: "itroots net"
+  //   // email: "itroots.net@gmail.com"
+  //   // expires: 1551804153
+  //   // expires_in: 3597
+  //   // familyName: "net"
+  //   // givenName: "itroots"
+  //   // userId: "102929510784780528383"
 
-    this.googlePlus.login({})
-    .then(res => {
-      console.log("res: ",res)
-      this.googlePlus.logout().then(() => {
-        console.log("close ggole plus seesion success")
-      }).catch(() => {
-        console.log("close ggole plus seesion failed");
-      })
-    })
-    .catch(err => console.error("err: ",err));
-  }
+  //   this.googlePlus.login({})
+  //   .then(res => {
+  //     console.log("res: ",res)
+  //     this.googlePlus.logout().then(() => {
+  //       console.log("close ggole plus seesion success")
+  //     }).catch(() => {
+  //       console.log("close ggole plus seesion failed");
+  //     })
+  //   })
+  //   .catch(err => console.error("err: ",err));
+  // }
 
-  //login with twitter socila netwwork.
-  doTwLogin() {
-    if (navigator.onLine ) {
-      let nav = this.navCtrl;
+  // //login with twitter socila netwwork.
+  // doTwLogin() {
+  //   if (navigator.onLine ) {
+  //     let nav = this.navCtrl;
 
-      //Request for login
-      this.twitter.login()
-      .then(result => {
-          console.log("twitter login info " + JSON.stringify(result));
-          this.twitter.showUser()
-          .then(user => {
-              console.log("user info" + JSON.stringify(user));
-              //get user gender from twitter response.
-              let user_gender = user.gender;
-              if (typeof (user_gender) === "undefined" || user_gender === null) {
-                user_gender = 0;
-              }
+  //     //Request for login
+  //     this.twitter.login()
+  //     .then(result => {
+  //         console.log("twitter login info " + JSON.stringify(result));
+  //         this.twitter.showUser()
+  //         .then(user => {
+  //             console.log("user info" + JSON.stringify(user));
+  //             //get user gender from twitter response.
+  //             let user_gender = user.gender;
+  //             if (typeof (user_gender) === "undefined" || user_gender === null) {
+  //               user_gender = 0;
+  //             }
               
-              console.log("twitter data", user.id, " -", user.name, " -", user.profile_image_url_https);
-              //this.loginservice.userLoginWithSocial(user.id, 2, user.name, user.profile_image_url_https, 0, "0000-00-00", (data) => this.socialLoginSuccessCallback(data), (data) => this.socialLoginFailureCallback(data))
-              this.twitter.logout().then(() => {
-                console.log("clear twitter session success");
-              }).catch(() => {
-                console.log("clear twitter session failed");
-              })
-            },
-            error => {
-              console.log("user info faile " + error);
-            }
-          )
-        },
-        error => {
-          console.log("twitter login failed " + error)
-        }
-      );
-    }
-    else {
-      //this.ShowError = false;
-    }
-  }
+  //             console.log("twitter data", user.id, " -", user.name, " -", user.profile_image_url_https);
+  //             //this.loginservice.userLoginWithSocial(user.id, 2, user.name, user.profile_image_url_https, 0, "0000-00-00", (data) => this.socialLoginSuccessCallback(data), (data) => this.socialLoginFailureCallback(data))
+  //             this.twitter.logout().then(() => {
+  //               console.log("clear twitter session success");
+  //             }).catch(() => {
+  //               console.log("clear twitter session failed");
+  //             })
+  //           },
+  //           error => {
+  //             console.log("user info faile " + error);
+  //           }
+  //         )
+  //       },
+  //       error => {
+  //         console.log("twitter login failed " + error)
+  //       }
+  //     );
+  //   }
+  //   else {
+  //     //this.ShowError = false;
+  //   }
+  // }
 }

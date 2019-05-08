@@ -61,7 +61,8 @@ export class MyApp {
           if(val) {
             this.userLoged = true;
             this.username = val.user.username;
-            this.photo = val.user.profile_pic;
+            this.photo = "http://itrootsdemos.com/makady/phase1/public/uploads/images/users/"+ val.user.profile_pic;
+            console.log(this.photo);
           }
         });
       });

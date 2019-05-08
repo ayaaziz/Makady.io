@@ -1,0 +1,64 @@
+<ion-menu [content]="content"   [attr.side]="this.platform.dir()==='ltr'?'left':'right'">
+  <ion-content>
+    <div style="width:100%;text-align: left;">
+      <p style="text-align:center;" (click)="getimg()">
+          <img dir="*ngif(this.platform.isRTL)? rtl : ltr" src="{{photo}}" class="circle-pic"
+          onerror="this.onerror=null;this.src='assets/imgs/camera.png';">
+        
+     
+      </p>
+    </div>
+    <ion-list no-lines style="margin-top: -7px;">
+      <button menuClose ion-item (click)="openhome()" style="margin-bottom: -8px;">
+        <ion-row dir="*ngif(this.platform.isRTL)? rtl : ltr" style="margin-right: 0px;margin-top: 30px;">
+          <ion-icon name="ios-home" style="font-size:21px;color:#f2622c;"></ion-icon>
+          <h2 style="margin-right: 10px;margin-left: 10px;color:#f2622c; font-size:18px;">{{"Home"| translate}}</h2>
+        </ion-row>
+      </button>
+      <button menuClose ion-item (click)="openlists()" style="margin-bottom: -8px;">
+        <ion-row dir="*ngif(this.platform.isRTL)? rtl : ltr" style="margin-right: 0px">
+          <ion-icon name="ios-list-outline" style="font-size:21px;color:#f2622c"></ion-icon>
+          <h2 style="margin-right: 10px;margin-left: 10px;color:#f2622c ;font-size:18px;">{{"list"|translate}} </h2>
+        </ion-row>
+      </button>
+      <button menuClose ion-item (click)="products()" style="margin-bottom: -8px;">
+        <ion-row dir="*ngif(this.platform.isRTL)? rtl : ltr" style="margin-right: 0px">
+          <ion-icon name="md-cart" style="font-size:21px;color:#f2622c;"></ion-icon>
+          <h2 style="    margin-right: 10px;margin-left: 10px;color:#f2622c ;font-size:18px;">{{"products"|translate}} </h2>
+        </ion-row>
+      </button>
+      <button menuClose ion-item (click)="offers()" style="margin-bottom: -8px;">
+        <ion-row dir="*ngif(this.platform.isRTL)? rtl : ltr"style="margin-right: 0px">
+          <ion-icon name="ios-pricetag" style="font-size:21px;color:#f2622c;"></ion-icon>
+          <h2 style="    margin-right: 10px;margin-left: 10px;color:#f2622c; font-size:18px;">{{"offers"|translate}} </h2>
+        </ion-row>
+      </button>
+     <button menuClose ion-item (click)="friends()" style="margin-bottom: -8px;">
+        <ion-row dir="*ngif(this.platform.isRTL)? rtl : ltr" style="margin-right: 0px;">
+          <ion-icon name="md-contacts" style="font-size:21px;color:#f2622c"></ion-icon>
+          <h2 style="    margin-right: 10px;margin-left: 10px;color:#f2622c; font-size:18px;"> {{"friends"| translate}}</h2>
+        </ion-row>
+      </button>
+      <button menuClose ion-item (click)="groups()" style="margin-bottom: -8px;">
+        <ion-row dir="*ngif(this.platform.isRTL)? rtl : ltr" style="margin-right: 0px;">
+          <ion-icon name="ios-people" style="font-size:21px;color:#f2622c"></ion-icon>
+          <h2 style="    margin-right: 10px;margin-left: 10px;color:#f2622c; font-size:18px;"> {{"groups"| translate}}</h2>
+        </ion-row>
+      </button>
+      <button menuClose ion-item (click)="settings()" style="margin-bottom: -8px;">
+        <ion-row dir="*ngif(this.platform.isRTL)? rtl : ltr" style="margin-right: 0px;">
+          <ion-icon md="md-settings" ios="md-settings" style="font-size:21px;color:#f2622c"></ion-icon>
+          <h2 style="    margin-right: 10px;margin-left: 10px;color:#f2622c ;font-size:18px;">{{"settings" | translate}}</h2>
+        </ion-row>
+      </button>
+      <button menuClose ion-item (click)="logout()" style="margin-bottom: -8px;">
+        <ion-row dir="*ngif(this.platform.isRTL)? rtl : ltr" style="margin-right: 0px;">
+          <ion-icon name="md-log-out" style="font-size:21px;color:#f2622c"></ion-icon>
+          <h2 style="    margin-right: 10px;margin-left: 10px;color:#f2622c ;font-size:18px;"> {{"logout"| translate}}</h2>
+        </ion-row>
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav id="nav" #content [root]="rootPage"></ion-nav>
