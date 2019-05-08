@@ -27,6 +27,7 @@ export class SignupPage {
   lang:any;
   imgdata = null;
   userImageUrl = "";
+  // defaultImgUrl:string;
 
   constructor(public storage:Storage,
               public provider:MainproviderProvider,
@@ -40,6 +41,7 @@ export class SignupPage {
               public navParams: NavParams,
               public actionSheetCtrl: ActionSheetController) {
 
+                // this.defaultImgUrl = this.helper.imagePath;
             this.langdirection = this.helper.langdirection;
 
             if(this.helper.langdirection=="ltr") {
@@ -97,7 +99,6 @@ export class SignupPage {
         //to save in db 
         this.imgdata = imageData;          
         // this.imgdata = encodeURIComponent(imageData);  
-        // http://itrootsdemos.com/makady/phase1/public/uploads/images/users/"
        
         console.log("imge when take pic :"+this.imgdata);
       })

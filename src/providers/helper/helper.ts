@@ -8,7 +8,9 @@ export class HelperProvider {
   accesstoken:any
   type:any;
   user_id;
-  serviceurl:any="http://itrootsdemos.com/makady/phase1/api/"
+  serviceurl:any="http://itrootsdemos.com/makady/phase1/api/";
+  userImagePath:string = "http://itrootsdemos.com/makady/phase1/public/uploads/images/users/";
+  productImagePath:string = "http://itrootsdemos.com/makady/phase1/public/uploads/images/products/";
 
   constructor(public toastCtrl:ToastController, 
               public http: HttpClient,

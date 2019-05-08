@@ -29,7 +29,9 @@ category_name:any
 detailsdata:any=[]
 products:any=[]
 members:any=[]
-services
+services;
+defaultImgUrl:string;
+
   constructor(public popoverCtrl:PopoverController,
               public storage:Storage,
               public ViewCtrl:ViewController,
@@ -42,6 +44,7 @@ services
 
   this.name=this.navParams.get("name")
   this.id=this.navParams.get("id")
+  this.defaultImgUrl = this.helper.productImagePath;
 
   }
   toggleSection(x){
@@ -65,8 +68,8 @@ services
           console.log(JSON.stringify(data))
           let parsedData=JSON.parse(data)
           this.members=parsedData.members
-         // this.details=parsedData.data.menu_items
           this.services = parsedData.data.menu_items
+          
           this.services.forEach(element => {
             element.open = false;
           });

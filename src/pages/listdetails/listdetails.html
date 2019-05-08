@@ -19,7 +19,7 @@
       <p style="color:#e26c40;font-weight: bold;font-size: 1.5em;margin-top:15px;margin-right:15px;margin-left:15px;">{{name}}</p>
     </ion-row>
     <ion-list class="accordion-list" style="padding: 5px;">
-      <span *ngFor="let item of  services; let i = index">
+      <span *ngFor="let item of services; let i = index">
         <ion-row (click)="toggleSection(i)" style="border-bottom: 2px solid #ececec;padding-left:0px;" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}"> 
           <ion-col col-2 class="header-details">
             <ion-icon *ngIf="!item.open" name="ios-arrow-down-outline" style="color:#e26c40;font-size: 2em;"></ion-icon>
@@ -131,7 +131,7 @@
             </ion-col>
             
             <ion-col col-2>
-              <button class="saveBtn" style="background-color: #e26c40; color:white;padding: 6px;margin-top: 15px;border-radius: 5px;" *ngIf="child.require_quan > 0" (click)="save(child.menu_item_id,i,j)">{{'save' | translate}}</button>
+              <button class="saveBtn" style="background-color: #e26c40; color:white;padding: 5px;margin-top: 0px;border-radius: 3px;" *ngIf="child.require_quan > 0" (click)="save(child.menu_item_id,i,j)">{{'save' | translate}}</button>
             </ion-col>
           </ion-row>
         </ion-list>

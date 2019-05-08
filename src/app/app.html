@@ -3,7 +3,7 @@
     <div style="text-align: center;">
       <div class="takePhoto">
           <img style="text-align:center;" src="{{photo}}" class="circle-pic"
-          onerror="this.onerror=null;this.src='assets/imgs/user.png';">   
+          onerror="this.onerror=null;this.src='assets/imgs/camera.png';">   <!--error =>camera,default in db =>user.png -->
           <ion-icon name="ios-camera" (click)="getimg()"></ion-icon>
       </div>
       <h4 style="color:#666;text-align: center;">{{username}}</h4>
