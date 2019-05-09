@@ -124,5 +124,6 @@
      "editlist":"Edit Menu",
      "createlist":"Create New Menu",
      "searchfriend":"Search For A Friend",
-     "offline":"You are offline, Please Check network and try again"
+     "offline":"You are offline, Please Check network and try again",
+     "searchproduct":"Search by name or barcode"
 }

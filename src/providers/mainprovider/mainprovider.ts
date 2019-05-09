@@ -1054,4 +1054,35 @@ export class MainproviderProvider {
 
 
 
+  //No Api yet (api name: "getProductByBarCode")
+  searchProdByBarCode(categoryId,prodBarCode,access,successCallback,failureCallback) {
+
+    if(navigator.onLine) {
+      let loader = this.loadingCtrl.create({
+        content: "",
+      });
+      loader.present();
+      let headers = new HttpHeaders();
+      let parameter = {
+        'category_id':categoryId,
+        'barcode':prodBarCode
+      }
+      headers = headers.set('Authorization', 'Bearer '+access);
+      let serviceUrl = this.helper.serviceurl + 'getProductByBarCode';
+
+      this.http.post(serviceUrl, parameter,{ headers: headers })
+        .subscribe(data => {
+            loader.dismiss();
+            successCallback(data);
+          },
+          err => {
+            loader.dismiss();
+            failureCallback(err);
+            this.helper.presentToast(err.message);            
+          });
+
+    } else {
+      this.helper.presentToast(this.translate.instant("offline"));      
+    }
+  }
 }

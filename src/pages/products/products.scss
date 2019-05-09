@@ -21,13 +21,21 @@ page-products {
         border-radius: 20% !important;
         color: black !important;
     }
+
     .rtl .circle-pic{
         max-width: 50px; right: -30px !important; position: relative !important;
     }
+
     .ltr .circle-pic{
         max-width: 50px; left: -30px !important; position: relative !important;
     }
 
-
+    .barcode-icon {
+        font-size: 30px;
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        transform: translateY(-50%);
+    }
 
 }

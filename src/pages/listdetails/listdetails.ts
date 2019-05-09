@@ -93,12 +93,15 @@ defaultImgUrl:string;
             let quantity=0
             let purchase=0
             element.products.forEach(element1 => {
-              quantity+= parseInt(element1.total_quantity)
-              purchase+=element1.total_quantity_purchase
+              quantity += parseInt(element1.total_quantity);
+              purchase += element1.total_quantity_purchase;
               element1.price = '' 
               element1.quant_count = ''
               //xxxxxxxxxxxxxxxx
-              element1.require_quan = parseInt(element1.total_quantity) - element1.total_quantity_purchase
+
+              //total quantity in header - 
+              element1.require_quan = parseInt(element1.total_quantity) - element1.total_quantity_purchase;
+              console.log(element1.require_quan)
             });
             
               element.name = element.category_name

@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MainproviderProvider } from '../../providers/mainprovider/mainprovider';
 import { HelperProvider } from '../../providers/helper/helper';
 import { Storage } from '@ionic/storage';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 
 @Component({
@@ -12,12 +13,13 @@ import { Storage } from '@ionic/storage';
 })
 export class ProductsPage {
   langdirection:any;
-  id:any;
+  categoryId:any;
   products:any = [];
   count:any = 1;
   categories:any = [];
   procount:any;
   categoryName:string;
+  productDetails:any;
 
   constructor(public alertCtrl:AlertController,
               public toastCtrl:ToastController,
@@ -29,19 +31,21 @@ export class ProductsPage {
               public provider:MainproviderProvider,
               public helper:HelperProvider,
               public navCtrl: NavController,
-              public navParams: NavParams) {
+              public navParams: NavParams,
+              public barcodeScanner:BarcodeScanner) {
 
     this.langdirection=this.helper.langdirection;                    
-    this.id = this.navParams.get("id");
+    this.categoryId = this.navParams.get("id");
     this.categoryName = this.navParams.get("categoryName");
 
     this.storage.get("makadyaccess").then((val) => {
       if(val) {
-        this.provider.getproducts(this.id,"",val,(data) => {
+        this.provider.getproducts(this.categoryId,"",val,(data) => {
           let parsedData=JSON.parse(data);
           this.products=parsedData.data;
           this.products.forEach(element => {
             element["count"]=this.count;
+
           });
           console.log(parsedData);
         },(error) => {
@@ -54,7 +58,7 @@ export class ProductsPage {
   onInput(input) {
     this.storage.get("makadyaccess").then((val) => {
       if(val) {
-        this.provider.getproducts(this.id,input,val,(data) => {
+        this.provider.getproducts(this.categoryId,input,val,(data) => {
           let parsedData=JSON.parse(data);
           this.products=parsedData.data;
           console.log(parsedData);
@@ -159,6 +163,8 @@ export class ProductsPage {
     });
   }
 
+
+  
   update(id) {
     this.storage.get("makadyaccess").then((val) => {
       if(val) {
@@ -172,4 +178,35 @@ export class ProductsPage {
       }
     });
   }
+
+
+  searchByBarcode() {
+    this.barcodeScanner.scan().then(barData => {
+      let prodCode = barData.text;
+      this.storage.get("makadyaccess").then(val => {
+        if(val) {
+          this.provider.searchProdByBarCode(this.categoryId,prodCode,val,prodData => {
+            prodData = JSON.parse(prodData);
+            console.log(JSON.stringify(prodData));
+            
+            if(prodData.success) {
+              // this.productDetails = prodData;
+                this.products = prodData.data;
+                this.products.forEach(element => {
+                  element["count"] = this.count;
+                });
+
+            } else {
+              this.helper.presentToast(prodData.errors);
+            }
+          },err => {
+            this.helper.presentToast(this.translate.instant('serverErr'))
+          });
+        }
+    })
+    }, (err) => {
+        console.log('Error: ', err);
+    });
+  }
+  
 }
