@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController, Events } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { HelperProvider } from '../../providers/helper/helper';
 import { Platform } from 'ionic-angular/platform/platform';
@@ -15,7 +15,18 @@ export class FriendsPage {
   langdirection:any
   friends:any=[]
   groups:any=[]
-  constructor(public alertCtrl:AlertController,public barcodeScanner:BarcodeScanner  ,public ViewCtrl:ViewController,public storage :Storage,public provider:MainproviderProvider,public platform:Platform,public helper:HelperProvider,public translate:TranslateService,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public alertCtrl:AlertController,
+              public barcodeScanner:BarcodeScanner,
+              public ViewCtrl:ViewController,
+              public storage :Storage,
+              public provider:MainproviderProvider,
+              public platform:Platform,
+              public helper:HelperProvider,
+              public translate:TranslateService,
+              public navCtrl: NavController,
+              public navParams: NavParams,
+              public event:Events) {
+
     this.langdirection=this.helper.langdirection
     this.storage.get("makadyaccess").then((val)=>{
       if(val)
@@ -125,7 +136,7 @@ export class FriendsPage {
       this.provider.addfriends(user_id,val,(data)=>{
         data = JSON.parse(data)
         if(data.success){
-          this.helper.presentToast("تم إرسال طلب الصداقة بنجاح")
+          this.helper.presentToast("تم إرسال طلب الصداقة بنجاح");
         }
         else{
           this.helper.presentToast(data.errors)

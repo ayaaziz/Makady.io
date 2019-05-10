@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Platform, ViewController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Platform, ViewController, ToastController, Events } from 'ionic-angular';
 import { MainproviderProvider } from '../../providers/mainprovider/mainprovider';
 import { TranslateService } from '@ngx-translate/core';
 import { HelperProvider } from '../../providers/helper/helper';
 import { Storage } from '@ionic/storage';
 import moment from 'moment';
+import { HomePage } from '../home/home';
 
 @Component({
   selector: 'page-friendlist',
@@ -24,7 +25,8 @@ export class FriendlistPage {
               public provider:MainproviderProvider,
               public helper:HelperProvider,
               public navCtrl: NavController,
-              public navParams: NavParams) {
+              public navParams: NavParams,
+              public event:Events) {
   }
 
   ionViewDidLoad() {
@@ -65,6 +67,9 @@ export class FriendlistPage {
               this.friends.splice(i, 1);
             }
           }
+          this.event.publish("removeRequest");
+          // this.helper.requestsNo--;
+
         },(data)=>{});
       }
     });
@@ -80,8 +85,16 @@ export class FriendlistPage {
               this.friends.splice(i, 1);
             }
           }
+          this.event.publish("removeRequest");
+          // this.helper.requestsNo--;
+          // this.event.publish("respondRequest");
         },(data)=>{});
       }
     });
+  }
+
+
+  goHome() {
+    this.navCtrl.setRoot(HomePage);
   }
 }

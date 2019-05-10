@@ -375,7 +375,6 @@ export class MyApp {
         }
       }
     });
-
-
   }
+
 }

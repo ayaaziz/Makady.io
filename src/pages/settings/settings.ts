@@ -10,6 +10,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { TabsPage } from '../tabs/tabs';
 import { SettingsProvider } from '../../providers/settings/settings';
+import { HomePage } from '../home/home';
 
 
 @Component({
@@ -28,6 +29,8 @@ export class SettingsPage {
   productNotificationStatus: boolean = false;
   offersNotificationStatus: boolean = false;
   username:string;
+  HomePage = HomePage;
+
 
   constructor(public actionSheetCtrl: ActionSheetController,
               public camera:Camera,

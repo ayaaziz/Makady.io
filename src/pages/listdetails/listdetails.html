@@ -27,11 +27,11 @@
           </ion-col>
 
           <ion-col col-8 *ngIf="item.quantity != item.purchase">
-            <p style="color:#e26c40;font-size: 1.2em;">{{item.name}} ( {{item.quantity }} / {{item.purchase}} )&#x200E;</p>
+            <p style="color:#e26c40;font-size: 1.2em;">{{item.name}} ({{item.quantity }} / {{item.purchase}})&#x200E;</p>
           </ion-col>
 
           <ion-col col-8 *ngIf="item.quantity == item.purchase">
-            <del style="color:#e26c40;font-size: 1.2em;margin-top:10px;">{{item.name}} ( {{item.quantity }} / {{item.purchase}} )&#x200E; </del>
+            <del style="color:#e26c40;font-size: 1.2em;margin-top:10px;">{{item.name}} ({{item.quantity }} / {{item.purchase}})&#x200E; </del>
           </ion-col>
 
           <ion-col col-2 class="header-details">

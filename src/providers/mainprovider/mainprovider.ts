@@ -844,6 +844,8 @@ export class MainproviderProvider {
     }
   }
 
+
+  //////xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx///////
   updateproduct(id,quantity,access,successCallback, failureCallback) {
 
     if(navigator.onLine) {
@@ -1053,7 +1055,7 @@ export class MainproviderProvider {
   }
 
 
-
+  // *****************************New Apis*************************//
   //No Api yet (api name: "getProductByBarCode")
   searchProdByBarCode(categoryId,prodBarCode,access,successCallback,failureCallback) {
 
@@ -1085,4 +1087,6 @@ export class MainproviderProvider {
       this.helper.presentToast(this.translate.instant("offline"));      
     }
   }
+
+  
 }

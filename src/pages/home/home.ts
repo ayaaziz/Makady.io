@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Events, LoadingController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { SignupPage } from '../signup/signup';
 import { TranslateService } from '@ngx-translate/core';
@@ -21,21 +21,56 @@ export class HomePage {
   data:any
   chartdata:any=[]
   price:any=0
-  names:any=[]
-  constructor(public provider:MainproviderProvider,public storage:Storage,public helper:HelperProvider,public translate:TranslateService,public navCtrl: NavController) {
+  names:any=[];
+
+  constructor(public provider:MainproviderProvider,
+              public storage:Storage,
+              public helper:HelperProvider,
+              public translate:TranslateService,
+              public navCtrl: NavController,
+              public event:Events,
+              public loadingCtrl:LoadingController) {
    
-    this.langdirection=this.helper.langdirection
+    this.langdirection=this.helper.langdirection;
+    
   }
   login()
   {
     this.navCtrl.push(SignupPage)
   }
+
   friendlist()
   {
     this.navCtrl.push(FriendlistPage)
   }
+
   ionViewDidEnter()
   { 
+
+    const spinner = this.loadingCtrl.create();
+    spinner.present();
+    
+    // this.storage.get("makadyaccess").then(val => {
+    //   if(val) {
+    //     this.provider.friendrequests(val,(data) => {
+    //       if(data) {
+    //         data = JSON.parse(data);
+    //         this.requestsNo = data.friends.length;
+    //       }
+    //     },err =>{
+
+    //     });
+    //   }
+    // });
+
+    // this.event.subscribe("addRequest",() => {
+    //   this.requestsNo++;
+    // });
+
+    // this.event.subscribe("removeRequest",() => {
+    //   this.requestsNo--;
+    // });
+
     this.storage.get("user_info").then((val)=>{
       if(val)
       { 
@@ -50,6 +85,9 @@ export class HomePage {
       if(val)
       {
         this.provider.home(val,(data)=>{
+          
+          spinner.dismiss();
+
           let dataparsed=JSON.parse(data)
           this.data=dataparsed.data
           console.log(""+JSON.stringify(this.data))
@@ -152,8 +190,8 @@ export class HomePage {
   
     
       
-        },(data)=>{
-
+        },(error)=>{
+          spinner.dismiss();
         })
         
       }

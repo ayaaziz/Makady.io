@@ -90,23 +90,25 @@ defaultImgUrl:string;
             
          // });
           this.services.forEach(element => {
-            let quantity=0
-            let purchase=0
+            let quantity=0;
+            let purchase=0;
             element.products.forEach(element1 => {
               quantity += parseInt(element1.total_quantity);
               purchase += element1.total_quantity_purchase;
-              element1.price = '' 
-              element1.quant_count = ''
+              element1.price = ''; 
+              element1.quant_count = '';
               //xxxxxxxxxxxxxxxx
-
-              //total quantity in header - 
+              //each product required quantity
               element1.require_quan = parseInt(element1.total_quantity) - element1.total_quantity_purchase;
+              alert("product quantity: "+parseInt(element1.total_quantity) +"- "+"product quantity purchased: "+ element1.total_quantity_purchase)
               console.log(element1.require_quan)
             });
             
               element.name = element.category_name
-              element.quantity = quantity
-              element.purchase = purchase
+
+              //total quantity and total purchace of service
+              element.quantity = quantity;
+              element.purchase = purchase;
               element.required_quantity = quantity - purchase
               
            //alert(quantity - purchase)
@@ -147,6 +149,7 @@ defaultImgUrl:string;
           this.helper.presentToast("يجب ألا تكون الكمية التي تم شراؤها أكبر من الكمية المطلوبة")
           return
         }
+
     this.provider.addproduct(id,this.helper.user_id,quant_count,price,val,(data) => {
       
      if(data.success){
@@ -177,5 +180,47 @@ defaultImgUrl:string;
       this.navCtrl.push(CategoriesPage);
     })
   }
-  
+
+  // opendetails(name)
+  // {
+  //   this.hide=false
+  //   this.show=true
+  //   this.details.forEach(element => {
+  //     if(element.category_name==name)
+  //     {
+  //       this.category_name=name
+  //     this.products=element.products
+  //     }
+  //   });
+  //   this.detailsdata.forEach(element => {
+  //     if(element.name==name)
+  //     {
+  //       this.quantity=element.quantity
+  //       this.purchase=element.purchase
+
+  //     }
+  //   });
+  //   for(var i=0;i<this.detailsdata.length;i++) {
+  //     if (this.detailsdata[i].name==name) {
+  //       this.detailsdata.splice(i, 1);
+  //     }
+  //   }
+ 
+  // }
+  // closedetails()
+  // {
+  //   this.details=[]
+  //   this.detailsdata=[]
+  //   this.storage.get("makadydata").then((val)=>{
+  //     if(val)
+  //     {
+  //       this.detailsdata=val
+  //       console.log(JSON.stringify(this.detailsdata))
+
+  //     }
+  //   })
+  //   this.hide=true
+  //   this.show=false
+  // }
 }
+
