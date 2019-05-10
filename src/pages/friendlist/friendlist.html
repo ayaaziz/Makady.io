@@ -11,7 +11,7 @@
 
 <ion-content padding>
   <p style="text-align: center;color:#e26c40;font-size: 1.2em;font-weight: bold;" [hidden]="hide">{{'noreq' | translate}}</p>
-  <div style="border:1px solid #e26c40; border-radius: 8px;"  *ngFor="let item of friends">
+  <div style="border:1px solid #e26c40; border-radius: 8px;margin-bottom: 10px;"  *ngFor="let item of friends">
     <ion-row>
       <ion-col col-3 style="display: flex;justify-content: center;align-items: center;">
         <img  src="{{item.profile_pic}}" class="circle-pic"

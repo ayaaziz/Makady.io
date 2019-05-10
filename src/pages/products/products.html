@@ -14,9 +14,8 @@
   <div style="position: relative;">
     <ion-searchbar [dir]="langdirection" style="margin-top: 0px;" placeholder="{{ 'searchproduct' | translate }}" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput">
     </ion-searchbar>
-    <ion-icon class="barcode-icon" ios="ios-barcode-outline" md="ios-barcode-outline" (click)="searchByBarcode()"></ion-icon>
+    <ion-icon [dir]="langdirection" class="barcode-icon" ios="ios-barcode-outline" md="ios-barcode-outline" (click)="searchByBarcode()"></ion-icon>
   </div>
-  
   
   <div style="border:1px solid #e26c40; border-radius: 15px;margin:10px 14px;"  *ngFor="let item of products">
     <ion-row style="position:relative;">

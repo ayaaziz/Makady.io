@@ -9,15 +9,14 @@ import { LoginPage } from '../pages/login/login';
 import { Storage } from '@ionic/storage';
 import { MenuController } from 'ionic-angular/components/app/menu-controller';
 import { SettingsPage } from '../pages/settings/settings';
-import { FriendsPage } from '../pages/friends/friends';
 import { MainproviderProvider } from '../providers/mainprovider/mainprovider';
 import { ImagePicker } from '@ionic-native/image-picker';
-import { Camera, CameraOptions } from '@ionic-native/camera';
-import { ProductsPage } from '../pages/products/products';
+import { Camera } from '@ionic-native/camera';
 import { CategoriesPage } from '../pages/categories/categories';
-import { dateDataSortValue } from 'ionic-angular/util/datetime-util';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { SettingsProvider } from '../providers/settings/settings';
+import { GroupsPage } from '../pages/groups/groups';
+import { FriendsPage } from '../pages/friends/friends';
 
 
 @Component({
@@ -214,12 +213,12 @@ export class MyApp {
     }
 
   openhome() {
-      this.navctrl.setRoot(TabsPage, { tabIndex: 0 });
+      this.navctrl.setRoot(TabsPage, { tabIndex: 2 });
       this.menu.close();
   }
 
   openlists() {
-    this.navctrl.setRoot(TabsPage, { tabIndex: 1 });
+    this.navctrl.setRoot(TabsPage, { tabIndex: 0 });
     this.menu.close();
   }
 
@@ -230,17 +229,17 @@ export class MyApp {
   }
 
   offers() {
-    this.navctrl.setRoot(TabsPage, { tabIndex: 2 });
+    this.navctrl.setRoot(TabsPage, { tabIndex: 1 });
   }
 
   friends() {
-    this.navctrl.setRoot(TabsPage).then(() => {
-      this.navctrl.push(FriendsPage);
-    });
+    this.navctrl.setRoot(TabsPage, { tabIndex: 4 });
   }
 
   groups() {
-    this.navctrl.setRoot(TabsPage, { tabIndex: 3 });
+    this.navctrl.setRoot(TabsPage).then(() => {
+      this.navctrl.push(GroupsPage);
+    });
   }
 
   settings() {
@@ -319,20 +318,37 @@ export class MyApp {
     };
 
     this.camera.getPicture(options).then((imageData: string) => {
-     console.log(JSON.stringify(imageData));
-     let base64Image = 'data:image/jpeg;base64,' + imageData;  
-     let imgdata = encodeURIComponent(imageData);
-     this.photo = base64Image;
-        console.log( "base64Image: ",JSON.stringify(base64Image));
-        // this.service.changeJSProfilePic(imgdata, 'jpeg'
-        this.storage.get('user_info').then((val) => {
-          console.log("val from get user_info", val);
-          if (val) {
-            // var newuserData = val;
-            val.user.profile_pic = this.photo;
-            // this.helper.storeJSInfo(newuserData);
-            this.storage.set("user_info", val);
-          }});
+    
+      this.photo = 'data:image/jpeg;base64,' + imageData;  
+    //  let imgdata = encodeURIComponent(imageData);
+      // this.photo = base64Image;
+
+       
+
+          //update image in db
+          this.storage.get("makadyaccess").then(access => {
+            if(access) {
+              this.provider.changeProfilePicture(access,imageData,'jpeg',data => {
+                if(data) {
+
+                  //update image in storage
+                  this.storage.get('user_info').then((val) => {
+                    if (val) { 
+                      val.user.profile_pic = data.user.profile_pic;
+                      this.storage.set("user_info", val);
+                    }});
+
+                  this.helper.presentToast(this.translate.instant("picchanged"));
+                }
+              },
+              error => {
+                
+              });
+            }
+          });
+        
+        
+
     }, (err) => {
       console.log(JSON.stringify(err))
     });

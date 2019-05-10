@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ViewController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { HelperProvider } from '../../providers/helper/helper';
 import { Platform } from 'ionic-angular/platform/platform';
@@ -20,7 +20,15 @@ export class GroupsPage {
   show:any=true
   hide:any=false
   username:any
-  constructor(public alertCtrl:AlertController,public storage:Storage,public provider:MainproviderProvider,public platform:Platform,public helper:HelperProvider,public translate:TranslateService,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public alertCtrl:AlertController,
+              public storage:Storage,
+              public provider:MainproviderProvider,
+              public platform:Platform,
+              public helper:HelperProvider,
+              public translate:TranslateService,
+              public navCtrl: NavController,
+              public navParams: NavParams,
+              public ViewCtrl:ViewController) {
   }
   ionViewDidLoad() {
     this.storage.get("Makadyuser_name").then((val1)=>{

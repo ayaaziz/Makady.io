@@ -9,6 +9,7 @@ import { MainproviderProvider } from '../../providers/mainprovider/mainprovider'
 import { Storage } from '@ionic/storage';
 import { FriendlistPage } from '../friendlist/friendlist';
 import { HelperProvider } from '../../providers/helper/helper';
+import { FriendsPage } from '../friends/friends';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -18,10 +19,10 @@ export class TabsPage {
   tab1Root = HomePage;
   tab2Root = ShoppinglistPage;
   tab3Root = OffersPage;
-  // tab4Root = GroupsPage;
   tab4Root = FriendlistPage;
+  tab5Root = FriendsPage;
 
-  tabIndex: Number = 0;
+  tabIndex:number = 2;
   reqNo:number = 0;
 
   constructor(public provider:MainproviderProvider,

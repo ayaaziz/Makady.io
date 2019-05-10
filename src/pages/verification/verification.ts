@@ -217,12 +217,12 @@ export class VerificationPage {
 
   //update password and return home
   gohome() {
-    console.log(this.emailcode)
-    console.log(this.password)
-    console.log(this.username)
+    console.log(this.emailcode);
+    console.log(this.password);
+    console.log(this.username);
     this.provider.updatepass(this.username, this.emailcode, this.password, (data) => {
-      console.log(JSON.stringify(data))
-      this.navCtrl.setRoot(TabsPage)
+      console.log(JSON.stringify(data));
+      this.navCtrl.setRoot(TabsPage);
 
     }, (data) => {
 

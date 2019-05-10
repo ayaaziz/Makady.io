@@ -38,6 +38,8 @@ export class FriendlistPage {
           let parsedData=JSON.parse(data);
           this.friends=parsedData.friends;
 
+        
+
           if(this.friends.length == 0) {
             this.hide = false;
           

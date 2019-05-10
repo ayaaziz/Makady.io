@@ -71,7 +71,7 @@ groupname:any;
           this.name=""
           this.check=false
           this.presentToast(this.translate.instant('edited'))
-          this.navCtrl.setRoot(GroupsPage)
+          this.navCtrl.pop();
         },(data)=>{
 
           })
@@ -90,7 +90,7 @@ groupname:any;
         this.name=""
         this.check=false
         this.presentToast(this.translate.instant('created'))
-        this.navCtrl.setRoot(GroupsPage)
+        this.navCtrl.pop();
 
         },(data)=>{})
       }

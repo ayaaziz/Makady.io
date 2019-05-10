@@ -27,7 +27,6 @@ export class SignupPage {
   lang:any;
   imgdata = null;
   userImageUrl = "";
-  // defaultImgUrl:string;
 
   constructor(public storage:Storage,
               public provider:MainproviderProvider,
@@ -41,14 +40,14 @@ export class SignupPage {
               public navParams: NavParams,
               public actionSheetCtrl: ActionSheetController) {
 
-                // this.defaultImgUrl = this.helper.imagePath;
-            this.langdirection = this.helper.langdirection;
+              this.userImageUrl = this.helper.userImagePath + "default_avatar.png";
+              this.langdirection = this.helper.langdirection;
 
-            if(this.helper.langdirection=="ltr") {
-              this.lang="1";
-            } else { 
-             this.lang="2";
-            }
+              if(this.helper.langdirection == "ltr") {
+                this.lang="1";
+              } else { 
+              this.lang="2";
+              }
   }
 
 

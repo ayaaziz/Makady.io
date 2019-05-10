@@ -1,11 +1,11 @@
 <ion-header>
-    <ion-navbar color="danger" style="text-align:center;">
+    <ion-navbar color="danger" hideBackButton style="text-align:center;">
       <ion-title>{{'products' | translate}}</ion-title>      
       <ion-buttons left>
-        <button ion-button menuToggle>
-          <ion-icon  class="menuToggle" ios="ios-list" md="ios-list" style="font-size: 3.2rem;"></ion-icon>
-        </button>
-      </ion-buttons>
+          <button ion-button (click)="ViewCtrl.dismiss()">
+            <ion-icon md="ios-arrow-back" ios="ios-arrow-back" style="font-size: 2.5rem;color:white;" ></ion-icon>
+          </button>
+        </ion-buttons>
     </ion-navbar>
   </ion-header>
 
