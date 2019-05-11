@@ -128,7 +128,7 @@ export class SignupPage {
 
     } else {
       this.provider.signup(this.username,this.name,this.email,this.Password,this.confirmPassword,this.phone,this.imgdata,"jpeg",4,"4rtghju98jhjk","1",this.lang,(data) => {
-       let parsedData=JSON.parse(data)
+       let parsedData=JSON.parse(data);
        console.log("signup data: "+JSON.stringify(data));
 
        console.log(parsedData)

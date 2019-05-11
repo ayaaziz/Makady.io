@@ -9,6 +9,7 @@ import { Storage } from '@ionic/storage';
 import { MainproviderProvider } from '../../providers/mainprovider/mainprovider';
 import { FriendlistPage } from '../friendlist/friendlist';
 
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'

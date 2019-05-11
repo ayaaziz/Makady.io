@@ -102,22 +102,41 @@ export class LoginPage {
 
   facebookLogin() {
     this.fb.login(['public_profile', 'email'])
-  .then((res: FacebookLoginResponse) => {
-    console.log('Logged into Facebook!', res)
-    let userId = res.authResponse.userID;
-    let params = new Array<string>();
-    this.fb.api("/me?fields=name,gender", params) //get user details
-      .then(user => {
-        console.log("Facebook user ", user)
-        this.fb.logout().then(() => {
-          console.log("close fb seesion success")
-        }).catch(() => {
-          console.log("close fb seesion failed");
-        })
+      .then((res: FacebookLoginResponse) => {
+        console.log('Facebook user info '+ res);
+        let userId = res.authResponse.userID;
+        let params = new Array<string>();
+        this.fb.api("/me?fields=name,gender", params) //get user details
+          .then(user => {
+            console.log("Facebook user ", user);
+
+            this.provider.userLoginWithSocial(userId,1,user.name,user.email,user.lang,user.picture,user.gender,"0000-00-00",data => {
+              //return with access
+              data = JSON.parse(data);
+              console.log(data);
+      
+              
+              this.storage.set("makadyaccess",data.access_token);
+              this.storage.set("user_info",user)
+              .then(() => {
+                this.event.publish("login");
+                this.navCtrl.setRoot(TabsPage);
+              });   
+            },
+            error => {
+              console.log(error);
+            });
+
+
+            this.fb.logout().then(() => {
+              console.log("close fb seesion success")
+            }).catch(() => {
+              console.log("close fb seesion failed");
+            })
+          })
+          .catch(err => console.log("facebook user info error "))
       })
-      .catch(err => console.log("facebook user info error "))
-  })
-  .catch(e => console.log('Error logging into Facebook', e));
+      .catch(e => console.log('Error logging into Facebook', e));
 
   }
 
@@ -137,10 +156,28 @@ export class LoginPage {
     // userId: "102929510784780528383"
 
     this.googlePlus.login({})
-    .then(res => {
-      console.log("res: ",res)
+    .then(user => {
+      console.log("google user info"+JSON.stringify(user));
+
+      this.provider.userLoginWithSocial(user.id,3,user.name,user.email,user.lang,user.imageUrl,0,"0000-00-00",data => {
+        //return with access
+        data = JSON.parse(data);
+        console.log(data);
+
+        
+        this.storage.set("makadyaccess",data.access_token);
+        this.storage.set("user_info",user)
+        .then(() => {
+          this.event.publish("login");
+          this.navCtrl.setRoot(TabsPage);
+        });   
+      },
+      error => {
+        console.log(error);
+      });
+     
       this.googlePlus.logout().then(() => {
-        console.log("close ggole plus seesion success")
+        console.log("close ggole plus seesion success");
       }).catch(() => {
         console.log("close ggole plus seesion failed");
       })
@@ -151,7 +188,6 @@ export class LoginPage {
   //login with twitter socila netwwork.
   doTwLogin() {
     if (navigator.onLine ) {
-      let nav = this.navCtrl;
 
       //Request for login
       this.twitter.login()
@@ -159,7 +195,7 @@ export class LoginPage {
           console.log("twitter login info " + JSON.stringify(result));
           this.twitter.showUser()
           .then(user => {
-              console.log("user info" + JSON.stringify(user));
+              console.log("twitter user info" + JSON.stringify(user));
               //get user gender from twitter response.
               let user_gender = user.gender;
               if (typeof (user_gender) === "undefined" || user_gender === null) {
@@ -167,7 +203,24 @@ export class LoginPage {
               }
               
               console.log("twitter data", user.id, " -", user.name, " -", user.profile_image_url_https);
-              //this.loginservice.userLoginWithSocial(user.id, 2, user.name, user.profile_image_url_https, 0, "0000-00-00", (data) => this.socialLoginSuccessCallback(data), (data) => this.socialLoginFailureCallback(data))
+              // this.loginservice.userLoginWithSocial(user.id, 2, user.name, user.profile_image_url_https, 0, "0000-00-00", (data) => this.socialLoginSuccessCallback(data), (data) => this.socialLoginFailureCallback(data))
+        
+              this.provider.userLoginWithSocial(user.id,2,user.name,"",user.lang,user.profile_image_url_https,0,"0000-00-00",data => {
+                //return with access
+                data = JSON.parse(data);
+                console.log(data);
+
+                
+                this.storage.set("makadyaccess",data.access_token);
+                this.storage.set("user_info",user)
+                .then(() => {
+                  this.event.publish("login");
+                  this.navCtrl.setRoot(TabsPage);
+                });   
+              },
+              error => {
+                console.log(error);
+              });
               this.twitter.logout().then(() => {
                 console.log("clear twitter session success");
               }).catch(() => {
