@@ -8,6 +8,9 @@ export class HelperProvider {
   accesstoken:any
   type:any;
   user_id;
+  prodNotification:boolean;
+  offersNotification:boolean;
+  
   serviceurl:any="http://itrootsdemos.com/makady/phase1/api/";
   userImagePath:string = "http://itrootsdemos.com/makady/phase1/public/uploads/images/users/";
   productImagePath:string = "http://itrootsdemos.com/makady/phase1/public/uploads/images/products/";

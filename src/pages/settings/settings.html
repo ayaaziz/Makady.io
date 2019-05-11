@@ -10,29 +10,19 @@
 </ion-header>
 
 <ion-content padding>
-	<!-- <div style="text-align: center;">
-		<div class="takePhoto">
-			<img style="text-align:center;" src="{{photo}}" class="circle-pic"
-			onerror="this.onerror=null;this.src='assets/imgs/user.png';">   
-			<ion-icon name="ios-camera" (click)="getimg()"></ion-icon>
-		</div>
-	</div> -->
-	<!-- <p style="text-align:center;font-weight: bold;font-size: 1.4em;">{{'scan' | translate}}</p> -->
-	<!-- <p style="text-align: center;"> -->
-		<ion-row>
-			<ion-col style="justify-content: center;display: flex;">
-				<ion-card *ngIf="createdCode">
-					<ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>		
-				</ion-card>
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col style="justify-content: center;display: flex;font-size: 22px;margin-top: -20px;">
-				<p>{{ username }}</p>
-			</ion-col>
-		</ion-row>
-		
-	<!-- </p> -->
+
+	<ion-row>
+		<ion-col style="justify-content: center;display: flex;">
+			<ion-card *ngIf="createdCode">
+				<ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>		
+			</ion-card>
+		</ion-col>
+	</ion-row>
+	<ion-row>
+		<ion-col style="justify-content: center;display: flex;font-size: 22px;margin-top: -20px;">
+			<p>{{ username }}</p>
+		</ion-col>
+	</ion-row>
 
 	<ion-list>
 		<ion-item  (click)="changelang()">
@@ -61,7 +51,6 @@
 		<ion-item *ngIf="open">
 				<ion-label style="color:#e26c40;margin-left: 8px;margin-right: 8px;margin-top: 2px;font-size: 1.4rem;">  {{"productsRecentlyAdded" | translate}}</ion-label>
 				<ion-toggle (ionChange)="onToggleProductNotification($event)" [checked]="productNotificationStatus"></ion-toggle>				
-				<!-- <ion-toggle [(ngModel)]="recentProduct" (ionChange)="onToggleProductNotification($event)" [checked]="productNotificationStatus"></ion-toggle> -->
 		</ion-item>
 
 		<ion-item *ngIf="open">

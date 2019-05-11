@@ -77,7 +77,7 @@ export class LoginPage {
                   this.navCtrl.setRoot(TabsPage);
 
                 } else { //not verified
-                    // this.navCtrl.push(VerificationPage,{"pageType":"AuthPage","username":pdata.user.username,"userId":pdata.user.id,"emailcode":pdata.user.email_code});                  
+                    // this.navCtrl.push(VerificationPage,{"pageType":"AuthPage","username":pdata.user.username,"userId":pdata.user.id,"emailcode":pdata.user.email_code,"access":Dataparsed.access_token});                  
                 } 
               },
               (error) => {

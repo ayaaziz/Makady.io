@@ -159,7 +159,7 @@ export class SignupPage {
         //   if(data) {
         //     console.log(JSON.stringify(data));
         //     let dataparsed = JSON.parse(data);
-        //     this.navCtrl.push(VerificationPage,{"pageType":"AuthPage","username": dataparsed.data.username,"userId":data.user.id,"emailcode":dataparsed.data.email_code});
+            // this.navCtrl.push(VerificationPage,{"pageType":"AuthPage","username": dataparsed.data.username,"userId":data.user.id,"emailcode":dataparsed.data.email_code,"access":parsedData.access_token});
         //   }
         // },error => {});
 

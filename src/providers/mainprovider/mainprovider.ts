@@ -1017,46 +1017,10 @@ export class MainproviderProvider {
     }
   }
 
-  setVerified(userId,successCallback,failureCallback) {
-    
-    if(navigator.onLine) {
-      let spinner = this.loadingCtrl.create();
-      spinner.present();
-
-      let headers = new HttpHeaders()
-      .set('Content-Type', 'application/json')
-      let parameter = {
-        'id':userId,
-        //must add "verified" column in db 
-        'verified':true
-      }
-      let serviceUrl = this.helper.serviceurl + 'updateVerificationStatus';
-
-      // this.http.post(serviceUrl, parameter, { headers: headers })
-      // .subscribe(
-      //   data => {
-      //     spinner.dismiss();
-
-      //     successCallback(JSON.stringify(data))
-      //   },
-      //   err => {
-      //     spinner.dismiss();
-
-      //     failureCallback(err);
-      //   });
-
-      
-      //test
-      return true;
-
-    } else {
-      this.helper.presentToast(this.translate.instant("offline"));
-    }
-  }
-
 
   // *****************************New Apis*************************//
-  //No Api yet (api name: "getProductByBarCode")
+  
+  //api name: "getProductByBarCode"
   searchProdByBarCode(categoryId,prodBarCode,access,successCallback,failureCallback) {
 
     if(navigator.onLine) {
@@ -1115,6 +1079,142 @@ export class MainproviderProvider {
 
     } else {
       this.helper.presentToast(this.translate.instant("offline"));      
+    }
+  }
+
+  //api name: "updateVerificationStatus"
+  setVerified(access,successCallback,failureCallback) {
+  
+    if(navigator.onLine) {
+      let spinner = this.loadingCtrl.create();
+      spinner.present();
+
+      let headers = new HttpHeaders();
+      headers = headers.set('Authorization', 'Bearer '+access);
+
+      let parameter = {
+        //must add "verified" column in db 
+        'verified':true
+      }
+      let serviceUrl = this.helper.serviceurl + 'updateVerificationStatus';
+
+      // this.http.post(serviceUrl, parameter, { headers: headers })
+      // .subscribe(
+      //   data => {
+      //     spinner.dismiss();
+
+      //     successCallback(JSON.stringify(data))
+      //   },
+      //   err => {
+      //     spinner.dismiss();
+
+      //     failureCallback(err);
+      //     this.helper.presentToast(err.message);   
+      //   });
+
+      
+      //test
+      return true;
+
+    } else {
+      this.helper.presentToast(this.translate.instant("offline"));
+    }
+  }
+
+  //api name: "productNotificationStatus"
+  //tell server if product notifications opened or closed
+  prodNotificationStatus(access,statusNo,successCallback,failureCallback) {
+
+    if(navigator.onLine) {
+      let spinner = this.loadingCtrl.create();
+      spinner.present();
+
+      let headers = new HttpHeaders();
+      headers = headers.set('Authorization', 'Bearer '+access);
+
+      let parameter = {
+        'status':statusNo
+      }
+
+      let serviceUrl = this.helper.serviceurl + 'productNotificationStatus';
+      this.http.post(serviceUrl, parameter,{ headers: headers })
+      .subscribe(data => {
+          spinner.dismiss();
+          successCallback(data);
+        },
+        err => {
+          spinner.dismiss();
+          failureCallback(err);
+          this.helper.presentToast(err.message);            
+        });
+  
+
+    } else {
+      this.helper.presentToast(this.translate.instant("offline"));
+    }
+  }
+
+  //api name: "offersNotificationStatus"
+  //tell server if offers notifications opened or closed
+  offersNotificationStatus(access,statusNo,successCallback,failureCallback) {
+
+    if(navigator.onLine) {
+      let spinner = this.loadingCtrl.create();
+      spinner.present();
+
+      let headers = new HttpHeaders();
+      headers = headers.set('Authorization', 'Bearer '+access);
+
+      let parameter = {
+        'status':statusNo
+      }
+
+      let serviceUrl = this.helper.serviceurl + 'offersNotificationStatus';
+
+      this.http.post(serviceUrl, parameter,{ headers: headers })
+      .subscribe(data => {
+          spinner.dismiss();
+          successCallback(data);
+        },
+        err => {
+          spinner.dismiss();
+          failureCallback(err);
+          this.helper.presentToast(err.message);            
+        });
+  
+    } else {
+      this.helper.presentToast(this.translate.instant("offline"));
+    }
+  }
+
+  //api name: "searchFriends" (ask esraa)
+  searchFriends(access,searchTxt,successCallback,failureCallback) {
+    if(navigator.onLine) {
+      let loader = this.loadingCtrl.create({
+        content: "",
+      });
+      loader.present();
+      let headers = new HttpHeaders();
+      let parameter = {
+        'search':searchTxt
+      }
+      headers = headers.set('Authorization', 'Bearer '+access);
+      let serviceUrl = this.helper.serviceurl + 'searchFriends';
+
+      this.http.post(serviceUrl,parameter, { headers: headers })
+      .subscribe(
+        data => {
+          loader.dismiss();
+          successCallback(JSON.stringify(data));
+        },
+        err => {
+          loader.dismiss();
+          failureCallback(err);
+          this.helper.presentToast(err.message);          
+        }
+      )
+    } else {
+      this.helper.presentToast(this.translate.instant("offline"));
     }
   }
 }

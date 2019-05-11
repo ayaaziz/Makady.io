@@ -53,13 +53,8 @@ export class SettingsPage {
                 this.langdirection=this.helper.langdirection;
 
                 //Get Current Notificatiopns Status
-                this.productNotificationStatus = this.settingsService.returnNotification();
-                this.offersNotificationStatus = this.settingsService.returnOffersNotification();
-    
-
-                console.log("product notification constructor..:"+JSON.stringify(this.productNotificationStatus));
-                console.log("offers notification constructor..:"+JSON.stringify(this.offersNotificationStatus));
-              
+                this.productNotificationStatus = this.helper.prodNotification;
+                this.offersNotificationStatus = this.helper.offersNotification;
                 
                 if(this.langdirection == "rtl")
                   this.scaleClass="scaleClass";

@@ -154,7 +154,23 @@ export class FriendsPage {
 
 
   onInput(text:string) {
-    
+    this.storage.get("makadyaccess").then(val => {
+      if(val) {
+        this.provider.searchFriends(val,text,data => {
+          if(data.success) {
+            data = JSON.parse(data);
+            console.log(JSON.stringify(data))
+            this.friends = data.friends;
+
+          } else {
+            this.helper.presentToast(data.errors);
+          }
+
+        },(data)=>{
+          this.helper.presentToast(this.translate.instant('serverErr'))
+        })
+  }
+})
   }
   
 }

@@ -49,7 +49,7 @@ export class VerificationPage {
               this.emailcode = this.navParams.get("emailcode");
               this.userId = this.navParams.get("userId");
               // this.email = this.navParams.get("email");
-              // this.access = this.navParams.get("access");   
+              this.access = this.navParams.get("access");   
               this.pageType = this.navParams.get("pageType");
   }
 
@@ -173,7 +173,7 @@ export class VerificationPage {
           if(this.pageType === "AuthPage") {  //from login or signup page
             this.navCtrl.setRoot(TabsPage);
             // //make this user verified 
-            // this.provider.setVerified(this.userId, data => {
+            // this.provider.setVerified(this.access, data => {
             //   alert(data);
             //   if(data) {
             //     this.navCtrl.setRoot(TabsPage);

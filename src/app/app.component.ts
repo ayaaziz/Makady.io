@@ -116,38 +116,41 @@ export class MyApp {
       });
 
 
-      //************************** Product Settings ************************//
+      //************************** Product Notification Settings ************************//
       this.settingsService.getNotificationStatus()
       .then(data => {  
         if(data === null ) data = true; 
-        this.prodNotification = data;    
-                 
-          console.log("product notification..:"+JSON.stringify(this.prodNotification));     
-          this.settingsService.sendNotificstionStatus(this.prodNotification);
+        this.helper.prodNotification = data;    
+        
+        this.storage.get("makadyaccess").then(access => {
+          if(access) {
+            this.provider.prodNotificationStatus(access,data == true ? 1:0,data => {
+              console.log(data);
+            },
+            error => {
+              console.log(error);
+            });
+          }
+        });
+       
       });      
 
-       //************************** Offers Settings ************************//
+       //************************** Offers Notification Settings ************************//
        this.settingsService.getOffersNotificationStatus()
        .then(data => {
           if(data === null) data = true;
-        this.offersNotification = data;    
+          this.helper.offersNotification = data;   
           
-          console.log("offers notification..:"+JSON.stringify(this.offersNotification));                   
-          this.settingsService.sendOffersNotificstionStatus(this.offersNotification);   
-          
-          // //open or close Offers notification
-          // if(data) {
-          //   // pushObject.subscribe("Offers")
-          //   .then(data => {
-          //     console.log(data);
-          //   });
-          // } else {
-          //   // pushObject.unsubscribe("Offers")
-          //   .then(data => {
-          //     console.log(data);
-          //   });
-          // }
-          
+          this.storage.get("makadyaccess").then(access => {
+            if(access) {
+              this.provider.offersNotificationStatus(access,data == true ? 1:0,data => {
+                console.log(data);
+              },
+              error => {
+                console.log(error);
+              });
+            }
+          });
        });
     });
   }
@@ -210,7 +213,7 @@ export class MyApp {
       console.error('Error with Push plugin', error);
     });
     
-    }
+  }
 
   openhome() {
       this.navctrl.setRoot(TabsPage, { tabIndex: 2 });
@@ -290,17 +293,6 @@ export class MyApp {
     });
     actionSheet.present(); 
   }
-
-  // choose() {
-  //   let options = {
-  //     maximumImagesCount: 1,
-  //   }
-  //   this.imagepicker.getPictures(options)
-  //   .then((results) => {
-  //     this.photo=results
-     
-  //   }, (err) => { console.log(err) });
-  // }
 
   take(sourceType) {
   
