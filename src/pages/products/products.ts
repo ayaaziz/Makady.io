@@ -130,6 +130,7 @@ export class ProductsPage {
                 let DataParsed=JSON.parse(data);
                 if(DataParsed.success==false && DataParsed.menu_item.length !=0) {
                   let proid=DataParsed.menu_item[0].id;
+                  let quantity= parseInt(DataParsed.menu_item[0].quantity);
                     let alert = this.alertCtrl.create({
                       message: this.translate.instant('alreadyexist'),
                       buttons: [
@@ -143,7 +144,8 @@ export class ProductsPage {
                         {
                           text: this.translate.instant('ok'),
                           handler: () => {
-                            this.update(proid);
+                            // this.update(proid);
+                            this.update(proid,quantity,this.categories)
                           }
                         }
                       ]
@@ -163,12 +165,24 @@ export class ProductsPage {
     });
   }
 
+  // update(id) {
+  //   this.storage.get("makadyaccess").then((val) => {
+  //     if(val) {
+  //       this.provider.updateproduct(id,this.procount,val,(data)=>{
+  //         let ParseData=JSON.parse(data)
+  //         if(ParseData.success==true)
+  //         {
+  //         this.helper.presentToast(this.translate.instant('countincreased'));
+  //         }
+  //       },(error)=>{});
+  //     }
+  //   });
+  // }
 
-  
-  update(id) {
+  update(id, quantity, categories) {
     this.storage.get("makadyaccess").then((val) => {
       if(val) {
-        this.provider.updateproduct(id,this.procount,val,(data)=>{
+        this.provider.updateproduct(id,parseInt(this.categories[0].quantity) + quantity,val,(data)=>{
           let ParseData=JSON.parse(data)
           if(ParseData.success==true)
           {
@@ -178,7 +192,6 @@ export class ProductsPage {
       }
     });
   }
-
 
   searchByBarcode() {
     this.barcodeScanner.scan().then(barData => {

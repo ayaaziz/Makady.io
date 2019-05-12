@@ -42,16 +42,14 @@ defaultImgUrl:string;
               public navParams: NavParams,
               public event:Events) {
 
-  this.name=this.navParams.get("name")
-  this.id=this.navParams.get("id")
-  this.defaultImgUrl = this.helper.productImagePath;
-
+      this.name=this.navParams.get("name")
+      this.id=this.navParams.get("id")
+      this.defaultImgUrl = this.helper.productImagePath;
   }
   toggleSection(x){
-    this.buy = ""
-    this.price = ""
-  //  if(this.services[x].quantity == this.services[x].purchase)
-  //  return
+    this.buy = "";
+    this.price = "";
+  
    this.services.forEach(element => {
      if(element.category_id != this.services[x].category_id)
      element.open=false
@@ -60,64 +58,48 @@ defaultImgUrl:string;
   }
 
   ionViewDidEnter() {
-    this.langdirection=this.helper.langdirection
+    this.langdirection=this.helper.langdirection;
     this.storage.get("makadyaccess").then((val)=>{
       if(val)
       {
-        this.provider.getMenudetails(this.id,val,(data)=>{
-          console.log(JSON.stringify(data))
-          let parsedData=JSON.parse(data)
-          this.members=parsedData.members
-          this.services = parsedData.data.menu_items
-          
-          this.services.forEach(element => {
-            element.open = false;
-          });
-          console.log("this.services"+this.services)
-          // this.details.forEach(element => {
-          //   let quantity=0
-          //   let purchase=0
-          //   element.products.forEach(element1 => {
-          //     quantity+= parseInt(element1.total_quantity)
-          //     purchase+=element1.total_quantity_purchase
-          //   });
-          //   let object={
-          //     "name" : element.category_name,
-          //     "quantity": quantity,
-          //     "purchase": purchase
-          //   }
-          //   this.detailsdata.push(object)
+        this.provider.getMenudetails(this.id,val,data => {
+          if(data) {
+            console.log(JSON.stringify(data));
+            let parsedData=JSON.parse(data);
+            this.members=parsedData.members;
+            this.services = parsedData.data.menu_items;
             
-         // });
-          this.services.forEach(element => {
-            let quantity=0;
-            let purchase=0;
-            element.products.forEach(element1 => {
-              quantity += parseInt(element1.total_quantity);
-              purchase += element1.total_quantity_purchase;
-              element1.price = ''; 
-              element1.quant_count = '';
-              //xxxxxxxxxxxxxxxx
-              //each product required quantity
-              element1.require_quan = parseInt(element1.total_quantity) - element1.total_quantity_purchase;
-              alert("product quantity: "+parseInt(element1.total_quantity) +"- "+"product quantity purchased: "+ element1.total_quantity_purchase)
-              console.log(element1.require_quan)
+            this.services.forEach(element => {
+              element.open = false;
             });
+            console.log("this.services"+this.services)
+          
+            this.services.forEach(element => {
+              let quantity=0;
+              let purchase=0;
+              element.products.forEach(element1 => {
+                quantity += parseInt(element1.total_quantity);
+                purchase += element1.total_quantity_purchase;
+                element1.price = ''; 
+                element1.quant_count = '';
             
-              element.name = element.category_name
-
-              //total quantity and total purchace of service
-              element.quantity = quantity;
-              element.purchase = purchase;
-              element.required_quantity = quantity - purchase
+                //each product required quantity
+                element1.require_quan = parseInt(element1.total_quantity) - element1.total_quantity_purchase;
+                // alert("product quantity: "+parseInt(element1.total_quantity) +"- "+"product quantity purchased: "+ element1.total_quantity_purchase)
+                console.log(element1.require_quan);
+              });
               
-           //alert(quantity - purchase)
-           // this.detailsdata.push(object)
-            
-          });
-          //this.storage.set("makadydata",this.detailsdata)
+                element.name = element.category_name;
 
-        },(data)=>{})
+                //total quantity and total purchace of service
+                element.quantity = quantity;
+                element.purchase = purchase;
+                element.required_quantity = quantity - purchase;
+                
+              
+            });
+          }
+        },error =>{})
       }
     })
   }

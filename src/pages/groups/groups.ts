@@ -30,7 +30,8 @@ export class GroupsPage {
               public navParams: NavParams,
               public ViewCtrl:ViewController) {
   }
-  ionViewDidLoad() {
+
+  ionViewWillEnter() {
     this.storage.get("Makadyuser_name").then((val1)=>{
       if(val1)
       {
@@ -51,7 +52,7 @@ export class GroupsPage {
 
         })
       }
-    })
+    });
   }
   
 onInput(input)

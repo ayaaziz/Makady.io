@@ -36,7 +36,7 @@ groupname:any;
       // this.pageType = "Create";      
     }
   
-    this.langdirection=this.helper.langdirection
+    this.langdirection=this.helper.langdirection;
     this.storage.get("makadyaccess").then((val)=> {
 
     if(val) {

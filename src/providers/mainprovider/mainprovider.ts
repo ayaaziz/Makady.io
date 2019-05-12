@@ -854,7 +854,7 @@ export class MainproviderProvider {
       });
       loader.present();
       let headers = new HttpHeaders();
-      alert(quantity)
+      // alert(quantity)
       let parameter={
         'id':id,
         'quantity':quantity
@@ -893,7 +893,7 @@ export class MainproviderProvider {
       }
       headers = headers.set('Authorization', 'Bearer '+access);
       let serviceUrl = this.helper.serviceurl + 'getMenu';
-      //
+   
       this.http.post(serviceUrl,parameter,{ headers: headers })
         .subscribe(
           data => {
@@ -903,7 +903,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            this.helper.presentToast(err.message);            
+            // this.helper.presentToast(err.message);            
           }
         )
     } else {

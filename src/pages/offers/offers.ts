@@ -167,11 +167,9 @@ export class OffersPage {
     this.storage.get("makadyaccess").then((val) => {
       if(val) {
         this.provider.updateproduct(id, parseInt(this.categories[0].quantity) + quantity,val,(data) => {
+          data = JSON.parse(data);
           if(data.success) {
             this.helper.presentToast(this.translate.instant('countincreased'));
-          }
-          else {
-            this.helper.presentToast("خطأ في الأتصال");
           }
         },(data)=>{})
       }

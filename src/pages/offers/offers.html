@@ -12,7 +12,7 @@
 
 <ion-content padding>
   <ion-searchbar [dir]="langdirection" style="padding:0;margin-bottom: 20px;" placeholder="Search by name, barcode or store" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput"></ion-searchbar>
-  <p style ="margin-right: 10px;margin-left: 10px;font-size: 1.2em;color: #e26c40;font-weight: bold;" *ngIf="isResult">{{'result' | translate}}</p>
+  <!-- <p style ="margin-right: 10px;margin-left: 10px;font-size: 1.2em;color: #e26c40;font-weight: bold;" *ngIf="isResult">{{'result' | translate}}</p> -->
  
   <ion-row>
     <ion-col col-6 style="box-shadow: 1px 3px 8px 1px lightgrey;border-radius: 7px" *ngFor="let item of offers">
