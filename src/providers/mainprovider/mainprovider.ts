@@ -1218,8 +1218,49 @@ export class MainproviderProvider {
     }
   }
 
-  //api name: "social_login"
-  userLoginWithSocial(id,socialType,name,email,lang,profileImageUrl,gender,phone,successCallback,failureCallback) {
+  // //api name: "social_login"
+  // userLoginWithSocial(id,socialType,name,email,lang,profileImageUrl,gender,phone,successCallback,failureCallback) {
+
+  //   if(navigator.onLine) {
+  //     let loader = this.loadingCtrl.create({
+  //       content: "",
+  //     });
+  //     loader.present();
+  //     let headers = new HttpHeaders();
+      
+  //     let parameter = {
+  //       'username':name,
+  //       'name': name,
+  //       'email': email,
+  //       'password':id,
+  //       'phone': phone,
+  //       'profile_pic':profileImageUrl,
+  //       'social_type':socialType,
+  //       'lang':lang
+  //     }
+  //     headers = headers.set('Content-Type', 'application/json');
+
+  //     let serviceUrl = this.helper.serviceurl + 'social_login';
+
+  //     this.http.post(serviceUrl,parameter, { headers: headers })
+  //     .subscribe(
+  //       data => {
+  //         loader.dismiss();
+  //         successCallback(JSON.stringify(data));
+  //       },
+  //       err => {
+  //         loader.dismiss();
+  //         failureCallback(err);
+  //         this.helper.presentToast(err.message);          
+  //       }
+  //     )
+  //   } else {
+  //     this.helper.presentToast(this.translate.instant("offline"));
+  //   }
+  // }
+
+   //api name: "social_login"
+   userLoginWithSocial(id,socialType,name,email,lang,profileImageUrl,gender,phone,successCallback,failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -1233,10 +1274,8 @@ export class MainproviderProvider {
         'name': name,
         'email': email,
         'password':id,
-        'phone': phone,
-        'profile_pic':profileImageUrl,
-        'social_type':socialType,
-        'lang':lang
+        'lang':lang,
+        'social_type':socialType,        
       }
       headers = headers.set('Content-Type', 'application/json');
 

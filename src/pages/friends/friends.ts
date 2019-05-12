@@ -28,6 +28,12 @@ export class FriendsPage {
               public event:Events) {
 
     this.langdirection=this.helper.langdirection
+ 
+  
+  }
+
+
+  ionViewWillEnter() {
     this.storage.get("makadyaccess").then((val)=>{
       if(val)
       {
@@ -42,13 +48,9 @@ export class FriendsPage {
     })
 
       }
-    })
-  
+    });
   }
 
-  ionViewDidLoad() {
-
-  }
   delete(id)
   {
     let alert = this.alertCtrl.create({

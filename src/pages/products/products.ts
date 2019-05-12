@@ -182,7 +182,9 @@ export class ProductsPage {
 
   searchByBarcode() {
     this.barcodeScanner.scan().then(barData => {
+      alert("scan");
       let prodCode = barData.text;
+      alert("prodCode: "+prodCode);
       this.storage.get("makadyaccess").then(val => {
         if(val) {
           this.provider.searchProdByBarCode(this.categoryId,prodCode,val,prodData => {

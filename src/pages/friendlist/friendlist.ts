@@ -70,7 +70,6 @@ export class FriendlistPage {
             }
           }
           this.event.publish("removeRequest");
-          // this.helper.requestsNo--;
 
         },(data)=>{});
       }

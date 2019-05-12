@@ -129,8 +129,7 @@ export class LoginPage {
             });
             console.log(facebookUser);
 
-
-            //api to save in db and return access_token
+            ////api to save in db and return access_token
             // this.provider.userLoginWithSocial(userId,1,user.name,user.email,1,user.picture,0,"0000-00-00",data => {
             //   //return with access
             //   data = JSON.parse(data);
@@ -230,24 +229,34 @@ export class LoginPage {
               }
               
               console.log("twitter data", user.id, " -", user.name, " -", user.profile_image_url_https);
+              
+              
+              //*************************************//
+              this.storage.set("socialType",2);
+              let twitterUser = {
+                "name": user.name,
+                "picture": user.profile_image_url_https,
+              }
+              this.storage.set("twitter_user",twitterUser)
+              .then(() => {
+                this.event.publish("login");
+                this.navCtrl.setRoot(TabsPage);
+              });
+              console.log(twitterUser);
+                
+              
               // this.loginservice.userLoginWithSocial(user.id, 2, user.name, user.profile_image_url_https, 0, "0000-00-00", (data) => this.socialLoginSuccessCallback(data), (data) => this.socialLoginFailureCallback(data))
-        
               this.provider.userLoginWithSocial(user.id,2,user.name,"",user.lang,user.profile_image_url_https,0,"0000-00-00",data => {
                 //return with access
                 data = JSON.parse(data);
                 console.log(data);
-
-                
-                this.storage.set("makadyaccess",data.access_token);
-                this.storage.set("user_info",user)
-                .then(() => {
-                  this.event.publish("login");
-                  this.navCtrl.setRoot(TabsPage);
-                });   
+                this.storage.set("makadyaccess",data.access_token); 
               },
               error => {
                 console.log(error);
               });
+              //****************************************//
+
               this.twitter.logout().then(() => {
                 console.log("clear twitter session success");
               }).catch(() => {

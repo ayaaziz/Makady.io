@@ -150,8 +150,6 @@ export class SignupPage {
           this.storage.set("socialType",data.user.social_type);
           console.log("social: "+data.user.social_type);
           
-          
-
           this.storage.set("user_info",data)
           .then(() => {
             this.event.publish("login");
