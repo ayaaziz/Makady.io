@@ -144,9 +144,14 @@ export class SignupPage {
        } else {
          this.provider.getuser(parsedData.access_token, (data) => {
           data = JSON.parse(data);
-          console.log(data);
+          console.log(JSON.stringify(data));
           this.helper.accesstoken=parsedData.access_token;
           this.storage.set("makadyaccess",parsedData.access_token);
+          this.storage.set("socialType",data.user.social_type);
+          console.log("social: "+data.user.social_type);
+          
+          
+
           this.storage.set("user_info",data)
           .then(() => {
             this.event.publish("login");

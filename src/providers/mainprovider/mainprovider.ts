@@ -825,7 +825,7 @@ export class MainproviderProvider {
       }
       headers = headers.set('Authorization', 'Bearer '+access);
       let serviceUrl = this.helper.serviceurl + 'acceptFriendRequest';
-      //
+     
       this.http.post(serviceUrl,parameter, { headers: headers })
         .subscribe(
           data => {

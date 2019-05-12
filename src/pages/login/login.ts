@@ -59,6 +59,7 @@ export class LoginPage {
               this.provider.getuser(Dataparsed.access_token, (data) => {
                 let pdata = JSON.parse(data);
                 console.log("parsed data: "+JSON.stringify(pdata));
+                console.log("social: "+pdata.user.social_type);
          
                 // if (this.remember == true) {
                   this.storage.set("Makadyusername", "true");
@@ -67,6 +68,8 @@ export class LoginPage {
                 this.helper.accesstoken = Dataparsed.access_token;
                 this.storage.set("Makadyuser_name", this.username);
 
+                this.storage.set("socialType",pdata.user.social_type);
+                
                 this.storage.set("user_info", pdata)
                 .then(() => {
                   this.event.publish("login");
@@ -109,24 +112,36 @@ export class LoginPage {
         this.fb.api("/me?fields=name,gender", params) //get user details
           .then(user => {
             console.log("Facebook user ", user);
+            user.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
+            console.log("Facebook pic ", user.picture);
 
-            this.provider.userLoginWithSocial(userId,1,user.name,user.email,user.lang,user.picture,user.gender,"0000-00-00",data => {
-              //return with access
-              data = JSON.parse(data);
-              console.log(data);
-      
-              
-              this.storage.set("makadyaccess",data.access_token);
-              this.storage.set("user_info",user)
-              .then(() => {
-                this.event.publish("login");
-                this.navCtrl.setRoot(TabsPage);
-              });   
-            },
-            error => {
-              console.log(error);
+            //**************//
+            this.storage.set("socialType",1);
+            let facebookUser = {
+              "name": user.name,
+              "picture": user.picture,
+              // "email": user.email
+            }
+            this.storage.set("facebook_user",facebookUser)
+            .then(() => {
+              this.event.publish("login");
+              this.navCtrl.setRoot(TabsPage);
             });
+            console.log(facebookUser);
 
+
+            //api to save in db and return access_token
+            // this.provider.userLoginWithSocial(userId,1,user.name,user.email,1,user.picture,0,"0000-00-00",data => {
+            //   //return with access
+            //   data = JSON.parse(data);
+            //   console.log(data);
+            //   this.storage.set("makadyaccess",data.access_token);   
+            // },
+            // error => {
+            //   console.log(error);
+            // });
+
+            //**************//
 
             this.fb.logout().then(() => {
               console.log("close fb seesion success")
@@ -141,7 +156,7 @@ export class LoginPage {
   }
 
   googleLogin() {
-    console.log("googleLogin ")
+    console.log("googleLogin ");
     // 651484334747-hg2uqdf63o2vus6er099d4ia6dmgeae2.apps.googleusercontent.com
     // ionic cordova plugin add cordova-plugin-googleplus --variable REVERSED_CLIENT_ID=651484334747-hg2uqdf63o2vus6er099d4ia6dmgeae2.apps.googleusercontent.com
     // npm install --save @ionic-native/google-plus@4
@@ -159,23 +174,35 @@ export class LoginPage {
     .then(user => {
       console.log("google user info"+JSON.stringify(user));
 
-      this.provider.userLoginWithSocial(user.id,3,user.name,user.email,user.lang,user.imageUrl,0,"0000-00-00",data => {
-        //return with access
-        data = JSON.parse(data);
-        console.log(data);
+      //**************************//
+      let google_user = {
+        "name": user.displayName,
+			  "email": user.email,
+			  "picture": user.imageUrl
+      }
 
-        
-        this.storage.set("makadyaccess",data.access_token);
-        this.storage.set("user_info",user)
-        .then(() => {
-          this.event.publish("login");
-          this.navCtrl.setRoot(TabsPage);
-        });   
-      },
-      error => {
-        console.log(error);
+      this.storage.set("socialType",3);
+      this.storage.set("google_user",google_user)
+      .then(() => {
+        this.event.publish("login");
+        this.navCtrl.setRoot(TabsPage);
       });
-     
+      console.log(google_user);
+
+      // //api to save in db and return access_token
+      // this.provider.userLoginWithSocial(user.id,3,user.name,user.email,user.lang,user.imageUrl,0,"0000-00-00",data => {
+      
+      //   data = JSON.parse(data);
+      //   console.log(data);
+
+      //   this.storage.set("makadyaccess",data.access_token);  
+      // },
+      // error => {
+      //   console.log(error);
+      // });
+
+      //**************************//
+      
       this.googlePlus.logout().then(() => {
         console.log("close ggole plus seesion success");
       }).catch(() => {
