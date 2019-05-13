@@ -18,29 +18,27 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding style="background-color: #f3f3f3">
-  <div style="background-color: white;padding:2px;">
-  <p style="margin-right: 5px;color: #e26c40;font-weight: bold;font-size: 1.4em;margin-left: 5px;" [dir]="langdirection"> {{'mostsell' | translate}}</p>
-  <!-- <ion-row *ngIf="langdirection=='rtl'">
-    <ion-col col-12>
-      <section class="chart-wrapper">
-        <canvas class="canvas1" #polarChart ></canvas>
-      </section>
-    </ion-col>
-  </ion-row> -->
-  <ion-row>
-    <ion-col col-12>
-      <section class="chart-wrapper2">
-        <canvas class="canvas1" #polarChart></canvas>
-      </section>
-    </ion-col>
-  </ion-row>
-</div>
+<ion-content padding>
 
-<!-- <div style="background-color: white;padding:2px;">
-  
-</div> -->
-  <div style="background-color: white;padding:2px;margin-top: 5px;">
+  <div class="panel">
+    <p style="margin-right: 5px;color: #e26c40;font-weight: bold;font-size: 1.4em;margin-left: 5px;" [dir]="langdirection"> {{'mostsell' | translate}}</p>
+    <!-- <ion-row *ngIf="langdirection=='rtl'">
+      <ion-col col-12>
+        <section class="chart-wrapper">
+          <canvas class="canvas1" #polarChart ></canvas>
+        </section>
+      </ion-col>
+    </ion-row> -->
+    <ion-row>
+      <ion-col col-12>
+        <section class="chart-wrapper2">
+          <canvas class="canvas1" #polarChart></canvas>
+        </section>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div class="panel">
     <p style="margin-right: 5px;color: #e26c40;font-weight: bold;font-size: 1.4em;margin-left: 5px;" [dir]="langdirection"> {{'money' | translate}}</p>
     <ion-row>
       <ion-col col-8>
@@ -50,10 +48,25 @@
         <p style="font-size: 1.1em;text-align: center;width:100%;" [dir]="langdirection">{{price}} {{'R.s' | translate}}</p>
       </ion-col>
     </ion-row>
-    <ion-row *ngFor="let item of data">
-      <ion-col col-2><p [dir]="langdirection" style="margin-top: 10px;"><img src="assets/imgs/camera.png" class="circle-pic"></p></ion-col>
-      <ion-col col-6><p [dir]="langdirection">{{item.name}}</p></ion-col>
+    <ion-row *ngFor="let item of data; let i = index;">
+      <ion-col col-2>
+        <round-progress 
+          [current]="30" [color]="'currentColor+i'" 
+          [radius]="45" [stroke]="7" [max]="100">
+        </round-progress>
+      </ion-col>
+      <ion-col col-6><p>{{item.name}}</p></ion-col>
       <ion-col col-4><p style="text-align: center;">{{item.price}} {{'R.s' | translate}} </p></ion-col>
     </ion-row>
   </div>
+
+
+<!--progress ring-->
+ 
+  <!-- <h3>Semi Circle Example</h3>
+  <round-progress [semicircle]="true" 
+  [current]="current" [color]="'#4801b8'" 
+  [radius]="45" [stroke]="5" [max]="max"> -->
+<!-- </round-progress> -->
+
 </ion-content>

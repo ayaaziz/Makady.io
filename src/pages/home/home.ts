@@ -23,6 +23,11 @@ export class HomePage {
   chartdata:any=[]
   price:any=0
   names:any=[];
+  currentColor0:string;
+  currentColor1:string;
+  currentColor2:string;
+  currentColor3:string;
+
 
   constructor(public provider:MainproviderProvider,
               public storage:Storage,
@@ -90,7 +95,7 @@ export class HomePage {
           spinner.dismiss();
 
           let dataparsed=JSON.parse(data)
-          this.data=dataparsed.data
+          this.data = dataparsed.data;
           console.log(""+JSON.stringify(this.data))
           if(this.data.length>0){
           this.data.forEach(element => {
@@ -98,7 +103,23 @@ export class HomePage {
             this.chartdata.push(element.quantity)
             this.names.push(element.name)
             console.log("chartdata :",this.chartdata)
-            console.log("names :",this.names)
+            console.log("names :",this.names);
+
+            /////////////////////////////////////////////
+            if(element.name === "bakery") {
+              this.currentColor0 = "#7FD3B9";
+            } else if(element.name === "cleaning supplies") {
+              this.currentColor1 = "#DB7F7F";
+            } else if(element.name === "fruits") {
+              this.currentColor2 = "#D3A1D2";
+            } else if(element.name === "dairy products") {
+              this.currentColor3 = "#FF9EB3";
+            }
+
+        
+            ////////////////////////////////////////////
+
+
             this.pieChartEl	= new Chart(this.polarChart.nativeElement,
               {
                  type: 'polarArea',

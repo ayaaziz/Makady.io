@@ -41,6 +41,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { TwitterConnect } from '@ionic-native/twitter-connect';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { SettingsProvider } from '../providers/settings/settings';
+import {RoundProgressModule} from 'angular-svg-round-progressbar';
 import { Push } from '@ionic-native/push';
 
 export function createTranslateLoader(http: HttpClient) {
@@ -75,6 +76,7 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     NgxQRCodeModule,
     BrowserModule,
+    RoundProgressModule,
     IonicModule.forRoot(MyApp,{
       tabsHideOnSubPages: true
     }),

@@ -36,4 +36,25 @@ page-home {
         margin-left: 1px;
         margin-top: 0px;
     }
+
+    ion-content {
+        background-color:  #f3f3f3 !important;
+    }
+
+    div.panel {
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 3px;
+        box-shadow: 1px 1px 12px rgba(#222,.2);
+        margin-bottom: 13px;
+    }
+
+    round-progress {
+        background: url('../../assets/imgs/camera.png') no-repeat center;
+        overflow: hidden !important;
+        width: 45px !important;
+        height: 45px !important;
+        border-radius: 50%;
+        background-size: cover;
+    }
 }
