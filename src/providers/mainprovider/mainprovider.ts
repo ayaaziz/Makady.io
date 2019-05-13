@@ -1199,7 +1199,7 @@ export class MainproviderProvider {
         'search':searchTxt
       }
       headers = headers.set('Authorization', 'Bearer '+access);
-      let serviceUrl = this.helper.serviceurl + 'searchFriends';
+      let serviceUrl = this.helper.serviceurl + 'searchFriend';
 
       this.http.post(serviceUrl,parameter, { headers: headers })
       .subscribe(
@@ -1269,14 +1269,24 @@ export class MainproviderProvider {
       loader.present();
       let headers = new HttpHeaders();
       
-      let parameter = {
+      // let parameter = {
+      //   'username':name,
+      //   'name': name,
+      //   'email': email,
+      //   'password':id,
+      //   'lang':lang,
+      //   'social_type':socialType,        
+      // }
+
+      let parameter = [{
         'username':name,
         'name': name,
         'email': email,
         'password':id,
         'lang':lang,
         'social_type':socialType,        
-      }
+      }]
+      
       headers = headers.set('Content-Type', 'application/json');
 
       let serviceUrl = this.helper.serviceurl + 'social_login';

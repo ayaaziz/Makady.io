@@ -18,6 +18,7 @@ import { VerificationPage } from '../verification/verification';
   selector: 'page-login',
   templateUrl: 'login.html'
 })
+
 export class LoginPage {
   remember: any;
   langdirection: any;
@@ -129,16 +130,16 @@ export class LoginPage {
             });
             console.log(facebookUser);
 
-            ////api to save in db and return access_token
-            // this.provider.userLoginWithSocial(userId,1,user.name,user.email,1,user.picture,0,"0000-00-00",data => {
-            //   //return with access
-            //   data = JSON.parse(data);
-            //   console.log(data);
-            //   this.storage.set("makadyaccess",data.access_token);   
-            // },
-            // error => {
-            //   console.log(error);
-            // });
+            //api to save in db and return access_token
+            this.provider.userLoginWithSocial(userId,1,user.name,user.email,1,user.picture,0,"0000-00-00",data => {
+              //return with access
+              data = JSON.parse(data);
+              console.log(data);
+              this.storage.set("makadyaccess",data.access_token);   
+            },
+            error => {
+              console.log(error);
+            });
 
             //**************//
 

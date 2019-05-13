@@ -131,17 +131,21 @@ export class FriendsPage {
 // })
 // .catch((e: any) => console.log('Error is', e));
     this.barcodeScanner.scan().then(barcodeData => {
+      console.log("scaaaaaan");
       let user_id = barcodeData.text;
+      console.log("scan friend id: "+user_id);
       this.storage.get("makadyaccess").then((val)=>{
         if(val)
         {
       this.provider.addfriends(user_id,val,(data)=>{
         data = JSON.parse(data)
         if(data.success){
+          alert("success scan");
           this.helper.presentToast("تم إرسال طلب الصداقة بنجاح");
         }
         else{
-          this.helper.presentToast(data.errors)
+          alert("error scan");          
+          this.helper.presentToast(data.errors);
         }
      console.log(JSON.stringify(data))
       },(data)=>{

@@ -32,8 +32,9 @@ export class MyApp {
   langdirection;
   side:string;
   userLoged: boolean = false;
-  prodNotification: boolean = false;
-  offersNotification: boolean = false;
+  // prodNotification: boolean = false;
+  // offersNotification: boolean = false;
+  errorImg:string;
 
   constructor(public actionSheetCtrl: ActionSheetController,
               public camera:Camera,
@@ -49,8 +50,10 @@ export class MyApp {
               splashScreen: SplashScreen,
               private push: Push,
               private settingsService:SettingsProvider
-              // private pushObject: PushObject
             ) {
+
+    // this.errorImg = this.helper.userImagePath + "default_avatar.png";
+              
 
     platform.ready().then(() => {
       this.event.subscribe("login", () => {
@@ -102,7 +105,6 @@ export class MyApp {
               }
           });
 
-     
       });
     
 
@@ -240,6 +242,7 @@ export class MyApp {
 
     pushObject.on('notification').subscribe((notification: any) => {
 
+      alert("notification");
       //handle notification
       console.log('Received a notification', notification);
       alert(JSON.stringify(notification));
