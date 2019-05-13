@@ -51,7 +51,7 @@
     <ion-row *ngFor="let item of data; let i = index;">
       <ion-col col-2>
         <round-progress 
-          [current]="30" [color]="'currentColor+i'" 
+          [current]="item.price" [color]="item.color" 
           [radius]="45" [stroke]="7" [max]="100">
         </round-progress>
       </ion-col>
