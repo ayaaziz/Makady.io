@@ -59,21 +59,21 @@ export class GroupsPage {
 onInput(input)
 {
   if(input=="") {
-  this.storage.get("makadyaccess").then((val)=>{
-    if(val)
-    {
-      // this.show = true;
-      // this.groups=[];
-      this.provider.friends(val,(data)=>{
-        console.log(JSON.stringify(data))
-        let parsedData=JSON.parse(data)
-        this.groups=parsedData.groups
-      },(data)=>{
-    });
+    this.storage.get("makadyaccess").then((val)=>{
+      if(val)
+      {
+        // this.show = true;
+        // this.groups=[];
+        this.provider.friends(val,(data)=>{
+          console.log(JSON.stringify(data));
+          let parsedData=JSON.parse(data);
+          this.groups=parsedData.groups;
+        },(data)=>{
+      });
     }
-  })
+  });
 }
-else{
+else {
   this.storage.get("makadyaccess").then((val)=>{
     if(val)
     {
