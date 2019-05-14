@@ -21,7 +21,7 @@
 <ion-content padding>
 
   <div class="panel">
-    <p style="margin-right: 5px;color: #e26c40;font-weight: bold;font-size: 1.4em;margin-left: 5px;" [dir]="langdirection"> {{'mostsell' | translate}}</p>
+    <p style="margin-right: 5px;color: #e26c40;font-weight: bold;font-size: 1.4em;margin-left: 5px;"> {{'mostsell' | translate}}</p>
     <!-- <ion-row *ngIf="langdirection=='rtl'">
       <ion-col col-12>
         <section class="chart-wrapper">
@@ -39,52 +39,32 @@
   </div>
 
   <div class="panel">
-    <!-- <ion-row class="progress">
-      <ion-col class="progress-bar" style="width:50px;background-color:#7FD3B9;
-      border-top-left-radius:10px;border-bottom-left-radius:10px;">
-      </ion-col>
-      <ion-col class="progress-bar" style="width:60px;background-color:#DB7F7F;">
-      </ion-col>
-      <ion-col class="progress-bar" style="width:40px;background-color:#D3A1D2;">
-      </ion-col>
-      <ion-col class="progress-bar" style="width:70px;background-color:#FF9EB3;
-      border-top-right-radius:10px;border-bottom-right-radius:10px;">
-      </ion-col>
-    </ion-row> -->
-
-    <ion-row class="progress">
-      <div class="progress-bar progress-bar-1" style="width: 40%">
-        Free Space
-      </div>
-      <div class="progress-bar progress-bar-2" style="width:10%">
-        Warning
-      </div>
-      <div class="progress-bar progress-bar-3" style="width:20%;">
-        Danger
-      </div>
-      <div class="progress-bar progress-bar-4" style="width:20%;">
-        Danger
-      </div>
-    </ion-row>
 
     <p style="margin-right: 5px;color: #e26c40;font-weight: bold;font-size: 1.4em;margin-left: 5px;" [dir]="langdirection"> {{'money' | translate}}</p>
+
+    <ion-row class="progress-bar">
+      <div *ngFor="let item of data" [ngStyle]="{'width': item.percentage+'%','background-color':item.color}">
+      </div>
+    </ion-row>
+
     <ion-row>
-      <ion-col col-8>
-        <p style="margin-right: 5px;font-size: 1.1em;margin-left: 5px;width:100%;" [dir]="langdirection"> {{'total' | translate}}</p>
+      <ion-col col-9>
+        <p style="margin-right: 5px;font-size: 1.1em;margin-left: 5px;width:100%;"> {{'total' | translate}}</p>
       </ion-col>
-      <ion-col col-4>
-        <p style="font-size: 1.1em;text-align: center;width:100%;" [dir]="langdirection">{{price}} {{'R.s' | translate}}</p>
+      <ion-col col-3>
+        <p style="font-size: 1.1em;text-align: center;width:100%;">{{price}} {{'R.s' | translate}}</p>
       </ion-col>
     </ion-row>
+
     <ion-row *ngFor="let item of data; let i = index;">
       <ion-col col-3>
         <round-progress 
-          [current]="item.price" [color]="item.color" 
+          [current]="item.percentage" [color]="item.color" 
           [radius]="45" [stroke]="7" [max]="100">
         </round-progress>
       </ion-col>
-      <ion-col col-5><p>{{item.name}}</p></ion-col>
-      <ion-col col-4><p style="text-align: center;">{{item.price}} {{'R.s' | translate}} </p></ion-col>
+      <ion-col col-6><p>{{item.name}}</p></ion-col>
+      <ion-col col-3><p style="text-align: center;">{{item.price}} {{'R.s' | translate}} </p></ion-col>
     </ion-row>
   </div>
 

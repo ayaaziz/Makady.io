@@ -554,7 +554,7 @@ export class MainproviderProvider {
       });
       loader.present();
       let headers = new HttpHeaders();
-      let parameter={
+      let parameter = {
         'name':name
       }
       headers = headers.set('Authorization', 'Bearer '+access);

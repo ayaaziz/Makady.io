@@ -98,11 +98,18 @@ x:number = 10;
           this.data = dataparsed.data;
           console.log(""+JSON.stringify(this.data));
           if(this.data.length > 0) {
+
+            //get total price
+            this.data.forEach(element => {
+              this.price += parseInt(element.price);
+            });
+
            this.data.forEach(element => {
-            this.price += parseInt(element.price);
+            // this.price += parseInt(element.price);
             this.chartdata.push(element.quantity);
             this.names.push(element.name);
         
+            //new properties(color,percentage) for each element in array
             if(element.name === "bakery") {
               element.color = "#7FD3B9";
             } else if(element.name === "cleaning supplies") {
@@ -113,6 +120,7 @@ x:number = 10;
               element.color = "#FF9EB3";
             }
 
+            element.percentage = Math.floor((element.price * 100) / this.price);
 
             this.pieChartEl	= new Chart(this.polarChart.nativeElement,
               {
