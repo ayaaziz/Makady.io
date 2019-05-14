@@ -12,7 +12,7 @@
 <ion-content padding>
   <ion-searchbar style="padding:0;margin-bottom: 20px;" placeholder="{{'searchgroup' | translate}}" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput"></ion-searchbar>
  
-  <ion-row style="margin-top: 5px;" *ngIf="show">
+  <ion-row style="margin-top: 5px;">
     <ion-col col-6 *ngFor="let item of groups" style="justify-content:center;">
       <div style="box-shadow: 0px 2px 6px 1px lightgrey;border-radius:7px; padding: 1px 0;">
         <p style="font-size: 1.5em;top: -13px;left: 13px;position: absolute;width: 20px;text-align:center;" (click)="deletegroup(item.group_id)"><ion-icon name="ios-close"></ion-icon></p>
@@ -38,7 +38,7 @@
   </ion-row>
 
 
-  <ion-row style="margin-top: 5px;" *ngIf="!show">
+  <!-- <ion-row style="margin-top: 5px;" *ngIf="!show">
     <ion-col col-6 style="box-shadow: 1px 3px 6px 1px lightgrey;" *ngFor="let item of groups">
       <p style="font-size: 1.5em;top: -13px;left: 13px;position: absolute;width: 30px;" (click)="deletegroup(item.id)"><ion-icon name="ios-close"></ion-icon></p>
       <p *ngIf="item.members?.length == 0 || !item.members" style="text-align:center;margin-bottom: 2px;">
@@ -59,7 +59,7 @@
         </button>
       </p>
     </ion-col>  
-  </ion-row>
+  </ion-row> -->
 
   <ion-fab bottom [ngClass]="{'left-fab':langdirection === 'ltr','right-fab':langdirection === 'rtl'}">
     <button ion-fab style="background:#e26c40;" (click)="addgroup()"><ion-icon style="color:white;" name="add"></ion-icon></button>

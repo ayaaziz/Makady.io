@@ -27,7 +27,7 @@ export class HomePage {
   currentColor1:string;
   currentColor2:string;
   currentColor3:string;
-
+x:number = 10;
 
   constructor(public provider:MainproviderProvider,
               public storage:Storage,

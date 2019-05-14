@@ -39,6 +39,34 @@
   </div>
 
   <div class="panel">
+    <!-- <ion-row class="progress">
+      <ion-col class="progress-bar" style="width:50px;background-color:#7FD3B9;
+      border-top-left-radius:10px;border-bottom-left-radius:10px;">
+      </ion-col>
+      <ion-col class="progress-bar" style="width:60px;background-color:#DB7F7F;">
+      </ion-col>
+      <ion-col class="progress-bar" style="width:40px;background-color:#D3A1D2;">
+      </ion-col>
+      <ion-col class="progress-bar" style="width:70px;background-color:#FF9EB3;
+      border-top-right-radius:10px;border-bottom-right-radius:10px;">
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row class="progress">
+      <div class="progress-bar progress-bar-1" style="width: 40%">
+        Free Space
+      </div>
+      <div class="progress-bar progress-bar-2" style="width:10%">
+        Warning
+      </div>
+      <div class="progress-bar progress-bar-3" style="width:20%;">
+        Danger
+      </div>
+      <div class="progress-bar progress-bar-4" style="width:20%;">
+        Danger
+      </div>
+    </ion-row>
+
     <p style="margin-right: 5px;color: #e26c40;font-weight: bold;font-size: 1.4em;margin-left: 5px;" [dir]="langdirection"> {{'money' | translate}}</p>
     <ion-row>
       <ion-col col-8>
@@ -49,13 +77,13 @@
       </ion-col>
     </ion-row>
     <ion-row *ngFor="let item of data; let i = index;">
-      <ion-col col-2>
+      <ion-col col-3>
         <round-progress 
           [current]="item.price" [color]="item.color" 
           [radius]="45" [stroke]="7" [max]="100">
         </round-progress>
       </ion-col>
-      <ion-col col-6><p>{{item.name}}</p></ion-col>
+      <ion-col col-5><p>{{item.name}}</p></ion-col>
       <ion-col col-4><p style="text-align: center;">{{item.price}} {{'R.s' | translate}} </p></ion-col>
     </ion-row>
   </div>

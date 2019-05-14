@@ -16,10 +16,11 @@ import { FriendlistPage } from '../friendlist/friendlist';
 export class GroupsPage {
   langdirection:any
   myInput:any
-  groups:any=[]
-  show:any=true
-  hide:any=false
-  username:any
+  groups:any;
+  // show:any=true
+  // hide:any=false
+  username:any;
+
   constructor(public alertCtrl:AlertController,
               public storage:Storage,
               public provider:MainproviderProvider,
@@ -35,7 +36,7 @@ export class GroupsPage {
     this.storage.get("Makadyuser_name").then((val1)=>{
       if(val1)
       {
-       this.username=val1
+       this.username=val1;
       }
     })
      this.langdirection=this.helper.langdirection
@@ -57,21 +58,18 @@ export class GroupsPage {
   
 onInput(input)
 {
-  if(input=="")
-{
+  if(input=="") {
   this.storage.get("makadyaccess").then((val)=>{
     if(val)
     {
-      this.show=true
-      this.groups=[]
-  this.provider.friends(val,(data)=>{
-    console.log(JSON.stringify(data))
-    let parsedData=JSON.parse(data)
-    this.groups=parsedData.groups
-  },(data)=>{
-
-  })
-
+      // this.show = true;
+      // this.groups=[];
+      this.provider.friends(val,(data)=>{
+        console.log(JSON.stringify(data))
+        let parsedData=JSON.parse(data)
+        this.groups=parsedData.groups
+      },(data)=>{
+    });
     }
   })
 }
@@ -81,11 +79,10 @@ else{
     {
   this.provider.searchgroups(input,val,(data)=>{
     console.log(JSON.stringify(data))
-    this.groups=[]
-    this.show=false
-    let parsedData=JSON.parse(data)
-      this.groups=parsedData.data
-    
+    // this.groups=[]
+    // this.show=false
+    let parsedData = JSON.parse(data);
+      this.groups = parsedData.data;
   },(data)=>{
 
   })
