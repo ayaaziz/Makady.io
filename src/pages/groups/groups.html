@@ -16,18 +16,42 @@
     <ion-col col-6 *ngFor="let item of groups" style="justify-content:center;">
       <div style="box-shadow: 0px 2px 6px 1px lightgrey;border-radius:7px; padding: 1px 0;">
         <p style="font-size: 1.5em;top: -13px;left: 13px;position: absolute;width: 20px;text-align:center;" (click)="deletegroup(item.group_id)"><ion-icon name="ios-close"></ion-icon></p>
-        <div *ngIf="item.members?.length == 0 || !item.members" style="width:108px;height:108px;margin:auto;overflow: hidden;text-align:center;border-radius: 50%;">
-          <img style="width:90px;border-radius: 50%;margin-top:15px;" src="assets/imgs/error.png">
+
+        <!--No Members-->
+        <div *ngIf="item.members?.length === 0 || !item.members" style="width:100px;height:100px;margin:15px auto;overflow: hidden;text-align:center;border-radius: 50%;">
+          <img style="width:100%;" src="assets/imgs/error.png">
         </div>
-        <div *ngIf="item.members?.length == 1" style="width:108px;height:108px;margin:auto;overflow: hidden;text-align:center;border-radius: 50%;">
-          <img *ngFor="let member of item.members; let i = index" style="width:90px;border-radius: 50%;margin-top:15px;" src="{{member.profile_pic}}">         
+
+        <!-- 1 Member -->
+        <div *ngIf="item.members?.length === 1" style="width:100px;height:100px;margin:15px auto;overflow: hidden;border-radius: 50%;">
+          <img *ngFor="let member of item.members; let i = index" style="width:100%;" src="{{member.profile_pic}}">         
         </div>
-        <div *ngIf="item.members?.length > 2" style="width:50px;height:100px;margin:auto;overflow: hidden;border-radius: 50%;">
+
+
+        <!-- <div *ngIf="item.members?.length > 2" style="width:50px;height:100px;margin:auto;overflow: hidden;border-radius: 50%;">
           <img *ngFor="let member of item.members; let i = index" style="width:45px;border-radius: 50%;margin-top:15px;" src="{{member.profile_pic}}">   
+        </div> -->
+
+        <!-- 2 members -->
+        <div *ngIf="item.members?.length === 2" style="width:100px;height:100px;margin:15px auto;overflow: hidden;border-radius: 50%;">
+          <img *ngFor="let member of item.members; let i = index" style="width:50%;" src="{{member.profile_pic}}">   
         </div>
-        <div *ngIf="item.members?.length > 3" style="width:100px;height:100px;margin:auto;overflow: hidden;border-radius: 50%;">
+
+        
+        <!-- <div *ngIf="item.members?.length > 3" style="width:100px;height:100px;margin:auto;overflow: hidden;border-radius: 50%;">
           <img *ngFor="let member of item.members; let i = index" style="width:45px;border-radius: 50%;margin-top:15px;" src="{{member.profile_pic}}"> 
+        </div> -->
+
+        <!-- 3 members -->
+        <div *ngIf="item.members?.length === 3" style="width:100px;height:100px;margin:15px auto;overflow: hidden;border-radius: 50%;">
+          <img *ngFor="let member of item.members; let i = index" [ngClass]="{'halfImg':i!==item.members?.length-1,'fullImg':i===item.members?.length-1}" src="{{member.profile_pic}}"> 
         </div>
+
+         <!-- 4 members or More -->
+         <div *ngIf="item.members?.length > 3" style="width:100px;height:100px;margin:15px auto;overflow: hidden;border-radius: 50%;">
+          <img *ngFor="let member of item.members; let i = index" style="width:50%;" src="{{member.profile_pic}}"> 
+        </div>
+
         <p style="text-align:center;margin: 4px;">{{item.group_name}}</p>
         <p style="text-align:center;">
           <button ion-button style="background-color:#e26c40;color:white" (click)="editgroup(item.group_id,item.group_name)">{{'modify' | translate}}
