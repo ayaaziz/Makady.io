@@ -242,10 +242,8 @@ export class MyApp {
 
     pushObject.on('notification').subscribe((notification: any) => {
 
-      alert("notification");
       //handle notification
       console.log('Received a notification', notification);
-      alert(JSON.stringify(notification));
       
     }); 
 

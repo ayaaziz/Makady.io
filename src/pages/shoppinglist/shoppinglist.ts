@@ -21,6 +21,7 @@ export class ShoppinglistPage {
   show:any=true;
   hide1:any=true;
   hide2:any=true;
+  userId:number;
 
   constructor(public alertCtrl:AlertController,
               public platform:Platform,
@@ -114,14 +115,14 @@ export class ShoppinglistPage {
           console.log(JSON.stringify(data));
           let parsedData=JSON.parse(data);
           this.inlistes=parsedData.data;
-        
           if(this.inlistes.length==0) {
             this.show = false;
-            this.hide = true;
+            this.hide = false;
           
           } else {
             this.show = true;
           }
+     
         },(data)=>{});
       }
     });
@@ -142,7 +143,7 @@ export class ShoppinglistPage {
         
           if(this.listes.length==0) {
             this.hide=false;
-            this.show=true;
+            this.show=false;
           
           } else {
             this.hide=true;
@@ -152,7 +153,7 @@ export class ShoppinglistPage {
     });
   }
 
-  deletelist(id) {
+  deletelist(id,type:string) {
     let alert = this.alertCtrl.create({
       title: this.translate.instant('confirmmenuMsg'),
       buttons: [
@@ -168,15 +169,43 @@ export class ShoppinglistPage {
           handler: () => {
             this.storage.get("makadyaccess").then((val) => {
               if(val) {
-                this.provider.deletemenu(id,val,(data) => {
-                  console.log(JSON.stringify(data));
-                  for(var i=0;i<this.listes.length;i++) {
-                    if (this.listes[i].menu_id == id) {
-                      this.listes.splice(i, 1);
+
+                //delete Menu, if it is user's Menu
+                if(type === "userList") {
+                  this.provider.deletemenu(id,val,(data) => {
+                    console.log(JSON.stringify(data));
+                    for(var i=0;i<this.listes.length;i++) {
+                      if (this.listes[i].menu_id == id) {
+                        this.listes.splice(i, 1);
+                      }
                     }
-                  }
-                },(error)=>{
-                });
+                    console.log("Menu Deleted");
+                    
+                  },(error)=>{
+                  });
+                //remove user from this Menu, if it is invited Menu
+                } else if(type === "invitedList") {
+                  
+                  console.log("type: "+type);
+                  this.storage.get("user_info").then(data => {
+
+                    console.log("user data: "+JSON.stringify(data));
+
+                    this.userId = data.user.id;
+                    console.log("user id: "+ this.userId);
+                    this.provider.removeUserFromMenu(id,this.userId,val,data => {
+                      if(data) {
+                        console.log("User Removed From Menu");
+                        this.getinvited();
+                      }
+                    },
+                    error => {
+                      
+                    });
+                  });
+
+                }
+           
               }
             });
           }

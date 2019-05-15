@@ -22,7 +22,7 @@
   <ion-row>  
     <ion-searchbar style="margin-top: 35px;padding-bottom: 0;" placeholder="{{'searchYours' | translate }}" (ionInput)="onInput(myInput)" (ionCancel)="onCancel()" [(ngModel)]="myInput" [hidden]="hide2" [dir]="langdirection"></ion-searchbar>
       <ion-col>       
-        <p style="text-align: center;color:#e26c40;font-size: 1.4em;font-weight: bold;" [hidden]="hide">{{'nolistes'| translate}}</p>
+        <!-- <p style="text-align: center;color:#e26c40;font-size: 1.4em;font-weight: bold;" [hidden]="hide">{{'nolistes'| translate}}</p> -->
         <ion-item  style="border:1px solid #e26c40; border-radius: 10px;margin-top: 15px;" *ngFor="let item of listes" [hidden]="hide2">
             <ion-row>
               <ion-col col-1 (click)="opendetails(item.menu_id,item.menu_name)">
@@ -32,7 +32,7 @@
                 <p [dir]="langdirection" style="color:#666;font-size: 1.8rem;margin: 3px 5px 0 3px;">{{item.menu_name}}</p>
               </ion-col>
               <ion-col col-1>
-                <p [dir]="langdirection" style="margin-bottom: 0px;font-size: 1.5em;margin-top: 0px;text-align: center;" (click)="deletelist(item.menu_id)"><ion-icon name="ios-close" style="text-align: center;"></ion-icon></p>
+                <p [dir]="langdirection" style="margin-bottom: 0px;font-size: 1.5em;margin-top: 0px;text-align: center;" (click)="deletelist(item.menu_id,'userList')"><ion-icon name="ios-close" style="text-align: center;"></ion-icon></p>
               </ion-col>
             </ion-row>
             <ion-row>
@@ -54,17 +54,17 @@
   <ion-row>
     <ion-searchbar style="margin-top: 35px;padding-bottom: 0;" placeholder="{{'searchinvited' | translate }}" (ionInput)="onInputinvited(myInput)" (ionCancel)="onCancel()" [(ngModel)]="myInput" [hidden]="hide1"  [dir]="langdirection"></ion-searchbar>
     <ion-col>
-      <p style="text-align: center;color:#e26c40;font-size: 1.4em;font-weight: bold;" [hidden]="show">{{'nolistes'| translate}}</p>
+      <!-- <p style="text-align: center;color:#e26c40;font-size: 1.4em;font-weight: bold;" [hidden]="show">{{'nolistes'| translate}}</p> -->
       <ion-item style="border:1px solid #e26c40; border-radius: 10px;margin-top: 10px;" *ngFor="let item of inlistes" [hidden]="hide1">
         <ion-row style="margin-top: -8px;">
           <ion-col col-1 (click)="opendetails(item.menu_id,item.menu_name)">
-            <p [dir]="langdirection"><ion-icon name="ios-list-outline" style="color:#666;font-size: 2.2em;"></ion-icon></p>
+            <p><ion-icon name="ios-list-outline" style="color:#666;font-size: 2.2em;"></ion-icon></p>
           </ion-col>
           <ion-col col-10 (click)="opendetails(item.menu_id,item.menu_name)">
-            <p [dir]="langdirection" style="color:#666;font-size: 1.8rem;margin: 3px 5px 0 3px;">{{item.menu_name}}</p>
+            <p style="color:#666;font-size: 1.8rem;margin: 3px 5px 0 3px;">{{item.menu_name}}</p>
           </ion-col>
           <ion-col col-1>
-            <p [dir]="langdirection" style="margin-bottom: 0px;font-size: 1.5em;margin-top: 0px;text-align: center;" (click)="deletelist(item.menu_id)"><ion-icon name="ios-close" style="text-align: center;"></ion-icon></p>
+            <p style="margin-bottom: 0px;font-size: 1.5em;margin-top: 0px;text-align: center;" (click)="deletelist(item.menu_id,'invitedList')"><ion-icon name="ios-close" style="text-align: center;"></ion-icon></p>
           </ion-col> 
         </ion-row>
         <ion-row style="text-align: center">

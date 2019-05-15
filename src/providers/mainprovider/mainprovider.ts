@@ -687,30 +687,30 @@ export class MainproviderProvider {
   deletemenu(id,access,successCallback, failureCallback) {
 
     if(navigator.onLine) {
-    let loader = this.loadingCtrl.create({
-      content: "",
-    });
-    loader.present();
-    let headers = new HttpHeaders();
-    let parameter={
-      'menu_id':id
-    }
-    headers = headers.set('Authorization', 'Bearer '+access);
-    let serviceUrl = this.helper.serviceurl + 'deleteMenu';
-    //
-    this.http.post(serviceUrl, parameter,{ headers: headers })
-      .subscribe(
-        data => {
-          loader.dismiss();
+      let loader = this.loadingCtrl.create({
+        content: "",
+      });
+      loader.present();
+      let headers = new HttpHeaders();
+      let parameter={
+        'menu_id':id
+      }
+      headers = headers.set('Authorization', 'Bearer '+access);
+      let serviceUrl = this.helper.serviceurl + 'deleteMenu';
+      //
+      this.http.post(serviceUrl, parameter,{ headers: headers })
+        .subscribe(
+          data => {
+            loader.dismiss();
 
-          successCallback(JSON.stringify(data))
-        },
-        err => {
-          loader.dismiss();
-          failureCallback(err);
-          this.helper.presentToast(err.message);          
-        }
-      )
+            successCallback(JSON.stringify(data))
+          },
+          err => {
+            loader.dismiss();
+            failureCallback(err);
+            this.helper.presentToast(err.message);          
+          }
+        )
     } else {
       this.helper.presentToast(this.translate.instant("offline"));
     }
@@ -1303,6 +1303,42 @@ export class MainproviderProvider {
           this.helper.presentToast(err.message);          
         }
       )
+    } else {
+      this.helper.presentToast(this.translate.instant("offline"));
+    }
+  }
+
+
+  removeUserFromMenu(menuId,userId,access,successCallback,failureCallback) {
+ 
+    if(navigator.onLine) {
+      let loader = this.loadingCtrl.create({
+        content: "",
+      });
+      loader.present();
+
+      let headers = new HttpHeaders();
+      let parameter = {
+        'menu_id':menuId,
+        'current_user':userId
+      }
+      headers = headers.set('Authorization', 'Bearer '+access);
+
+      let serviceUrl = this.helper.serviceurl + 'RemoveMenuUser';
+ 
+      this.http.post(serviceUrl, parameter,{ headers: headers })
+        .subscribe(
+          data => {
+            loader.dismiss();
+
+            successCallback(JSON.stringify(data))
+          },
+          err => {
+            loader.dismiss();
+            failureCallback(err);
+            this.helper.presentToast(err.message);          
+          }
+        )
     } else {
       this.helper.presentToast(this.translate.instant("offline"));
     }
