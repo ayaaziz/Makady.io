@@ -77,16 +77,26 @@ else {
   this.storage.get("makadyaccess").then((val)=>{
     if(val)
     {
-  this.provider.searchgroups(input,val,(data)=>{
-    console.log(JSON.stringify(data))
-    // this.groups=[]
-    // this.show=false
-    let parsedData = JSON.parse(data);
-      this.groups = parsedData.data;
-  },(data)=>{
+        this.provider.searchgroups(input,val,(data) => {
+          console.log(JSON.stringify(data));
+          // this.groups=[]
+          // this.show=false
+          let parsedData = JSON.parse(data);
+            // this.groups = parsedData.data;
+            let newGroups = [];
+            parsedData.data.forEach(group => {
+              let names = { 
+                "group_name": group.filter_name_en,
+                "members":group.profile_pic 
+              }
 
-  })
-}
+              newGroups.push(names);
+              this.groups = newGroups;
+              console.log(JSON.stringify(this.groups));
+            });
+        },(data) => {
+      });
+    }
   })
 }
 }

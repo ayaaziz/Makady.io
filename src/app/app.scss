@@ -147,6 +147,21 @@ ion-content {
     background: white !important;
 }
 
+.halfImg {
+    width: 50%;
+    height: 50%;
+}
+
+.fullImg {
+    width: 100%;
+    height: 50%;
+    margin-top: -6px;
+}
+
+.thirdFourthImg {
+    margin-top: -6px;
+}
+
 
 //SideMenu Style
 [dir="rtl"] ion-menu[side=left] > .menu-inner {

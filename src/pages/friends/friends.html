@@ -13,10 +13,10 @@
 <ion-content padding>
   <ion-searchbar [dir]="langdirection" placeholder="{{ 'searchfriend' | translate }}" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput"></ion-searchbar>
   
-  <ion-scroll scrollX="true" style="height:175px;white-space: nowrap;margin-top: 5px;">   
+  <ion-scroll scrollX="true" style="height:200px;white-space: nowrap;margin-top: 5px;">   
     <div class="subcat" style="box-shadow: 0px 2px 8px #ebe9e9;margin-right: 5px;margin-left: 5px;text-align: center;height: 150px" *ngFor="let item of groups">
 
-      <div *ngIf="item.members?.length == 0 || !item.members" style="width:100px;height:100px;margin:auto;">
+      <!-- <div *ngIf="item.members?.length == 0 || !item.members" style="width:100px;height:100px;margin:auto;">
         <img style="width:80px;border-radius: 50%" src="assets/imgs/error.png">
       </div>
 
@@ -30,6 +30,31 @@
 
       <div *ngIf="item.members?.length > 3" style="width:100px;height:100px;margin:auto;overflow: hidden;border-radius: 50%;">
         <img *ngFor="let member of item.members; let i = index" style="width:40px;border-radius: 50%" src="{{member.profile_pic}}">  
+      </div> -->
+
+       <!--No Members-->
+       <div *ngIf="item.members?.length === 0 || !item.members" style="width:70px;height:70px;margin:15px auto;overflow: hidden;text-align:center;border-radius: 50%;">
+        <img style="width:100%;height: 100%;" src="assets/imgs/error.png">
+      </div>
+
+      <!-- 1 Member -->
+      <div *ngIf="item.members?.length === 1" style="width:70px;height:70px;margin:15px auto;overflow: hidden;border-radius: 50%;">
+        <img *ngFor="let member of item.members; let i = index" style="width:100%;height: 100%;" src="{{member.profile_pic}}">         
+      </div>
+
+      <!-- 2 members -->
+      <div *ngIf="item.members?.length === 2" style="width:70px;height:70px;margin:15px auto;overflow: hidden;border-radius: 50%;">
+        <img *ngFor="let member of item.members; let i = index" style="width:50%;height: 100%;" src="{{member.profile_pic}}">   
+      </div>
+
+      <!-- 3 members -->
+      <div *ngIf="item.members?.length === 3" style="white-space: normal;width:70px;height:70px;margin:15px auto;overflow: hidden;border-radius: 50%;">
+        <img *ngFor="let member of item.members; let i = index" [ngClass]="{'halfImg':i!==item.members?.length-1,'fullImg':i===item.members?.length-1}" src="{{member.profile_pic}}"> 
+      </div>
+
+       <!-- 4 members or More -->
+       <div *ngIf="item.members?.length > 3" style="white-space: normal;width:70px;height:70px;margin:15px auto;overflow: hidden;border-radius: 50%;">
+        <img *ngFor="let member of item.members; let i = index" style="width:50%;height: 50%;" [ngClass]="{'thirdFourthImg':(i === item.members?.length-1 || i === item.members?.length-2)}" src="{{member.profile_pic}}"> 
       </div>
 
       <div style="text-align:center;">{{item.group_name}}</div>
