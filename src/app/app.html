@@ -3,22 +3,22 @@
     <div style="text-align: center;">
       <div class="takePhoto">
           <img style="text-align:center;" src="{{photo}}" class="circle-pic"
-          onerror="this.onerror=null;this.src='assets/imgs/camera.png';">   <!--error =>camera,default in db =>user.png -->
+          onerror="this.onerror=null;this.src='assets/imgs/camera.png';"> 
           <ion-icon name="ios-camera" (click)="getimg()"></ion-icon>
       </div>
       <h4 style="color:#666;text-align: center;">{{username}}</h4>
     </div>
-    <ion-list no-lines style="margin-top: -7px;">
+    <ion-list no-lines style="margin-top: 20px;">
       <button menuClose ion-item (click)="openhome()" style="margin-bottom: -8px;">
-        <ion-row  style="margin-right: 0px;margin-top: 30px;">
+        <ion-row  style="margin-right: 0px;">
           <ion-icon name="ios-home" style="font-size:21px;color:#f2622c;"></ion-icon>
           <h2 style="margin-right: 10px;margin-left: 10px;color:#f2622c; font-size:18px;">{{"Home"| translate}}</h2>
         </ion-row>
       </button>
       <button menuClose ion-item (click)="openlists()" style="margin-bottom: -8px;">
-        <ion-row dir="*ngif(this.platform.isRTL)? rtl : ltr" style="margin-right: 0px">
+        <ion-row style="margin-right: 0px">
           <ion-icon name="ios-list-outline" style="font-size:30px;font-weight: bold;color:#f2622c"></ion-icon>
-          <h2 style="margin-right: 10px;margin-left: 10px;color:#f2622c ;font-size:18px;">{{"list"|translate}} </h2>
+          <h2 style="margin-top: 5px;margin-right: 10px;margin-left: 10px;color:#f2622c ;font-size:18px;">{{"list"|translate}} </h2>
         </ion-row>
       </button>
       <button menuClose ion-item (click)="products()" style="margin-bottom: -8px;">

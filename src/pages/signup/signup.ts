@@ -41,6 +41,9 @@ export class SignupPage {
               public actionSheetCtrl: ActionSheetController) {
 
               this.userImageUrl = this.helper.userImagePath + "default_avatar.png";
+              
+              console.log("my image: "+this.userImageUrl);
+
               this.langdirection = this.helper.langdirection;
 
               if(this.helper.langdirection == "ltr") {

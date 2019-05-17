@@ -11,42 +11,44 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-searchbar [dir]="langdirection" style="padding:0;margin-bottom: 20px;" placeholder="Search by name, barcode or store" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput"></ion-searchbar>
-  <!-- <p style ="margin-right: 10px;margin-left: 10px;font-size: 1.2em;color: #e26c40;font-weight: bold;" *ngIf="isResult">{{'result' | translate}}</p> -->
+  <ion-searchbar [dir]="langdirection" style="padding:0;margin-bottom: 20px;" placeholder="{{ 'searchproduct' | translate }}" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput"></ion-searchbar>
  
   <ion-row>
     <ion-col col-6 style="box-shadow: 1px 3px 8px 1px lightgrey;border-radius: 7px" *ngFor="let item of offers">
       <p style="text-align:center;margin: 0px;"> <img style="width:100%;height: 100px;" src="{{item.product_image}}"
         onerror="this.onerror=null;this.src='assets/imgs/error2.png';"></p>
-      <p style="margin: 6px;">{{item.product_name}}</p>
+      <p style="text-align: center;">{{item.product_name}}</p>
       
       <ion-row>
-        <ion-col col-6 no-padding>
+        <ion-col col-6>
           <ion-row>
-            <ion-col col-6 no-padding><del style="color:#e26c40; font-size: 12px; text-align: center;"> {{item.price_before}} {{'R.s' | translate}}</del></ion-col>
-            <ion-col col-6 no-padding><p style="color:#e26c40;margin-top: 2px; font-size: 12px; text-align: center;">{{item.price_after}} {{'R.s' | translate}}</p></ion-col>
+            <ion-col col-6><del style="color:#e26c40; font-size: 12px; text-align: center;"> {{item.price_before}} {{'R.s' | translate}}</del></ion-col>
+            <ion-col col-6><p style="color:#e26c40;margin-top: 2px; font-size: 12px; text-align: center;">{{item.price_after}} {{'R.s' | translate}}</p></ion-col>
           </ion-row>
         </ion-col>
         <ion-col col-6>
-          <ion-row>
-            <ion-col col-4 no-padding>
-              <ion-fab style="bottom: 1px;">
-                <button (click)="AddQuantityNum(item.offer_id)" ion-fab color=quantityColor style="width: 16px;height: 19px;"><ion-icon name="add" style="font-size: 1.3rem;"></ion-icon></button>
+          <ion-row>      
+            <ion-col col style="display: flex;justify-content: center;">
+              <ion-fab>
+                <button (click)="AddQuantityNum(item.offer_id)" ion-fab color="quantityColor" style="width: 16px;height: 19px;"><ion-icon name="add" style="font-size: 1.3rem;"></ion-icon></button>
               </ion-fab>
             </ion-col>
-            <ion-col col-4 no-padding style="text-align: center;">
-              <span style="text-align: center;">{{item.count}} </span>
+
+            <ion-col col style="display: flex;justify-content: center;">
+              <span>{{item.count}} </span>
             </ion-col>
-            <ion-col col-4 no-padding>
-              <ion-fab style="bottom: 1px;">
-                <button (click)="minusQuantityNum(item.offer_id)" ion-fab color=quantityColor style="width: 16px;height: 19px;"><ion-icon name="remove" style="font-size: 1.3rem;"></ion-icon></button>
+            
+            <ion-col col style="display: flex;justify-content: center;">
+              <ion-fab>
+                <button (click)="minusQuantityNum(item.offer_id)" ion-fab color="quantityColor" style="width: 16px;height: 19px;"><ion-icon name="remove" style="font-size: 1.3rem;"></ion-icon></button>
               </ion-fab>
             </ion-col>
+
           </ion-row>
         </ion-col>
       </ion-row>
       <p style="text-align:center;margin-top: 0px;">
-        <button ion-button style="background-color:#e26c40;color:white;text-align:center;width: auto;border-radius: 14px;" (click)="addtomenu(item)">{{'addOffer' | translate}}</button>
+        <button ion-button style="background-color:#e26c40;color:white;text-align:center;width: auto;border-radius: 5px;" (click)="addtomenu(item)">{{'addOffer' | translate}}</button>
       </p>
     </ion-col>
   </ion-row>

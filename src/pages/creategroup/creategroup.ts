@@ -50,6 +50,7 @@ groupname:any;
       }
     })
   }
+  
   checkfriend(id)
   {
       this.id=this.id+id

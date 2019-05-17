@@ -56,9 +56,8 @@ export class MyApp {
               
 
     platform.ready().then(() => {
+
       this.event.subscribe("login", () => {
-
-
         this.storage.get("socialType")
         .then(social => {
           console.log("sooocial: "+JSON.stringify(social));
