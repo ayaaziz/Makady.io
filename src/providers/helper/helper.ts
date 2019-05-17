@@ -19,6 +19,7 @@ export class HelperProvider {
               public http: HttpClient,
               public event:Events) {
     console.log('Hello HelperProvider Provider');
+
   }
   parseArabic(str) {
     return Number( str.replace(/[٠١٢٣٤٥٦٧٨٩]/g, function(d) {

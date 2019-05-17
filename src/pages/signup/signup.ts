@@ -40,10 +40,6 @@ export class SignupPage {
               public navParams: NavParams,
               public actionSheetCtrl: ActionSheetController) {
 
-              this.userImageUrl = this.helper.userImagePath + "default_avatar.png";
-              
-              console.log("my image: "+this.userImageUrl);
-
               this.langdirection = this.helper.langdirection;
 
               if(this.helper.langdirection == "ltr") {
@@ -51,6 +47,13 @@ export class SignupPage {
               } else { 
               this.lang="2";
               }
+  }
+
+  ionViewWillEnter() {
+    
+    this.userImageUrl = this.helper.userImagePath + "default_avatar.png";
+              
+    console.log("my image: "+this.userImageUrl);
   }
 
 
