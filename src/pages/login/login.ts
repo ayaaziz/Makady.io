@@ -123,7 +123,8 @@ export class LoginPage {
               "picture": user.picture,
               // "email": user.email
             }
-            this.storage.set("facebook_user",facebookUser)
+            // this.storage.set("facebook_user",facebookUser)
+            this.storage.set("user_info",facebookUser)
             .then(() => {
               this.event.publish("login");
               this.navCtrl.setRoot(TabsPage);
@@ -140,7 +141,6 @@ export class LoginPage {
             error => {
               console.log(error);
             });
-
             //**************//
 
             this.fb.logout().then(() => {
@@ -182,24 +182,25 @@ export class LoginPage {
       }
 
       this.storage.set("socialType",3);
-      this.storage.set("google_user",google_user)
+      // this.storage.set("google_user",google_user)
+      this.storage.set("user_info",google_user)
       .then(() => {
         this.event.publish("login");
         this.navCtrl.setRoot(TabsPage);
       });
       console.log(google_user);
 
-      // //api to save in db and return access_token
-      // this.provider.userLoginWithSocial(user.id,3,user.name,user.email,user.lang,user.imageUrl,0,"0000-00-00",data => {
+      //api to save in db and return access_token
+      this.provider.userLoginWithSocial(user.id,3,user.name,user.email,user.lang,user.imageUrl,0,"0000-00-00",data => {
       
-      //   data = JSON.parse(data);
-      //   console.log(data);
+        data = JSON.parse(data);
+        console.log(data);
 
-      //   this.storage.set("makadyaccess",data.access_token);  
-      // },
-      // error => {
-      //   console.log(error);
-      // });
+        this.storage.set("makadyaccess",data.access_token);  
+      },
+      error => {
+        console.log(error);
+      });
 
       //**************************//
       
@@ -238,24 +239,24 @@ export class LoginPage {
                 "name": user.name,
                 "picture": user.profile_image_url_https,
               }
-              this.storage.set("twitter_user",twitterUser)
+              // this.storage.set("twitter_user",twitterUser)
+              this.storage.set("user_info",twitterUser)
               .then(() => {
                 this.event.publish("login");
                 this.navCtrl.setRoot(TabsPage);
               });
               console.log(twitterUser);
                 
-              
-              // this.loginservice.userLoginWithSocial(user.id, 2, user.name, user.profile_image_url_https, 0, "0000-00-00", (data) => this.socialLoginSuccessCallback(data), (data) => this.socialLoginFailureCallback(data))
-              this.provider.userLoginWithSocial(user.id,2,user.name,"",user.lang,user.profile_image_url_https,0,"0000-00-00",data => {
-                //return with access
-                data = JSON.parse(data);
-                console.log(data);
-                this.storage.set("makadyaccess",data.access_token); 
-              },
-              error => {
-                console.log(error);
-              });
+              // // this.loginservice.userLoginWithSocial(user.id, 2, user.name, user.profile_image_url_https, 0, "0000-00-00", (data) => this.socialLoginSuccessCallback(data), (data) => this.socialLoginFailureCallback(data))
+              // this.provider.userLoginWithSocial(user.id,2,user.name,"",user.lang,user.profile_image_url_https,0,"0000-00-00",data => {
+              //   //return with access
+              //   data = JSON.parse(data);
+              //   console.log(data);
+              //   this.storage.set("makadyaccess",data.access_token); 
+              // },
+              // error => {
+              //   console.log(error);
+              // });
               //****************************************//
 
               this.twitter.logout().then(() => {

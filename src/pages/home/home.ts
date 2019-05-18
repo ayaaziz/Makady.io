@@ -81,7 +81,7 @@ x:number = 10;
       if(val)
       { 
         //alert( val.user.id)
-        this.helper.user_id = val.user.id
+        // this.helper.user_id = val.user.id
       }})
       this.chartdata = []
       this.data = []

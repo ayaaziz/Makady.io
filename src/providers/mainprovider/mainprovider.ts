@@ -1278,14 +1278,19 @@ export class MainproviderProvider {
       //   'social_type':socialType,        
       // }
 
-      let parameter = [{
-        'username':name,
-        'name': name,
-        'email': email,
-        'password':id,
-        'lang':lang,
-        'social_type':socialType,        
-      }]
+      let parameter = {
+        // "social_data": [name,email,id,lang,socialType]
+        "social_data": [
+        {
+          'username':name,
+          'name': name,
+          'email': email,
+          'password':id,
+          'lang':lang,
+          'social_type':socialType,        
+        }
+        ]
+      } 
       
       headers = headers.set('Content-Type', 'application/json');
 

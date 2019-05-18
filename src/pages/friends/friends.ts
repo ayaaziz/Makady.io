@@ -12,9 +12,10 @@ import { BarcodeScanner  } from '@ionic-native/barcode-scanner';
   templateUrl: 'friends.html'
 })
 export class FriendsPage {
-  langdirection:any
-  friends:any=[]
-  groups:any=[]
+  langdirection:any;
+  friends:any=[];
+  groups:any=[];
+  
   constructor(public alertCtrl:AlertController,
               public barcodeScanner:BarcodeScanner,
               public ViewCtrl:ViewController,
