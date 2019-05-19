@@ -21,10 +21,19 @@ export class CreatemenuPage {
   menuid:any
   menuname:any;
 
-  constructor(public ViewCtrl:ViewController,public toastCtrl:ToastController,public storage:Storage,public provider:MainproviderProvider,public platform:Platform,public helper:HelperProvider,public translate:TranslateService,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public ViewCtrl:ViewController,
+    public toastCtrl:ToastController,
+    public storage:Storage,
+    public provider:MainproviderProvider,
+    public platform:Platform,
+    public helper:HelperProvider,
+    public translate:TranslateService,
+    public navCtrl: NavController, 
+    public navParams: NavParams) {
 
         this.page=this.navParams.get("page")
-        this.menuid=this.navParams.get("menuid")
+        this.menuid = this.navParams.get("menuid");
+        // alert(this.menuid);
         this.menuname=this.navParams.get("name")
   }
   
@@ -35,17 +44,32 @@ export class CreatemenuPage {
       this.name = this.menuname;
 
     }
-    this.langdirection=this.helper.langdirection
+    this.langdirection=this.helper.langdirection;
     this.storage.get("makadyaccess").then((val)=>{
      if(val)
      {
-   this.provider.friends(val,(data)=>{
-     console.log(JSON.stringify(data))
-     let parsedData=JSON.parse(data)
-     this.friends=parsedData.friends
-   },(data)=>{
-
-   })
+  
+      if(this.page === "edit") {
+        // alert(this.page);
+        this.provider.getFriendsNotInMenu(this.menuid,val,data => {
+          // let parsedData = JSON.parse(data);
+          console.log(JSON.stringify(data));
+          
+          // this.friends = parsedData.friends;
+         },
+         error => {
+          console.log(error);
+         });
+      } else {
+          this.provider.friends(val,data => { 
+          console.log(JSON.stringify(data));
+          let parsedData = JSON.parse(data);
+          this.friends = parsedData.friends;
+        },error=> {
+          console.log(error);          
+        })
+      }
+       
 
      }
    })

@@ -1348,4 +1348,37 @@ export class MainproviderProvider {
       this.helper.presentToast(this.translate.instant("offline"));
     }
   }
+
+  getFriendsNotInMenu(menuId,access,successCallback, failureCallback) {
+    if(navigator.onLine) {
+      let loader = this.loadingCtrl.create({
+        content: "",
+      });
+      loader.present();
+      let headers = new HttpHeaders();
+
+      let parameter = {
+        "menu_id":menuId
+      }
+    
+      headers = headers.set('Authorization', 'Bearer '+access);
+      let serviceUrl = this.helper.serviceurl + 'FriendsNotInMenu';
+    
+      this.http.post(serviceUrl, parameter ,{ headers: headers })
+        .subscribe(
+          data => {
+            loader.dismiss();
+
+            successCallback(JSON.stringify(data));
+          },
+          err => {
+            loader.dismiss();
+            failureCallback(err);
+            this.helper.presentToast(err.message);            
+          }
+        )
+    } else {
+      this.helper.presentToast(this.translate.instant("offline"));
+    }
+  }
 }

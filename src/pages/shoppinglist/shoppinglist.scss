@@ -1,35 +1,83 @@
-page-shoppinglist {
+// page-shoppinglist {
    
-    ion-header {
-        position: relative !important;
-    }
+//     ion-header {
+//         position: relative !important;
+//     }
 
-    .segment-button.segment-activated {
-        background-color: #cfe4ba !important;
-        color: black !important;
-        border: 0px !important;
-    }
-    .item-inner {
-        border-bottom: 0px !important;
-    }
+//     .segment-button.segment-activated {
+//         background-color: #cfe4ba !important;
+//         color: black !important;
+//         border: 0px !important;
+//     }
+//     .item-inner {
+//         border-bottom: 0px !important;
+//     }
     
-    ion-segment-button.segment-button {
-        background-color: #e9ffd0 !important;
-        color: black !important;
-    } 
+//     ion-segment-button.segment-button {
+//         background-color: #e9ffd0 !important;
+//         color: black !important;
+//     } 
 
-    ion-segment {
-        display:flex;
-        width: 100%;
-        position: relative;
-        width: 100%;
-        z-index: 1;
-        // top: 56px;
+//     ion-segment {
+//         display:flex;
+//         width: 100%;
+//         position: relative;
+//         width: 100%;
+//         z-index: 1;
+//     }
+
+//     .segment-ios .segment-button {
+//         height: 4.2rem !important;
+//         line-height: 4rem !important;
+//     }
+    
+// }
+
+page-shoppinglist {
+    .segment-md .segment-button.activated,
+     .segment-md 
+     .segment-button.segment-activated {
+        border-color: #e46f3f !important;
+        opacity: 1;
     }
-
+    .segment-ios .segment-button.activated, .segment-ios .segment-button.segment-activated {
+        border-color: #e46f3f !important;
+        opacity: 1;
+    }
+    .segment-md .segment-button {
+        color: #e46f3f !important;
+    }
     .segment-ios .segment-button {
-        height: 4.2rem !important;
-        line-height: 4rem !important;
+        color: #e46f3f !important;
     }
-    
+
+    // ion-segment {
+    //     // display:flex;
+    //     width: 100%;
+    //     position: relative;
+    //     width: 100%;
+    //     z-index: 1;
+    //     // margin-top: 50px;
+    // }
+
+    // ion-segment-button .segment-activated {
+    //     background-color: #e9ffd0 !important;
+    // }
+
+    .segment-ios .segment-button.segment-activated,
+    .segment-md .segment-button.activated,
+    .segment-md .segment-button.segment-activated {
+        background-color: #cfe4ba !important;
+        border: none;
+        border-bottom: 2px solid #e46f3f;
+    }
+
+    .segment-ios .segment-button,
+    .segment-md .segment-button,
+    .segment-md .segment-button {
+        border: none;
+        // border-bottom: 2px solid #222;
+        background-color: #ebf7dd !important;
+    }
 }
+
