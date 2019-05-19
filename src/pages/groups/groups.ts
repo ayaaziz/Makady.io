@@ -38,18 +38,18 @@ export class GroupsPage {
       {
        this.username=val1;
       }
-    })
+    });
      this.langdirection=this.helper.langdirection
      this.storage.get("makadyaccess").then((val)=>{
       if(val)
       {
-        this.provider.friends(val,(data)=>{
-          console.log(JSON.stringify(data))
-          let parsedData=JSON.parse(data)
-          this.groups=parsedData.groups
-          console.log("groupsss"+JSON.stringify(this.groups))
+        this.provider.friends(val,data => {
+          console.log(JSON.stringify(data));
+          let parsedData=JSON.parse(data);
+          this.groups=parsedData.groups;
+          console.log("groupsss"+JSON.stringify(this.groups));
       
-        },(data)=>{
+        },error => {
 
         })
       }

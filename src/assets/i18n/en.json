@@ -126,5 +126,7 @@
      "searchfriend":"Search For A Friend",
      "offline":"You are offline, Please Check network and try again",
      "searchproduct":"Search by name or barcode",
-     "picchanged":"Picture Changed Successfully!"
+     "picchanged":"Picture Changed Successfully!",
+     "nogroups":"There is no groups",
+     "nofriends":"There is no friends"
 }
