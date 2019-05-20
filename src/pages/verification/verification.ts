@@ -230,6 +230,7 @@ export class VerificationPage {
   }
 
   resend() {
+  
     this.provider.forgetpass(this.username, (data) => {
       console.log(JSON.stringify(data))
       let dataparsed = JSON.parse(data)
@@ -237,7 +238,7 @@ export class VerificationPage {
       this.emailcode = dataparsed.data.email_code
 
       if(data) {
-        this.helper.presentToast("تم إرسال كود التفعيل إلى بريدك الإلكتروني");
+        this.helper.presentToast("codesent");
         // this.event.publish("reload");
         setTimeout(() => {
           this.inputOne = false;

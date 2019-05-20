@@ -14,7 +14,7 @@ export class ForgetpasswordPage {
 langdirection:any;
 Email:any="";
 emailcode:any;
-username:any;
+// username:any;
 
   constructor(public provider:MainproviderProvider,
               public helper:HelperProvider,
@@ -31,18 +31,18 @@ username:any;
       this.helper.presentToast(this.translate.instant('enteryouremail'));
 
     } else {
-      this.provider.forgetpass(this.Email,(data) => {
-        console.log(JSON.stringify(data));
-        let dataparsed = JSON.parse(data);
-        this.username = dataparsed.data.username;
-        this.emailcode = dataparsed.data.email_code;
-        console.log(this.emailcode);
-        console.log(this.username);
-        this.navCtrl.push(VerificationPage,{"pageType":"forgetPass","username":this.username,"emailcode":this.emailcode});
+      // this.provider.forgetpass(this.Email,(data) => {
+      //   console.log(JSON.stringify(data));
+      //   let dataparsed = JSON.parse(data);
+      //   this.username = dataparsed.data.username;
+      //   this.emailcode = dataparsed.data.email_code;
+      //   console.log(this.emailcode);
+      //   console.log(this.username);
+        this.navCtrl.push(VerificationPage,{"pageType":"forgetPass","username":this.Email,"emailcode":this.emailcode});
 
-      },(error)=>{
-        console.log(error);
-      });
+      // },(error)=>{
+      //   console.log(error);
+      // });
     }
   }
 }

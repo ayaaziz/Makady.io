@@ -55,7 +55,7 @@ export class LoginPage {
   
           let Dataparsed = JSON.parse(data);
           if (Dataparsed.success == false) {
-            this.helper.presentToast('خطأ في اسم المستخدم أو كلمة المرور');
+            this.helper.presentToast('loginerror');
           } else { 
               this.provider.getuser(Dataparsed.access_token, (data) => {
                 let pdata = JSON.parse(data);
@@ -96,9 +96,12 @@ export class LoginPage {
     }
   }
 
+  // //*******************//
   // openVerify() {
   //   this.navCtrl.push(VerificationPage);
   // }
+  // //*******************//
+  
 
   forget() {
     this.navCtrl.push(ForgetpasswordPage);

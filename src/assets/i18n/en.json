@@ -128,5 +128,7 @@
      "searchproduct":"Search by name or barcode",
      "picchanged":"Picture Changed Successfully!",
      "nogroups":"There is no groups",
-     "nofriends":"There is no friends"
+     "nofriends":"There is no friends",
+     "codesent":"Verification code sent to your email",
+     "loginerror":"Incorrect name or password"
 }
