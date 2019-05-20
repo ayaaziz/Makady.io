@@ -1093,7 +1093,7 @@ export class MainproviderProvider {
 
       let parameter = {
         //must add "verified" column in db 
-        'verified':true
+        'verified':1
       }
       let serviceUrl = this.helper.serviceurl + 'updateVerificationStatus';
 

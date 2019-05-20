@@ -43,7 +43,8 @@ defaultImgUrl:string;
               public event:Events) {
 
       this.name=this.navParams.get("name")
-      this.id=this.navParams.get("id")
+      this.id=this.navParams.get("id");
+     
       this.defaultImgUrl = this.helper.productImagePath;
   }
   toggleSection(x){
@@ -159,7 +160,9 @@ defaultImgUrl:string;
   addproduct()
   {
     this.navCtrl.setRoot(TabsPage).then(()=>{
-      this.navCtrl.push(CategoriesPage);
+
+      //aya
+      this.navCtrl.push(CategoriesPage,{"fromUserList":this.id});
     })
   }
 

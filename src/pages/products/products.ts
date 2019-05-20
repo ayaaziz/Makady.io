@@ -11,6 +11,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
   selector: 'page-products',
   templateUrl: 'products.html',
 })
+
 export class ProductsPage {
   langdirection:any;
   categoryId:any;
@@ -20,6 +21,7 @@ export class ProductsPage {
   procount:any;
   categoryName:string;
   productDetails:any;
+  userMenuId:number;
 
   constructor(public alertCtrl:AlertController,
               public toastCtrl:ToastController,
@@ -34,6 +36,8 @@ export class ProductsPage {
               public navParams: NavParams,
               public barcodeScanner:BarcodeScanner) {
 
+
+    this.userMenuId = this.navParams.get("fromUserList");
     this.langdirection=this.helper.langdirection;                    
     this.categoryId = this.navParams.get("id");
     this.categoryName = this.navParams.get("categoryName");
@@ -103,7 +107,51 @@ export class ProductsPage {
     this.categories.push(data);
 
     console.log(JSON.stringify(this.categories));
-    this.doRadio();
+
+
+    if(this.userMenuId) {
+
+      this.storage.get("makadyaccess").then((val) => {
+      
+        if(val) {
+          this.provider.addtomenu(this.userMenuId,this.categories,val,(data) => {
+            console.log(JSON.stringify(data));
+            let DataParsed=JSON.parse(data);
+            if(DataParsed.menu_item.length !=0) {
+              let proid=DataParsed.menu_item[0].id;
+              let quantity= parseInt(DataParsed.menu_item[0].quantity);
+              
+                let alert = this.alertCtrl.create({
+                  message: this.translate.instant('alreadyexist'),
+                  buttons: [
+                    {
+                      text: this.translate.instant('cancel'),
+                      role: 'cancel',
+                      handler: () => {
+                        console.log('Cancel clicked');
+                      }
+                    },
+                    {
+                      text: this.translate.instant('ok'),
+                      handler: () => {
+                        // this.update(proid);
+                        this.update(proid,quantity,this.categories)
+                      }
+                    }
+                  ]
+                });
+                alert.present();
+            
+              } else {
+                  this.helper.presentToast(this.translate.instant('productadded'));
+            }
+          },(error)=>{})
+        }
+      });
+
+    } else {
+      this.doRadio();
+    }
   }
 
    doRadio() {  
@@ -164,20 +212,6 @@ export class ProductsPage {
       }
     });
   }
-
-  // update(id) {
-  //   this.storage.get("makadyaccess").then((val) => {
-  //     if(val) {
-  //       this.provider.updateproduct(id,this.procount,val,(data)=>{
-  //         let ParseData=JSON.parse(data)
-  //         if(ParseData.success==true)
-  //         {
-  //         this.helper.presentToast(this.translate.instant('countincreased'));
-  //         }
-  //       },(error)=>{});
-  //     }
-  //   });
-  // }
 
   update(id, quantity, categories) {
     this.storage.get("makadyaccess").then((val) => {

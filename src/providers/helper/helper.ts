@@ -40,7 +40,10 @@ export class HelperProvider {
 
   //check matching between codes
   verifyAccount(userCode:string,emailcode:string) {   
-    if(userCode === emailcode) {
+    console.log("userCode",userCode);
+    console.log("emailcode",emailcode);
+    
+    if(userCode == emailcode) {
       return true;
     } else {
         return false;

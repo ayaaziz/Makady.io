@@ -77,11 +77,11 @@ export class LoginPage {
                 });
 
                 // if(data.verified) 
-                if(true) { //account verified
-                  this.navCtrl.setRoot(TabsPage);
+                if(false) { //account verified
+                  // this.navCtrl.setRoot(TabsPage);
 
                 } else { //not verified
-                    // this.navCtrl.push(VerificationPage,{"pageType":"AuthPage","username":pdata.user.username,"userId":pdata.user.id,"emailcode":pdata.user.email_code,"access":Dataparsed.access_token});                  
+                    this.navCtrl.push(VerificationPage,{"pageType":"AuthPage","username":pdata.user.username,"userId":pdata.user.id,"emailcode":pdata.user.email_code,"access":Dataparsed.access_token});                  
                 } 
               },
               (error) => {

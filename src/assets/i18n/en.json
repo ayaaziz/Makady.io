@@ -130,5 +130,6 @@
      "nogroups":"There is no groups",
      "nofriends":"There is no friends",
      "codesent":"Verification code sent to your email",
-     "loginerror":"Incorrect name or password"
+     "loginerror":"Incorrect name or password",
+     "menuadd":"add"
 }

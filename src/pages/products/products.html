@@ -50,7 +50,9 @@
 
       <ion-col col-1></ion-col>
 
-      <button class="addBtn" ion-button style="background-color:#e26c40;width: 36px; height: 40px; font-size: 13px;color:white;text-align:center;width: 40px;white-space: normal;border-radius: 14px;" (click)="addtomenu(item)">{{'addTo' | translate}}</button>
+
+      <button class="addBtn" ion-button style="background-color:#e26c40;width: 36px; height: 40px; font-size: 13px;color:white;text-align:center;width: 40px;white-space: normal;border-radius: 14px;" (click)="addtomenu(item)" *ngIf="userMenuId">{{'menuadd' | translate}}</button>      
+      <button class="addBtn" ion-button style="background-color:#e26c40;width: 36px; height: 40px; font-size: 13px;color:white;text-align:center;width: 40px;white-space: normal;border-radius: 14px;" (click)="addtomenu(item)" *ngIf="!userMenuId">{{'addTo' | translate}}</button>
     </ion-row>
   </div>
 </ion-content>

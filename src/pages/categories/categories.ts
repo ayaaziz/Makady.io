@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ViewController } from 'ionic-angular';
+import { NavController, ViewController, NavParams } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { HelperProvider } from '../../providers/helper/helper';
 import { Platform } from 'ionic-angular/platform/platform';
@@ -15,6 +15,7 @@ export class CategoriesPage {
 langdirection:any;
 products:any = [];
 count:any=1;
+userMenuId:number;
 
   constructor(public provider:MainproviderProvider,
               public ViewCtrl:ViewController,
@@ -22,12 +23,15 @@ count:any=1;
               public platform:Platform,
               public helper:HelperProvider,
               public translate:TranslateService,
-              public navCtrl: NavController) {
+              public navCtrl: NavController,
+              public navParam:NavParams) {
 
   }
 
   ionViewDidLoad() {
-    this.langdirection=this.helper.langdirection
+
+    this.userMenuId = this.navParam.get("fromUserList");
+    this.langdirection=this.helper.langdirection;
     this.storage.get("makadyaccess").then((val) => {
       if(val) {
         this.provider.products(val,(data) => {
@@ -41,6 +45,8 @@ count:any=1;
   }
 
   show(id,catName) {
-    this.navCtrl.push(ProductsPage,{id:id,"categoryName":catName});
+    // this.navCtrl.push(ProductsPage,{id:id,"categoryName":catName});
+
+    this.navCtrl.push(ProductsPage,{id:id,"categoryName":catName,"fromUserList":this.userMenuId});    
   }
 }
