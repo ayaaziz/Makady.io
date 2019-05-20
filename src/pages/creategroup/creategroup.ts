@@ -54,7 +54,9 @@ groupname:any;
   checkfriend(id)
   {
       this.id=this.id+id
+
   }
+
   create()
   {
     if(this.id.charAt(0) == ',' )
