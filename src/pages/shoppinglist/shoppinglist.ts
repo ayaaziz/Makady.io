@@ -17,7 +17,7 @@ export class ShoppinglistPage {
   myInput:any="";
   listes:any=[];
   hide:any=true;
-  inlistes:any;
+  inlistes:any = [];
   show:any=true;
   hide1:any=true;
   hide2:any=true;
