@@ -55,7 +55,7 @@ export class LoginPage {
   
           let Dataparsed = JSON.parse(data);
           if (Dataparsed.success == false) {
-            this.helper.presentToast('loginerror');
+            this.helper.presentToast(this.translate.instant('loginerror'));
           } else { 
               this.provider.getuser(Dataparsed.access_token, (data) => {
                 let pdata = JSON.parse(data);

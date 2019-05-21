@@ -50,7 +50,11 @@ page-home {
     }
 
     round-progress {
-        background: url('../../assets/imgs/camera.png') no-repeat center;
+        // background: url('../assets/imgs/camera.png') no-repeat center;
+        background-image: url('../assets/imgs/camera.png');
+        background-repeat: no-repeat;
+        background-position: center;
+
         overflow: hidden !important;
         width: 45px !important;
         height: 45px !important;

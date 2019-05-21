@@ -56,7 +56,7 @@
 
     <ion-row *ngFor="let item of data; let i = index;">
       <ion-col col-3>
-        <round-progress 
+        <round-progress style="background-image: url({{item.image}})"
           [current]="item.percentage" [color]="item.color" 
           [radius]="45" [stroke]="7" [max]="100">
         </round-progress>
@@ -65,14 +65,5 @@
       <ion-col col-3><p style="text-align: center;">{{item.price}} {{'R.s' | translate}} </p></ion-col>
     </ion-row>
   </div>
-
-
-<!--progress ring-->
- 
-  <!-- <h3>Semi Circle Example</h3>
-  <round-progress [semicircle]="true" 
-  [current]="current" [color]="'#4801b8'" 
-  [radius]="45" [stroke]="5" [max]="max"> -->
-<!-- </round-progress> -->
 
 </ion-content>

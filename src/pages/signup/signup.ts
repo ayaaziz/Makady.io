@@ -159,16 +159,19 @@ export class SignupPage {
           this.storage.set("user_info",data)
           .then(() => {
             this.event.publish("login");
+
+            //delete this line later
+            this.navCtrl.setRoot(TabsPage);
           });
 
            //********************************************//           
 
-        //cal api to return verification code to the user email and return with code          
+        // //cal api to return verification code to the user email and return with code          
         // this.provider.forgetpass(this.username,data => {
         //   if(data) {
         //     console.log(JSON.stringify(data));
         //     let dataparsed = JSON.parse(data);
-            // this.navCtrl.push(VerificationPage,{"pageType":"AuthPage","username": dataparsed.data.username,"userId":data.user.id,"emailcode":dataparsed.data.email_code,"access":parsedData.access_token});
+        //     this.navCtrl.push(VerificationPage,{"pageType":"AuthPage","username": dataparsed.data.username,"userId":data.user.id,"emailcode":dataparsed.data.email_code,"access":parsedData.access_token});
         //   }
         // },error => {});
 
