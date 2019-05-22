@@ -30,7 +30,7 @@ export class HelperProvider {
   {
     let toast = this.toastCtrl.create({
       message: msg,
-      duration: 4000,
+      duration: 5000,
       position: 'top',
       showCloseButton: true,
       closeButtonText: "OK",

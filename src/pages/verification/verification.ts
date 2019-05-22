@@ -35,6 +35,7 @@ export class VerificationPage {
   email:string;
   access:string;
   pageType:string;
+  isRegister:boolean;
 
   constructor(public provider: MainproviderProvider,
               public helper: HelperProvider, 
@@ -49,12 +50,17 @@ export class VerificationPage {
               this.emailcode = this.navParams.get("emailcode");
               this.userId = this.navParams.get("userId");
               // this.email = this.navParams.get("email");
-              this.access = this.navParams.get("access");   
+              // this.access = this.navParams.get("access");   
               this.pageType = this.navParams.get("pageType");
+              this.isRegister = this.navParams.get("register");
   }
 
   ionViewDidLoad() {
     this.langdirection = this.helper.langdirection;
+
+    if(this.isRegister) {
+      this.helper.presentToast(this.translate.instant("codesent"));
+    }
  
     setTimeout(() => {
       this.inputOne = false;
@@ -206,7 +212,7 @@ export class VerificationPage {
           },500);
           this.input1 = this.input2 = this.input3 = this.input4 = "";
         }
-        
+
     } else {
       this.input3 = " ";
     }

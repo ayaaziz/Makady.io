@@ -50,12 +50,12 @@ export class CreatemenuPage {
      {
   
       if(this.page === "edit") {
-        // alert(this.page);
+        
         this.provider.getFriendsNotInMenu(this.menuid,val,data => {
-          // let parsedData = JSON.parse(data);
+          data = JSON.parse(data);
           console.log(JSON.stringify(data));
           
-          // this.friends = parsedData.friends;
+          this.friends = data.friend;
          },
          error => {
           console.log(error);

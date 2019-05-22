@@ -141,7 +141,12 @@ export class SignupPage {
        if(parsedData.success==false) {
 
          if(parsedData.errors.username) {
-           this.helper.presentToast(this.translate.instant("username"));
+           console.log("username error: "+parsedData.errors.username);
+           if(parsedData.errors.username == "The username must be at least 4 characters.") {
+            this.helper.presentToast(this.translate.instant("The username must be at least 4 characters"));
+           } else {
+             this.helper.presentToast(this.translate.instant("The username has already been taken"));
+           }
 
          } else if(parsedData.errors.email_exist) {
            this.helper.presentToast(this.translate.instant("emailExist"));
@@ -159,9 +164,6 @@ export class SignupPage {
           this.storage.set("user_info",data)
           .then(() => {
             this.event.publish("login");
-
-            ////delete this line later
-            // this.navCtrl.setRoot(TabsPage);
           });
        
 
@@ -170,7 +172,7 @@ export class SignupPage {
             if(data) {
               data = JSON.parse(data);
               console.log("registeration data: "+JSON.stringify(data));
-              this.navCtrl.push(VerificationPage,{"pageType":"AuthPage","username": data.data.username,"userId":data.data.id,"emailcode":data.data.email_code});
+              this.navCtrl.push(VerificationPage,{"pageType":"AuthPage","username": data.data.username,"userId":data.data.id,"emailcode":data.data.email_code,"register":true});
             }
           },error => {});
 

@@ -40,13 +40,31 @@ groupname:any;
     this.storage.get("makadyaccess").then((val)=> {
 
     if(val) {
+
+      if(this.page === "edit") {
+        
+        this.provider.getFriendsNotInGroup(this.groupid,val,data => {
+          data = JSON.parse(data);
+          console.log(JSON.stringify(data));
+          
+          this.friends = data.friend;
+         },
+         error => {
+          console.log(error);
+         });
+
+
+      } else {
+
         this.provider.friends(val,(data)=>{
           console.log(JSON.stringify(data))
           let parsedData=JSON.parse(data)
           this.friends=parsedData.friends
         },(data)=>{
 
-        })
+        });
+
+        }
       }
     })
   }
