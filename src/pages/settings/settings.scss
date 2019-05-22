@@ -18,7 +18,29 @@ page-settings {
         background: #fff;
    }
    .scaleClass{
-    transform: scale(-1,1);
-}
+        transform: scale(-1,1);
+    }
+
+    ul {
+        padding-left: 0;
+        text-align: center;
+
+        li {
+            display: inline-block;
+            margin-right: 8px;
+    
+            a {
+                text-decoration: none;
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
 
 }

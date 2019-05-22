@@ -169,18 +169,22 @@ export class VerificationPage {
       let result = this.helper.verifyAccount(this.ver,this.emailcode);
         spinner.dismiss();
         if(result) { //matched
-
+    
           if(this.pageType === "AuthPage") {  //from login or signup page
-            this.navCtrl.setRoot(TabsPage);
-            // //make this user verified 
-            // this.provider.setVerified(this.access, data => {
-            //   alert(data);
-            //   if(data) {
-            //     this.navCtrl.setRoot(TabsPage);
-            //   }
-            // },error => {
-            //   console.log(error);
-            // });
+            //make this user verified 
+            this.storage.get("makadyaccess").then((val)=>{
+              if(val)
+              { 
+                this.provider.setVerified(val, data => {
+                  alert(data);
+                  if(data) {
+                    this.navCtrl.setRoot(TabsPage);
+                  }
+                },error => {
+                  console.log(error);
+                });
+              }
+            });
           
           } else { //from forgetpassword page
             
@@ -188,15 +192,9 @@ export class VerificationPage {
             this.show = false;
             this.hide = true;
           }
-         
-
-
-          //************************************************** */
-
-          
 
         } else { //not matched
-          this.helper.presentToast("الكود خاطئ, يرجى إعادة المحاولة");
+          this.helper.presentToast(this.translate.instant("notMatchedCode"));
           // this.event.publish("reload");
           
           setTimeout(() => {
@@ -208,7 +206,7 @@ export class VerificationPage {
           },500);
           this.input1 = this.input2 = this.input3 = this.input4 = "";
         }
-      //*********************************************************************//
+        
     } else {
       this.input3 = " ";
     }
@@ -238,7 +236,7 @@ export class VerificationPage {
       this.emailcode = dataparsed.data.email_code
 
       if(data) {
-        this.helper.presentToast("codesent");
+        this.helper.presentToast(this.translate.instant("codesent"));
         // this.event.publish("reload");
         setTimeout(() => {
           this.inputOne = false;

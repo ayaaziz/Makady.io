@@ -76,12 +76,13 @@ export class LoginPage {
                   this.event.publish("login");
                 });
 
-                // if(data.verified) 
-                if(true) { //account verified
+                if(pdata.user.verified) { //account verified
+                  console.log("account verified");
                   this.navCtrl.setRoot(TabsPage);
 
                 } else { //not verified
-                    // this.navCtrl.push(VerificationPage,{"pageType":"AuthPage","username":pdata.user.username,"userId":pdata.user.id,"emailcode":pdata.user.email_code,"access":Dataparsed.access_token});                  
+                    console.log("account not verified");                  
+                    this.navCtrl.push(VerificationPage,{"pageType":"AuthPage","username":pdata.user.username,"userId":pdata.user.id,"emailcode":pdata.user.email_code});                  
                 } 
               },
               (error) => {

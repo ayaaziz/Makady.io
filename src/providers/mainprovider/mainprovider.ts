@@ -1097,23 +1097,22 @@ export class MainproviderProvider {
       }
       let serviceUrl = this.helper.serviceurl + 'updateVerificationStatus';
 
-      // this.http.post(serviceUrl, parameter, { headers: headers })
-      // .subscribe(
-      //   data => {
-      //     spinner.dismiss();
+      this.http.post(serviceUrl, parameter, { headers: headers })
+      .subscribe(
+        data => {
+          spinner.dismiss();
 
-      //     successCallback(JSON.stringify(data))
-      //   },
-      //   err => {
-      //     spinner.dismiss();
+          successCallback(JSON.stringify(data))
+        },
+        err => {
+          spinner.dismiss();
 
-      //     failureCallback(err);
-      //    console.log(err.message); 
-      //   });
-
-      
-      //test
-      return true;
+          failureCallback(err);
+         console.log(err.message); 
+        });
+        
+      // //test
+      // return true;
 
     } else {
       this.helper.presentToast(this.translate.instant("offline"));

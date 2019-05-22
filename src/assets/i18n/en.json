@@ -131,5 +131,6 @@
      "nofriends":"There is no friends",
      "codesent":"Verification code sent to your email",
      "loginerror":"Incorrect name or password",
-     "menuadd":"add"
+     "menuadd":"add",
+     "notMatchedCode":"Incorrect code, Please try again"
 }
