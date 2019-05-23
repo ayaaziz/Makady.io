@@ -554,7 +554,7 @@ export class MainproviderProvider {
       loader.present();
       let headers = new HttpHeaders();
       let parameter = {
-        'name':name
+        'username':name
       }
       headers = headers.set('Authorization', 'Bearer '+access);
       let serviceUrl = this.helper.serviceurl + 'searchGroup';
