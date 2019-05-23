@@ -87,7 +87,7 @@ else {
             parsedData.data.forEach(group => {
               let names = { 
                 "group_name": group.name_en,
-                "members":group.profile_pic 
+                // "members":group.profile_pic 
               }
 
               newGroups.push(names);
