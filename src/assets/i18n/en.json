@@ -137,5 +137,6 @@
      "mustinsertPurchased":"You must insert the purchased quantity!",
      "mustinsertprice":"You must insert price!",
      "purchasedmustnotmorerequired":"Purchased quantity must be less than or equal to the required quantity!",
-     "purchaseSaved":"Purchase saved successfully"
+     "purchaseSaved":"Purchase saved successfully",
+     "friendrequestsent":"Friend Request Sent"
 }

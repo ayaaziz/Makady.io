@@ -142,6 +142,7 @@
      "mustinsertPurchased":"يجب إدخال الكمية التي تم شراؤها",
      "mustinsertprice":"يجب إدخال السعر",
      "purchasedmustnotmorerequired":"يجب ألا تكون الكمية التي تم شراؤها أكبر من الكمية المطلوبة",
-     "purchaseSaved":"تم حفظ الشراء بنجاح"
+     "purchaseSaved":"تم حفظ الشراء بنجاح",
+     "friendrequestsent":"تم إرسال طلب الصداقة"
 
 }
