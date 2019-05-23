@@ -106,18 +106,16 @@ defaultImgUrl:string;
   }
   save(id,i,j)
   {
-
-    alert(this.helper.user_id);
     this.storage.get("makadyaccess").then((val)=>{
       if(val)
       {
        // alert(i +" "+j)
         if(!this.services[i].products[j].quant_count){
-          this.helper.presentToast("mustinsertPurchased");
+          this.helper.presentToast(this.translate.instant("mustinsertPurchased"));
           return;
         }
         if(!this.services[i].products[j].price){
-          this.helper.presentToast("mustinsertprice");
+          this.helper.presentToast(this.translate.instant("mustinsertprice"));
           return
         }
         let quant_count = this.helper.parseArabic(this.services[i].products[j].quant_count)
@@ -131,7 +129,7 @@ defaultImgUrl:string;
           return
         }
         if(quant_count > this.services[i].products[j].require_quan){
-          this.helper.presentToast("purchasedmustnotmorerequired");
+          this.helper.presentToast(this.translate.instant("purchasedmustnotmorerequired"));
           return
         }
 

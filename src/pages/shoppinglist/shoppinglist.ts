@@ -35,7 +35,7 @@ export class ShoppinglistPage {
 
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.hide2=false;
     this.hide1=true;
     this.langdirection = this.helper.langdirection;
