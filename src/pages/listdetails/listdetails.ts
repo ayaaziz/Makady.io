@@ -106,44 +106,46 @@ defaultImgUrl:string;
   }
   save(id,i,j)
   {
+
+    alert(this.helper.user_id);
     this.storage.get("makadyaccess").then((val)=>{
       if(val)
       {
        // alert(i +" "+j)
         if(!this.services[i].products[j].quant_count){
-          this.helper.presentToast("يجب إخال الكمية التي تم شراؤها")
+          this.helper.presentToast("mustinsertPurchased");
           return;
         }
         if(!this.services[i].products[j].price){
-          this.helper.presentToast("يجب إدخال السعر")
+          this.helper.presentToast("mustinsertprice");
           return
         }
         let quant_count = this.helper.parseArabic(this.services[i].products[j].quant_count)
         let price = this.helper.parseArabic(this.services[i].products[j].price)
         if(quant_count <= 0){
-          this.helper.presentToast("يجب إخال الكمية التي تم شراؤها")
+          this.helper.presentToast(this.translate.instant("mustinsertPurchased"));
           return;
         }
         if(price <= 0){
-          this.helper.presentToast("يجب إدخال السعر")
+          this.helper.presentToast(this.translate.instant("mustinsertprice"));
           return
         }
         if(quant_count > this.services[i].products[j].require_quan){
-          this.helper.presentToast("يجب ألا تكون الكمية التي تم شراؤها أكبر من الكمية المطلوبة")
+          this.helper.presentToast("purchasedmustnotmorerequired");
           return
         }
 
     this.provider.addproduct(id,this.helper.user_id,quant_count,price,val,(data) => {
       
      if(data.success){
-       this.helper.presentToast("تم حفظ الشراء بنجاح")
+       this.helper.presentToast(this.translate.instant("purchaseSaved"));
        this.price= ''
        this.buy = ''
        this.ionViewDidEnter();
  
      }
      else{
-       this.helper.presentToast(data.errors)
+       console.log(JSON.stringify(data.errors));
      }
     }
     ,(data)=>{

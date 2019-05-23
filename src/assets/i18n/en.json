@@ -75,7 +75,7 @@
      "created":"Group Created Successfully  ",
      "yourlist":"Your List",
      "invited":"List You Invited in",
-     "categories":"No. of Categories: ",
+     "categories":"No.of Categories: ",
      "bought":"purchased : ",
      "takepic":"Take A Picture",
      "choose":"Choose A Picture",
@@ -130,7 +130,12 @@
      "nogroups":"There is no groups",
      "nofriends":"There is no friends",
      "codesent":"Verification code sent to your email",
+     "entercodesent":"Please, Enter verification code that has been sent to your email",     
      "loginerror":"Incorrect name or password",
      "menuadd":"add",
-     "notMatchedCode":"Incorrect code, Please try again"
+     "notMatchedCode":"Incorrect code, Please try again",
+     "mustinsertPurchased":"You must insert the purchased quantity!",
+     "mustinsertprice":"You must insert price!",
+     "purchasedmustnotmorerequired":"Purchased quantity must be less than or equal to the required quantity!",
+     "purchaseSaved":"Purchase saved successfully"
 }

@@ -172,7 +172,7 @@ export class SignupPage {
             if(data) {
               data = JSON.parse(data);
               console.log("registeration data: "+JSON.stringify(data));
-              this.navCtrl.push(VerificationPage,{"pageType":"AuthPage","username": data.data.username,"userId":data.data.id,"emailcode":data.data.email_code,"register":true});
+              this.navCtrl.push(VerificationPage,{"pageType":"AuthPage","username": data.data.username,"userId":data.data.id,"emailcode":data.data.email_code});
             }
           },error => {});
 

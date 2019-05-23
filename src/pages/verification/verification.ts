@@ -58,9 +58,7 @@ export class VerificationPage {
   ionViewDidLoad() {
     this.langdirection = this.helper.langdirection;
 
-    if(this.isRegister) {
-      this.helper.presentToast(this.translate.instant("codesent"));
-    }
+    this.helper.presentToast(this.translate.instant("entercodesent")); 
  
     setTimeout(() => {
       this.inputOne = false;

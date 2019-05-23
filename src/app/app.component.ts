@@ -70,6 +70,7 @@ export class MyApp {
                 this.username = val.user.username;
                 this.photo = this.helper.userImagePath + val.user.profile_pic;
                 console.log(this.photo);
+                this.helper.user_id = val.user.id;
               }
             });
           } else if(social == 1 || social == 2 || social == 3) {

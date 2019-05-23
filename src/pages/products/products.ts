@@ -117,33 +117,36 @@ export class ProductsPage {
           this.provider.addtomenu(this.userMenuId,this.categories,val,(data) => {
             console.log(JSON.stringify(data));
             let DataParsed=JSON.parse(data);
-            if(DataParsed.menu_item.length !=0) {
-              let proid=DataParsed.menu_item[0].id;
-              let quantity= parseInt(DataParsed.menu_item[0].quantity);
-              
-                let alert = this.alertCtrl.create({
-                  message: this.translate.instant('alreadyexist'),
-                  buttons: [
-                    {
-                      text: this.translate.instant('cancel'),
-                      role: 'cancel',
-                      handler: () => {
-                        console.log('Cancel clicked');
+            console.log("DataParsed: "+JSON.stringify(DataParsed));
+            if(DataParsed.menu_item) {
+              if(DataParsed.menu_item.length !=0) {
+                console.log("enterrrrrr");
+                let proid=DataParsed.menu_item[0].id;
+                let quantity= parseInt(DataParsed.menu_item[0].quantity);
+                
+                  let alert = this.alertCtrl.create({
+                    message: this.translate.instant('alreadyexist'),
+                    buttons: [
+                      {
+                        text: this.translate.instant('cancel'),
+                        role: 'cancel',
+                        handler: () => {
+                          console.log('Cancel clicked');
+                        }
+                      },
+                      {
+                        text: this.translate.instant('ok'),
+                        handler: () => {
+                          // this.update(proid);
+                          this.update(proid,quantity,this.categories)
+                        }
                       }
-                    },
-                    {
-                      text: this.translate.instant('ok'),
-                      handler: () => {
-                        // this.update(proid);
-                        this.update(proid,quantity,this.categories)
-                      }
-                    }
-                  ]
-                });
-                alert.present();
-            
-              } else {
-                  this.helper.presentToast(this.translate.instant('productadded'));
+                    ]
+                  });
+                  alert.present();
+                } 
+            } else {
+                this.helper.presentToast(this.translate.instant('productadded'));
             }
           },(error)=>{})
         }
@@ -176,6 +179,7 @@ export class ProductsPage {
               this.provider.addtomenu(data,this.categories,val,(data) => {
                 console.log(JSON.stringify(data));
                 let DataParsed=JSON.parse(data);
+                console.log("DataParsed: "+JSON.stringify(DataParsed));
                 if(DataParsed.success==false && DataParsed.menu_item.length !=0) {
                   let proid=DataParsed.menu_item[0].id;
                   let quantity= parseInt(DataParsed.menu_item[0].quantity);

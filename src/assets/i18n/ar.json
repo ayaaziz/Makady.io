@@ -133,10 +133,15 @@
      "nogroups":"لا يوجد مجموعات",
      "nofriends":"لا يوجد أصدقاء",
      "codesent":"تم إرسال كود التفعيل إلى بريدك الإلكتروني",
+     "entercodesent":"من فضلك أدخل كود التفعيل الذي تم إرساله إلى بريدك الإلكتروني",     
      "loginerror":"خطأ في اسم المستخدم أو كلمة المرور",
      "menuadd":"إضافة",
      "notMatchedCode":"الكود خاطئ, يرجى إعادة المحاولة",
      "The username must be at least 4 characters":"يجب ألا يقل اسم المستخدم عن ٤ حروف",
-     "The username has already been taken":"اسم المستخدم مستخدم بالفعل"
+     "The username has already been taken":"اسم المستخدم مستخدم بالفعل",
+     "mustinsertPurchased":"يجب إدخال الكمية التي تم شراؤها",
+     "mustinsertprice":"يجب إدخال السعر",
+     "purchasedmustnotmorerequired":"يجب ألا تكون الكمية التي تم شراؤها أكبر من الكمية المطلوبة",
+     "purchaseSaved":"تم حفظ الشراء بنجاح"
 
 }
