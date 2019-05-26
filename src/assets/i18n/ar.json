@@ -143,6 +143,7 @@
      "mustinsertprice":"يجب إدخال السعر",
      "purchasedmustnotmorerequired":"يجب ألا تكون الكمية التي تم شراؤها أكبر من الكمية المطلوبة",
      "purchaseSaved":"تم حفظ الشراء بنجاح",
-     "friendrequestsent":"تم إرسال طلب الصداقة"
+     "friendrequestsent":"تم إرسال طلب الصداقة",
+     "nofriendsToAdd":"لا يوجدأصدقاء"
 
 }

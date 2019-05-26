@@ -80,6 +80,8 @@ export class MyApp {
                     this.userLoged = true;
                     this.username = socialUser.name;
                     this.photo = socialUser.picture;
+
+                    console.log(this.username + " - " + this.photo);
                   }
               });    
           } 

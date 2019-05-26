@@ -1260,55 +1260,55 @@ export class MainproviderProvider {
    //api name: "social_login"
    userLoginWithSocial(id,socialType,name,email,lang,profileImageUrl,gender,phone,successCallback,failureCallback) {
 
-    if(navigator.onLine) {
-      let loader = this.loadingCtrl.create({
-        content: "",
-      });
-      loader.present();
-      let headers = new HttpHeaders();
-      
-      // let parameter = {
-      //   'username':name,
-      //   'name': name,
-      //   'email': email,
-      //   'password':id,
-      //   'lang':lang,
-      //   'social_type':socialType,        
-      // }
+      if(navigator.onLine) {
+        let loader = this.loadingCtrl.create({
+          content: "",
+        });
+        loader.present();
+        let headers = new HttpHeaders();
+        
+        // let parameter = {
+        //   'username':name,
+        //   'name': name,
+        //   'email': email,
+        //   'password':id,
+        //   'lang':lang,
+        //   'social_type':socialType,        
+        // }
 
-      let parameter = {
-        // "social_data": [name,email,id,lang,socialType]
-        "social_data": [
-        {
-          'username':name,
-          'name': name,
-          'email': email,
-          'password':id,
-          'lang':lang,
-          'social_type':socialType,        
-        }
-        ]
-      } 
-      
-      headers = headers.set('Content-Type', 'application/json');
+        let parameter = {
+          // "social_data": [name,email,id,lang,socialType]
+          "social_data": [
+          {
+            'username':name,
+            'name': name,
+            'email': email,
+            'password':id,
+            'lang':lang,
+            'social_type':socialType,        
+          }
+          ]
+        } 
+        
+        headers = headers.set('Content-Type', 'application/json');
 
-      let serviceUrl = this.helper.serviceurl + 'social_login';
+        let serviceUrl = this.helper.serviceurl + 'social_login';
 
-      this.http.post(serviceUrl,parameter, { headers: headers })
-      .subscribe(
-        data => {
-          loader.dismiss();
-          successCallback(JSON.stringify(data));
-        },
-        err => {
-          loader.dismiss();
-          failureCallback(err);
-          console.log(err.message);      
-        }
-      )
-    } else {
-      this.helper.presentToast(this.translate.instant("offline"));
-    }
+        this.http.post(serviceUrl,parameter, { headers: headers })
+        .subscribe(
+          data => {
+            loader.dismiss();
+            successCallback(JSON.stringify(data));
+          },
+          err => {
+            loader.dismiss();
+            failureCallback(err);
+            console.log(err.message);      
+          }
+        )
+      } else {
+        this.helper.presentToast(this.translate.instant("offline"));
+      }
   }
 
 

@@ -138,5 +138,6 @@
      "mustinsertprice":"You must insert price!",
      "purchasedmustnotmorerequired":"Purchased quantity must be less than or equal to the required quantity!",
      "purchaseSaved":"Purchase saved successfully",
-     "friendrequestsent":"Friend Request Sent"
+     "friendrequestsent":"Friend Request Sent",
+     "nofriendsToAdd":"No friends to Add"
 }

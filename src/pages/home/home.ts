@@ -77,12 +77,12 @@ x:number = 10;
     //   this.requestsNo--;
     // });
 
-    this.storage.get("user_info").then((val)=>{
-      if(val)
-      { 
-        //alert( val.user.id)
-        // this.helper.user_id = val.user.id
-      }})
+    // this.storage.get("user_info").then((val)=>{
+    //   if(val)
+    //   { 
+    //     //alert( val.user.id)
+    //     // this.helper.user_id = val.user.id
+    //   }})
       this.chartdata = []
       this.data = []
       this.price = 0

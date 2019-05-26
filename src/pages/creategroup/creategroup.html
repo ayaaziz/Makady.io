@@ -25,6 +25,11 @@
       <p style="font-size: 18px; color: #e26c40;">{{'choosefriends' | translate}}</p>      
     </ion-col>
   </ion-row>
+  <ion-row *ngIf="friends.length === 0">
+    <ion-col>
+      <p style="text-align: center;color:#3d3d3d;font-size: 1.1em;font-weight: bold;">{{'nofriendsToAdd'| translate}}</p>      
+    </ion-col>
+  </ion-row>
   <ion-row *ngFor="let item of friends">
     <ion-col col-3>
       <img class="circle-pic" src="{{item.profile_pic}}"
