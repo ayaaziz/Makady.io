@@ -54,6 +54,13 @@ export class LoginPage {
         this.provider.login(this.username, this.Password, "fdgdgdg66553rhask", (data) => {
   
           let Dataparsed = JSON.parse(data);
+
+          this.storage.set("makadyaccess", Dataparsed.access_token);
+          //set token in localstorage
+          localStorage.setItem('kdkvfkhggssomakady', Dataparsed.access_token);
+          //set refreshtoken in localstorage
+          localStorage.setItem('reefdfdfvcvcmakady',Dataparsed.refresh_token);
+
           if (Dataparsed.success == false) {
             this.helper.presentToast(this.translate.instant('loginerror'));
           } else { 
@@ -65,7 +72,7 @@ export class LoginPage {
                 // if (this.remember == true) {
                   this.storage.set("Makadyusername", "true");
                 // }
-                this.storage.set("makadyaccess", Dataparsed.access_token);
+
                 this.helper.accesstoken = Dataparsed.access_token;
                 this.storage.set("Makadyuser_name", this.username);
 

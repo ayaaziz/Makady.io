@@ -44,6 +44,11 @@ import { SettingsProvider } from '../providers/settings/settings';
 import {RoundProgressModule} from 'angular-svg-round-progressbar';
 import { Push } from '@ionic-native/push';
 
+//refresh token
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RefreshTokenInterceptor } from '../providers/refresh-token.interceptor';
+
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -120,6 +125,7 @@ export function createTranslateLoader(http: HttpClient) {
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    {provide: HTTP_INTERCEPTORS, useClass: RefreshTokenInterceptor, multi: true },
     MainproviderProvider,
     HelperProvider,
     GooglePlus,

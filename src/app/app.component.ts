@@ -307,23 +307,24 @@ export class MyApp {
   }
 
   logout() {
-    // this.storage.get("makadyaccess").then((val)=> {
-    //   if(val) {
-        // this.provider.logout(1,val,(data) => {
-        this.provider.logout(1,(data) => {          
+    this.storage.get("makadyaccess").then((val)=> {
+      if(val) {
+        this.provider.logout(1,val,(data) => {       
           this.userLoged = false;
           this.storage.remove("Makadyusername");
           this.storage.remove("Mlanguage");
 
           this.storage.remove("Makadyuser_name");
           this.storage.remove("makadyaccess");
+          localStorage.clear();
+          
           this.storage.remove("user_info");
           this.navctrl.push(LoginPage);
         
           console.log(JSON.stringify(data))
         },(data)=>{})
-    //   }
-    // });
+      }
+    });
   }
   
   getimg() {

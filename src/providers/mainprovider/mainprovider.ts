@@ -167,39 +167,7 @@ export class MainproviderProvider {
     }
   }
 
-  // logout(search,access,successCallback, failureCallback) {
-
-  //   if(navigator.onLine) {
-  //     let loader = this.loadingCtrl.create({
-  //       content: "",
-  //     });
-  //     loader.present();
-  //     let headers = new HttpHeaders();
-  //     let parameter = {
-  //       'search':search,
-      
-  //     }
-  //     headers = headers.set('Authorization', 'Bearer '+access);
-  //     let serviceUrl = this.helper.serviceurl + 'logoutDevice';
-  //     //
-  //     this.http.post(serviceUrl, parameter, { headers: headers })
-  //       .subscribe(
-  //         data => {
-  //           loader.dismiss();
-  //           successCallback(JSON.stringify(data));
-  //         },
-  //         err => {
-  //           loader.dismiss();
-  //           failureCallback(err);        
-  //           console.log(err.message);     
-  //         }
-  //       )
-  //   } else {
-  //     this.helper.presentToast(this.translate.instant("offline"));
-  //   }
-  // }
-
-  logout(search,successCallback, failureCallback) {
+  logout(search,access,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -211,10 +179,10 @@ export class MainproviderProvider {
         'search':search,
       
       }
-      // headers = headers.set('Au);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'logoutDevice';
       //
-      this.http.post(serviceUrl, parameter)
+      this.http.post(serviceUrl, parameter, { headers: headers })
         .subscribe(
           data => {
             loader.dismiss();
@@ -230,6 +198,7 @@ export class MainproviderProvider {
       this.helper.presentToast(this.translate.instant("offline"));
     }
   }
+
 
 
   // changelang(lang,access,successCallback, failureCallback) {
@@ -272,7 +241,7 @@ export class MainproviderProvider {
         'current_password':pass,
       
       }
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'checkPassword';
       //
       this.http.post(serviceUrl, parameter, { headers: headers })
@@ -305,7 +274,7 @@ export class MainproviderProvider {
         'password_confirmation':confirm
       
       }
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'changePassword';
       //
       this.http.post(serviceUrl, parameter, { headers: headers })
@@ -336,7 +305,7 @@ export class MainproviderProvider {
       loader.present();
       let headers = new HttpHeaders();
     
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'getUser';
       //
       this.http.get(serviceUrl, { headers: headers })
@@ -364,7 +333,7 @@ export class MainproviderProvider {
       loader.present();
       let headers = new HttpHeaders();
     
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'categories';
       //
       this.http.get(serviceUrl, { headers: headers })
@@ -398,7 +367,7 @@ export class MainproviderProvider {
         'category_id':id,
         'search':search
       }
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'getCategoryProducts';
       //
       this.http.post(serviceUrl,parameter, { headers: headers })
@@ -429,7 +398,7 @@ export class MainproviderProvider {
     let parameter={
       'search':search
     }
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'offers';
       //
       this.http.post(serviceUrl,parameter, { headers: headers })
@@ -460,7 +429,7 @@ export class MainproviderProvider {
       loader.present();
       let headers = new HttpHeaders();
     
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'friends';
     
       this.http.get(serviceUrl, { headers: headers })
@@ -492,7 +461,7 @@ export class MainproviderProvider {
       let parameter={
         'user_id':id
       }
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'deleteFriend';
       //
       this.http.post(serviceUrl, parameter,{ headers: headers })
@@ -524,7 +493,7 @@ export class MainproviderProvider {
       let parameter={
         'user_id':id
       }
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'addFriend';
     
       this.http.post(serviceUrl, parameter,{ headers: headers })
@@ -556,7 +525,7 @@ export class MainproviderProvider {
       let parameter={
         'group_id':id
       }
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'deleteGroup';
   
       this.http.post(serviceUrl, parameter,{ headers: headers })
@@ -588,7 +557,7 @@ export class MainproviderProvider {
       let parameter = {
         'username':name
       }
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'searchGroup';
     
       this.http.post(serviceUrl, parameter,{ headers: headers })
@@ -622,7 +591,7 @@ export class MainproviderProvider {
         'name':name,
         'users_ids':ids
       }
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'createGroup';
       //
       this.http.post(serviceUrl, parameter,{ headers: headers })
@@ -659,7 +628,7 @@ export class MainproviderProvider {
       }
       console.log(access)
       console.log(parameter)
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'editGroup';
       //
       this.http.post(serviceUrl, parameter,{ headers: headers })
@@ -693,7 +662,7 @@ export class MainproviderProvider {
         'search':search,
       
       }
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'menus';
       //
       this.http.post(serviceUrl, parameter,{ headers: headers })
@@ -726,7 +695,7 @@ export class MainproviderProvider {
       let parameter={
         'menu_id':id
       }
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'deleteMenu';
       //
       this.http.post(serviceUrl, parameter,{ headers: headers })
@@ -761,7 +730,7 @@ export class MainproviderProvider {
         'products':JSON.stringify(products)
       }
       console.log(parameter)
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'addMenuProduct';
       //
       this.http.post(serviceUrl, parameter,{ headers: headers })
@@ -791,7 +760,7 @@ export class MainproviderProvider {
       loader.present();
       let headers = new HttpHeaders();
 
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization','Bearer '+ localStorage.getItem('kdkvfkhggssomakady'));
                         // .set('Access-Control-Allow-Origin',"*");
       let serviceUrl = this.helper.serviceurl + 'home';
       //
@@ -822,7 +791,7 @@ export class MainproviderProvider {
       loader.present();
       let headers = new HttpHeaders();
 
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+ localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'getFriendRequest';
       //
       this.http.get(serviceUrl, { headers: headers })
@@ -854,7 +823,7 @@ export class MainproviderProvider {
       let parameter={
         'user_id':id
       }
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'acceptFriendRequest';
      
       this.http.post(serviceUrl,parameter, { headers: headers })
@@ -890,7 +859,7 @@ export class MainproviderProvider {
         'id':id,
         'quantity':quantity
       }
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'updateMenuProduct';
       //
       this.http.post(serviceUrl,parameter, { headers: headers })
@@ -922,7 +891,7 @@ export class MainproviderProvider {
       let parameter={
         'menu_id':id,
       }
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'getMenu';
    
       this.http.post(serviceUrl,parameter,{ headers: headers })
@@ -956,7 +925,7 @@ export class MainproviderProvider {
       }
 
     console.log(parameter)
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'createMenu';
       //
       this.http.post(serviceUrl, parameter,{ headers: headers })
@@ -990,7 +959,7 @@ export class MainproviderProvider {
         'users_ids':ids,
         'menu_id':menuid
       }
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'editMenu';
       //
       this.http.post(serviceUrl, parameter,{ headers: headers })
@@ -1027,7 +996,7 @@ export class MainproviderProvider {
         'price':price,
         'date':new Date()
       }
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'addMenuUserProduct';
       //
       this.http.post(serviceUrl, parameter,{ headers: headers })
@@ -1064,7 +1033,7 @@ export class MainproviderProvider {
         'category_id':categoryId,
         'barcode':prodBarCode
       }
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'getProductByBarCode';
 
       this.http.post(serviceUrl, parameter,{ headers: headers })
@@ -1094,7 +1063,7 @@ export class MainproviderProvider {
         "profile_pic":pic,
         "profile_pic_ext":ext
       }
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'changeProfilePic';
 
       this.http.post(serviceUrl, parameter,{ headers: headers })
@@ -1121,7 +1090,7 @@ export class MainproviderProvider {
       spinner.present();
 
       let headers = new HttpHeaders();
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
 
       let parameter = {
         //must add "verified" column in db 
@@ -1160,7 +1129,7 @@ export class MainproviderProvider {
       spinner.present();
 
       let headers = new HttpHeaders();
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
 
       let parameter = {
         'status':statusNo
@@ -1193,7 +1162,7 @@ export class MainproviderProvider {
       spinner.present();
 
       let headers = new HttpHeaders();
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
 
       let parameter = {
         'status':statusNo
@@ -1228,7 +1197,7 @@ export class MainproviderProvider {
       let parameter = {
         'search':searchTxt
       }
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'searchFriend';
 
       this.http.post(serviceUrl,parameter, { headers: headers })
@@ -1357,7 +1326,7 @@ export class MainproviderProvider {
         'menu_id':menuId,
         'current_user':userId
       }
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
 
       let serviceUrl = this.helper.serviceurl + 'RemoveMenuUser';
  
@@ -1391,7 +1360,7 @@ export class MainproviderProvider {
         "menu_id":menuId
       }
     
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'FriendsNotInMenu';
     
       this.http.post(serviceUrl, parameter ,{ headers: headers })
@@ -1424,7 +1393,7 @@ export class MainproviderProvider {
         "group_id":groupId
       }
     
-      headers = headers.set('Authorization', 'Bearer '+access);
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'FriendsNotInGroup';
     
       this.http.post(serviceUrl, parameter ,{ headers: headers })

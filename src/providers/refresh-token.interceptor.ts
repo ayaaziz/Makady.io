@@ -20,7 +20,7 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
     return next.handle(request).catch((errorResponse: HttpErrorResponse) => {
       const error = (typeof errorResponse.error !== 'object') ? JSON.parse(errorResponse.error) : errorResponse;
       //alert(JSON.stringify(errorResponse.url))
-      if ( errorResponse.url == this.helper.serviceurl +"api/login") {
+      if ( errorResponse.url == this.helper.serviceurl +"api/user_login") {
         return Observable.throw(errorResponse);
     }
      else if (errorResponse.status === 401 && errorResponse.url != this.helper.serviceurl +'api/refresh') {
