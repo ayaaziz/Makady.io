@@ -84,15 +84,26 @@ else {
           let parsedData = JSON.parse(data);
             // this.groups = parsedData.data;
             let newGroups = [];
+            let images = [];
+            
             parsedData.data.forEach(group => {
+              
+              group.profile_pic.forEach(img => {
+                console.log(JSON.stringify(img))
+                // img = JSON.stringify(img);
+                images.push({"profile_pic":this.helper.userImagePath + img.profile_pic})
+              })
+              
               let names = { 
                 "group_name": group.name_en,
-                // "members":group.profile_pic 
+                "members":images
               }
 
+              console.log(JSON.stringify(images));
               newGroups.push(names);
+              
               this.groups = newGroups;
-              console.log(JSON.stringify(this.groups));
+              console.log(JSON.stringify("search group data: "+JSON.stringify(this.groups)));
             });
         },(data) => {
       });

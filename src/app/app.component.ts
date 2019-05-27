@@ -307,9 +307,10 @@ export class MyApp {
   }
 
   logout() {
-    this.storage.get("makadyaccess").then((val)=> {
-      if(val) {
-        this.provider.logout(1,val,(data) => {
+    // this.storage.get("makadyaccess").then((val)=> {
+    //   if(val) {
+        // this.provider.logout(1,val,(data) => {
+        this.provider.logout(1,(data) => {          
           this.userLoged = false;
           this.storage.remove("Makadyusername");
           this.storage.remove("Mlanguage");
@@ -321,8 +322,8 @@ export class MyApp {
         
           console.log(JSON.stringify(data))
         },(data)=>{})
-      }
-    });
+    //   }
+    // });
   }
   
   getimg() {
