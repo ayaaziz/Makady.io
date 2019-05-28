@@ -71,8 +71,8 @@ groupname:any;
   
   checkfriend(id)
   {
-      this.id=this.id+id
-
+      this.id=this.id+','+id;
+      // alert(this.id);
   }
 
   create()
@@ -80,7 +80,7 @@ groupname:any;
     if(this.id.charAt(0) == ',' )
    {
      this.id = this.id.substr(1);
-     console.log(this.id)
+    //  alert(this.id);     
    }
     if(this.page=="edit")
     {
