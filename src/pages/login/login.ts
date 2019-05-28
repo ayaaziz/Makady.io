@@ -118,7 +118,7 @@ export class LoginPage {
   facebookLogin() {
     this.fb.login(['public_profile', 'email'])
       .then((res: FacebookLoginResponse) => {
-        console.log('Facebook user info '+ res);
+        console.log('Facebook user info '+JSON.stringify(res));
         let userId = res.authResponse.userID;
         let params = new Array<string>();
         this.fb.api("/me?fields=name,gender", params) //get user details

@@ -19,6 +19,11 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+
   <div class="panel">
     <p style="margin-right: 5px;color: #e26c40;font-weight: bold;font-size: 1.4em;margin-left: 5px;"> {{'mostsell' | translate}}</p>
     <!-- <ion-row *ngIf="langdirection=='rtl'">

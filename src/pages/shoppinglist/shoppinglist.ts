@@ -36,6 +36,10 @@ export class ShoppinglistPage {
   }
 
   ionViewWillEnter() {
+    this.loadData();
+  }
+
+  loadData() {
     this.hide2=false;
     this.hide1=true;
     this.langdirection = this.helper.langdirection;
@@ -221,5 +225,19 @@ export class ShoppinglistPage {
 
   addmenu() {
     this.navCtrl.push(CreatemenuPage);
+  }
+
+  doRefresh(event) {
+
+    console.log("eventtt: "+event);
+
+    console.log('Begin async operation');
+
+    this.loadData();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.complete();
+    }, 2000);
   }
 }

@@ -50,9 +50,11 @@ x:number = 10;
     this.navCtrl.push(FriendlistPage)
   }
 
-  ionViewDidEnter()
-  { 
+  ionViewDidEnter() { 
+    this.loadData();
+  }
 
+  loadData() {
     const spinner = this.loadingCtrl.create();
     spinner.present();
     
@@ -232,5 +234,19 @@ x:number = 10;
       }
     })
     
+  }
+
+  doRefresh(event) {
+
+    console.log("eventtt: "+event);
+
+    console.log('Begin async operation');
+
+    this.loadData();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.complete();
+    }, 2000);
   }
 }

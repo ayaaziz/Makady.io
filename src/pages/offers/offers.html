@@ -11,6 +11,11 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+
   <ion-searchbar [dir]="langdirection" style="padding:0;margin-bottom: 20px;" placeholder="{{ 'searchproduct' | translate }}" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput"></ion-searchbar>
  
   <ion-row>
@@ -33,7 +38,7 @@
             <ion-row>      
               <ion-col col style="display: flex;justify-content: center;">
                 <ion-fab>
-                  <button (click)="AddQuantityNum(item.offer_id)" ion-fab color="quantityColor" style="width: 16px;height: 19px;"><ion-icon name="add" style="font-size: 1.3rem;"></ion-icon></button>
+                  <button (click)="AddQuantityNum(item.offer_id)" ion-fab color="quantityColor" style="width: 12px;height: 19px;"><ion-icon name="add" style="font-size: 1.3rem;"></ion-icon></button>
                 </ion-fab>
               </ion-col>
 
@@ -43,7 +48,7 @@
               
               <ion-col col style="display: flex;justify-content: center;">
                 <ion-fab>
-                  <button (click)="minusQuantityNum(item.offer_id)" ion-fab color="quantityColor" style="width: 16px;height: 19px;"><ion-icon name="remove" style="font-size: 1.3rem;"></ion-icon></button>
+                  <button (click)="minusQuantityNum(item.offer_id)" ion-fab color="quantityColor" style="width: 12px;height: 19px;"><ion-icon name="remove" style="font-size: 1.3rem;"></ion-icon></button>
                 </ion-fab>
               </ion-col>
 

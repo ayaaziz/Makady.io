@@ -31,7 +31,11 @@ export class OffersPage {
 
               }
 
- ionViewDidLoad() {
+  ionViewDidLoad() {
+    this.loadData();
+  }
+
+  loadData() {
     this.langdirection=this.helper.langdirection;
     this.storage.get("makadyaccess").then((val) => {
       if(val) {
@@ -174,5 +178,19 @@ export class OffersPage {
         },(data)=>{})
       }
     });
+  }
+
+  doRefresh(event) {
+
+    console.log("eventtt: "+event);
+
+    console.log('Begin async operation');
+
+    this.loadData();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.complete();
+    }, 2000);
   }
 }

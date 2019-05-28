@@ -33,6 +33,10 @@ export class GroupsPage {
   }
 
   ionViewWillEnter() {
+    this.loadData();
+  }
+
+  loadData() {
     this.storage.get("Makadyuser_name").then((val1)=>{
       if(val1)
       {
@@ -164,5 +168,20 @@ deletegroup(id)
 friendlist()
   {
     this.navCtrl.push(FriendlistPage)
+  }
+
+
+  doRefresh(event) {
+
+    console.log("eventtt: "+event);
+
+    console.log('Begin async operation');
+
+    this.loadData();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.complete();
+    }, 2000);
   }
 }
