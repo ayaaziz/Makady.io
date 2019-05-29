@@ -10,7 +10,20 @@
 </ion-header>
 
 <ion-content padding>
-  <p style="text-align: center;color:#e26c40;font-size: 1.2em;font-weight: bold;" *ngIf="friends.length === 0">{{'noreq' | translate}}</p>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content 
+      pullingIcon="ios-arrow-dropup"
+      refreshingSpinner=null>
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-row class="nodata" *ngIf="friends.length === 0">
+    <ion-col>
+       <p style="text-align: center;color:#e26c40;font-size: 1.2em;font-weight: bold;">{{'noreq' | translate}}</p>   
+    </ion-col>
+  </ion-row>
+
   <div style="border:1px solid #e26c40; border-radius: 8px;margin-bottom: 10px;"  *ngFor="let item of friends">
     <ion-row>
       <ion-col col-3 style="display: flex;justify-content: center;align-items: center;">

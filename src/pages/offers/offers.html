@@ -21,6 +21,12 @@
 
   <ion-searchbar [dir]="langdirection" style="padding:0;margin-bottom: 20px;" placeholder="{{ 'searchproduct' | translate }}" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput"></ion-searchbar>
  
+  <ion-row class="nodata" *ngIf="offers.length === 0">
+    <ion-col>
+      <p style="text-align: center;color:#e26c40;font-size: 1.4rem;font-weight: bold;">{{'nooffers'| translate}}</p>
+    </ion-col>
+  </ion-row>
+
   <ion-row>
       <!-- col-12 col-sm  -->
     <ion-col class="offer" col-6 *ngFor="let item of offers" style="display:flex;justify-content:center;">

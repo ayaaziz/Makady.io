@@ -19,6 +19,7 @@
 </ion-header>
 
 <ion-content padding>
+  
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" closeDuration="5ms" snapbackDuration="5ms">
     <ion-refresher-content 
       pullingIcon="ios-arrow-dropup"
@@ -28,13 +29,8 @@
 
   <div class="panel">
     <p style="margin-right: 5px;color: #e26c40;font-weight: bold;font-size: 1.4em;margin-left: 5px;"> {{'mostsell' | translate}}</p>
-    <!-- <ion-row *ngIf="langdirection=='rtl'">
-      <ion-col col-12>
-        <section class="chart-wrapper">
-          <canvas class="canvas1" #polarChart ></canvas>
-        </section>
-      </ion-col>
-    </ion-row> -->
+    
+    
     <ion-row>
       <ion-col col-12>
         <section class="chart-wrapper2">

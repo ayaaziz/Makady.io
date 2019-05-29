@@ -29,7 +29,10 @@ userMenuId:number;
   }
 
   ionViewDidLoad() {
+    this.loadData();
+  }
 
+  loadData() {
     this.userMenuId = this.navParam.get("fromUserList");
     this.langdirection=this.helper.langdirection;
     this.storage.get("makadyaccess").then((val) => {
@@ -48,5 +51,19 @@ userMenuId:number;
     // this.navCtrl.push(ProductsPage,{id:id,"categoryName":catName});
 
     this.navCtrl.push(ProductsPage,{id:id,"categoryName":catName,"fromUserList":this.userMenuId});    
+  }
+
+  doRefresh(event) {
+
+    console.log("eventtt: "+event);
+
+    console.log('Begin async operation');
+
+    this.loadData();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.complete();
+    }, 2000);
   }
 }

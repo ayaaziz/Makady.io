@@ -153,11 +153,18 @@ export class SignupPage {
          }
 
        } else {
+
+         //set token in localstorage
+         localStorage.setItem('kdkvfkhggssomakady', parsedData.access_token);
+         //set refreshtoken in localstorage
+         localStorage.setItem('reefdfdfvcvcmakady',parsedData.refresh_token);
+         this.storage.set("makadyaccess",parsedData.access_token);
+
+         
          this.provider.getuser(parsedData.access_token, (data) => {
           data = JSON.parse(data);
           console.log(JSON.stringify(data));
           this.helper.accesstoken=parsedData.access_token;
-          this.storage.set("makadyaccess",parsedData.access_token);
           this.storage.set("socialType",data.user.social_type);
           console.log("social: "+data.user.social_type);
           

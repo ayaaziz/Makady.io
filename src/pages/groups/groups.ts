@@ -16,7 +16,7 @@ import { FriendlistPage } from '../friendlist/friendlist';
 export class GroupsPage {
   langdirection:any
   myInput:any
-  groups:any;
+  groups:any = [];
   // show:any=true
   // hide:any=false
   username:any;

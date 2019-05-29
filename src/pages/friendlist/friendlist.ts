@@ -30,6 +30,10 @@ export class FriendlistPage {
   }
 
   ionViewDidLoad() {
+    this.loadData();
+  }
+
+  loadData() {
     // this.langdirection=this.helper.langdirection;
     this.storage.get("makadyaccess").then((val) => {
       if(val) {
@@ -97,5 +101,19 @@ export class FriendlistPage {
 
   goHome() {
     this.navCtrl.setRoot(HomePage);
+  }
+
+  doRefresh(event) {
+
+    console.log("eventtt: "+event);
+
+    console.log('Begin async operation');
+
+    this.loadData();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.complete();
+    }, 2000);
   }
 }

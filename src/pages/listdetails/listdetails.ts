@@ -29,7 +29,7 @@ category_name:any
 detailsdata:any=[]
 products:any=[]
 members:any=[]
-services;
+services:any = [];
 defaultImgUrl:string;
 
   constructor(public popoverCtrl:PopoverController,

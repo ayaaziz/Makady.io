@@ -42,6 +42,11 @@ export class ProductsPage {
     this.categoryId = this.navParams.get("id");
     this.categoryName = this.navParams.get("categoryName");
 
+    this.loadData();
+
+  }
+
+  loadData() {
     this.storage.get("makadyaccess").then((val) => {
       if(val) {
         this.provider.getproducts(this.categoryId,"",val,(data) => {
@@ -260,6 +265,21 @@ export class ProductsPage {
     }, (err) => {
         console.log('Error: ', err);
     });
+  }
+
+
+  doRefresh(event) {
+
+    console.log("eventtt: "+event);
+
+    console.log('Begin async operation');
+
+    this.loadData();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.complete();
+    }, 2000);
   }
   
 }

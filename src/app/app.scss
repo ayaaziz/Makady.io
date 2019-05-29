@@ -222,3 +222,13 @@ ion-content {
         bottom: 6px;
     }
 }
+
+.refresher-pulling-icon,
+.refresher-refreshing-icon  {
+    color: #e26c40 !important;
+}
+
+.nodata {
+    margin-top: 80px;
+    background-color: #faaf5c30;
+}

@@ -139,5 +139,8 @@
      "purchasedmustnotmorerequired":"Purchased quantity must be less than or equal to the required quantity!",
      "purchaseSaved":"Purchase saved successfully",
      "friendrequestsent":"Friend Request Sent",
-     "nofriendsToAdd":"No friends to Add"
+     "nofriendsToAdd":"No friends to Add",
+     "noproducts":"No products",
+     "norequireditems":"No  required shopping items",
+     "nooffers":"No offers"
 }
