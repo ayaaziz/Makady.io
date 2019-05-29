@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ToastController, Events } from 'ionic-angular';
+import { ToastController, Events, NavController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import { LoginPage } from '../../pages/login/login';
 
 @Injectable()
 export class HelperProvider {
@@ -10,6 +12,7 @@ export class HelperProvider {
   user_id;
   prodNotification:boolean;
   offersNotification:boolean;
+  userLoged: boolean = false;
   
   serviceurl:any="http://itrootsdemos.com/makady/phase1/api/";
   userImagePath:string = "http://itrootsdemos.com/makady/phase1/public/uploads/images/users/";
@@ -17,7 +20,10 @@ export class HelperProvider {
 
   constructor(public toastCtrl:ToastController, 
               public http: HttpClient,
-              public event:Events) {
+              public storage:Storage,
+              public event:Events,
+              // private navctrl:NavController
+            ) {
     console.log('Hello HelperProvider Provider');
 
   }
@@ -48,6 +54,19 @@ export class HelperProvider {
     } else {
         return false;
     }
+  }
+
+  out() {
+    this.userLoged = false;
+    this.storage.remove("Makadyusername");
+    this.storage.remove("Mlanguage");
+
+    this.storage.remove("Makadyuser_name");
+    this.storage.remove("makadyaccess");
+    localStorage.clear();
+    
+    this.storage.remove("user_info");
+    // this.navctrl.setRoot(LoginPage);
   }
 
 }

@@ -180,7 +180,7 @@ export class VerificationPage {
               if(val)
               { 
                 this.provider.setVerified(val, data => {
-                  alert(data);
+                  // alert(data);
                   if(data) {
                     this.navCtrl.setRoot(TabsPage);
                   }
