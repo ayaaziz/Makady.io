@@ -238,27 +238,25 @@ export class ProductsPage {
 
   searchByBarcode() {
     this.barcodeScanner.scan().then(barData => {
-      alert("scan");
+
       let prodCode = barData.text;
-      alert("prodCode: "+prodCode);
+      console.log("prodCode: "+prodCode);
       this.storage.get("makadyaccess").then(val => {
         if(val) {
           this.provider.searchProdByBarCode(this.categoryId,prodCode,val,prodData => {
-            prodData = JSON.parse(prodData);
             console.log(JSON.stringify(prodData));
             
             if(prodData.success) {
-              // this.productDetails = prodData;
                 this.products = prodData.data;
                 this.products.forEach(element => {
                   element["count"] = this.count;
                 });
 
             } else {
-              this.helper.presentToast(prodData.errors);
+              console.log(prodData.errors);
             }
           },err => {
-            this.helper.presentToast(this.translate.instant('serverErr'))
+            console.log(this.translate.instant('serverErr'))
           });
         }
     })

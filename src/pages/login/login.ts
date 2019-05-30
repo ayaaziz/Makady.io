@@ -12,7 +12,6 @@ import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { TwitterConnect } from '@ionic-native/twitter-connect';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { VerificationPage } from '../verification/verification';
-// import { VerificationPage } from '../verification/verification';
 
 @Component({
   selector: 'page-login',
@@ -25,6 +24,7 @@ export class LoginPage {
   logInForm: FormGroup;
   username: any = "";
   Password: any = "";
+  
 
   constructor(
               private googlePlus: GooglePlus,
@@ -48,12 +48,15 @@ export class LoginPage {
   }
 
   login() {
+    console.log(this.helper.registerationId);
+    
     if (this.username == "" || this.Password == "") {
       this.helper.presentToast(this.translate.instant('alldata'));
     } else {
-        this.provider.login(this.username, this.Password, "fdgdgdg66553rhask", (data) => {
+        this.provider.login(this.username, this.Password,this.helper.registerationId, (data) => {
   
           let Dataparsed = JSON.parse(data);
+          
 
           this.storage.set("makadyaccess", Dataparsed.access_token);
           //set token in localstorage

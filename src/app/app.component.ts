@@ -228,32 +228,12 @@ export class MyApp {
 
     const pushObject:PushObject = this.push.init(options);
 
-    // open or close product notification
-    // if(this.prodNotification) {
-    //   pushObject.subscribe("Product")
-    //   .then(data => {
-    //     console.log(data);
-    //   });           
-    // } else {
-    //   pushObject.unsubscribe("Product")
-    //   .then(data => {
-    //     console.log(data);
-    //   });
-    // }
+    pushObject.on('registration').subscribe((registration: any) => {
+      console.log('Device registered', registration);
 
-    // //open or close offers notification
-    // if(this.offersNotification) {
-    //   pushObject.subscribe("Offers")
-    //   .then(data => {
-    //     console.log(data);
-    //   });           
-    // } else {
-    //   pushObject.unsubscribe("Offers")
-    //   .then(data => {
-    //     console.log(data);
-    //   });
-    // }
+      this.helper.registerationId = registration.registrationId;
 
+    });
 
     pushObject.on('notification').subscribe((notification: any) => {
 
@@ -261,8 +241,6 @@ export class MyApp {
       console.log('Received a notification', notification);
       
     }); 
-
-    pushObject.on('registration').subscribe((registration: any) => console.log('Device registered', registration));
 
     pushObject.on('error').subscribe(error => {
       console.error('Error with Push plugin', error);

@@ -1052,6 +1052,36 @@ export class MainproviderProvider {
     }
   }
 
+  // searchProductByName(categoryId,prodBarCode,access,successCallback,failureCallback) {
+  //   if(navigator.onLine) {
+  //     let loader = this.loadingCtrl.create({
+  //       content: "",
+  //     });
+  //     loader.present();
+  //     let headers = new HttpHeaders();
+  //     let parameter = {
+  //       'category_id':categoryId,
+  //       'barcode':prodBarCode
+  //     }
+  //     headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
+  //     let serviceUrl = this.helper.serviceurl + 'getProductByBarCode';
+
+  //     this.http.post(serviceUrl, parameter,{ headers: headers })
+  //       .subscribe(data => {
+  //           loader.dismiss();
+  //           successCallback(data);
+  //         },
+  //         err => {
+  //           loader.dismiss();
+  //           failureCallback(err);
+  //           console.log(err.message);         
+  //         });
+
+  //   } else {
+  //     this.helper.presentToast(this.translate.instant("offline"));      
+  //   }
+  // }
+
   changeProfilePicture(access,pic,ext,successCallback,failureCallback) {
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({

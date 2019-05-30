@@ -37,12 +37,17 @@ page-products {
         transform: translateY(-50%);
     }
 
-    .barcode-icon[dir="ltr"] {
-        right: 15px;
+    .barcode-icon{
+        right: 47px;
     }
 
-    .barcode-icon[dir="rtl"] {
-        left: 15px;    
-    }
+
+    // .barcode-icon[dir="ltr"] {
+    //     right: 47px;
+    // }
+
+    // .barcode-icon[dir="rtl"] {
+    //     left: 47px;    
+    // }
 
 }

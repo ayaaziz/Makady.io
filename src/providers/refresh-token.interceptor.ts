@@ -37,7 +37,10 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
             localStorage.setItem('kdkvfkhggssomakady', data.access_token)
             localStorage.setItem('reefdfdfvcvcmakady', data.refresh_token)
             const cloneRequest = request.clone({setHeaders: {'Authorization': 'Bearer ${data.access_token}'}});
+            
+            alert(data.refresh_token);
             return next.handle(cloneRequest);
+
           })
           .catch( err => {
             console.log("errorr here");
@@ -45,8 +48,8 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
           })
       }
       else if (errorResponse.status === 401  && errorResponse.url == this.helper.serviceurl +'refreshToken'){
-        // alert("hereeeee");
-        this.helper.out();
+        alert("hereeeee");
+        //this.helper.out();
         return;
       }
       else{
