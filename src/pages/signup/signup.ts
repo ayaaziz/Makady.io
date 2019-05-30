@@ -133,7 +133,7 @@ export class SignupPage {
       this.helper.presentToast(this.translate.instant('invalidphone'));
 
     } else {
-      this.provider.signup(this.username,this.name,this.email,this.Password,this.confirmPassword,this.phone,this.imgdata,"jpeg",4,this.helper.registerationId,"1",this.lang,(data) => {
+      this.provider.signup(this.username,this.name,this.email,this.Password,this.confirmPassword,this.phone,this.imgdata,"jpeg",4,this.helper.registerationId?this.helper.registerationId:"fdgdgdg66553rhask","1",this.lang,(data) => {
        let parsedData=JSON.parse(data);
        console.log("signup data: "+JSON.stringify(data));
 

@@ -53,7 +53,7 @@ export class LoginPage {
     if (this.username == "" || this.Password == "") {
       this.helper.presentToast(this.translate.instant('alldata'));
     } else {
-        this.provider.login(this.username, this.Password,this.helper.registerationId, (data) => {
+        this.provider.login(this.username, this.Password,this.helper.registerationId?this.helper.registerationId:"fdgdgdg66553rhask", (data) => {
   
           let Dataparsed = JSON.parse(data);
           
