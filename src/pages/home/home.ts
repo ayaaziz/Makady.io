@@ -106,32 +106,18 @@ x:number = 10;
               this.price += parseInt(element.price);
             });
 
-           this.data.forEach(element => {
+           this.data.forEach((element,index) => {
             // this.price += parseInt(element.price);
             this.chartdata.push(element.quantity);
             this.names.push(element.name);
         
             //add new properties(color,percentage) for each element in array
-            if(element.name === "bakery" || 
-              element.name === "\u0645\u062e\u0628\u0648\u0632\u0627\u062a" || 
-              element.category_id === 1) {
-              element.color = "#7FD3B9";
+           
+            if(index === 0) element.color = "#7FD3B9";
+            else if(index === 1) element.color = "#DB7F7F";
+            else if(index === 2) element.color = "#D3A1D2";
+            else if(index === 3) element.color = "#FF9EB3";
             
-            } else if(element.name === "cleaning supplies" ||
-                element.name === "\u0645\u0633\u062a\u0644\u0632\u0645\u0627\u062a \u0627\u0644\u062a\u0646\u0638\u064a\u0641" ||
-                element.category_id === 2) {
-                element.color = "#DB7F7F";
-            
-            } else if(element.name === "fruits" ||
-                element.name === "\u0641\u0648\u0627\u0643\u0647" ||
-                element.category_id === 3) {
-                element.color = "#D3A1D2";
-            
-            } else if(element.name === "dairy products" || 
-                element.name === "\u0623\u0644\u0628\u0627\u0646" ||
-                element.category_id === 4) {
-                element.color = "#FF9EB3";
-            }
 
             element.percentage = Math.floor((element.price * 100) / this.price);
 

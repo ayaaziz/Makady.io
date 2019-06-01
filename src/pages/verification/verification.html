@@ -17,11 +17,11 @@
     </div>
     <p style="text-align: center;color: gray;font-size: 1.1em;margin-bottom: 4px;">{{'entercode' | translate}}</p>
 
-    <ion-row  style=" margin-top: 40px;">
-      <ion-input  type="text" style="margin-right: 5px;font-size: 30px;width:40px;height:40px;border-bottom: 2px solid #f2622b;color:#e19419;text-align:center" maxlength="2" [readonly]="inputOne" (input)='onInputTime($event)' [(ngModel)]='input1' #focusInput></ion-input>
-      <ion-input  type="text" style="margin-right: 5px;margin-left: 5px;font-size: 30px;width:40px;height:40px;border-bottom: 2px solid #f2622b;color:#e19419;text-align:center" [readonly]="inputTwo" maxlength="2"  (input)='onInputTime1($event)' [(ngModel)]='input2' #focusInput1></ion-input>
-      <ion-input  type="text" style="margin-right: 5px;margin-left: 5px;font-size: 30px;width:40px;height:40px;border-bottom: 2px solid #f2622b;color:#e19419;text-align:center" [readonly]="inputThree" maxlength="2"  (input)='onInputTime2($event)' [(ngModel)]='input3' #focusInput2></ion-input>
-      <ion-input  type="text" style="margin-left: 5px;font-size: 30px;width:40px;height:40px;border-bottom: 2px solid #f2622b;color:#e19419;text-align:center" maxlength="2" [readonly]="inputFour" (input)='onInputTime3($event)'  [(ngModel)]='input4' #focusInput3></ion-input>
+    <ion-row dir="ltr" style=" margin-top: 40px;">
+      <ion-input dir="ltr" type="text" style="margin-right: 5px;font-size: 30px;width:40px;height:40px;border-bottom: 2px solid #f2622b;color:#e19419;text-align:center" maxlength="2" [readonly]="inputOne" (input)='onInputTime($event)' [(ngModel)]='input1' #focusInput></ion-input>
+      <ion-input dir="ltr" type="text" style="margin-right: 5px;margin-left: 5px;font-size: 30px;width:40px;height:40px;border-bottom: 2px solid #f2622b;color:#e19419;text-align:center" [readonly]="inputTwo" maxlength="2"  (input)='onInputTime1($event)' [(ngModel)]='input2' #focusInput1></ion-input>
+      <ion-input dir="ltr" type="text" style="margin-right: 5px;margin-left: 5px;font-size: 30px;width:40px;height:40px;border-bottom: 2px solid #f2622b;color:#e19419;text-align:center" [readonly]="inputThree" maxlength="2"  (input)='onInputTime2($event)' [(ngModel)]='input3' #focusInput2></ion-input>
+      <ion-input dir="ltr" type="text" style="margin-left: 5px;font-size: 30px;width:40px;height:40px;border-bottom: 2px solid #f2622b;color:#e19419;text-align:center" maxlength="2" [readonly]="inputFour" (input)='onInputTime3($event)'  [(ngModel)]='input4' #focusInput3></ion-input>
     </ion-row>
 
     <p style="margin-top: 20px;">{{'notreach' | translate}}<span style="color:#f2622c" (click)="resend()">{{'resend'| translate}}</span></p>

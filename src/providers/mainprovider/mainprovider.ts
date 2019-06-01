@@ -1150,9 +1150,9 @@ export class MainproviderProvider {
     }
   }
 
-  //api name: "productNotificationStatus"
-  //tell server if product notifications opened or closed
-  prodNotificationStatus(access,statusNo,successCallback,failureCallback) {
+  //api name: "notificationStatus"
+  //tell server if product notifications/offers notification opened or closed
+  notificationStatus(access,userId,notificationType,statusNo,successCallback,failureCallback) {
 
     if(navigator.onLine) {
       let spinner = this.loadingCtrl.create();
@@ -1162,10 +1162,12 @@ export class MainproviderProvider {
       headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
 
       let parameter = {
+        "user_id":userId,
+        "notification_type":notificationType,
         'status':statusNo
       }
 
-      let serviceUrl = this.helper.serviceurl + 'productNotificationStatus';
+      let serviceUrl = this.helper.serviceurl + 'notificationStatus';
       this.http.post(serviceUrl, parameter,{ headers: headers })
       .subscribe(data => {
           spinner.dismiss();
@@ -1178,39 +1180,6 @@ export class MainproviderProvider {
         });
   
 
-    } else {
-      this.helper.presentToast(this.translate.instant("offline"));
-    }
-  }
-
-  //api name: "offersNotificationStatus"
-  //tell server if offers notifications opened or closed
-  offersNotificationStatus(access,statusNo,successCallback,failureCallback) {
-
-    if(navigator.onLine) {
-      let spinner = this.loadingCtrl.create();
-      spinner.present();
-
-      let headers = new HttpHeaders();
-      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
-
-      let parameter = {
-        'status':statusNo
-      }
-
-      let serviceUrl = this.helper.serviceurl + 'offersNotificationStatus';
-
-      this.http.post(serviceUrl, parameter,{ headers: headers })
-      .subscribe(data => {
-          spinner.dismiss();
-          successCallback(data);
-        },
-        err => {
-          spinner.dismiss();
-          failureCallback(err);
-          console.log(err.message);        
-        });
-  
     } else {
       this.helper.presentToast(this.translate.instant("offline"));
     }

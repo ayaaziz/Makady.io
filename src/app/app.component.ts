@@ -180,7 +180,7 @@ export class MyApp {
         
         this.storage.get("makadyaccess").then(access => {
           if(access) {
-            this.provider.prodNotificationStatus(access,data == true ? 1:0,data => {
+            this.provider.notificationStatus(access,this.helper.user_id,2,data ? 1:0,data => {
               console.log(data);
             },
             error => {
@@ -199,7 +199,7 @@ export class MyApp {
           
           this.storage.get("makadyaccess").then(access => {
             if(access) {
-              this.provider.offersNotificationStatus(access,data == true ? 1:0,data => {
+              this.provider.notificationStatus(access,this.helper.user_id,3,data ? 1:0,data => {
                 console.log(data);
               },
               error => {

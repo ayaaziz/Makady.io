@@ -13,7 +13,7 @@ export class HelperProvider {
   prodNotification:boolean;
   offersNotification:boolean;
   userLoged: boolean = false;
-  registerationId:string;
+  registerationId:string = "fdgdgdg66553rhask";
   
   serviceurl:any="http://itrootsdemos.com/makady/phase1/api/";
   userImagePath:string = "http://itrootsdemos.com/makady/phase1/public/uploads/images/users/";
