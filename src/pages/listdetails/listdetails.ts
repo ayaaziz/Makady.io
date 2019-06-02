@@ -159,11 +159,11 @@ defaultImgUrl:string;
   }
   addproduct()
   {
-    this.navCtrl.setRoot(TabsPage).then(()=>{
+    // this.navCtrl.setRoot(TabsPage).then(()=>{
 
       //aya
       this.navCtrl.push(CategoriesPage,{"fromUserList":this.id});
-    })
+    // })
   }
 
   // opendetails(name)
