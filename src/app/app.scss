@@ -232,4 +232,8 @@ ion-content {
 .nodata {
     margin-top: 80px;
     background-color: #faaf5c30;
+
+    ion-col {
+        justify-content: center;
+    }
 }

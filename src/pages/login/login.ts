@@ -124,7 +124,7 @@ export class LoginPage {
         console.log('Facebook user info '+JSON.stringify(res));
         let userId = res.authResponse.userID;
         let params = new Array<string>();
-        this.fb.api("/me?fields=name,gender", params) //get user details
+        this.fb.api("/me?fields=name,email", params) //get user details
           .then(user => {
             console.log("Facebook user ", user);
             user.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
@@ -135,7 +135,7 @@ export class LoginPage {
             let facebookUser = {
               "name": user.name,
               "picture": user.picture,
-              // "email": user.email
+              "email": user.email
             }
             // this.storage.set("facebook_user",facebookUser)
             this.storage.set("user_info",facebookUser)
@@ -145,12 +145,18 @@ export class LoginPage {
             });
             console.log(facebookUser);
 
+            this.storage.set("Makadyusername", "true");
             // //api to save in db and return access_token
             // this.provider.userLoginWithSocial(userId,1,user.name,user.email,1,user.picture,0,"0000-00-00",data => {
             //   //return with access
             //   data = JSON.parse(data);
             //   console.log(data);
             //   this.storage.set("makadyaccess",data.access_token);   
+             ////set token in localstorage
+          // localStorage.setItem('kdkvfkhggssomakady', Dataparsed.access_token);
+          // //set refreshtoken in localstorage
+          // localStorage.setItem('reefdfdfvcvcmakady',Dataparsed.refresh_token);
+
             // },
             // error => {
             //   console.log(error);
@@ -203,6 +209,7 @@ export class LoginPage {
         this.navCtrl.setRoot(TabsPage);
       });
       console.log(google_user);
+      this.storage.set("Makadyusername", "true");
 
       // //api to save in db and return access_token
       // this.provider.userLoginWithSocial(user.id,3,user.name,user.email,user.lang,user.imageUrl,0,"0000-00-00",data => {
@@ -210,7 +217,11 @@ export class LoginPage {
       //   data = JSON.parse(data);
       //   console.log(data);
 
-      //   this.storage.set("makadyaccess",data.access_token);  
+      //   this.storage.set("makadyaccess",data.access_token); 
+       ////set token in localstorage
+      //  localStorage.setItem('kdkvfkhggssomakady', Dataparsed.access_token);
+      ////  set refreshtoken in localstorage
+      //  localStorage.setItem('reefdfdfvcvcmakady',Dataparsed.refresh_token); 
       // },
       // error => {
       //   console.log(error);
@@ -260,6 +271,7 @@ export class LoginPage {
                 this.navCtrl.setRoot(TabsPage);
               });
               console.log(twitterUser);
+              this.storage.set("Makadyusername", "true");
                 
               // // this.loginservice.userLoginWithSocial(user.id, 2, user.name, user.profile_image_url_https, 0, "0000-00-00", (data) => this.socialLoginSuccessCallback(data), (data) => this.socialLoginFailureCallback(data))
 
@@ -269,6 +281,10 @@ export class LoginPage {
               //     data = JSON.parse(data);
               //     console.log(data);
               //     this.storage.set("makadyaccess",data.access_token); 
+              ////set token in localstorage
+              // localStorage.setItem('kdkvfkhggssomakady', Dataparsed.access_token);
+              ////set refreshtoken in localstorage
+              // localStorage.setItem('reefdfdfvcvcmakady',Dataparsed.refresh_token);
               //   },
               //   error => {
               //     console.log(error);

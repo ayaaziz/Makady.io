@@ -73,10 +73,12 @@ export class MyApp {
                 this.helper.user_id = val.user.id;
               }
             });
-          } else if(social == 1 || social == 2 || social == 3) {
+          } 
+          else if(social == 1 || social == 2 || social == 3) {
               this.storage.get("user_info")
                 .then(socialUser => {
                   if(socialUser) {
+                    console.log("user_info social user: "+JSON.stringify(socialUser));
                     this.userLoged = true;
                     this.username = socialUser.name;
                     this.photo = socialUser.picture;
@@ -102,6 +104,7 @@ export class MyApp {
           //           this.userLoged = true;
           //           this.username = twitterUser.name;
           //           this.photo = twitterUser.picture;
+          //           alert("twitter");
           //         }
           //     });
 
@@ -151,6 +154,7 @@ export class MyApp {
           }     
       });
 
+      //Enter without relogin 
       this.storage.get("Makadyusername").then((val)=> {
         if(!val) {
           this.navctrl.push(LoginPage);
@@ -161,7 +165,7 @@ export class MyApp {
             this.navctrl.push(LoginPage);
             return;
           }
-          this.username = userInfo.user.username;
+          // this.username = userInfo.user.username;
         })
            if(val=="true") {
              this.event.publish("login");

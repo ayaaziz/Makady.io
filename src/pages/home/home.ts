@@ -55,29 +55,10 @@ x:number = 10;
   }
 
   loadData() {
-    const spinner = this.loadingCtrl.create();
-    spinner.present();
+    // const spinner = this.loadingCtrl.create();
+    // spinner.present();
     
-    // this.storage.get("makadyaccess").then(val => {
-    //   if(val) {
-    //     this.provider.friendrequests(val,(data) => {
-    //       if(data) {
-    //         data = JSON.parse(data);
-    //         this.requestsNo = data.friends.length;
-    //       }
-    //     },err =>{
 
-    //     });
-    //   }
-    // });
-
-    // this.event.subscribe("addRequest",() => {
-    //   this.requestsNo++;
-    // });
-
-    // this.event.subscribe("removeRequest",() => {
-    //   this.requestsNo--;
-    // });
 
     // this.storage.get("user_info").then((val)=>{
     //   if(val)
@@ -94,7 +75,7 @@ x:number = 10;
       {
         this.provider.home(val,(data)=>{
           
-          spinner.dismiss();
+          // spinner.dismiss();
 
           let dataparsed = JSON.parse(data);
           this.data = dataparsed.data;
@@ -214,7 +195,7 @@ x:number = 10;
     
       
         },(error)=>{
-          spinner.dismiss();
+          // spinner.dismiss();
         })
         
       }
