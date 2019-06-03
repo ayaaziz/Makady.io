@@ -82,7 +82,7 @@ export class MyApp {
                     this.userLoged = true;
                     this.username = socialUser.name;
                     this.photo = socialUser.picture;
-
+                    // this.helper.user_id = socialUser.user.id;
                     console.log(this.username + " - " + this.photo);
                   }
               });    

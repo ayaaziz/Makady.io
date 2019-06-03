@@ -24,6 +24,7 @@ export class LoginPage {
   logInForm: FormGroup;
   username: any = "";
   Password: any = "";
+  lang:any;
   
 
   constructor(
@@ -41,6 +42,12 @@ export class LoginPage {
               private fb: Facebook) {
 
             this.langdirection = this.helper.langdirection;
+
+            if(this.helper.langdirection == "ltr") {
+              this.lang = "1";
+            } else { 
+               this.lang = "2";
+            }
   }
 
   opensign() {
@@ -146,21 +153,28 @@ export class LoginPage {
             console.log(facebookUser);
 
             this.storage.set("Makadyusername", "true");
-            // //api to save in db and return access_token
-            // this.provider.userLoginWithSocial(userId,1,user.name,user.email,1,user.picture,0,"0000-00-00",data => {
-            //   //return with access
-            //   data = JSON.parse(data);
-            //   console.log(data);
-            //   this.storage.set("makadyaccess",data.access_token);   
-             ////set token in localstorage
-          // localStorage.setItem('kdkvfkhggssomakady', Dataparsed.access_token);
-          // //set refreshtoken in localstorage
-          // localStorage.setItem('reefdfdfvcvcmakady',Dataparsed.refresh_token);
+            //api to save in db and return access_token
+            this.provider.userLoginWithSocial(userId,1,user.name,user.email,this.lang,user.picture,0,"0000-00-00",data => {
+              //return with access
+              data = JSON.parse(data);
 
-            // },
-            // error => {
-            //   console.log(error);
-            // });
+              console.log(data);
+              this.storage.set("makadyaccess",data.access_token);   
+              //set token in localstorage
+              localStorage.setItem('kdkvfkhggssomakady', data.access_token);
+              //set refreshtoken in localstorage
+              localStorage.setItem('reefdfdfvcvcmakady',data.refresh_token);
+
+              this.provider.getuser(data.access_token,data => {
+                this.helper.user_id = data.user.id;
+
+              },error => {
+                console.log(error);
+              });
+            },
+            error => {
+              console.log(error);
+            });
             //**************//
 
             this.fb.logout().then(() => {
@@ -211,21 +225,28 @@ export class LoginPage {
       console.log(google_user);
       this.storage.set("Makadyusername", "true");
 
-      // //api to save in db and return access_token
-      // this.provider.userLoginWithSocial(user.id,3,user.name,user.email,user.lang,user.imageUrl,0,"0000-00-00",data => {
+      //api to save in db and return access_token
+      this.provider.userLoginWithSocial(user.id,3,user.name,user.email,this.lang,user.imageUrl,0,"0000-00-00",data => {
       
-      //   data = JSON.parse(data);
-      //   console.log(data);
+        data = JSON.parse(data);
+        console.log(data);
 
-      //   this.storage.set("makadyaccess",data.access_token); 
-       ////set token in localstorage
-      //  localStorage.setItem('kdkvfkhggssomakady', Dataparsed.access_token);
-      ////  set refreshtoken in localstorage
-      //  localStorage.setItem('reefdfdfvcvcmakady',Dataparsed.refresh_token); 
-      // },
-      // error => {
-      //   console.log(error);
-      // });
+        this.storage.set("makadyaccess",data.access_token); 
+        //set token in localstorage
+        localStorage.setItem('kdkvfkhggssomakady', data.access_token);
+        //set refreshtoken in localstorage
+        localStorage.setItem('reefdfdfvcvcmakady',data.refresh_token); 
+
+        this.provider.getuser(data.access_token,data => {
+          this.helper.user_id = data.user.id;
+
+        },error => {
+          console.log(error);
+        });
+      },
+      error => {
+        console.log(error);
+      });
 
       //**************************//
       
@@ -276,19 +297,26 @@ export class LoginPage {
               // // this.loginservice.userLoginWithSocial(user.id, 2, user.name, user.profile_image_url_https, 0, "0000-00-00", (data) => this.socialLoginSuccessCallback(data), (data) => this.socialLoginFailureCallback(data))
 
               // // setTimeout(() => {
-              //   this.provider.userLoginWithSocial(user.id,2,user.name,"",user.lang,user.profile_image_url_https,0,"0000-00-00",data => {
-              //     //return with access
-              //     data = JSON.parse(data);
-              //     console.log(data);
-              //     this.storage.set("makadyaccess",data.access_token); 
-              ////set token in localstorage
-              // localStorage.setItem('kdkvfkhggssomakady', Dataparsed.access_token);
-              ////set refreshtoken in localstorage
-              // localStorage.setItem('reefdfdfvcvcmakady',Dataparsed.refresh_token);
-              //   },
-              //   error => {
-              //     console.log(error);
-              //   });
+                this.provider.userLoginWithSocial(user.id,2,user.name,"",this.lang,user.profile_image_url_https,0,"0000-00-00",data => {
+                  //return with access
+                  data = JSON.parse(data);
+                  console.log(data);
+                  this.storage.set("makadyaccess",data.access_token); 
+                  //set token in localstorage
+                  localStorage.setItem('kdkvfkhggssomakady', data.access_token);
+                  //set refreshtoken in localstorage
+                  localStorage.setItem('reefdfdfvcvcmakady',data.refresh_token);
+
+                  this.provider.getuser(data.access_token,data => {
+                    this.helper.user_id = data.user.id;
+    
+                  },error => {
+                    console.log(error);
+                  });
+                },
+                error => {
+                  console.log(error);
+                });
               // // },500);
               //****************************************//
 
