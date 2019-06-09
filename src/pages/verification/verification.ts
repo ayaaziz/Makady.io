@@ -233,7 +233,7 @@ export class VerificationPage {
 
   resend() {
   
-    this.provider.forgetpass(this.username, (data) => {
+    this.provider.forgetpass(this.username,"", (data) => {
       console.log(JSON.stringify(data))
       let dataparsed = JSON.parse(data)
       this.username = dataparsed.data.username
