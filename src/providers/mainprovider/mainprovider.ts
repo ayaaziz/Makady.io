@@ -97,7 +97,7 @@ export class MainproviderProvider {
   }
 
   //return emailcode
-  forgetpass(username,successCallback, failureCallback) {
+  forgetpass(username,requestType,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -106,7 +106,8 @@ export class MainproviderProvider {
       loader.present();
       let headers = new HttpHeaders();
       let parameter = {
-        'username':username 
+        'username':username,
+        'type':requestType
       }
 
       headers = headers.set('Content-Type', 'application/json');
@@ -1194,7 +1195,7 @@ export class MainproviderProvider {
       loader.present();
       let headers = new HttpHeaders();
       let parameter = {
-        'search':searchTxt
+        'username':searchTxt
       }
       headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'searchFriend';

@@ -87,15 +87,20 @@ groupname:any;
       this.storage.get("makadyaccess").then((val)=>{
         if(val)
         {
-          this.provider.editgroup(this.name,this.id,this.groupid,val,(data)=>{
-          console.log(JSON.stringify(data))
-          this.name=""
-          this.check=false
-          this.presentToast(this.translate.instant('edited'))
-          this.navCtrl.pop();
-        },(data)=>{
 
-          })
+          if(this.name.length < 4){
+            this.presentToast(this.translate.instant("groupnamelength"))
+          } else {
+            this.provider.editgroup(this.name,this.id,this.groupid,val,(data)=>{
+              console.log(JSON.stringify(data))
+              this.name=""
+              this.check=false
+              this.presentToast(this.translate.instant('edited'))
+              this.navCtrl.pop();
+              },(data)=>{
+    
+              });
+          }
         }
       })
     }
@@ -104,16 +109,17 @@ groupname:any;
       if(val)
       {
         if(this.name.length < 4){
-          this.presentToast(this.translate.instant(""))
+          this.presentToast(this.translate.instant("groupnamelength"))
+        } else {
+          this.provider.creategroup(this.name,this.id,val,(data)=>{
+            console.log(JSON.stringify(data));
+            this.name="";
+            this.check=false;
+            this.presentToast(this.translate.instant('created'));
+            this.navCtrl.pop();
+    
+            },(data)=>{})
         }
-        this.provider.creategroup(this.name,this.id,val,(data)=>{
-        console.log(JSON.stringify(data))
-        this.name=""
-        this.check=false
-        this.presentToast(this.translate.instant('created'))
-        this.navCtrl.pop();
-
-        },(data)=>{})
       }
     })
   }

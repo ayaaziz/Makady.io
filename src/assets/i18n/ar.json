@@ -147,6 +147,7 @@
      "nofriendsToAdd":"لا يوجدأصدقاء",
      "noproducts":"لا يوجد منتجات",
      "norequireditems":"لا يوجد طلبات شراء",
-     "nooffers":"لا يوجد عروض"
+     "nooffers":"لا يوجد عروض",
+     "groupnamelength":"اسم المجموعة يجب أن يكون أربعة حروف على الأقل"
 
 }

@@ -38,16 +38,21 @@ export class FriendsPage {
     this.storage.get("makadyaccess").then((val)=>{
       if(val)
       {
-    this.provider.friends(val,(data)=>{
-      console.log(JSON.stringify(data))
-      let parsedData=JSON.parse(data)
-      this.friends=parsedData.friends
-      console.log("friends: "+JSON.stringify(this.friends));
-      this.groups=parsedData.groups
-    },(data)=>{
+        this.provider.friends(val,data => {
+          console.log(JSON.stringify(data))
+          let parsedData=JSON.parse(data)
+          this.friends=parsedData.friends
+          console.log("friends: "+JSON.stringify(this.friends));
+        
+          parsedData.groups.forEach(group => {
+            group.members = group.members.slice(0,4);
+          });
 
-    })
+          this.groups = parsedData.groups;
 
+        },error => {
+          console.log(error);
+        });
       }
     });
   }
@@ -161,23 +166,45 @@ export class FriendsPage {
 
 
   onInput(text:string) {
-    this.storage.get("makadyaccess").then(val => {
-      if(val) {
-        this.provider.searchFriends(val,text,data => {
-          if(data.success) {
-            data = JSON.parse(data);
-            console.log(JSON.stringify(data))
-            this.friends = data.friends;
 
+   
+      this.storage.get("makadyaccess").then(val => {
+        if(val) {
+
+          if(text) {
+            this.provider.searchFriends(val,text,data => {
+              // console.log("search friend: "+JSON.stringify(data));
+              if(data) {
+                data = JSON.parse(data);
+                console.log("search friend: "+JSON.stringify(data));
+                this.friends = data.data;
+              }
+    
+            },error => {
+              console.log(error);
+            })
           } else {
-            this.helper.presentToast(data.errors);
+            this.provider.friends(val,data => {
+              console.log(JSON.stringify(data))
+              let parsedData=JSON.parse(data)
+              this.friends=parsedData.friends
+              console.log("friends: "+JSON.stringify(this.friends));
+            
+              parsedData.groups.forEach(group => {
+                group.members = group.members.slice(0,4);
+              });
+    
+              this.groups = parsedData.groups;
+    
+            },error => {
+              console.log(error);
+            });
           }
 
-        },(data)=>{
-          this.helper.presentToast(this.translate.instant('serverErr'))
-        })
-  }
-})
+        }
+      })
+  
+ 
   }
   
 }

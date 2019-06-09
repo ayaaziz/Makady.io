@@ -142,5 +142,6 @@
      "nofriendsToAdd":"No friends to Add",
      "noproducts":"No products",
      "norequireditems":"No  required shopping items",
-     "nooffers":"No offers"
+     "nooffers":"No offers",
+     "groupnamelength":"Group name should be at least 4 letters"
 }

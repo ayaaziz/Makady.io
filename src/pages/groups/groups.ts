@@ -52,7 +52,8 @@ export class GroupsPage {
           let parsedData = JSON.parse(data);
 
           parsedData.groups.forEach(group => {
-            group.members = group.members.slice(0,3);
+            group.members = group.members.slice(0,4);
+            console.log("group length: "+ group.members.length);
           });
           
           this.groups = parsedData.groups;
@@ -101,7 +102,7 @@ else {
               
               let singleGroup = { 
                 "group_name": group.name_en,
-                "members":images.slice(0,3)
+                "members":images.slice(0,4)
               }
 
               console.log(JSON.stringify(images));

@@ -31,7 +31,7 @@ username:any;
       this.helper.presentToast(this.translate.instant('enteryouremail'));
 
     } else {
-      this.provider.forgetpass(this.Email,(data) => {
+      this.provider.forgetpass(this.Email,"forgetPassword",(data) => {
         console.log(JSON.stringify(data));
         let dataparsed = JSON.parse(data);
         this.username = dataparsed.data.username;

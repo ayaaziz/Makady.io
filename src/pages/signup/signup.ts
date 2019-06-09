@@ -172,10 +172,9 @@ export class SignupPage {
           .then(() => {
             this.event.publish("login");
           });
-       
 
           //cal api to return verification code to the user email and return with code          
-          this.provider.forgetpass(this.username,data => {
+          this.provider.forgetpass(this.username,"verification",data => {
             if(data) {
               data = JSON.parse(data);
               console.log("registeration data: "+JSON.stringify(data));
