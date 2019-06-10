@@ -233,7 +233,13 @@ export class VerificationPage {
 
   resend() {
   
-    this.provider.forgetpass(this.username,"", (data) => {
+    let type:string = "";
+    if(this.pageType === "AuthPage") 
+      type = "verification";
+    else 
+      type = "forgetPassword";
+
+    this.provider.forgetpass(this.username,type, (data) => {
       console.log(JSON.stringify(data))
       let dataparsed = JSON.parse(data)
       this.username = dataparsed.data.username
