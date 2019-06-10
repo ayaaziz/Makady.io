@@ -35,7 +35,7 @@
     </ion-col>
 
     <ion-col>       
-      <ion-item  style="border:1px solid #e26c40; border-radius: 10px;margin-top: 10px;" *ngFor="let item of listes" [hidden]="hide2">
+      <ion-item style="border:1px solid #e26c40; border-radius: 10px;margin-top: 10px;" *ngFor="let item of listes" [hidden]="hide2">
           <ion-row>
             <ion-col col-1 (click)="opendetails(item.menu_id,item.menu_name)">
               <p><ion-icon name="ios-list-outline" style="color:#666;font-size: 2.2em;"></ion-icon></p>

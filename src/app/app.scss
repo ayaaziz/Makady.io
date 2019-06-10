@@ -184,7 +184,8 @@ ion-content {
 }
 
 [dir="rtl"] ion-nav.menu-content.menu-content-reveal.menu-content-open {
-    transform: translateX(-293px) !important;
+    // transform: translateX(-293px) !important;
+    transform: translateX(-266px) !important;  
 }
 
 // ion-menu .menu-enabled.show-menu + ion-nav.menu-content.menu-content-reveal.menu-content-open {

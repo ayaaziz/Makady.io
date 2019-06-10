@@ -186,6 +186,6 @@ friendlist()
     setTimeout(() => {
       console.log('Async operation has ended');
       event.complete();
-    }, 2000);
+    });
   }
 }

@@ -48,8 +48,8 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
           })
       }
       else if (errorResponse.status === 401  && errorResponse.url == this.helper.serviceurl +'refreshToken'){
-        alert("hereeeee");
-        //this.helper.out();
+        // alert("hereeeee");
+        this.helper.out();
         return;
       }
       else{
