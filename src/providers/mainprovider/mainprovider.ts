@@ -168,7 +168,7 @@ export class MainproviderProvider {
     }
   }
 
-  logout(search,access,successCallback, failureCallback) {
+  logout(search,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({

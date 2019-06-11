@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ToastController, Events, NavController } from 'ionic-angular';
+import { ToastController, Events, NavController,App } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { LoginPage } from '../../pages/login/login';
+// import { MainproviderProvider } from '../mainprovider/mainprovider';
 
 @Injectable()
 export class HelperProvider {
@@ -23,6 +24,7 @@ export class HelperProvider {
               public http: HttpClient,
               public storage:Storage,
               public event:Events,
+              public app:App
               // private navctrl:NavController
             ) {
     console.log('Hello HelperProvider Provider');
@@ -56,18 +58,4 @@ export class HelperProvider {
         return false;
     }
   }
-
-  out() {
-    this.userLoged = false;
-    this.storage.remove("Makadyusername");
-    this.storage.remove("Mlanguage");
-
-    this.storage.remove("Makadyuser_name");
-    this.storage.remove("makadyaccess");
-    localStorage.clear();
-    
-    this.storage.remove("user_info");
-    // this.navctrl.setRoot(LoginPage);
-  }
-
 }

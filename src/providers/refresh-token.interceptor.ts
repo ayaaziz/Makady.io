@@ -5,13 +5,17 @@ import { HelperProvider } from './helper/helper';
 //import { HelperProvider } from '../helper/helper';
 import { Observable } from 'rxjs/Rx';
 import { Storage } from '@ionic/storage';
+import { App } from 'ionic-angular';
 import { MainproviderProvider } from './mainprovider/mainprovider';
+import { LoginPage } from '../pages/login/login';
 
 @Injectable()
 export class RefreshTokenInterceptor implements HttpInterceptor {
 
+  userLoged: boolean = false;
   constructor(  public helper: HelperProvider, private injector: Injector, public storage: Storage, 
-                public provider:MainproviderProvider ) {
+                public provider:MainproviderProvider,
+                public app:App ) {
     
   }
 
@@ -49,7 +53,25 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
       }
       else if (errorResponse.status === 401  && errorResponse.url == this.helper.serviceurl +'refreshToken'){
         // alert("hereeeee");
-        this.helper.out();
+        // this.helper.out();
+
+        this.provider.logout(1,data => {       
+        this.userLoged = false;
+        this.storage.remove("Makadyusername");
+        this.storage.remove("Mlanguage");
+
+        this.storage.remove("Makadyuser_name");
+        this.storage.remove("makadyaccess");
+        localStorage.clear();
+        
+        this.storage.remove("user_info");
+        let nav = this.app.getActiveNav();
+        alert(nav);
+        nav.setRoot(LoginPage);
+    
+      console.log(JSON.stringify(data))
+    },error => {})
+
         return;
       }
       else{

@@ -89,28 +89,33 @@ else {
     {
         this.provider.searchgroups(input,val,data => {
           console.log(JSON.stringify(data));
-      
           let parsedData = JSON.parse(data);
-            let newGroups = [];
-            let images = [];
-            
-            parsedData.data.forEach(group => {   
-              group.profile_pic.forEach(img => {
-                console.log(JSON.stringify(img))
-                images.push({"profile_pic":this.helper.userImagePath + img.profile_pic});
-              });
-              
-              let singleGroup = { 
-                "group_name": group.name_en,
-                "members":images.slice(0,4)
-              }
+           
+            if(parsedData.data.length > 0) {
+              let newGroups = [];
+              let images = [];
+              parsedData.data.forEach(group => {   
+                group.profile_pic.forEach(img => {
+                  console.log(JSON.stringify(img))
+                  images.push({"profile_pic":this.helper.userImagePath + img.profile_pic});
+                });
+                
+                let singleGroup = { 
+                  "group_name": group.name_en,
+                  "members":images.slice(0,4)
+                }
 
-              console.log(JSON.stringify(images));
-              newGroups.push(singleGroup);
-              
-              this.groups = newGroups;
-              console.log(JSON.stringify("search group data: "+JSON.stringify(this.groups)));
-            });
+                console.log(JSON.stringify(images));
+                newGroups.push(singleGroup);
+                
+                
+                this.groups = newGroups;
+                console.log(JSON.stringify("search group data: "+JSON.stringify(this.groups)));
+                
+              });
+            } else {
+              this.groups = [];
+            }
         },error => {
           console.log(error);
       });
