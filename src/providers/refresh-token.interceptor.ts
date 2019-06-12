@@ -53,24 +53,24 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
       }
       else if (errorResponse.status === 401  && errorResponse.url == this.helper.serviceurl +'refreshToken'){
         // alert("hereeeee");
-        // this.helper.out();
+        this.helper.out();
 
-        this.provider.logout(1,data => {       
-        this.userLoged = false;
-        this.storage.remove("Makadyusername");
-        this.storage.remove("Mlanguage");
+    //     this.provider.logout(1,data => {       
+    //     this.userLoged = false;
+    //     this.storage.remove("Makadyusername");
+    //     this.storage.remove("Mlanguage");
 
-        this.storage.remove("Makadyuser_name");
-        this.storage.remove("makadyaccess");
-        localStorage.clear();
+    //     this.storage.remove("Makadyuser_name");
+    //     this.storage.remove("makadyaccess");
+    //     localStorage.clear();
         
-        this.storage.remove("user_info");
-        let nav = this.app.getActiveNav();
-        alert(nav);
-        nav.setRoot(LoginPage);
+    //     this.storage.remove("user_info");
+    //     let nav = this.app.getActiveNav();
+    //     alert(nav);
+    //     nav.setRoot(LoginPage);
     
-      console.log(JSON.stringify(data))
-    },error => {})
+    //   console.log(JSON.stringify(data))
+    // },error => {})
 
         return;
       }

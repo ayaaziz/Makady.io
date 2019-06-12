@@ -91,7 +91,8 @@
         "PHOTO_LIBRARY_USAGE_DESCRIPTION": "To allow user to upload select images"
       },
       "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "832939987990-qkfbtvd8gc0runckq4qqtqpcguhtbgtg.apps.googleusercontent.com",
+        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.566883177794-dnk0g8f61h5nej8pb56r55dkcfa85jje",
+        "WEB_APPLICATION_CLIENT_ID": "566883177794-m25ltalfnb56vr30dfbgtcn6p1c54to8.apps.googleusercontent.com",
         "PLAY_SERVICES_VERSION": "11.8.0"
       },
       "phonegap-plugin-barcodescanner": {
