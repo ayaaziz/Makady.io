@@ -17,14 +17,23 @@
         <ion-input type="text" [dir]="langdirection" [(ngModel)]="username" placeholder="{{'username'| translate}}" ></ion-input>
       </ion-item>
 
+      <!-- <ion-item no-lines style="border-radius: 10px;margin-top: 20px;border: 2px solid lightgray;margin-right: 15px;margin-left: 15px;width: 90%;">
+        <ion-icon item-start name="md-key"></ion-icon>
+        <ion-icon item-end (click)="togglePwd('pwd')" ios="ios-eye-off" md="ios-eye-off" *ngIf="hidePassword"></ion-icon>
+        <ion-icon item-end (click)="togglePwd('pwd')" ios="ios-eye" md="ios-eye" *ngIf="!hidePassword"></ion-icon>
+        <ion-input [type]="pwdType" [dir]="langdirection" [(ngModel)]="Password" placeholder="{{'password' | translate}}" ></ion-input>
+      </ion-item> -->
+
       <ion-item no-lines style="border-radius: 10px;margin-top: 20px;border: 2px solid lightgray;margin-right: 15px;margin-left: 15px;width: 90%;">
-        <ion-label style="margin-left: 10px;"><ion-icon name="md-key"></ion-icon></ion-label>
-        <ion-input type="password" [dir]="langdirection" [(ngModel)]="Password" placeholder="{{'password' | translate}}" ></ion-input>
+        <ion-icon item-start name="md-key"></ion-icon>
+        <ion-icon item-end (click)="togglePwd('pwd')" [ios]="iconPwdName" [md]="iconPwdName"></ion-icon>
+        <ion-input [type]="pwdType" [dir]="langdirection" [(ngModel)]="Password" placeholder="{{'password' | translate}}" ></ion-input>
       </ion-item>
 
       <ion-item no-lines style="border-radius: 10px;margin-top: 20px;border: 2px solid lightgray;margin-right: 15px;margin-left: 15px;width: 90%;">
-        <ion-label style="margin-left: 10px;"><ion-icon name="md-key"></ion-icon></ion-label>
-        <ion-input type="password" [dir]="langdirection" [(ngModel)]="confirmPassword" placeholder="{{'confirmpass' | translate}}" ></ion-input>
+        <ion-icon item-start name="md-key"></ion-icon>
+        <ion-icon item-end (click)="togglePwd('confirmPwd')" [ios]="iconConfirmName" [md]="iconConfirmName"></ion-icon>
+        <ion-input [type]="confirmPwdType" [dir]="langdirection" [(ngModel)]="confirmPassword" placeholder="{{'confirmpass' | translate}}" ></ion-input>
       </ion-item>
           
       <ion-item no-lines style="border-radius: 10px;margin-top: 20px;border: 2px solid lightgray;margin-right: 15px;margin-left: 15px;width: 90%;">

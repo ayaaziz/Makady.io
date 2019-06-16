@@ -25,6 +25,9 @@ export class LoginPage {
   username: any = "";
   Password: any = "";
   lang:any;
+  hidePassword = true;
+  pwdType = "password";
+  iconName = "ios-eye-off";
   
 
   constructor(
@@ -339,5 +342,17 @@ export class LoginPage {
     else {
       //this.ShowError = false;
     }
+  }
+
+  togglePwd() {
+    if(this.hidePassword) {
+      this.hidePassword = false;
+      this.pwdType = "text";
+      this.iconName = "ios-eye";
+    } else {
+      this.hidePassword = true;
+      this.pwdType = "password";
+      this.iconName = "ios-eye-off";        
+    }  
   }
 }

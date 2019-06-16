@@ -8,4 +8,15 @@ page-signup {
         margin-top: 30px;
         margin-left: 1px;
     }
+
+    div.item-inner {
+        margin-left: 0 !important; 
+    }
+
+    .item > ion-icon,
+    .item-inner > ion-icon {
+        min-height: 2.4rem;
+        font-size: 2.4rem;
+        color: #999;
+    }
 }

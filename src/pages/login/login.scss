@@ -47,6 +47,17 @@ page-login {
         }
     }
 
+    div.item-inner {
+        margin-left: 0 !important; 
+    }
+
+    .item > ion-icon,
+    .item-inner > ion-icon {
+        min-height: 2.4rem;
+        font-size: 2.4rem;
+        color: #999;
+    }
+
     // ion-input.auth-input {
     //     flex-direction: row;
     //     &::before {

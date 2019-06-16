@@ -27,6 +27,12 @@ export class SignupPage {
   lang:any;
   imgdata = null;
   userImageUrl = "";
+  hidePassword:boolean = true;
+  pwdType:string = "password";
+  hideConfirmPwd:boolean = true;
+  confirmPwdType:string = "password";
+  iconPwdName:string = "ios-eye-off";
+  iconConfirmName:string = "ios-eye-off";
 
   constructor(public storage:Storage,
               public provider:MainproviderProvider,
@@ -194,4 +200,30 @@ export class SignupPage {
       });
     }
   }
+
+  togglePwd(action:string) {
+
+    if(action === "pwd") {
+      if(this.hidePassword) {
+        this.hidePassword = false;
+        this.pwdType = "text";
+        this.iconPwdName = "ios-eye";
+      } else {
+        this.hidePassword = true;
+        this.pwdType = "password";
+        this.iconPwdName = "ios-eye-off";        
+      } 
+    } else {
+      if(this.hideConfirmPwd) {
+        this.hideConfirmPwd = false;
+        this.confirmPwdType = "text";
+        this.iconConfirmName = "ios-eye";        
+      } else {
+        this.hideConfirmPwd = true;
+        this.confirmPwdType = "password";
+        this.iconConfirmName = "ios-eye-off";                
+      } 
+    }
+  }
+ 
 }

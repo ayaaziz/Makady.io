@@ -9,8 +9,9 @@
     </ion-item>
 
     <ion-item no-lines style="border-radius: 10px;margin-top: 20px;border: 2px solid lightgray;margin-right: 15px;margin-left: 15px;width: 90%;">
-      <ion-label style="margin-left: 10px;"><ion-icon name="md-key"></ion-icon></ion-label>
-      <ion-input [dir]="langdirection" type="password" [(ngModel)]="Password" placeholder="{{'password' | translate}}" ></ion-input>
+      <ion-icon item-start name="md-key"></ion-icon>
+      <ion-icon item-end (click)="togglePwd()" [ios]="iconName" [md]="iconName"></ion-icon>      
+      <ion-input [dir]="langdirection" [type]="pwdType" [(ngModel)]="Password" placeholder="{{'password' | translate}}" ></ion-input>
     </ion-item>
 
     <ion-row>
