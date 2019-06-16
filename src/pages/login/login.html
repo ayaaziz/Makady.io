@@ -10,7 +10,9 @@
 
     <ion-item no-lines style="border-radius: 10px;margin-top: 20px;border: 2px solid lightgray;margin-right: 15px;margin-left: 15px;width: 90%;">
       <ion-icon item-start name="md-key"></ion-icon>
-      <ion-icon item-end (click)="togglePwd()" [ios]="iconName" [md]="iconName"></ion-icon>      
+      <button ion-button clear item-end (click)="togglePwd()">
+        <ion-icon [ios]="iconName" [md]="iconName"></ion-icon>      
+      </button>
       <ion-input [dir]="langdirection" [type]="pwdType" [(ngModel)]="Password" placeholder="{{'password' | translate}}" ></ion-input>
     </ion-item>
 

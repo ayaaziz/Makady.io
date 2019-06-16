@@ -26,28 +26,32 @@
 
       <ion-item no-lines style="border-radius: 10px;margin-top: 20px;border: 2px solid lightgray;margin-right: 15px;margin-left: 15px;width: 90%;">
         <ion-icon item-start name="md-key"></ion-icon>
-        <ion-icon item-end (click)="togglePwd('pwd')" [ios]="iconPwdName" [md]="iconPwdName"></ion-icon>
+        <button ion-button clear item-end (click)="togglePwd('pwd')">
+          <ion-icon [ios]="iconPwdName" [md]="iconPwdName"></ion-icon>
+        </button>
         <ion-input [type]="pwdType" [dir]="langdirection" [(ngModel)]="Password" placeholder="{{'password' | translate}}" ></ion-input>
       </ion-item>
 
       <ion-item no-lines style="border-radius: 10px;margin-top: 20px;border: 2px solid lightgray;margin-right: 15px;margin-left: 15px;width: 90%;">
         <ion-icon item-start name="md-key"></ion-icon>
-        <ion-icon item-end (click)="togglePwd('confirmPwd')" [ios]="iconConfirmName" [md]="iconConfirmName"></ion-icon>
+        <button ion-button clear item-end (click)="togglePwd('confirmPwd')">
+          <ion-icon [ios]="iconConfirmName" [md]="iconConfirmName"></ion-icon>
+        </button>
         <ion-input [type]="confirmPwdType" [dir]="langdirection" [(ngModel)]="confirmPassword" placeholder="{{'confirmpass' | translate}}" ></ion-input>
       </ion-item>
           
       <ion-item no-lines style="border-radius: 10px;margin-top: 20px;border: 2px solid lightgray;margin-right: 15px;margin-left: 15px;width: 90%;">
-        <ion-label style="margin-left: 10px;"><ion-icon name="md-person"></ion-icon></ion-label>
+        <ion-icon item-start name="md-person"></ion-icon>
         <ion-input type="text" [dir]="langdirection" [(ngModel)]="name" placeholder=" {{'name' | translate}}" ></ion-input>
       </ion-item> 
         
       <ion-item no-lines style="border-radius: 10px;margin-top: 20px;border: 2px solid lightgray;margin-right: 15px;margin-left: 15px;width: 90%;">
-        <ion-label style="margin-left: 10px;"><ion-icon name="md-mail"></ion-icon></ion-label>
+        <ion-icon item-start name="md-mail"></ion-icon>
         <ion-input type="email" [dir]="langdirection" [(ngModel)]="email" placeholder=" {{'email' | translate}}" ></ion-input>
       </ion-item>
                 
       <ion-item no-lines style="border-radius: 10px;margin-top: 20px;border: 2px solid lightgray;margin-right: 15px;margin-left: 15px;width: 90%;">
-        <ion-label style="margin-left: 10px;"><ion-icon name="ios-phone-portrait-outline"></ion-icon></ion-label>
+        <ion-icon item-start name="ios-phone-portrait-outline"></ion-icon>
         <ion-input type="tel" [dir]="langdirection" [(ngModel)]="phone" placeholder=" {{'mobile' | translate}}" ></ion-input>
       </ion-item> 
     </ion-list>
