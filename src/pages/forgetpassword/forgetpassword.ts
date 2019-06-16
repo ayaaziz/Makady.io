@@ -45,4 +45,17 @@ username:any;
       });
     }
   }
+
+
+  doRefresh(event) {
+
+    console.log("eventtt: "+event);
+
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.complete();
+    });
+  }
 }

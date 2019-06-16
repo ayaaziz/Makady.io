@@ -36,9 +36,8 @@ export class CreatemenuPage {
         // alert(this.menuid);
         this.menuname=this.navParams.get("name")
   }
-  
-  ionViewDidEnter() {
 
+  loadData() {
     if(this.page === "edit")
     {
       this.name = this.menuname;
@@ -69,11 +68,14 @@ export class CreatemenuPage {
           console.log(error);          
         })
       }
-       
-
      }
    })
   }
+  
+  ionViewDidEnter() {
+    this.loadData();
+  }
+
   checkfriend(id)
   {
       this.id=this.id+','+id
@@ -132,5 +134,19 @@ export class CreatemenuPage {
     
     });
     toast.present();
+  }
+
+  doRefresh(event) {
+
+    console.log("eventtt: "+event);
+
+    console.log('Begin async operation');
+
+    this.loadData();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.complete();
+    });
   }
 }

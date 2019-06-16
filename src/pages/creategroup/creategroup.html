@@ -11,6 +11,14 @@
 </ion-header>
 
 <ion-content padding>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content 
+      pullingIcon="ios-arrow-dropup"
+      refreshingSpinner=null>
+    </ion-refresher-content>
+  </ion-refresher>
+
   <ion-row>
     <ion-col col-12>
       <ion-label style="font-size: 18px; color: #e26c40;">{{'Group Name' | translate}}</ion-label>

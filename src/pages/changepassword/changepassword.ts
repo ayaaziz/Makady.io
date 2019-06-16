@@ -16,12 +16,13 @@ export class ChangepasswordPage {
   confirm:any=""
   new:any=""
   constructor(public ViewCtrl:ViewController,public toastCtrl:ToastController,public translate:TranslateService,public storage:Storage,public platform:Platform,public provider:MainproviderProvider,public helper:HelperProvider,public navCtrl: NavController, public navParams: NavParams) {
+    this.langdirection=this.helper.langdirection;    
   }
 
   ionViewDidLoad() {
-    this.langdirection=this.helper.langdirection
 
   }
+  
   change()
   {
     if(this.confirm=="" || this.current=="" || this.new=="" )
@@ -75,4 +76,15 @@ export class ChangepasswordPage {
     toast.present();
   }
 
+  doRefresh(event) {
+
+    console.log("eventtt: "+event);
+
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.complete();
+    });
+  }
 }

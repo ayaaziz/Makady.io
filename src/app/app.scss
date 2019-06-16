@@ -246,3 +246,8 @@ p.group-text {
     overflow: hidden;
     margin: 0 auto;
 }
+
+// .item.item-block.item-ios:not(:last-child),
+button.item.item-block.item-md:not(:last-child) {
+    border-bottom: 8px solid #e26c40;
+}

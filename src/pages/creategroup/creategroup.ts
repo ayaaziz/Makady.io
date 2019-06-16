@@ -28,7 +28,7 @@ groupname:any;
     this.groupname = this.navParams.get("name");
   }
 
-  ionViewDidLoad() {
+  loadData() {
     if(this.page=="edit") {
       this.name = this.groupname;
       // this.pageType = "Edit";
@@ -67,6 +67,10 @@ groupname:any;
         }
       }
     })
+  }
+
+  ionViewDidLoad() {
+    this.loadData();
   }
   
   checkfriend(id)
@@ -133,6 +137,20 @@ groupname:any;
     
     });
     toast.present();
+  }
+
+  doRefresh(event) {
+
+    console.log("eventtt: "+event);
+
+    console.log('Begin async operation');
+
+    this.loadData();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.complete();
+    });
   }
 
 }
