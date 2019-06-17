@@ -161,7 +161,6 @@ defaultImgUrl:string;
   {
     // this.navCtrl.setRoot(TabsPage).then(()=>{
 
-      //aya
       this.navCtrl.push(CategoriesPage,{"fromUserList":this.id});
     // })
   }

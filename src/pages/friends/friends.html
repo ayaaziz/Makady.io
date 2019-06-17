@@ -11,6 +11,14 @@
 </ion-header>
 
 <ion-content padding>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content 
+      pullingIcon="ios-arrow-dropup"
+      refreshingSpinner=null>
+    </ion-refresher-content>
+  </ion-refresher>
+
   <ion-searchbar [dir]="langdirection" placeholder="{{ 'searchfriend' | translate }}" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput"></ion-searchbar>
   
   <!-- <p style="text-align: center;color:#3d3d3d;font-size: 1.8rem;font-weight: bold;" *ngIf="groups.length === 0">{{'nogroups'| translate}}</p> -->

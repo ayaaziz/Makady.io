@@ -11,6 +11,13 @@
 
 <ion-content padding>
 
+	<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content 
+			pullingIcon="ios-arrow-dropup"
+			refreshingSpinner=null>
+		</ion-refresher-content>
+	</ion-refresher>
+
 	<ion-row>
 		<ion-col style="justify-content: center;display: flex;">
 			<ion-card *ngIf="createdCode">

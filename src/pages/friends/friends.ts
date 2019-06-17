@@ -33,8 +33,7 @@ export class FriendsPage {
   
   }
 
-
-  ionViewWillEnter() {
+  loadData() {
     this.storage.get("makadyaccess").then((val)=>{
       if(val)
       {
@@ -55,6 +54,11 @@ export class FriendsPage {
         });
       }
     });
+  }
+
+
+  ionViewWillEnter() {
+    this.loadData();
   }
 
   delete(id)
@@ -205,6 +209,21 @@ export class FriendsPage {
       })
   
  
+  }
+
+
+  doRefresh(event) {
+
+    console.log("eventtt: "+event);
+
+    console.log('Begin async operation');
+
+    this.loadData();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.complete();
+    });
   }
   
 }

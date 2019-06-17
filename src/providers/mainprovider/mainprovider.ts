@@ -1267,30 +1267,28 @@ export class MainproviderProvider {
         });
         loader.present();
         let headers = new HttpHeaders();
-        
+    
         // let parameter = {
-        //   'username':name,
-        //   'name': name,
-        //   'email': email,
-        //   'password':id,
-        //   'lang':lang,
-        //   'social_type':socialType,        
+          // "social_data": [
+          // {
+          //   'username':name,
+          //   'name': name,
+          //   'email': email,
+          //   'password':id,
+          //   'lang':lang,
+          //   'social_type':socialType,        
+          // }
+          // ]
         // }
 
         let parameter = {
-          // "social_data": [name,email,id,lang,socialType]
-          "social_data": [
-          {
-            'username':name,
-            'name': name,
-            'email': email,
-            'password':id,
-            'lang':lang,
-            'social_type':socialType,        
-          }
-          ]
-        } 
-        
+          'username':name,
+          'email': email,
+          'password':id,
+          'lang':lang,
+          'social_type':socialType      
+        }
+           
         headers = headers.set('Content-Type', 'application/json');
 
         let serviceUrl = this.helper.serviceurl + 'social_login';
@@ -1395,6 +1393,71 @@ export class MainproviderProvider {
     
       headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'FriendsNotInGroup';
+    
+      this.http.post(serviceUrl, parameter ,{ headers: headers })
+        .subscribe(
+          data => {
+            loader.dismiss();
+
+            successCallback(JSON.stringify(data));
+          },
+          err => {
+            loader.dismiss();
+            failureCallback(err);
+            console.log(err.message);       
+          }
+        )
+    } else {
+      this.helper.presentToast(this.translate.instant("offline"));
+    }
+  }
+
+
+
+  ///////new apis/////////
+  getRequestsSent(access,successCallback,failureCallback) {
+    if(navigator.onLine) {
+      let loader = this.loadingCtrl.create({
+        content: "",
+      });
+      loader.present();
+      let headers = new HttpHeaders();
+    
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
+      let serviceUrl = this.helper.serviceurl + 'FriendsIRequest';
+    
+      this.http.get(serviceUrl ,{ headers: headers })
+        .subscribe(
+          data => {
+            loader.dismiss();
+
+            successCallback(JSON.stringify(data));
+          },
+          err => {
+            loader.dismiss();
+            failureCallback(err);
+            console.log(err.message);       
+          }
+        )
+    } else {
+      this.helper.presentToast(this.translate.instant("offline"));
+    }
+  }
+
+  cancelReq(reqId,successCallback,failureCallback) {
+    if(navigator.onLine) {
+      let loader = this.loadingCtrl.create({
+        content: "",
+      });
+      loader.present();
+      let headers = new HttpHeaders();
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
+
+      let parameter = {
+        "request_id":reqId
+      }
+
+      let serviceUrl = this.helper.serviceurl + 'cancelRequest';
     
       this.http.post(serviceUrl, parameter ,{ headers: headers })
         .subscribe(

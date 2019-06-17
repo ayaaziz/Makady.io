@@ -92,6 +92,8 @@ export class SettingsPage {
    
     
   }
+
+
   take(sourceType)
   {
     console.log("take pic")
@@ -133,7 +135,7 @@ export class SettingsPage {
     });
   }
 
-  ionViewDidLoad() {
+  loadData() {
     this.storage.get("makadyaccess").then((val) => { 
       if(val) {
         this.provider.getuser(val,(data) => {
@@ -153,6 +155,10 @@ export class SettingsPage {
     })
 
     console.log('ionViewDidLoad SettingsPage');
+  }
+
+  ionViewDidLoad() {
+    this.loadData();
   }
 
 
@@ -281,5 +287,19 @@ export class SettingsPage {
 
     //open or close product notification
      
+  }
+
+  doRefresh(event) {
+
+    console.log("eventtt: "+event);
+
+    console.log('Begin async operation');
+
+    this.loadData();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.complete();
+    });
   }
 }

@@ -15,6 +15,7 @@ export class FriendlistPage {
   langdirection:any;
   friends:any = [];
   hide:any = true;
+  requestsSent:any = [];
 
   constructor(public toastCtrl:ToastController,
               public Alert:AlertController,
@@ -42,8 +43,6 @@ export class FriendlistPage {
           let parsedData=JSON.parse(data);
           this.friends=parsedData.friends;
 
-        
-
           if(this.friends.length == 0) {
             this.hide = false;
           
@@ -57,8 +56,27 @@ export class FriendlistPage {
         },(data)=>{
 
         });
+
+
+
+        
+        this.provider.getRequestsSent(val,data => {
+          console.log(JSON.stringify(data));
+          // let parsedData=JSON.parse(data);
+          // this.requestsSent = parsedData.friends;
+
+        },error => {
+          console.log(error);
+        });
+
+
       }
     });
+
+
+
+   
+
     console.log('ionViewDidLoad FriendlistPage');
   }
 
@@ -91,8 +109,6 @@ export class FriendlistPage {
             }
           }
           this.event.publish("removeRequest");
-          // this.helper.requestsNo--;
-          // this.event.publish("respondRequest");
         },(data)=>{});
       }
     });
@@ -114,6 +130,19 @@ export class FriendlistPage {
     setTimeout(() => {
       console.log('Async operation has ended');
       event.complete();
+    });
+  }
+
+  cancelRequest(reqId) {
+    this.provider.cancelReq(reqId,data => {
+      console.log(JSON.stringify(data));
+      for(var i=0;i<this.requestsSent.length;i++) {
+        // if (this.requestsSent[i].user_id == reqId) {
+        //   this.friends.splice(i, 1);
+        // }
+      }
+    },error => {
+      console.log(error);
     });
   }
 }
