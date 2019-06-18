@@ -2,14 +2,17 @@
   <ion-content style='font-family: "makady" !important;'>
     <div style="text-align: center;">
       <div class="takePhoto">
-          <img style="text-align:center;" src="{{photo}}" class="circle-pic"
-          onerror="this.onerror=null;this.src='assets/imgs/user.png';"> 
-          <ion-icon name="ios-camera" (click)="getimg()"></ion-icon>
+        <img style="text-align:center;" src="{{photo}}" class="circle-pic"
+        onerror="this.onerror=null;this.src='assets/imgs/user.png';"> 
+        <ion-icon name="ios-camera" (click)="getimg()"></ion-icon>
       </div>
-      <h4 style="color:#666;text-align: center;">{{username}}</h4>
+      <div>
+        <h4 style="display: inline-block;color:#666;text-align: center;">{{username}}</h4>
+      </div>
     </div>
     <ion-list no-lines style="margin-top: 20px;">
-      <button menuClose ion-item (click)="openhome()" style="margin-bottom: -8px;">
+      <!-- <button menuClose ion-item (click)="openhome()" style="margin-bottom: -8px;"> -->
+      <button menuClose ion-item (click)="openhome()">        
         <ion-row  style="margin-right: 0px;">
           <ion-icon name="ios-home" style="font-size:21px;color:#f2622c;"></ion-icon>
           <h2 style="margin-right: 10px;margin-left: 10px;color:#f2622c; font-size:18px;">{{"Home"| translate}}</h2>

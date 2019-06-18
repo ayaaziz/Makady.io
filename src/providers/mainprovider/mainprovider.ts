@@ -947,7 +947,7 @@ export class MainproviderProvider {
     }
   }
 
-  editmenu(name,ids,menuid,access,successCallback, failureCallback) {
+  editmenu(name,ids,removedIds,menuid,access,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -958,6 +958,7 @@ export class MainproviderProvider {
       let parameter={
         'name':name,
         'users_ids':ids,
+        'removed_ids':removedIds,
         'menu_id':menuid
       }
       headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
@@ -1311,40 +1312,40 @@ export class MainproviderProvider {
   }
 
 
-  removeUserFromMenu(menuId,userId,access,successCallback,failureCallback) {
+  // removeUserFromMenu(menuId,userId,access,successCallback,failureCallback) {
  
-    if(navigator.onLine) {
-      let loader = this.loadingCtrl.create({
-        content: "",
-      });
-      loader.present();
+  //   if(navigator.onLine) {
+  //     let loader = this.loadingCtrl.create({
+  //       content: "",
+  //     });
+  //     loader.present();
 
-      let headers = new HttpHeaders();
-      let parameter = {
-        'menu_id':menuId,
-        'current_user':userId
-      }
-      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
+  //     let headers = new HttpHeaders();
+  //     let parameter = {
+  //       'menu_id':menuId,
+  //       'current_user':userId
+  //     }
+  //     headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
 
-      let serviceUrl = this.helper.serviceurl + 'RemoveMenuUser';
+  //     let serviceUrl = this.helper.serviceurl + 'RemoveMenuUser';
  
-      this.http.post(serviceUrl, parameter,{ headers: headers })
-        .subscribe(
-          data => {
-            loader.dismiss();
+  //     this.http.post(serviceUrl, parameter,{ headers: headers })
+  //       .subscribe(
+  //         data => {
+  //           loader.dismiss();
 
-            successCallback(JSON.stringify(data))
-          },
-          err => {
-            loader.dismiss();
-            failureCallback(err);
-            console.log(err.message);    
-          }
-        )
-    } else {
-      this.helper.presentToast(this.translate.instant("offline"));
-    }
-  }
+  //           successCallback(JSON.stringify(data))
+  //         },
+  //         err => {
+  //           loader.dismiss();
+  //           failureCallback(err);
+  //           console.log(err.message);    
+  //         }
+  //       )
+  //   } else {
+  //     this.helper.presentToast(this.translate.instant("offline"));
+  //   }
+  // }
 
   getFriendsNotInMenu(menuId,access,successCallback, failureCallback) {
     if(navigator.onLine) {
@@ -1360,6 +1361,39 @@ export class MainproviderProvider {
     
       headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'FriendsNotInMenu';
+    
+      this.http.post(serviceUrl, parameter ,{ headers: headers })
+        .subscribe(
+          data => {
+            loader.dismiss();
+
+            successCallback(JSON.stringify(data));
+          },
+          err => {
+            loader.dismiss();
+            failureCallback(err);
+            console.log(err.message);       
+          }
+        )
+    } else {
+      this.helper.presentToast(this.translate.instant("offline"));
+    }
+  }
+
+  getFriendsInMenu(menuId,successCallback, failureCallback) {
+    if(navigator.onLine) {
+      let loader = this.loadingCtrl.create({
+        content: "",
+      });
+      loader.present();
+      let headers = new HttpHeaders();
+
+      let parameter = {
+        "menu_id":menuId
+      }
+    
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
+      let serviceUrl = this.helper.serviceurl + 'FriendsInMenu';
     
       this.http.post(serviceUrl, parameter ,{ headers: headers })
         .subscribe(
@@ -1415,7 +1449,7 @@ export class MainproviderProvider {
 
 
   ///////new apis/////////
-  getRequestsSent(access,successCallback,failureCallback) {
+  getRequestsSent(successCallback,failureCallback) {
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
         content: "",
@@ -1444,7 +1478,7 @@ export class MainproviderProvider {
     }
   }
 
-  cancelReq(reqId,successCallback,failureCallback) {
+  cancelReq(userId,successCallback,failureCallback) {
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
         content: "",
@@ -1454,10 +1488,10 @@ export class MainproviderProvider {
       headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
 
       let parameter = {
-        "request_id":reqId
+        "user_id":userId
       }
 
-      let serviceUrl = this.helper.serviceurl + 'cancelRequest';
+      let serviceUrl = this.helper.serviceurl + 'CancelFriendRequest';
     
       this.http.post(serviceUrl, parameter ,{ headers: headers })
         .subscribe(
@@ -1470,6 +1504,43 @@ export class MainproviderProvider {
             loader.dismiss();
             failureCallback(err);
             console.log(err.message);       
+          }
+        )
+    } else {
+      this.helper.presentToast(this.translate.instant("offline"));
+    }
+  }
+
+
+  removeUserFromMenu(menuId,userId,successCallback,failureCallback) {
+ 
+    if(navigator.onLine) {
+      let loader = this.loadingCtrl.create({
+        content: "",
+      });
+      loader.present();
+
+      let headers = new HttpHeaders();
+      let parameter = {
+        'menu_id':menuId,
+        'user_id':userId
+      }
+
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
+
+      let serviceUrl = this.helper.serviceurl + 'DeleteMenuUser';
+ 
+      this.http.post(serviceUrl, parameter,{ headers: headers })
+        .subscribe(
+          data => {
+            loader.dismiss();
+
+            successCallback(JSON.stringify(data))
+          },
+          err => {
+            loader.dismiss();
+            failureCallback(err);
+            console.log(err.message);    
           }
         )
     } else {

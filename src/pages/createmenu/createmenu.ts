@@ -20,6 +20,8 @@ export class CreatemenuPage {
   page:any
   menuid:any
   menuname:any;
+  friendsInMenu:any = [];
+  removedIds:any = "";
 
   constructor(public ViewCtrl:ViewController,
     public toastCtrl:ToastController,
@@ -50,6 +52,7 @@ export class CreatemenuPage {
   
       if(this.page === "edit") {
         
+        //get friends not in menu
         this.provider.getFriendsNotInMenu(this.menuid,val,data => {
           data = JSON.parse(data);
           console.log(JSON.stringify(data));
@@ -59,6 +62,17 @@ export class CreatemenuPage {
          error => {
           console.log(error);
          });
+
+         //get friends in menu
+         this.provider.getFriendsInMenu(this.menuid,data => {
+           data = JSON.parse(data);
+          this.friendsInMenu = data.friend;
+          console.log("friendsInMenu......: "+JSON.stringify(this.friendsInMenu));
+          
+         },error => {
+          console.log(error);
+         })
+         
       } else {
           this.provider.friends(val,data => { 
           console.log(JSON.stringify(data));
@@ -78,33 +92,40 @@ export class CreatemenuPage {
 
   checkfriend(id)
   {
-      this.id=this.id+','+id
+      this.id=this.id+','+id;
   }
+
+  unCheckFriend(id) {
+    this.removedIds=this.removedIds+','+id;   
+  }
+
   create()
   {
     if(this.name.length < 4){
-      this.presentToast(this.translate.instant("groupNameErr"))
+      this.presentToast(this.translate.instant("groupNameErr"));
       return
     }
+
    if(this.id.charAt(0) == ',' )
    {
      this.id = this.id.substr(1);
-     console.log(this.id)
+     console.log(this.id);
    }
-    if(this.page=="edit")
-    {
+
+   if(this.page=="edit")
+   {
       this.storage.get("makadyaccess").then((val)=>{
         if(val)
         {
-          this.provider.editmenu(this.name,this.id,this.menuid,val,(data)=>{
+          this.provider.editmenu(this.name,this.id,this.removedIds,this.menuid,val,data => {
           console.log(JSON.stringify(data))
-          this.name=""
-          this.check=false
-          this.presentToast(this.translate.instant('edited'))
-          this.navCtrl.setRoot(ShoppinglistPage)
+          this.name="";
+          this.check=false;
+          this.presentToast(this.translate.instant('edited'));
+          this.navCtrl.setRoot(ShoppinglistPage);
 
-          },(data)=>{
-
+          },error => {
+            console.log(error);
           })
         }
       })
@@ -149,4 +170,12 @@ export class CreatemenuPage {
       event.complete();
     });
   }
+
+  // removeFriend(userId) {
+  //   this.provider.removeUserFromMenu(this.menuid,userId,data => {
+  //     console.log(JSON.stringify(data));
+  //   },error => {
+  //     console.log(error);
+  //   })
+  // }
 }

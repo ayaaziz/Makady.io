@@ -56,26 +56,18 @@ export class FriendlistPage {
         },(data)=>{
 
         });
-
-
-
-        
-        this.provider.getRequestsSent(val,data => {
-          console.log(JSON.stringify(data));
-          // let parsedData=JSON.parse(data);
-          // this.requestsSent = parsedData.friends;
-
-        },error => {
-          console.log(error);
-        });
-
-
       }
     });
 
+      
+    this.provider.getRequestsSent(data => {
+      console.log(JSON.stringify(data));
+      let parsedData=JSON.parse(data);
+      this.requestsSent = parsedData.friends;
 
-
-   
+    },error => {
+      console.log(error);
+    });
 
     console.log('ionViewDidLoad FriendlistPage');
   }
@@ -133,13 +125,12 @@ export class FriendlistPage {
     });
   }
 
-  cancelRequest(reqId) {
-    this.provider.cancelReq(reqId,data => {
-      console.log(JSON.stringify(data));
+  cancelRequest(userId) {
+    this.provider.cancelReq(userId,data => {
       for(var i=0;i<this.requestsSent.length;i++) {
-        // if (this.requestsSent[i].user_id == reqId) {
-        //   this.friends.splice(i, 1);
-        // }
+        if (this.requestsSent[i].id == userId) {
+          this.requestsSent.splice(i, 1);
+        }
       }
     },error => {
       console.log(error);
