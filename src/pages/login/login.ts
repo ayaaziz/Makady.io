@@ -158,6 +158,13 @@ export class LoginPage {
             this.storage.set("Makadyusername", "true");
             //api to save in db and return access_token
             this.provider.userLoginWithSocial(userId,1,user.name,user.email,this.lang,user.picture,0,"0000-00-00",data => {
+            
+            console.log('username '+user.name,
+            'email '+ user.email,
+            'password '+userId,
+            'lang '+this.lang,
+            'social_type '+1);
+
               //return with access
               data = JSON.parse(data);
 

@@ -20,7 +20,9 @@ id:any=""
 page:any
 groupid:any
 groupname:any;
+friendsInGroup:any = [];
 // pageType:string;
+removedIds:any = "";
 
   constructor(public ViewCtrl:ViewController,public toastCtrl:ToastController,public storage:Storage,public provider:MainproviderProvider,public platform:Platform,public helper:HelperProvider,public translate:TranslateService,public navCtrl: NavController, public navParams: NavParams) {
     this.page = this.navParams.get("page");
@@ -43,15 +45,27 @@ groupname:any;
 
       if(this.page === "edit") {
         
+        //get friends not in group        
         this.provider.getFriendsNotInGroup(this.groupid,val,data => {
           data = JSON.parse(data);
           console.log(JSON.stringify(data));
           
           this.friends = data.friend;
-         },
-         error => {
+          },
+          error => {
           console.log(error);
-         });
+          });
+
+
+        //get friends in group
+        this.provider.getFriendsInGroup(this.groupid,data => {
+          data = JSON.parse(data);
+          this.friendsInGroup = data.friend;
+          console.log("friendsInGroup......: "+JSON.stringify(this.friendsInGroup));
+          
+        },error => {
+          console.log(error);
+        })
 
 
       } else {
@@ -79,6 +93,10 @@ groupname:any;
       // alert(this.id);
   }
 
+  unCheckFriend(id) {
+    this.removedIds=this.removedIds+','+id;   
+  }
+
   create()
   {
     if(this.id.charAt(0) == ',' )
@@ -95,7 +113,7 @@ groupname:any;
           if(this.name.length < 4){
             this.presentToast(this.translate.instant("groupnamelength"))
           } else {
-            this.provider.editgroup(this.name,this.id,this.groupid,val,(data)=>{
+            this.provider.editgroup(this.name,this.id,this.removedIds,this.groupid,val,(data)=>{
               console.log(JSON.stringify(data))
               this.name=""
               this.check=false

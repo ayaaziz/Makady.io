@@ -614,7 +614,7 @@ export class MainproviderProvider {
   }
 
 
-  editgroup(name,ids,groupid,access,successCallback, failureCallback) {
+  editgroup(name,ids,removedIds,groupid,access,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -625,6 +625,7 @@ export class MainproviderProvider {
       let parameter={
         'name':name,
         'users_ids':ids,
+        "removed_ids":removedIds,
         'group_id':groupid
       }
       console.log(access)
@@ -1261,6 +1262,12 @@ export class MainproviderProvider {
 
    //api name: "social_login"
    userLoginWithSocial(id,socialType,name,email,lang,profileImageUrl,gender,phone,successCallback,failureCallback) {
+    alert("sociaaaal!!!!");
+    console.log('username '+name,
+    'email '+ email,
+    'password '+id,
+    'lang '+lang,
+    'social_type '+socialType);
 
       if(navigator.onLine) {
         let loader = this.loadingCtrl.create({
@@ -1268,19 +1275,6 @@ export class MainproviderProvider {
         });
         loader.present();
         let headers = new HttpHeaders();
-    
-        // let parameter = {
-          // "social_data": [
-          // {
-          //   'username':name,
-          //   'name': name,
-          //   'email': email,
-          //   'password':id,
-          //   'lang':lang,
-          //   'social_type':socialType,        
-          // }
-          // ]
-        // }
 
         let parameter = {
           'username':name,
@@ -1312,40 +1306,40 @@ export class MainproviderProvider {
   }
 
 
-  // removeUserFromMenu(menuId,userId,access,successCallback,failureCallback) {
+  removeUserFromMenu(menuId,userId,access,successCallback,failureCallback) {
  
-  //   if(navigator.onLine) {
-  //     let loader = this.loadingCtrl.create({
-  //       content: "",
-  //     });
-  //     loader.present();
+    if(navigator.onLine) {
+      let loader = this.loadingCtrl.create({
+        content: "",
+      });
+      loader.present();
 
-  //     let headers = new HttpHeaders();
-  //     let parameter = {
-  //       'menu_id':menuId,
-  //       'current_user':userId
-  //     }
-  //     headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
+      let headers = new HttpHeaders();
+      let parameter = {
+        'menu_id':menuId,
+        'current_user':userId
+      }
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
 
-  //     let serviceUrl = this.helper.serviceurl + 'RemoveMenuUser';
+      let serviceUrl = this.helper.serviceurl + 'RemoveMenuUser';
  
-  //     this.http.post(serviceUrl, parameter,{ headers: headers })
-  //       .subscribe(
-  //         data => {
-  //           loader.dismiss();
+      this.http.post(serviceUrl, parameter,{ headers: headers })
+        .subscribe(
+          data => {
+            loader.dismiss();
 
-  //           successCallback(JSON.stringify(data))
-  //         },
-  //         err => {
-  //           loader.dismiss();
-  //           failureCallback(err);
-  //           console.log(err.message);    
-  //         }
-  //       )
-  //   } else {
-  //     this.helper.presentToast(this.translate.instant("offline"));
-  //   }
-  // }
+            successCallback(JSON.stringify(data))
+          },
+          err => {
+            loader.dismiss();
+            failureCallback(err);
+            console.log(err.message);    
+          }
+        )
+    } else {
+      this.helper.presentToast(this.translate.instant("offline"));
+    }
+  }
 
   getFriendsNotInMenu(menuId,access,successCallback, failureCallback) {
     if(navigator.onLine) {
@@ -1446,6 +1440,39 @@ export class MainproviderProvider {
     }
   }
 
+  getFriendsInGroup(groupId,successCallback, failureCallback) {
+    if(navigator.onLine) {
+      let loader = this.loadingCtrl.create({
+        content: "",
+      });
+      loader.present();
+      let headers = new HttpHeaders();
+
+      let parameter = {
+        "group_id":groupId
+      }
+    
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
+      let serviceUrl = this.helper.serviceurl + 'FriendsInGroup';
+    
+      this.http.post(serviceUrl, parameter ,{ headers: headers })
+        .subscribe(
+          data => {
+            loader.dismiss();
+
+            successCallback(JSON.stringify(data));
+          },
+          err => {
+            loader.dismiss();
+            failureCallback(err);
+            console.log(err.message);       
+          }
+        )
+    } else {
+      this.helper.presentToast(this.translate.instant("offline"));
+    }
+  }
+
 
 
   ///////new apis/////////
@@ -1512,39 +1539,5 @@ export class MainproviderProvider {
   }
 
 
-  removeUserFromMenu(menuId,userId,successCallback,failureCallback) {
- 
-    if(navigator.onLine) {
-      let loader = this.loadingCtrl.create({
-        content: "",
-      });
-      loader.present();
 
-      let headers = new HttpHeaders();
-      let parameter = {
-        'menu_id':menuId,
-        'user_id':userId
-      }
-
-      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
-
-      let serviceUrl = this.helper.serviceurl + 'DeleteMenuUser';
- 
-      this.http.post(serviceUrl, parameter,{ headers: headers })
-        .subscribe(
-          data => {
-            loader.dismiss();
-
-            successCallback(JSON.stringify(data))
-          },
-          err => {
-            loader.dismiss();
-            failureCallback(err);
-            console.log(err.message);    
-          }
-        )
-    } else {
-      this.helper.presentToast(this.translate.instant("offline"));
-    }
-  }
 }
