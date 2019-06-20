@@ -11,6 +11,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { TabsPage } from '../tabs/tabs';
 import { SettingsProvider } from '../../providers/settings/settings';
 import { HomePage } from '../home/home';
+import { EditProfilePage } from '../edit-profile/edit-profile';
 
 
 @Component({
@@ -287,6 +288,23 @@ export class SettingsPage {
 
     //open or close product notification
      
+  }
+
+  editProfile() {
+
+    this.storage.get("makadyaccess").then((val)=>{
+      if(val) {
+        this.provider.getuser(val,data => {
+          data = JSON.parse(data);
+          console.log("prof data....: "+JSON.stringify(data));  
+
+          this.navCtrl.push(EditProfilePage,{"user":data});
+        },error => {
+          console.log(error);
+        });
+      }
+    });
+
   }
 
   doRefresh(event) {

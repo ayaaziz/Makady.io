@@ -64,6 +64,13 @@
 				<ion-label style="color:#e26c40;margin-left: 8px;margin-right: 8px;margin-top: 2px;font-size: 1.4rem;">  {{"offers" | translate}}</ion-label>
 				<ion-toggle (ionChange)="onToggleOffersNotification($event)" [checked]="offersNotificationStatus"></ion-toggle>
 		</ion-item>
+	
+		<ion-item  (click)="editProfile()">
+			<ion-row >
+				<ion-icon name="ios-person" style="color:#e26c40"></ion-icon>
+				<p style="color:#e26c40;margin-left: 8px;margin-right: 8px;margin-top: 2px;">{{'editProfile' | translate}}</p>
+			</ion-row>
+		</ion-item>
 
 		<ion-item (click)="shareapp()">
 			<ion-row>
