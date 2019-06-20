@@ -170,12 +170,4 @@ export class CreatemenuPage {
       event.complete();
     });
   }
-
-  // removeFriend(userId) {
-  //   this.provider.removeUserFromMenu(this.menuid,userId,data => {
-  //     console.log(JSON.stringify(data));
-  //   },error => {
-  //     console.log(error);
-  //   })
-  // }
 }

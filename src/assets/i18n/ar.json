@@ -151,6 +151,12 @@
      "nooffers":"لا يوجد عروض",
      "groupnamelength":"اسم المجموعة يجب أن يكون أربعة حروف على الأقل",
      "requestsSent":"الأشخاص الذين أرسلت لهم طلب صداقة",
-     "deleteReq":"إلغاء الطلب"
+     "deleteReq":"إلغاء الطلب",
+     "editProfile":"تعديل الصفحة الشخصية",
+     "usernamerequired":"يجب إدخال اسم المستخدم",
+     "namerequired":"يجب إدخال الاسم",
+     "emailrequired":"يجب إدخال البريد الإلكتروني",
+     "phonerequired":"يجب إدخال رقم الهاتف",
+     "profileEdited":"تم تعديل الصفحة الشخصية بنجاح"
 
 }

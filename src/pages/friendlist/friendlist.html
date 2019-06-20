@@ -49,31 +49,27 @@
   </ion-list>
 
   <div *ngIf="requestsSent.length > 0" style="padding: 5px;border:1px solid #ebeaea;margin-top: 10px;border-radius: 3px;">
-      <p style="color:#e26c40;font-weight:bold;font-size:1.2em;margin-left: 10px;margin-right: 10px;">{{'requestsSent'| translate}}</p>
-      <hr>
-      <ion-list no-lines>   
-        <ion-row class="nodata" style="margin-top: 10px;" *ngIf="friends.length === 0">
-          <ion-col>
-            <p style="text-align: center;color:#e26c40;font-size: 1.4rem;font-weight: bold;">{{'nofriends'| translate}}</p>   
-          </ion-col>
-        </ion-row>
-  
-        <ion-item *ngFor="let item of requestsSent">
+    <p style="color:#e26c40;font-weight:bold;font-size:1.2em;margin-left: 10px;margin-right: 10px;">{{'requestsSent'| translate}}</p>
+    <hr>
+    <ion-list no-lines>   
+      <ion-item *ngFor="let item of requestsSent">
+        <ion-grid>
           <ion-row class="friends">
-            <ion-col style="padding-top: 0;padding-bottom: 0;align-items: center;display: flex;flex-basis: 60px;">
+            <ion-col col-3 style="padding-top: 0;padding-bottom: 0;align-items: center;display: flex;flex-basis: 60px;">
               <img src="{{item.profile_pic}}" class="circle-pic"
               onerror="this.onerror=null;this.src='assets/imgs/camera.png';" style="margin-top: 0px;margin-left: 0px;margin-right: 0px;">
             </ion-col>
         
-            <ion-col col-6 style="padding-top: 20px;">
+            <ion-col col style="align-items: center;display: flex;">
               <p>{{item.username}}</p> 
             </ion-col>   
         
-            <ion-col col-3 style="align-items: center;display: flex;justify-content: flex-end;">
+            <ion-col col style="align-items: center;display: flex;justify-content: flex-end;">
               <p style="color:gray;text-align: center;" (click)="cancelRequest(item.id)">{{'deleteReq' | translate}}</p>
             </ion-col>
           </ion-row>
-        </ion-item>
-      </ion-list>
-    </div>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

@@ -146,5 +146,11 @@
      "nooffers":"No offers",
      "groupnamelength":"Group name should be at least 4 letters",
      "requestsSent":"Requests you sent",
-     "deleteReq":"Cancel request"
+     "deleteReq":"Cancel request",
+     "editProfile":"Edit Profile",
+     "usernamerequired":"Username is required.",
+     "namerequired":"Name is required.",
+     "emailrequired":"Email is required.",
+     "phonerequired":"Phone is required.",
+     "profileEdited":"Profile edited successfully"
 }

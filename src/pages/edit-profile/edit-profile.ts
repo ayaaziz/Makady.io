@@ -38,18 +38,15 @@ export class EditProfilePage {
                 this.userImageUrl =  this.helper.userImagePath + this.user.user.profile_pic;
 
                 this.initializeForm(this.user.user.username,this.user.user.name,this.user.user.email,this.user.user.phone);             
-  }
+              }
 
-  ionViewWillEnter() {
- 
-  }
 
   private initializeForm(userName,name,email,phone) {
 
     console.log(userName,name,email,phone);
 
     this.userForm = new FormGroup({
-      'username': new FormControl(userName,Validators.required),
+      'username': new FormControl(userName,Validators.compose([Validators.required,Validators.minLength(4)])),
       'name': new FormControl(name,Validators.required),
       'email': new FormControl(email,Validators.compose([Validators.required,Validators.email])),
       'phone': new FormControl(phone,Validators.compose([Validators.required,Validators.minLength(9),Validators.maxLength(12)]))
@@ -113,17 +110,26 @@ export class EditProfilePage {
   onSubmit() {
     const val = this.userForm.value;
 
-    console.log("val: "+JSON.stringify(val));
+    console.log("val: "+JSON.stringify("form data.....: "+JSON.stringify(val)));
    
-      //  this.provider.editProfile(val,this.imgdata,data => {
-      //   console.log("data: "+JSON.stringify(data));
-        
-      //   this.helper.presentToast(this.translate.instant('profileEdited'));
+       this.provider.editProfile(val,this.imgdata,"jpeg",data => {
+        console.log("data: "+JSON.stringify(data));
+        data = JSON.parse(data);
 
-      //  },error => {
-      //    console.log(error);
-      //  });
+        if(data.errors.email && this.user.user.email != val.email) {
+          this.helper.presentToast(this.translate.instant("emailExist"));
+        } 
+      
+        if(data.success) {
+          this.helper.presentToast(this.translate.instant('profileEdited'));
+        }
+
+       },error => {
+         console.log(error);
+       });
       
   }
+
+  
 
 }

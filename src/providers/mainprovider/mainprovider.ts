@@ -1538,6 +1538,39 @@ export class MainproviderProvider {
     }
   }
 
-
+  editProfile(data,image,ext,successCallback,failureCallback) {
+    if(navigator.onLine) {
+      let loader = this.loadingCtrl.create({
+        content: "",
+      });
+      loader.present();
+      let headers = new HttpHeaders();
+      let parameter = {
+        'username':data.username,
+        'name': data.name,
+        'email': data.email,
+        'phone': data.phone,
+        'profile_pic':image,
+        'profile_pic_ext': ext
+      }
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
+      let serviceUrl = this.helper.serviceurl + 'EditProfile';
+      
+      this.http.post(serviceUrl, parameter, { headers: headers })
+        .subscribe(
+          data => {
+            loader.dismiss();
+            successCallback(JSON.stringify(data))
+          },
+          err => {
+            loader.dismiss();
+            failureCallback(err);
+            console.log(err.message);
+          }
+        )
+    } else {
+      this.helper.presentToast(this.translate.instant("offline"));
+    }
+  }
 
 }

@@ -5,7 +5,7 @@ page-edit-profile {
 
     ion-input {
         border: 1px solid #ccc;
-        padding: 5px;
+        padding: 0 5px 0 5px;
         border-radius: 5px;
     }
 
@@ -19,4 +19,32 @@ page-edit-profile {
     .list-md .item-input:last-child {
         border-bottom: none !important;
     }
+
+    .item-md.item-input.item-input-has-focus .item-inner, .item-md.item-input.input-has-focus .item-inner,
+    .list-md .item-input.item-input-has-focus:last-child, .list-md .item-input.input-has-focus:last-child,
+    .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+        box-shadow:unset !important;
+    }
+
+
+    .error-message {
+        color: #f00;
+        margin-left: 12px;
+
+        &::before {
+            content: "*";
+        }
+    }
+
+
+    // .label-md[floating],
+    //  .label-md[floating] 
+    //  {
+    //      margin-left: 10px !important;
+    //      margin-right: 10px !important;
+         
+    //  }
+
+  
+    
 }
