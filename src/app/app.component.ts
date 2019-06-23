@@ -57,6 +57,10 @@ export class MyApp {
 
     platform.ready().then(() => {
 
+      this.event.subscribe("picChanged", pic => {                
+        this.photo = this.helper.userImagePath + pic;
+      });
+
       this.event.subscribe("login", () => {
         this.storage.get("socialType")
         .then(social => {
@@ -68,9 +72,16 @@ export class MyApp {
               if(val) {
                 this.userLoged = true;
                 this.username = val.user.username;
-                this.photo = this.helper.userImagePath + val.user.profile_pic;
+ 
+                this.event.publish("picChanged",val.user.profile_pic);
                 console.log(this.photo);
                 this.helper.user_id = val.user.id;
+
+                          
+                // this.photo = this.helper.userImagePath + val.user.profile_pic;
+                
+               
+      
               }
             });
           } 
@@ -81,7 +92,8 @@ export class MyApp {
                     console.log("user_info social user: "+JSON.stringify(socialUser));
                     this.userLoged = true;
                     this.username = socialUser.name;
-                    this.photo = socialUser.picture;
+                    // this.photo = socialUser.picture;
+                    this.event.publish("picChanged",socialUser.picture);
                     // this.helper.user_id = socialUser.user.id;
                     console.log(this.username + " - " + this.photo);
                   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, ActionSheetController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ActionSheetController, ViewController, Events } from 'ionic-angular';
 import { MainproviderProvider } from '../../providers/mainprovider/mainprovider';
 import { Storage } from '@ionic/storage';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -26,6 +26,7 @@ export class EditProfilePage {
               private camera: Camera,
               public toastCtrl:ToastController,
               // public formBuilder:FormBuilder,
+              public event: Events,
               public translate:TranslateService,
               public helper:HelperProvider, 
               public actionSheetCtrl: ActionSheetController,
@@ -109,18 +110,22 @@ export class EditProfilePage {
 
   onSubmit() {
     const val = this.userForm.value;
-
+    // val = JSON.parse(val);
     console.log("val: "+JSON.stringify("form data.....: "+JSON.stringify(val)));
    
        this.provider.editProfile(val,this.imgdata,"jpeg",data => {
         console.log("data: "+JSON.stringify(data));
         data = JSON.parse(data);
 
-        if(data.errors.email && this.user.user.email != val.email) {
-          this.helper.presentToast(this.translate.instant("emailExist"));
-        } 
+        if(data.errors) {
+          if(data.errors.email) {
+            this.helper.presentToast(this.translate.instant("emailExist"));
+          } 
+        }
       
         if(data.success) {
+          console.log("data.profile_pic: "+data.user.profile_pic);
+          this.event.publish("picChanged",data.user.profile_pic);
           this.helper.presentToast(this.translate.instant('profileEdited'));
         }
 

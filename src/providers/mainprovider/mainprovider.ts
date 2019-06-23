@@ -1262,7 +1262,7 @@ export class MainproviderProvider {
 
    //api name: "social_login"
    userLoginWithSocial(id,socialType,name,email,lang,profileImageUrl,gender,phone,successCallback,failureCallback) {
-    alert("sociaaaal!!!!");
+  
     console.log('username '+name,
     'email '+ email,
     'password '+id,
@@ -1304,7 +1304,6 @@ export class MainproviderProvider {
         this.helper.presentToast(this.translate.instant("offline"));
       }
   }
-
 
   removeUserFromMenu(menuId,userId,access,successCallback,failureCallback) {
  

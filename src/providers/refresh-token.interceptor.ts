@@ -27,9 +27,9 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
       //alert(JSON.stringify(errorResponse.url))
       if ( errorResponse.url == this.helper.serviceurl +"user_login") {
         return Observable.throw(errorResponse);
-    }
-     else if (errorResponse.status === 401 && errorResponse.url != this.helper.serviceurl +'refreshToken') {
-      alert("here token");
+      }
+      else if (errorResponse.status === 401 && errorResponse.url != this.helper.serviceurl +'refreshToken') {
+        alert("get token");
         const http = this.injector.get(HttpClient);
         let headers = new HttpHeaders()
         headers = headers.set('Content-Type', 'application/x-www-form-urlencoded');//client_credentials
@@ -44,7 +44,6 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
             
             alert(data.refresh_token);
             return next.handle(cloneRequest);
-
           })
           .catch( err => {
             console.log("errorr here");
