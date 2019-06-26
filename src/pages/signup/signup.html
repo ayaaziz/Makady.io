@@ -1,4 +1,9 @@
 <ion-content padding style=" background-size: contain;;background-image: url('assets/imgs/background.jpg')">
+  
+  <button ion-button class="lang-icon" clear *ngIf="langdirection == 'ltr'" (click)="changelang()">ع</button>
+  <button ion-button class="lang-icon" clear *ngIf="langdirection == 'rtl'" (click)="changelang()">E</button>      
+  
+  
   <p style="margin-top: -23px;margin-bottom: -16px;text-align:center;margin-top: 0px;"><img style="text-align: center; width: 150px;" src="assets/imgs/logo.png"></p>
   <h2 style="margin-bottom: 20px;margin-top: 0px;text-align: center;color: white;font-weight: bold;">{{'register' | translate}}</h2>
   <div style="box-shadow: 1px 5px 2px 0px #d3d3d3b8;background-color: white;border-radius: 15px;border:1px solid lightgray;">
@@ -13,7 +18,7 @@
   
     <ion-list>
       <ion-item no-lines style="border-radius: 10px;margin-top: 20px;border: 2px solid lightgray;margin-right: 15px;margin-left: 15px;width: 90%;">
-        <ion-label style="margin-left: 10px;"><ion-icon name="md-person"></ion-icon></ion-label>
+        <ion-icon name="md-person"></ion-icon>
         <ion-input type="text" [dir]="langdirection" [(ngModel)]="username" placeholder="{{'username'| translate}}" ></ion-input>
       </ion-item>
 

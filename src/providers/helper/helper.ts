@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ToastController, Events, NavController,App } from 'ionic-angular';
+import { ToastController, Events, NavController,App, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { LoginPage } from '../../pages/login/login';
-// import { MainproviderProvider } from '../mainprovider/mainprovider';
+import { MainproviderProvider } from '../mainprovider/mainprovider';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class HelperProvider {
@@ -15,6 +16,7 @@ export class HelperProvider {
   offersNotification:boolean;
   userLoged: boolean = false;
   registerationId:string = "fdgdgdg66553rhask";
+  scaleClass:any = "";
   
   serviceurl:any="http://itrootsdemos.com/makady/phase1/api/";
   userImagePath:string = "http://itrootsdemos.com/makady/phase1/public/uploads/images/users/";
@@ -24,7 +26,9 @@ export class HelperProvider {
               public http: HttpClient,
               public storage:Storage,
               public event:Events,
-              public app:App
+              public app:App,
+              public platform:Platform,
+              public translate:TranslateService,
               // private navctrl:NavController
             ) {
     console.log('Hello HelperProvider Provider');
@@ -40,7 +44,7 @@ export class HelperProvider {
     let toast = this.toastCtrl.create({
       message: msg,
       duration: 5000,
-      position: 'top',
+      position: 'bottom',
       showCloseButton: true,
       closeButtonText: "OK",
     });
@@ -69,5 +73,28 @@ export class HelperProvider {
     localStorage.clear();
     
     this.storage.remove("user_info");
+  }
+
+  changelang() {
+    if(this.langdirection == "ltr")
+    {
+      this.translate.setDefaultLang('ar');  
+      this.translate.use('ar');    
+      this.platform.setDir('rtl', true);
+      this.langdirection = "rtl"; 
+      this.scaleClass="scaleClass";
+      this.storage.set('Mlanguage', 'ar').then(resp=>{
+        console.log("resp set('language',: ",resp);
+      });
+    
+    } else {
+        this.translate.setDefaultLang('en');
+        this.translate.use('en');
+        this.platform.setDir('ltr', true);
+        this.langdirection = "ltr";
+        this.storage.set('Mlanguage', 'en').then(resp=>{
+          console.log("resp set('language',: ",resp)
+        });
+    }
   }
 }

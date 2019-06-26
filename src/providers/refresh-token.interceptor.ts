@@ -21,7 +21,8 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    // alert("here token")
+    // alert("here token");
+    // alert(localStorage.getItem('reefdfdfvcvcmakady'));
     return next.handle(request).catch((errorResponse: HttpErrorResponse) => {
       const error = (typeof errorResponse.error !== 'object') ? JSON.parse(errorResponse.error) : errorResponse;
       //alert(JSON.stringify(errorResponse.url))
@@ -29,12 +30,16 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
         return Observable.throw(errorResponse);
       }
       else if (errorResponse.status === 401 && errorResponse.url != this.helper.serviceurl +'refreshToken') {
-        alert("get token");
+        // alert("get token");
+    // alert(localStorage.getItem('reefdfdfvcvcmakady'));
+        
         const http = this.injector.get(HttpClient);
         let headers = new HttpHeaders()
         headers = headers.set('Content-Type', 'application/x-www-form-urlencoded');//client_credentials
                 
         let params = new HttpParams().set('refresh_token', localStorage.getItem('reefdfdfvcvcmakady'))
+        console.log("localStorage.getItem('reefdfdfvcvcmakady'):..... "+localStorage.getItem('reefdfdfvcvcmakady'));
+        
         return http.post<any>(this.helper.serviceurl +'refreshToken', params, { headers: headers })
           .flatMap(data => {
             console.log("returned data:"+JSON.stringify(data));
@@ -42,7 +47,7 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
             localStorage.setItem('reefdfdfvcvcmakady', data.refresh_token)
             const cloneRequest = request.clone({setHeaders: {'Authorization': 'Bearer ${data.access_token}'}});
             
-            alert(data.refresh_token);
+            // alert(data.refresh_token);
             return next.handle(cloneRequest);
           })
           .catch( err => {

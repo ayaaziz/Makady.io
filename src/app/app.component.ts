@@ -69,7 +69,8 @@ export class MyApp {
             this.storage.get("user_info")
             .then(val => {
               console.log("user_info : ",JSON.stringify(val));
-              if(val) {
+              // if(val.verified) {
+                
                 this.userLoged = true;
                 this.username = val.user.username;
  
@@ -82,7 +83,7 @@ export class MyApp {
                 
                
       
-              }
+              // }
             });
           } 
           else if(social == 1 || social == 2 || social == 3) {
@@ -410,7 +411,7 @@ export class MyApp {
           this.platform.setDir('ltr', true);
           this.helper.langdirection = "ltr";
         }
-      } else{
+      } else {
         console.log("lang value not detected",val);
         var userLang = navigator.language.split('-')[0];
         console.log("navigator.language",navigator.language);

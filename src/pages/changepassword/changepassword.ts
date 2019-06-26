@@ -30,11 +30,11 @@ export class ChangepasswordPage {
       this.presentToast(this.translate.instant('alldata'))
 
     }
-    else if(!(this.new==this.confirm))
-    {
-      this.presentToast(this.translate.instant('dontmatch'))
+    // else if(!(this.new==this.confirm))
+    // {
+    //   this.presentToast(this.translate.instant('dontmatch'))
 
-    }
+    // }
     else{
     this.storage.get("makadyaccess").then((val)=>{
       if(val)
@@ -42,9 +42,11 @@ export class ChangepasswordPage {
         this.provider.checkpass(this.current,val,(data)=>{
           console.log(JSON.stringify(data))
           let dataparsed=JSON.parse(data)
-          if(dataparsed.success==false)
-          {
-            this.presentToast(dataparsed.error.password)
+          if(dataparsed.success==false) {
+            this.presentToast(this.translate.instant("incorrectOld"));
+          } else if(!(this.new==this.confirm)) {
+
+            this.presentToast(this.translate.instant('dontmatch'));
           }
           else{
             this.provider.changepass(this.current,this.new,this.confirm,val,(data)=>{

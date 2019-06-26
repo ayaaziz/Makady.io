@@ -182,6 +182,9 @@ export class VerificationPage {
                 this.provider.setVerified(val, data => {
                   // alert(data);
                   if(data) {
+                    
+                    this.storage.set("Makadyusername", "true");
+                    
                     this.navCtrl.setRoot(TabsPage);
                   }
                 },error => {

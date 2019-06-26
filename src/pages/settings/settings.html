@@ -32,10 +32,11 @@
 	</ion-row>
 
 	<ion-list>
-		<ion-item  (click)="changelang()">
+		<ion-item (click)="changelang()">
 			<ion-row>
 				<ion-icon name="md-globe" style="color:#e26c40"></ion-icon>
 				<p style="color:#e26c40;margin-left: 8px;margin-right: 8px;margin-top: 2px;">{{'changlang' | translate}}</p>
+				<p style="color:#e26c40;margin-top: 2px;">({{langdirection=='ltr'?"English":"اللغة العربية"}})</p>
 			</ion-row>
 		</ion-item>
 

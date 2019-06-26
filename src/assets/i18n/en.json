@@ -23,7 +23,7 @@
     "restno":"Register Now!",
     "money":"The Money Spent",
     "invalidphone":"The telephone number must be at least 9 and not more than 12 digits",
-    "dontmatch":"Confirm Password Don't Match",
+    "dontmatch":"Confirm Password Don't Match with Password",
     "R.s":"R.S ",
     "total":"Total money spent this month",
     "passwordback":"To get your password back",
@@ -85,7 +85,7 @@
      "ok":"OK",
      "nolistes":"There Is No Lists",
      "menusearch":"Search For Menu",
-     "Selectmenu":"Select Menu",
+     "Selectmenu":"Select List",
      "friendreq":"Friend Requests",
      "addreq":"Accept",
      "cancelre":"Remove",
@@ -152,5 +152,11 @@
      "namerequired":"Name is required.",
      "emailrequired":"Email is required.",
      "phonerequired":"Phone is required.",
-     "profileEdited":"Profile edited successfully"
+     "profileEdited":"Profile edited successfully",
+     "incorrectOld":"Old password is incorrect",
+     "pwdLength":"The password must be at least 4 characters",
+     "makady":"Makady",
+     "makadyDisc":"",
+     "chooseapp":"Choose App",
+     "addList":"You have no Shopping Lists, Please add new List."
 }

@@ -46,13 +46,7 @@ export class SignupPage {
               public navParams: NavParams,
               public actionSheetCtrl: ActionSheetController) {
 
-              this.langdirection = this.helper.langdirection;
-
-              if(this.helper.langdirection == "ltr") {
-                this.lang="1";
-              } else { 
-              this.lang="2";
-              }
+            
   }
 
   ionViewWillEnter() {
@@ -60,6 +54,14 @@ export class SignupPage {
     this.userImageUrl = this.helper.userImagePath + "default_avatar.png";
               
     console.log("my image: "+this.userImageUrl);
+
+    this.langdirection = this.helper.langdirection;
+
+    if(this.helper.langdirection == "ltr") {
+      this.lang="1";
+    } else { 
+    this.lang="2";
+    }
   }
 
 
@@ -126,7 +128,7 @@ export class SignupPage {
 
   signup() {
     console.log("all data ",this.phone,this.username,this.Password,this.confirmPassword,this.email,this.name)
-    if(!this.phone || !this.username || !this.Password || !this.confirmPassword || !this.email|| !this.name) {
+    if(!this.username || !this.Password || !this.confirmPassword || !this.email|| !this.name) {
       this.helper.presentToast(this.translate.instant('alldata'));
 
     } else if(!(this.Password==this.confirmPassword)) {
@@ -135,7 +137,7 @@ export class SignupPage {
     } else if(!(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(String(this.email).trim()) == true || /^[\u0621-\u064A\s\p{N}]+$/.test(String(this.email).trim()) == true)) {
       this.helper.presentToast(this.translate.instant('invalidemail'))
 
-    } else if(this.phone.length < 9 || this.phone.length > 12) {
+    } else if((this.phone.length < 9 || this.phone.length > 12) && this.phone) {
       this.helper.presentToast(this.translate.instant('invalidphone'));
 
     } else {
@@ -153,10 +155,12 @@ export class SignupPage {
            } else {
              this.helper.presentToast(this.translate.instant("The username has already been taken"));
            }
-
          } else if(parsedData.errors.email_exist) {
            this.helper.presentToast(this.translate.instant("emailExist"));
-         }
+         
+          } else if(parsedData.errors.password) {
+          this.helper.presentToast(this.translate.instant("pwdLength"));
+        }
 
        } else {
 
@@ -224,6 +228,12 @@ export class SignupPage {
         this.iconConfirmName = "ios-eye-off";                
       } 
     }
+  }
+
+  changelang() {
+    this.helper.changelang();
+
+    this.langdirection = this.helper.langdirection;
   }
  
 }

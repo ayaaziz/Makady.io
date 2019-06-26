@@ -255,3 +255,18 @@ p.group-text {
 // .list-md .item-block .item-inner {
 //     border-bottom: 1px solid #e67043;
 // }
+
+button.lang-icon {
+    position: absolute;
+    top: 10px;
+    color: #fff;
+    font-size: 25px;
+}
+
+[dir="rtl"] button.lang-icon {
+    left: 0;
+}
+
+[dir="ltr"] button.lang-icon {
+    right: 0;    
+}

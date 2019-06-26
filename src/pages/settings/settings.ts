@@ -151,6 +151,16 @@ export class SettingsPage {
         (error) => {});
       }
     });
+
+
+    //get social links
+    this.provider.getSocialLinks(data => {
+      console.log(data);
+
+    },error => {
+      console.log(error);
+    });
+
     this.storage.get("Makadyuser_name").then((val) => {
       this.name = val;
     })
@@ -179,9 +189,6 @@ export class SettingsPage {
       {
         if(this.helper.langdirection == "ltr")
         {
-          // this.provider.changelang(2,val,(data)=> {
-
-          // console.log(JSON.stringify(data))
           this.translate.setDefaultLang('ar');  
           this.translate.use('ar');    
           this.platform.setDir('rtl', true);
@@ -191,17 +198,8 @@ export class SettingsPage {
             console.log("resp set('language',: ",resp);
           });
           this.navCtrl.setRoot(TabsPage);
-          // },(data)=>{
-          //   this.translate.setDefaultLang('ar');  
-          //   this.translate.use('ar');    
-          //   this.platform.setDir('rtl', true);
-          //   this.helper.langdirection = "rtl"; 
-          //   this.scaleClass="scaleClass";
-          //   this.navCtrl.setRoot(TabsPage)
-          // })
+       
         } else {
-          // this.provider.changelang(1,val,(data)=> {
-            // console.log(JSON.stringify(data));
             this.translate.setDefaultLang('en');
             this.translate.use('en');
             this.platform.setDir('ltr', true);
@@ -210,15 +208,6 @@ export class SettingsPage {
               console.log("resp set('language',: ",resp)
             });
             this.navCtrl.setRoot(TabsPage);
-          
-          // },
-          // (data)=> {
-          //   this.translate.setDefaultLang('en');
-          //   this.translate.use('en');
-          //   this.platform.setDir('ltr', true);
-          //   this.helper.langdirection = "ltr";
-          //   this.navCtrl.setRoot(TabsPage)
-          // })
         }
       }
     })
@@ -246,29 +235,29 @@ export class SettingsPage {
   // this.inap.create('https://www.facebook.com/makady/', '_system', 'location=yes');
 
   }
-  shareapp()
-{
-  console.log("shareapp")
-  this.socialSharing.share("مقاضي" , "مقاضي" , null ,"https://play.google.com/store/apps/details?id=net.ITRoots.Makady").then(() => {
-    console.log("success")
-  }).catch(() => {
-    console.log("not available")
-  });
-//   if (this.plt.is('ios')) {
-//   this.socialSharing.share("مقاضي" , "مقاضي" , null ,"https://play.google.com/store/apps/details?id=net.ITRoots.Makady").then(() => {
-//     console.log("success")
-//   }).catch(() => {
-//     console.log("not available")
-//   });
-// }
-// else{
-//   this.socialSharing.share("مقاضي" , "مقاضي" , null ,"https://play.google.com/store/apps/details?id=net.ITRoots.Makady").then(() => {
-//     console.log("success")
-//   }).catch(() => {
-//     console.log("not available")
-//   });
-// }
-}
+  shareapp() {
+    console.log("shareapp")
+    // this.socialSharing.share("مقاضي" , "مقاضي" , null ,"https://play.google.com/store/apps/details?id=net.ITRoots.Makady").then(() => {
+    //   console.log("success")
+    // }).catch(() => {
+    //   console.log("not available")
+    // });
+
+
+    var options = {
+      message: this.translate.instant('makady'),
+      subject: this.translate.instant('makadyDisc'),
+      url: 'https://play.google.com/store/apps/details?id=net.ITRoots.Makady',
+      chooserTitle: this.translate.instant('chooseapp'), // Android only, you can override the default share sheet title,
+    };
+
+    this.socialSharing.shareWithOptions(options).then(() => {
+      console.log("success")
+    }).catch(() => {
+      console.log("not available")
+    });
+  } 
+  
   open = false;
   toggleSection(){
   

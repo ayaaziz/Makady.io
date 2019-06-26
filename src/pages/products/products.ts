@@ -166,57 +166,59 @@ export class ProductsPage {
     this.storage.get("makadyaccess").then((val) => {
       if(val) {
         this.provider.menus(1,"",val,(data) => {
-          console.log(JSON.stringify(data));
-          let parsedData=JSON.parse(data);
-          console.log(JSON.stringify(parsedData.data));
-          let alert = this.Alert.create();
-          alert.setTitle(this.translate.instant('Selectmenu'));
-          parsedData.data.forEach(element => {
-            alert.addInput({type: 'radio', label: element.menu_name, value: element.menu_id});    
-          });
-          alert.addButton(this.translate.instant('cancel'));
-          alert.addButton({
-            text: this.translate.instant('ok'),
-            handler: data => {
-              alert.dismiss();
-              console.log(typeof(data));
-              console.log(JSON.stringify(data));
-              this.provider.addtomenu(data,this.categories,val,(data) => {
+            console.log(JSON.stringify(data));
+            let parsedData=JSON.parse(data);
+            console.log(JSON.stringify(parsedData.data));
+            let alert = this.Alert.create();
+            alert.setTitle(this.translate.instant('Selectmenu'));
+            parsedData.data.forEach(element => {
+              alert.addInput({type: 'radio', label: element.menu_name, value: element.menu_id});    
+            });
+            alert.addButton(this.translate.instant('cancel'));
+            alert.addButton({
+              text: this.translate.instant('ok'),
+              handler: data => {
+                alert.dismiss();
+                console.log(typeof(data));
                 console.log(JSON.stringify(data));
-                let DataParsed=JSON.parse(data);
-                console.log("DataParsed: "+JSON.stringify(DataParsed));
-                if(DataParsed.success==false && DataParsed.menu_item.length !=0) {
-                  let proid=DataParsed.menu_item[0].id;
-                  let quantity= parseInt(DataParsed.menu_item[0].quantity);
-                    let alert = this.alertCtrl.create({
-                      message: this.translate.instant('alreadyexist'),
-                      buttons: [
-                        {
-                          text: this.translate.instant('cancel'),
-                          role: 'cancel',
-                          handler: () => {
-                            console.log('Cancel clicked');
+                this.provider.addtomenu(data,this.categories,val,(data) => {
+                  console.log(JSON.stringify(data));
+                  let DataParsed=JSON.parse(data);
+                  console.log("DataParsed: "+JSON.stringify(DataParsed));
+
+                  if(DataParsed.success==false && DataParsed.menu_item.length !=0) {
+                    let proid=DataParsed.menu_item[0].id;
+                    let quantity= parseInt(DataParsed.menu_item[0].quantity);
+                      let alert = this.alertCtrl.create({
+                        message: this.translate.instant('alreadyexist'),
+                        buttons: [
+                          {
+                            text: this.translate.instant('cancel'),
+                            role: 'cancel',
+                            handler: () => {
+                              console.log('Cancel clicked');
+                            }
+                          },
+                          {
+                            text: this.translate.instant('ok'),
+                            handler: () => {
+                              // this.update(proid);
+                              this.update(proid,quantity,this.categories)
+                            }
                           }
-                        },
-                        {
-                          text: this.translate.instant('ok'),
-                          handler: () => {
-                            // this.update(proid);
-                            this.update(proid,quantity,this.categories)
-                          }
-                        }
-                      ]
-                    });
-                    alert.present();
-                
-                  } else {
+                        ]
+                      });
+                      alert.present();
+                  
+                    } else {
                       this.helper.presentToast(this.translate.instant('productadded'));
-                }
-              },(error)=>{})
-              return false;
-            }
-          });
-          alert.present()
+                    }
+                },(error)=>{})
+                return false;
+              }
+            });
+            alert.present();
+      
         },(error)=>{})
       }
     });

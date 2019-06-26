@@ -44,13 +44,17 @@ export class LoginPage {
               private twitter: TwitterConnect,
               private fb: Facebook) {
 
-            this.langdirection = this.helper.langdirection;
+       
+  }
 
-            if(this.helper.langdirection == "ltr") {
-              this.lang = "1";
-            } else { 
-               this.lang = "2";
-            }
+  ionViewWillEnter() {
+    this.langdirection = this.helper.langdirection;
+
+    if(this.helper.langdirection == "ltr") {
+      this.lang = "1";
+    } else { 
+       this.lang = "2";
+    }
   }
 
   opensign() {
@@ -82,9 +86,9 @@ export class LoginPage {
                 console.log("parsed data: "+JSON.stringify(pdata));
                 console.log("social: "+pdata.user.social_type);
          
-                // if (this.remember == true) {
+                if (this.remember == true) {
                   this.storage.set("Makadyusername", "true");
-                // }
+                }
 
                 this.helper.accesstoken = Dataparsed.access_token;
                 this.storage.set("Makadyuser_name", this.username);
@@ -133,6 +137,7 @@ export class LoginPage {
       .then((res: FacebookLoginResponse) => {
         console.log('Facebook user info '+JSON.stringify(res));
         let userId = res.authResponse.userID;
+        let accessTokenFromProvider = res.authResponse.accessToken;
         let params = new Array<string>();
         this.fb.api("/me?fields=name,email", params) //get user details
           .then(user => {
@@ -140,6 +145,7 @@ export class LoginPage {
             user.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
             console.log("Facebook pic ", user.picture);
 
+            
             //**************//
             this.storage.set("socialType",1);
             let facebookUser = {
@@ -217,6 +223,8 @@ export class LoginPage {
     this.googlePlus.login({})
     .then(user => {
       console.log("google user info"+JSON.stringify(user));
+      let accessTokenFromProvider = user.accessToken;
+      console.log("accessTokenFromProvider.....: "+accessTokenFromProvider); 
 
       //**************************//
       let google_user = {
@@ -280,6 +288,9 @@ export class LoginPage {
           this.twitter.showUser()
           .then(user => {
               console.log("twitter user info" + JSON.stringify(user));
+              let secret = user.secret;
+              let accessTokenFromProvider = user.token;
+
               //get user gender from twitter response.
               let user_gender = user.gender;
               if (typeof (user_gender) === "undefined" || user_gender === null) {
@@ -362,4 +373,13 @@ export class LoginPage {
       this.iconName = "ios-eye-off";        
     }  
   }
+
+  changelang() {
+    this.helper.changelang();
+
+    this.langdirection = this.helper.langdirection;
+  }
 }
+
+
+ 
