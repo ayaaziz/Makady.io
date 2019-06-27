@@ -31,7 +31,7 @@ export class SettingsPage {
   offersNotificationStatus: boolean = false;
   username:string;
   HomePage = HomePage;
-  socialLinks:any;
+  socialLinks:any = {};
 
 
   constructor(public actionSheetCtrl: ActionSheetController,
@@ -162,6 +162,8 @@ export class SettingsPage {
       
       this.socialLinks = data.data;
       console.log(" socialLinks........"+JSON.stringify(this.socialLinks));
+      console.log(" facebook........"+JSON.stringify(this.socialLinks.facebook));
+      
       
 
     },error => {
