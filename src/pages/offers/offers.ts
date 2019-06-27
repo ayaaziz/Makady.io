@@ -113,7 +113,7 @@ export class OffersPage {
           let parsedData=JSON.parse(data);
           console.log(JSON.stringify(parsedData.data));
           if(parsedData.data.length == 0) {
-            this.helper.presentToast("يجب إضافة قائمة تسوق أولاً حتى يمكنك إضافة منتجات لقوائمك")
+            this.helper.presentToast("firstaddList");
             return;
           }
           let alert = this.Alert.create();

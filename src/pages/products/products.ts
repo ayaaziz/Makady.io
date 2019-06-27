@@ -93,9 +93,12 @@ export class ProductsPage {
     if(this.count >0 ) {
       this.products.forEach(element => {
         if(element.product_id == id) {
-          if(element.count > 1)
+          if(element.count > 1) {
             element.count -= 1;
-        }
+          } else {
+            this.helper.presentToast(this.translate.instant("minQuntityone"));
+          }
+        } 
       });
     }
   }
@@ -168,6 +171,10 @@ export class ProductsPage {
         this.provider.menus(1,"",val,(data) => {
             console.log(JSON.stringify(data));
             let parsedData=JSON.parse(data);
+
+
+            if(parsedData.data.length > 0) {
+
             console.log(JSON.stringify(parsedData.data));
             let alert = this.Alert.create();
             alert.setTitle(this.translate.instant('Selectmenu'));
@@ -219,6 +226,21 @@ export class ProductsPage {
             });
             alert.present();
       
+
+          } else {
+            let newAlert = this.alertCtrl.create({
+              message: this.translate.instant("addList"),
+              buttons: [
+                {
+                  text: this.translate.instant("OK")
+                }
+              ]
+            });
+
+            newAlert.present();
+          }
+
+
         },(error)=>{})
       }
     });

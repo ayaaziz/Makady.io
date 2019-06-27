@@ -40,15 +40,17 @@ export class ChangepasswordPage {
       if(val)
       {
         this.provider.checkpass(this.current,val,(data)=>{
-          console.log(JSON.stringify(data))
-          let dataparsed=JSON.parse(data)
+          console.log(JSON.stringify(data));
+          let dataparsed=JSON.parse(data);
+
           if(dataparsed.success==false) {
             this.presentToast(this.translate.instant("incorrectOld"));
+          } else if(this.new.length < 4 || this.confirm.length < 4) {
+            this.presentToast(this.translate.instant('pwdLength'));
           } else if(!(this.new==this.confirm)) {
-
-            this.presentToast(this.translate.instant('dontmatch'));
+              this.presentToast(this.translate.instant('dontmatch'));
           }
-          else{
+          else {
             this.provider.changepass(this.current,this.new,this.confirm,val,(data)=>{
               console.log(JSON.stringify(data))
               this.current=""

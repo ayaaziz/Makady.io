@@ -39,10 +39,10 @@
             <del style="color:#e26c40;font-size: 1.2em;margin-top:10px;">{{item.name}} ({{item.quantity }} / {{item.purchase}})&#x200E; </del>
           </ion-col>
 
-          <ion-col col-2 class="header-details">
+          <!-- <ion-col col-2 class="header-details">
               <ion-icon style="color:#e26c40;" name="md-checkbox" *ngIf="item.quantity==item.purchase"></ion-icon>
               <ion-icon style="color:#e26c40;" name="md-square-outline" *ngIf="item.quantity!=item.purchase"></ion-icon>
-            </ion-col>
+            </ion-col> -->
         </ion-row>
         <ion-list *ngIf="item.open" style="background-color: #fff;" no-lines>
           <!-- <ion-row *ngFor="let child of item.products; let j = index" style="margin:0px;border-bottom: 1px solid lightgray;">

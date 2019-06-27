@@ -46,7 +46,7 @@ export class HelperProvider {
       duration: 5000,
       position: 'bottom',
       showCloseButton: true,
-      closeButtonText: "OK",
+      closeButtonText: this.translate.instant("OK"),
     });
     toast.present();
   }
