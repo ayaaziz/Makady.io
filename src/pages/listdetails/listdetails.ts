@@ -51,11 +51,17 @@ defaultImgUrl:string;
     this.buy = "";
     this.price = "";
   
-   this.services.forEach(element => {
-     if(element.category_id != this.services[x].category_id)
-     element.open=false
-   });
-    this.services[x].open = !this.services[x].open
+  //  this.services.forEach(element => {
+  //    if(element.category_id != this.services[x].category_id)
+  //    element.open = true;
+  //  });
+    // this.services[x].open = !this.services[x].open
+
+
+    if(this.services[x].open)
+      this.services[x].open = false;
+    else 
+      this.services[x].open = true;
   }
 
   ionViewDidEnter() {
@@ -71,7 +77,7 @@ defaultImgUrl:string;
             this.services = parsedData.data.menu_items;
             
             this.services.forEach(element => {
-              element.open = false;
+              element.open = true;
             });
             console.log("this.services"+this.services)
           

@@ -1582,7 +1582,7 @@ export class MainproviderProvider {
       let headers = new HttpHeaders();
    
       headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
-      let serviceUrl = this.helper.serviceurl + 'getLinks';
+      let serviceUrl = this.helper.serviceurl + 'socialLinks';
       
       this.http.get(serviceUrl, { headers: headers })
         .subscribe(
