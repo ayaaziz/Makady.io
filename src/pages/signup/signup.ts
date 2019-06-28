@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Tabs, ToastController, Events, ActionSheetController } from 'ionic-angular';
 import { HelperProvider } from '../../providers/helper/helper';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { LoginPage } from '../login/login';
 import { TabsPage } from '../tabs/tabs';
@@ -33,6 +33,12 @@ export class SignupPage {
   confirmPwdType:string = "password";
   iconPwdName:string = "ios-eye-off";
   iconConfirmName:string = "ios-eye-off";
+  registerForm:FormGroup;
+  isMatched:boolean = false;
+  userNameTakenValidation:string = "";
+  emailExistValidation:string = "";
+  dontmatch:string = "";
+
 
   constructor(public storage:Storage,
               public provider:MainproviderProvider,
@@ -46,7 +52,8 @@ export class SignupPage {
               public navParams: NavParams,
               public actionSheetCtrl: ActionSheetController) {
 
-            
+      this.initializeForm();
+       
   }
 
   ionViewWillEnter() {
@@ -63,6 +70,18 @@ export class SignupPage {
     this.lang="2";
     }
   }
+
+  private initializeForm() {
+    this.registerForm = new FormGroup({
+      'username': new FormControl(this.username,Validators.compose([Validators.required,Validators.minLength(4)])),
+      'Password': new FormControl(this.Password,Validators.compose([Validators.required,Validators.minLength(4)])),
+      'confirmPassword': new FormControl(this.confirmPassword,Validators.required),
+      'name': new FormControl(this.name,Validators.required),
+      'email': new FormControl(this.email,Validators.compose([Validators.required,Validators.email])),
+      'phone': new FormControl(this.phone,Validators.compose([Validators.minLength(9),Validators.maxLength(12)]))
+    });
+  }
+
 
 
   selectImage() {
@@ -126,41 +145,36 @@ export class SignupPage {
     this.navCtrl.push(LoginPage);
   }
 
-  signup() {
-    console.log("all data ",this.phone,this.username,this.Password,this.confirmPassword,this.email,this.name)
-    if(!this.username || !this.Password || !this.confirmPassword || !this.email|| !this.name) {
+  onSubmit() {
+    const val = this.registerForm.value;
+    console.log("val: "+JSON.stringify("form data.....: "+JSON.stringify(val)));
+    console.log("all data ",val.phone,val.username,val.Password,val.confirmPassword,val.email,val.name);
+
+    if(!val.username || !val.Password || !val.confirmPassword || !val.email|| !val.name) {
       this.helper.presentToast(this.translate.instant('alldata'));
-
-    } else if(!(this.Password==this.confirmPassword)) {
-      this.helper.presentToast(this.translate.instant('dontmatch'));
-
-    } else if(!(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(String(this.email).trim()) == true || /^[\u0621-\u064A\s\p{N}]+$/.test(String(this.email).trim()) == true)) {
-      this.helper.presentToast(this.translate.instant('invalidemail'))
-
-    } else if((this.phone.length < 9 || this.phone.length > 12) && this.phone) {
-      this.helper.presentToast(this.translate.instant('invalidphone'));
-
+      
     } else {
-      this.provider.signup(this.username,this.name,this.email,this.Password,this.confirmPassword,this.phone,this.imgdata,"jpeg",4,this.helper.registerationId,"1",this.lang,(data) => {
+      this.provider.signup(val.username,val.name,val.email,val.Password,val.confirmPassword,val.phone,this.imgdata,"jpeg",4,this.helper.registerationId,"1",this.lang,(data) => {
        let parsedData=JSON.parse(data);
        console.log("signup data: "+JSON.stringify(data));
 
-       console.log(parsedData)
-       if(parsedData.success==false) {
+       console.log(parsedData);
+       this.emailExistValidation = "";
+       this.userNameTakenValidation = "";
 
+       if(parsedData.errors) {
          if(parsedData.errors.username) {
            console.log("username error: "+parsedData.errors.username);
-           if(parsedData.errors.username == "The username must be at least 4 characters.") {
-            this.helper.presentToast(this.translate.instant("The username must be at least 4 characters"));
-           } else {
-             this.helper.presentToast(this.translate.instant("The username has already been taken"));
+
+           if(parsedData.errors.username == "The username has already been taken.") {
+            this.userNameTakenValidation = this.translate.instant("userNameTaken");
            }
-         } else if(parsedData.errors.email_exist) {
-           this.helper.presentToast(this.translate.instant("emailExist"));
-         
-          } else if(parsedData.errors.password) {
-          this.helper.presentToast(this.translate.instant("pwdLength"));
-        }
+          } else if(parsedData.errors.email_exist) {
+              this.emailExistValidation = this.translate.instant("emailExist"); 
+          } else {
+            this.emailExistValidation = "";
+            this.userNameTakenValidation = "";
+          }
 
        } else {
 
@@ -178,13 +192,13 @@ export class SignupPage {
           this.storage.set("socialType",data.user.social_type);
           console.log("social: "+data.user.social_type);
           
-          this.storage.set("user_info",data)
-          .then(() => {
-            this.event.publish("login");
-          });
+          this.storage.set("user_info",data);
+          // .then(() => {
+          //   this.event.publish("login");
+          // });
 
           //cal api to return verification code to the user email and return with code          
-          this.provider.forgetpass(this.username,"verification",data => {
+          this.provider.forgetpass(data.user.username,"verification",data => {
             if(data) {
               data = JSON.parse(data);
               console.log("registeration data: "+JSON.stringify(data));
@@ -235,5 +249,20 @@ export class SignupPage {
 
     this.langdirection = this.helper.langdirection;
   }
+
+
  
+  onConfirmTyping (ev) {
+    console.log(ev);
+    this.confirmPassword = ev.value;
+    console.log("pwd,confirm "+this.Password , this.confirmPassword);
+    if(this.Password == this.confirmPassword) 
+      this.isMatched = true;
+    else
+      this.isMatched = false;
+  }
+
+  onPwdTyping(ev) {
+    this.Password = ev.value;
+  }
 }

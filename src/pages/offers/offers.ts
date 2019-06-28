@@ -19,6 +19,7 @@ export class OffersPage {
  categories:any=[];
  procount:any;
  isResult:boolean = false;
+ allOffers:any = [];
 
   constructor(public toastCtrl:ToastController,
               public Alert:AlertController,
@@ -46,25 +47,36 @@ export class OffersPage {
           this.offers.forEach(element => {      
             element["count"] = this.count;
           });
+
+          this.allOffers = this.offers;
         },(error)=>{});
       }
     });
   }
 
   onInput(input) {
-    this.storage.get("makadyaccess").then((val) => {
-      if(val) {
-        this.provider.offers(input,val,(data) => {
-          console.log(JSON.stringify(data));
-          let parsedData=JSON.parse(data);
-          this.offers = parsedData.data;
-          this.offers.forEach(element => { 
-            element["count"] = this.count;
-            this.isResult = true;
-          });
-        },(error)=>{})
-      }
-    });
+
+    if(input) {
+      this.offers = this.allOffers.filter(element => {
+        return element.product_name.toLowerCase().indexOf(input.toLowerCase()) > -1;
+      });
+    } else {
+      this.loadData();
+    }
+
+    // this.storage.get("makadyaccess").then((val) => {
+    //   if(val) {
+    //     this.provider.offers(input,val,(data) => {
+    //       console.log(JSON.stringify(data));
+    //       let parsedData=JSON.parse(data);
+    //       this.offers = parsedData.data;
+    //       this.offers.forEach(element => { 
+    //         element["count"] = this.count;
+    //         this.isResult = true;
+    //       });
+    //     },(error)=>{})
+    //   }
+    // });
   }
 
   onCancel() {

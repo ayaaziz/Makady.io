@@ -69,7 +69,9 @@ export class MyApp {
             this.storage.get("user_info")
             .then(val => {
               console.log("user_info : ",JSON.stringify(val));
-              // if(val.verified) {
+              console.log("user_verified : ",JSON.stringify(val.user.verified));
+
+              if(val.user.verified == 1) {
                 
                 this.userLoged = true;
                 this.username = val.user.username;
@@ -77,13 +79,7 @@ export class MyApp {
                 this.event.publish("picChanged",val.user.profile_pic);
                 console.log(this.photo);
                 this.helper.user_id = val.user.id;
-
-                          
-                // this.photo = this.helper.userImagePath + val.user.profile_pic;
-                
-               
-      
-              // }
+              }
             });
           } 
           else if(social == 1 || social == 2 || social == 3) {
@@ -99,42 +95,8 @@ export class MyApp {
                     console.log(this.username + " - " + this.photo);
                   }
               });    
-          } 
-          // else if(social == 1) {
-          //     this.storage.get("facebook_user")
-          //       .then(facebookUser => {
-          //         if(facebookUser) {
-          //           this.userLoged = true;
-          //           this.username = facebookUser.name;
-          //           this.photo = facebookUser.picture;
-          //         }
-          //     });
-
-          //   } else if(social == 2) {
-          //     this.storage.get("twitter_user")
-          //       .then(twitterUser => {
-          //         if(twitterUser) {
-          //           this.userLoged = true;
-          //           this.username = twitterUser.name;
-          //           this.photo = twitterUser.picture;
-          //           alert("twitter");
-          //         }
-          //     });
-
-          //   } else if(social == 3) {
-          //       this.storage.get("google_user")
-          //         .then(googleUser => {
-          //           if(googleUser) {
-          //             this.userLoged = true;
-          //             this.username = googleUser.name;
-          //             this.photo = googleUser.picture;
-          //             if(!this.photo) {
-          //               this.photo = this.helper.userImagePath + "default_avatar.png";
-          //             }
-          //           }
-          //       });
-          //     }
-          });
+          }  
+        });
 
       });
     

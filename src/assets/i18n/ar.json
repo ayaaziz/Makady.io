@@ -139,7 +139,8 @@
      "menuadd":"إضافة",
      "notMatchedCode":"الكود خاطئ, يرجى إعادة المحاولة",
      "The username must be at least 4 characters":"يجب ألا يقل اسم المستخدم عن ٤ حروف",
-     "The username has already been taken":"اسم المستخدم مستخدم بالفعل",
+     "userNameLength":"يجب ألا يقل اسم المستخدم عن ٤ حروف",
+     "userNameTaken":" هذا الاسم مستخدم بالفعل",
      "mustinsertPurchased":"يجب إدخال الكمية التي تم شراؤها",
      "mustinsertprice":"يجب إدخال السعر",
      "purchasedmustnotmorerequired":"يجب ألا تكون الكمية التي تم شراؤها أكبر من الكمية المطلوبة",
@@ -167,5 +168,6 @@
      "firstaddList":"يجب إضافة قائمة تسوق أولاً حتى يمكنك إضافة منتجات لقوائمك",
      "minQuntityone":"يجب ألا يقل العدد عن 1",
      "noofproducts":"عدد المنتجات: ",
-     "OK":"تم"     
+     "OK":"تم",
+     "fieldrequired":"هذا المدخل مطلوب"  
 }

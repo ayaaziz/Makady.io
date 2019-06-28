@@ -264,9 +264,19 @@ button.lang-icon {
 }
 
 [dir="rtl"] button.lang-icon {
-    left: 0;
+    right: 0;
 }
 
 [dir="ltr"] button.lang-icon {
-    right: 0;    
+    left: 0;    
+}
+
+.error-message {
+    color: #f00;
+    margin-left: 12px;
+    margin-right: 12px;
+
+    &::before {
+        content: "*";
+    }
 }

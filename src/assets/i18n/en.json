@@ -108,9 +108,9 @@
      "QTY":"QTY",
      "date":"Date",
      "purchaseby":"Purchase By",
-     "groupNameErr": "List name must be greater than 3 characters",
+     "groupNameErr": "List name must be at least 4 characters",
      "serverErr": "Connection error",
-     "emailExist": "Email already exist",
+     "emailExist": "This email already exists",
      "SelectImageSource": "Select Image Source",
       "LoadfromLibrary":"Load from Library",
       "UseCamera": "Use Camera",
@@ -161,5 +161,9 @@
      "chooseapp":"Choose App",
      "addList":"You have no Shopping Lists, Please add new List",
      "minQuntityone":"Minimum quantity is 1",
-     "noofproducts":"No. of products: "
+     "noofproducts":"No. of products: ",
+     "passwordrequired":"Password is required",
+     "userNameLength":"The Username must be at least 4 characters",
+     "fieldrequired":"This field is required",
+     "userNameTaken":"This username has already been taken"
 }

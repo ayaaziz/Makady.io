@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, Events } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { HelperProvider } from '../../providers/helper/helper';
 import { SignupPage } from '../signup/signup';
 import { TabsPage } from '../tabs/tabs';
@@ -21,13 +21,14 @@ import { VerificationPage } from '../verification/verification';
 export class LoginPage {
   remember: any;
   langdirection: any;
-  logInForm: FormGroup;
   username: any = "";
   Password: any = "";
   lang:any;
   hidePassword = true;
   pwdType = "password";
   iconName = "ios-eye-off";
+  loginForm:FormGroup;
+
   
 
   constructor(
@@ -44,6 +45,7 @@ export class LoginPage {
               private twitter: TwitterConnect,
               private fb: Facebook) {
 
+    this.initializeForm();
        
   }
 
@@ -55,19 +57,33 @@ export class LoginPage {
     } else { 
        this.lang = "2";
     }
+
+  }
+
+  private initializeForm() {
+    this.loginForm = new FormGroup({
+      'username': new FormControl(this.username,Validators.required),
+      'Password': new FormControl(this.Password,Validators.required),
+    });
   }
 
   opensign() {
     this.navCtrl.push(SignupPage);
   }
 
-  login() {
+  onSubmit() {
+
     console.log(this.helper.registerationId);
     
-    if (this.username == "" || this.Password == "") {
+    const val = this.loginForm.value;
+   
+    console.log("val: "+JSON.stringify("form data.....: "+JSON.stringify(val)));
+
+
+    if (val.username == "" || val.Password == "") {
       this.helper.presentToast(this.translate.instant('alldata'));
     } else {
-        this.provider.login(this.username, this.Password,this.helper.registerationId, (data) => {
+        this.provider.login(val.username, val.Password,this.helper.registerationId, (data) => {
   
           let Dataparsed = JSON.parse(data);
           
@@ -86,27 +102,30 @@ export class LoginPage {
                 console.log("parsed data: "+JSON.stringify(pdata));
                 console.log("social: "+pdata.user.social_type);
          
-                if (this.remember == true) {
-                  this.storage.set("Makadyusername", "true");
-                }
 
                 this.helper.accesstoken = Dataparsed.access_token;
                 this.storage.set("Makadyuser_name", this.username);
 
                 this.storage.set("socialType",pdata.user.social_type);
                 
-                this.storage.set("user_info", pdata)
-                .then(() => {
-                  this.event.publish("login");
-                });
+                this.storage.set("user_info", pdata);
+                // .then(() => {
+                //   this.event.publish("login");
+                // });
 
                 if(pdata.user.verified) { //account verified
                   console.log("account verified");
+
+                  if (this.remember) {
+                    this.storage.set("Makadyusername", "true");
+                  }
+
+                  this.event.publish("login");
                   this.navCtrl.setRoot(TabsPage);
 
                 } else { //not verified
                     console.log("account not verified");                  
-                    this.navCtrl.push(VerificationPage,{"pageType":"AuthPage","username":pdata.user.username,"userId":pdata.user.id,"emailcode":pdata.user.email_code});                  
+                    this.navCtrl.push(VerificationPage,{"pageType":"AuthPage","username":pdata.user.username,"userId":pdata.user.id,"emailcode":pdata.user.email_code,"isRemembered":this.remember});                  
                 } 
               },
               (error) => {
@@ -120,12 +139,6 @@ export class LoginPage {
       });
     }
   }
-
-  // //*******************//
-  // openVerify() {
-  //   this.navCtrl.push(VerificationPage);
-  // }
-  // //*******************//
   
 
   forget() {

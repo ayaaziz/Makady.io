@@ -36,6 +36,7 @@ export class VerificationPage {
   access:string;
   pageType:string;
   isRegister:boolean;
+  remember:boolean = false;
 
   constructor(public provider: MainproviderProvider,
               public helper: HelperProvider, 
@@ -53,14 +54,20 @@ export class VerificationPage {
               // this.access = this.navParams.get("access");   
               this.pageType = this.navParams.get("pageType");
               this.isRegister = this.navParams.get("register");
+              this.remember = this.navParams.get("isRemembered");
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.langdirection = this.helper.langdirection;
 
     this.helper.presentToast(this.translate.instant("entercodesent")); 
  
     setTimeout(() => {
+      this.input1 = " ";
+      this.input2 = " ";
+      this.input3 = " ";
+      this.input4 = " ";
+
       this.inputOne = false;
       this.inputTwo = true;
       this.inputThree = true;
@@ -146,76 +153,90 @@ export class VerificationPage {
   }
 
   onInputTime3(ev) {
-    console.log("ev ",ev.inputType);
-    let val = String(this.input4).trim();
-    //this.input4 ? alert(1) : alert(0)
-    if(ev.inputType == "deleteContentBackward" && this.input4) {
-      this.input4 = " ";
-    
-    } else if(ev.inputType == "deleteContentBackward" && !this.input4) {
-      this.input4 = " ";
-      this.input3 = " ";
-      this.inputOne = true;
-      this.inputTwo = true;
-      this.inputThree = false;
-      this.inputFour = true;
-      this.myInput2.setFocus();
-    
-    } else if(val) {
-      this.ver = this.input1.trim() + this.input2.trim() + this.input3.trim() + this.input4.trim();
-      console.log("user ver"+this.ver);
-      console.log("email code"+this.emailcode);
-      const spinner = this.loadingCtrl.create();
-      spinner.present();
 
+    if(ev.inputType) {
+      console.log("ev ",ev.inputType);
+      let val = String(this.input4).trim();
+  
+      //this.input4 ? alert(1) : alert(0)
+      if(ev.inputType == "deleteContentBackward" && this.input4) {
+        this.input4 = " ";
       
-      //check matching between user verification code and the code sent to email
-      let result = this.helper.verifyAccount(this.ver,this.emailcode);
-        spinner.dismiss();
-        if(result) { //matched
-    
-          if(this.pageType === "AuthPage") {  //from login or signup page
-            //make this user verified 
-            this.storage.get("makadyaccess").then((val)=>{
-              if(val)
-              { 
-                this.provider.setVerified(val, data => {
-                  // alert(data);
-                  if(data) {
-                    
-                    this.storage.set("Makadyusername", "true");
-                    
-                    this.navCtrl.setRoot(TabsPage);
-                  }
-                },error => {
-                  console.log(error);
-                });
-              }
-            });
-          
-          } else { //from forgetpassword page
+      } else if(ev.inputType == "deleteContentBackward" && !this.input4) {
+        this.input4 = " ";
+        this.input3 = " ";
+        this.inputOne = true;
+        this.inputTwo = true;
+        this.inputThree = false;
+        this.inputFour = true;
+        this.myInput2.setFocus();
+      
+      } else if(val) {
+        this.ver = this.input1.trim() + this.input2.trim() + this.input3.trim() + this.input4.trim();
+        console.log("user ver"+this.ver);
+        console.log("email code"+this.emailcode);
+        const spinner = this.loadingCtrl.create();
+        spinner.present();
+  
+        
+        //check matching between user verification code and the code sent to email
+        let result = this.helper.verifyAccount(this.ver,this.emailcode);
+          spinner.dismiss();
+          if(result) { //matched
+      
+            if(this.pageType === "AuthPage") {  //from login or signup page
+              //make this user verified 
+              this.storage.get("makadyaccess").then((val)=>{
+                if(val)
+                { 
+                  this.provider.setVerified(val, data => {
+                    data = JSON.parse(data);
+                    if(data.success) {
+                  
+                      if (this.remember) {
+                        this.storage.set("Makadyusername", "true");
+                      }
+  
+                      this.storage.get("user_info")
+                      .then(val => {
+                        val.user.verified = 1;
+                        this.storage.set("user_info",val)
+                        .then(() => {
+                          this.event.publish("login");
+                          this.navCtrl.setRoot(TabsPage);
+                        }); 
+                      });
+  
+                    }
+                  },error => {
+                    console.log(error);
+                  });
+                }
+              });
             
-            //show new password page
-            this.show = false;
-            this.hide = true;
+            } else { //from forgetpassword page
+              
+              //show new password page
+              this.show = false;
+              this.hide = true;
+            }
+  
+          } else { //not matched
+              this.helper.presentToast(this.translate.instant("notMatchedCode"));
+                
+              setTimeout(() => {
+                this.inputOne = false;
+                this.inputTwo = true;
+                this.inputThree = true;
+                this.inputFour = true;
+                this.myInput.setFocus();
+              },500);
+              this.input1 = this.input2 = this.input3 = this.input4 = "";
           }
-
-        } else { //not matched
-          this.helper.presentToast(this.translate.instant("notMatchedCode"));
-          // this.event.publish("reload");
-          
-          setTimeout(() => {
-            this.inputOne = false;
-            this.inputTwo = true;
-            this.inputThree = true;
-            this.inputFour = true;
-            this.myInput.setFocus();
-          },500);
-          this.input1 = this.input2 = this.input3 = this.input4 = "";
-        }
-
-    } else {
-      this.input3 = " ";
+  
+      } else {
+        this.input3 = " ";
+      }
     }
   }
 

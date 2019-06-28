@@ -38,19 +38,17 @@ export class EditProfilePage {
                 console.log("profile data......: "+JSON.stringify(this.user));
                 this.userImageUrl =  this.helper.userImagePath + this.user.user.profile_pic;
 
-                this.initializeForm(this.user.user.username,this.user.user.name,this.user.user.email,this.user.user.phone);             
+                this.initializeForm();             
               }
 
 
-  private initializeForm(userName,name,email,phone) {
-
-    console.log(userName,name,email,phone);
+  private initializeForm() {
 
     this.userForm = new FormGroup({
-      'username': new FormControl(userName,Validators.compose([Validators.required,Validators.minLength(4)])),
-      'name': new FormControl(name,Validators.required),
-      'email': new FormControl(email,Validators.compose([Validators.required,Validators.email])),
-      'phone': new FormControl(phone,Validators.compose([Validators.required,Validators.minLength(9),Validators.maxLength(12)]))
+      'username': new FormControl(this.user.user.username,Validators.compose([Validators.required,Validators.minLength(4)])),
+      'name': new FormControl(this.user.user.name,Validators.required),
+      'email': new FormControl(this.user.user.email,Validators.compose([Validators.required,Validators.email])),
+      'phone': new FormControl(this.user.user.phone,Validators.compose([Validators.minLength(9),Validators.maxLength(12)]))
     });
 
   }

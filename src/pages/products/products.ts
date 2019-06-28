@@ -22,6 +22,7 @@ export class ProductsPage {
   categoryName:string;
   productDetails:any;
   userMenuId:number;
+  allProducts:any = [];
 
   constructor(public alertCtrl:AlertController,
               public toastCtrl:ToastController,
@@ -56,6 +57,9 @@ export class ProductsPage {
             element["count"]=this.count;
 
           });
+
+          this.allProducts = this.products;
+
           console.log(parsedData);
         },(error) => {
 
@@ -65,20 +69,30 @@ export class ProductsPage {
   }
 
   onInput(input) {
-    this.storage.get("makadyaccess").then((val) => {
-      if(val) {
-        this.provider.getproducts(this.categoryId,input,val,(data) => {
-          let parsedData=JSON.parse(data);
-          this.products=parsedData.data;
-          console.log(parsedData);
-          this.products.forEach(element => {
-            element["count"] = this.count;  
-          });
-        },(error)=>{
+    
+    if(input) {
+      this.products = this.allProducts.filter(element => {
+        return element.product_name.toLowerCase().indexOf(input.toLowerCase()) > -1;
+      });
+    } else {
+      this.loadData();
+    }
+   
 
-        });
-      }
-    });
+    // this.storage.get("makadyaccess").then((val) => {
+      // if(val) {
+      //   this.provider.getproducts(this.categoryId,input,val,(data) => {
+      //     let parsedData=JSON.parse(data);
+      //     this.products=parsedData.data;
+      //     console.log(parsedData);
+      //     this.products.forEach(element => {
+      //       element["count"] = this.count;  
+      //     });
+      //   },(error)=>{
+
+      //   });
+      // }
+    // });
   }
 
   AddQuantityNum(id) {
