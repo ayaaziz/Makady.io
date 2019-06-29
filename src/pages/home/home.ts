@@ -19,7 +19,7 @@ export class HomePage {
   langdirection:any
   public chartLoadingEl: any;
   public pieChartEl: any;
-  data:any
+  data:any = [];
   chartdata:any=[]
   price:any=0
   names:any=[];
@@ -147,24 +147,18 @@ x:number = 10;
           
         );
       }
-      else{
+      else {
         this.pieChartEl	= new Chart(this.polarChart.nativeElement,
           {
              type: 'polarArea',
              data: {
                 
-                 datasets: [{
-                     label                 : '',
-                     data                  : [0],
-                     duration              : 10,
-                     easing                : 'easeInQuart',
-                     backgroundColor       : ['rgba(0, 187,129, .5)',
-                                              'rgba(185, 17, 17,.5)',
-                                              'rgba(165, 96, 164,.5)',
-                                              'rgba(255, 99, 132, .5)'],
-               
-                 }],
-              labels:['']
+                //  datasets: [{
+                //      label                 : '',
+                //     //  data                  : [0],
+                //      duration              : 10,
+                //      easing                : 'easeInQuart'
+                //  }]
              },
             
     
@@ -186,8 +180,6 @@ x:number = 10;
             
              }
           });
-    
-    
     
           this.chartLoadingEl = this.pieChartEl.generateLegend();
       }

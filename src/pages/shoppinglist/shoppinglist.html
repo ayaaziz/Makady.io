@@ -56,9 +56,9 @@
               <p style="color:#e26c40;">  {{'bought'| translate}}{{item.total_quantity_purchase}}</p>
             </ion-col>
             <ion-col col-1>
-            <p style="margin-bottom: 0px;font-size: 1em;margin-top: -5px;text-align: center;" (click)="editlist(item.menu_id,item.menu_name)"><ion-icon name="md-create" style="text-align: center;"></ion-icon></p>
-          </ion-col>            
-        </ion-row>
+              <p style="margin-bottom: 0px;font-size: 1em;margin-top: -5px;text-align: center;" (click)="editlist(item.menu_id,item.menu_name)"><ion-icon name="md-create" style="text-align: center;"></ion-icon></p>
+            </ion-col>            
+          </ion-row>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -87,8 +87,11 @@
           <ion-col col-6 (click)="opendetails(item.menu_id,item.menu_name)">
             <p style="color:#e26c40;"> {{'categories'| translate}}{{item.total_quantity}}</p>
           </ion-col>
-          <ion-col col-6 (click)="opendetails(item.menu_id,item.menu_name)">
+          <ion-col col-5 (click)="opendetails(item.menu_id,item.menu_name)">
             <p style="color:#e26c40;">  {{'bought'| translate}}{{item.total_quantity_purchase}}</p>
+          </ion-col>
+          <ion-col col-1>
+            <p style="margin-bottom: 0px;font-size: 1em;margin-top: -5px;text-align: center;" (click)="editlist(item.menu_id,item.menu_name)"><ion-icon name="md-create" style="text-align: center;"></ion-icon></p>
           </ion-col>
         </ion-row>
       </ion-item>

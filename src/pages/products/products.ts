@@ -150,17 +150,17 @@ export class ProductsPage {
                     message: this.translate.instant('alreadyexist'),
                     buttons: [
                       {
-                        text: this.translate.instant('cancel'),
-                        role: 'cancel',
-                        handler: () => {
-                          console.log('Cancel clicked');
-                        }
-                      },
-                      {
                         text: this.translate.instant('ok'),
                         handler: () => {
                           // this.update(proid);
                           this.update(proid,quantity,this.categories)
+                        }
+                      },
+                      {
+                        text: this.translate.instant('cancel'),
+                        role: 'cancel',
+                        handler: () => {
+                          console.log('Cancel clicked');
                         }
                       }
                     ]
@@ -195,7 +195,7 @@ export class ProductsPage {
             parsedData.data.forEach(element => {
               alert.addInput({type: 'radio', label: element.menu_name, value: element.menu_id});    
             });
-            alert.addButton(this.translate.instant('cancel'));
+
             alert.addButton({
               text: this.translate.instant('ok'),
               handler: data => {
@@ -214,17 +214,17 @@ export class ProductsPage {
                         message: this.translate.instant('alreadyexist'),
                         buttons: [
                           {
-                            text: this.translate.instant('cancel'),
-                            role: 'cancel',
-                            handler: () => {
-                              console.log('Cancel clicked');
-                            }
-                          },
-                          {
-                            text: this.translate.instant('ok'),
+                            text: this.translate.instant('yes'),
                             handler: () => {
                               // this.update(proid);
                               this.update(proid,quantity,this.categories)
+                            }
+                          },
+                          {
+                            text: this.translate.instant('no'),
+                            role: 'cancel',
+                            handler: () => {
+                              console.log('Cancel clicked');
                             }
                           }
                         ]
@@ -238,6 +238,7 @@ export class ProductsPage {
                 return false;
               }
             });
+            alert.addButton(this.translate.instant('cancel'));
             alert.present();
       
 
@@ -246,7 +247,8 @@ export class ProductsPage {
               message: this.translate.instant("addList"),
               buttons: [
                 {
-                  text: this.translate.instant("OK")
+                  text: this.translate.instant("ok"),
+                  role: 'cancel'
                 }
               ]
             });

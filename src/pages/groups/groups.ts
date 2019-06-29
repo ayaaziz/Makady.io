@@ -101,14 +101,7 @@ deletegroup(id)
     title: this.translate.instant('confirmMsg'),
     buttons: [
       {
-        text: this.translate.instant('cancel'),
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      },
-      {
-        text: this.translate.instant('ok'),
+        text: this.translate.instant('yes'),
         handler: () => {
        
           this.storage.get("makadyaccess").then((val)=>{
@@ -124,6 +117,13 @@ deletegroup(id)
         },(data)=>{})
             }
           })
+        }
+      },
+      {
+        text: this.translate.instant('no'),
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
         }
       }
     ]

@@ -24,7 +24,7 @@
     "money":"The Money Spent",
     "invalidphone":"The telephone number must be at least 9 and not more than 12 digits",
     "dontmatch":"Confirm Password Don't Match with Password",
-    "R.s":"R.S ",
+    "R.s":"SR ",
     "total":"Total money spent this month",
     "passwordback":"To get your password back",
     "enteremail":"Please Enter Your Username",
@@ -166,5 +166,8 @@
      "userNameLength":"The Username must be at least 4 characters",
      "fieldrequired":"This field is required",
      "userNameTaken":"This username has already been taken",
-     "noInvitedlistes":"You are not invited in any list"
+     "noInvitedlistes":"You are not invited in any list",
+     "yes":"ok",
+     "no":"cancel",
+     "nopurchasedproducts":"No purchased products"
 }
