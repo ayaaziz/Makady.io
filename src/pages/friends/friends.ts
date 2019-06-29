@@ -15,6 +15,7 @@ export class FriendsPage {
   langdirection:any;
   friends:any=[];
   groups:any=[];
+  allFriends:any = [];
   
   constructor(public alertCtrl:AlertController,
               public barcodeScanner:BarcodeScanner,
@@ -40,8 +41,10 @@ export class FriendsPage {
         this.provider.friends(val,data => {
           console.log(JSON.stringify(data))
           let parsedData=JSON.parse(data)
-          this.friends=parsedData.friends
+          this.friends=parsedData.friends;
           console.log("friends: "+JSON.stringify(this.friends));
+
+          this.allFriends = this.friends;
         
           parsedData.groups.forEach(group => {
             group.members = group.members.slice(0,4);
@@ -169,46 +172,15 @@ export class FriendsPage {
   }
 
 
-  onInput(text:string) {
-
-   
-      this.storage.get("makadyaccess").then(val => {
-        if(val) {
-
-          if(text) {
-            this.provider.searchFriends(val,text,data => {
-              // console.log("search friend: "+JSON.stringify(data));
-              if(data) {
-                data = JSON.parse(data);
-                console.log("search friend: "+JSON.stringify(data));
-                this.friends = data.data;
-              }
-    
-            },error => {
-              console.log(error);
-            })
-          } else {
-            this.provider.friends(val,data => {
-              console.log(JSON.stringify(data))
-              let parsedData=JSON.parse(data)
-              this.friends=parsedData.friends
-              console.log("friends: "+JSON.stringify(this.friends));
-            
-              parsedData.groups.forEach(group => {
-                group.members = group.members.slice(0,4);
-              });
-    
-              this.groups = parsedData.groups;
-    
-            },error => {
-              console.log(error);
-            });
-          }
-
-        }
-      })
-  
- 
+  onInput(text) {
+    if(text) {
+      this.friends = this.allFriends.filter(element => {      
+        if(element.phone === null) element.phone = "";
+        return (element.username.toLowerCase().indexOf(text.toLowerCase()) > -1) || (element.phone.indexOf(text) > -1); 
+      });
+    } else {
+      this.friends = this.allFriends;
+    }
   }
 
 

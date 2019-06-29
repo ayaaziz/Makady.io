@@ -165,5 +165,6 @@
      "passwordrequired":"Password is required",
      "userNameLength":"The Username must be at least 4 characters",
      "fieldrequired":"This field is required",
-     "userNameTaken":"This username has already been taken"
+     "userNameTaken":"This username has already been taken",
+     "noInvitedlistes":"You are not invited in any list"
 }

@@ -22,6 +22,8 @@ export class ShoppinglistPage {
   hide1:any=true;
   hide2:any=true;
   userId:number;
+  allLists:any = [];
+  allInvitedLists:any = [];
 
   constructor(public alertCtrl:AlertController,
               public platform:Platform,
@@ -51,6 +53,8 @@ export class ShoppinglistPage {
           console.log(JSON.stringify(data));
           let parsedData = JSON.parse(data);
           this.listes = parsedData.data;
+
+          this.allLists = this.listes;
         
           if(this.listes.length==0) {
             this.hide = false;
@@ -65,23 +69,32 @@ export class ShoppinglistPage {
   }
 
   onInput(input) {
-    this.listes=[];
-    this.storage.get("makadyaccess").then((val) => {
-      if(val) {
-        this.provider.menus(1,input,val,(data) => {
-          console.log(JSON.stringify(data));
-          let parsedData=JSON.parse(data);
-          this.listes=parsedData.data;
-          if(this.listes.length==0) {
-            this.show=false;
-            this.hide=true;
+
+    if(input) {
+      this.listes = this.allLists.filter(element => {
+        return element.menu_name.toLowerCase().indexOf(input.toLowerCase()) > -1;
+      });
+    } else {
+      this.listes = this.allLists;
+    }
+
+    // this.listes=[];
+    // this.storage.get("makadyaccess").then((val) => {
+    //   if(val) {
+    //     this.provider.menus(1,input,val,(data) => {
+    //       console.log(JSON.stringify(data));
+    //       let parsedData=JSON.parse(data);
+    //       this.listes=parsedData.data;
+    //       if(this.listes.length==0) {
+    //         this.show=false;
+    //         this.hide=true;
           
-          } else {
-            this.show=true;
-          }
-        },(data)=>{});
-      }
-    });
+    //       } else {
+    //         this.show=true;
+    //       }
+    //     },(data)=>{});
+    //   }
+    // });
   }
 
   editlist(id,name) {
@@ -89,24 +102,32 @@ export class ShoppinglistPage {
   }
 
   onInputinvited(input) {
-    this.listes=[];
 
-    this.storage.get("makadyaccess").then((val) => {
-      if(val) {
-        this.provider.menus(2,input,val,(data) => {
-          console.log(JSON.stringify(data));
-          let parsedData=JSON.parse(data);
-          this.inlistes=parsedData.data;
-          if(this.inlistes.length==0) {
-            this.show = false;
-            this.hide = true;
-          }
-          else{
-            this.show = true;
-          }
-        },(data)=>{});
-      }
-    })
+    if(input) {
+      this.inlistes = this.allInvitedLists.filter(element => {
+        return element.menu_name.toLowerCase().indexOf(input.toLowerCase()) > -1;
+      });
+    } else {
+      this.inlistes = this.allInvitedLists;
+    }
+    // this.listes=[];
+
+    // this.storage.get("makadyaccess").then((val) => {
+    //   if(val) {
+    //     this.provider.menus(2,input,val,(data) => {
+    //       console.log(JSON.stringify(data));
+    //       let parsedData=JSON.parse(data);
+    //       this.inlistes=parsedData.data;
+    //       if(this.inlistes.length==0) {
+    //         this.show = false;
+    //         this.hide = true;
+    //       }
+    //       else{
+    //         this.show = true;
+    //       }
+    //     },(data)=>{});
+    //   }
+    // });
   }
 
   getinvited() {  
@@ -119,6 +140,9 @@ export class ShoppinglistPage {
           console.log(JSON.stringify(data));
           let parsedData=JSON.parse(data);
           this.inlistes=parsedData.data;
+
+          this.allInvitedLists = this.inlistes;
+
           if(this.inlistes.length==0) {
             this.show = false;
             this.hide = false;
@@ -144,6 +168,8 @@ export class ShoppinglistPage {
           console.log(JSON.stringify(data));
           let parsedData=JSON.parse(data);
           this.listes=parsedData.data;
+
+          this.allLists = this.listes;
         
           if(this.listes.length==0) {
             this.hide=false;

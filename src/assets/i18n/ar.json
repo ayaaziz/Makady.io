@@ -169,5 +169,6 @@
      "minQuntityone":"يجب ألا يقل العدد عن 1",
      "noofproducts":"عدد المنتجات: ",
      "OK":"تم",
-     "fieldrequired":"هذا المدخل مطلوب"  
+     "fieldrequired":"هذا الحقل مطلوب",
+     "noInvitedlistes":"لم يتم دعوتك في أي قائمة"  
 }

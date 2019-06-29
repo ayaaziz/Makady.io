@@ -20,6 +20,7 @@ export class GroupsPage {
   // show:any=true
   // hide:any=false
   username:any;
+  allGroups:any = [];
 
   constructor(public alertCtrl:AlertController,
               public storage:Storage,
@@ -57,6 +58,9 @@ export class GroupsPage {
           });
           
           this.groups = parsedData.groups;
+
+          this.allGroups = this.groups;
+
           console.log("groupsss"+JSON.stringify(this.groups));
   
        
@@ -69,59 +73,13 @@ export class GroupsPage {
   }
   
 onInput(input) {
-  if(input=="") {
-    this.storage.get("makadyaccess").then(val => {
-      if(val)
-      {
-        this.provider.friends(val,data => {
-          console.log(JSON.stringify(data));
-          let parsedData=JSON.parse(data);
-          this.groups=parsedData.groups;
-        },error => {
-          console.log(error);
-      });
-    }
-  });
-}
-else {
-  this.storage.get("makadyaccess").then(val => {
-    if(val)
-    {
-        this.provider.searchgroups(input,val,data => {
-          console.log(JSON.stringify(data));
-          let parsedData = JSON.parse(data);
-           
-            if(parsedData.data.length > 0) {
-              let newGroups = [];
-              let images = [];
-              parsedData.data.forEach(group => {   
-                group.profile_pic.forEach(img => {
-                  console.log(JSON.stringify(img))
-                  images.push({"profile_pic":this.helper.userImagePath + img.profile_pic});
-                });
-                
-                let singleGroup = { 
-                  "group_name": group.name_en,
-                  "members":images.slice(0,4)
-                }
-
-                console.log(JSON.stringify(images));
-                newGroups.push(singleGroup);
-                
-                
-                this.groups = newGroups;
-                console.log(JSON.stringify("search group data: "+JSON.stringify(this.groups)));
-                
-              });
-            } else {
-              this.groups = [];
-            }
-        },error => {
-          console.log(error);
-      });
-    }
-  })
-}
+  if(input) {
+    this.groups = this.allGroups.filter(element => {      
+      return (element.group_name.toLowerCase().indexOf(input.toLowerCase()) > -1); 
+    });
+  } else {
+    this.groups = this.allGroups;
+  }
 }
 
 oncancel()

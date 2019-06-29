@@ -61,7 +61,7 @@ export class OffersPage {
         return element.product_name.toLowerCase().indexOf(input.toLowerCase()) > -1;
       });
     } else {
-      this.loadData();
+      this.offers = this.allOffers;
     }
 
     // this.storage.get("makadyaccess").then((val) => {

@@ -75,7 +75,7 @@ export class ProductsPage {
         return element.product_name.toLowerCase().indexOf(input.toLowerCase()) > -1;
       });
     } else {
-      this.loadData();
+      this.products = this.allProducts;
     }
    
 

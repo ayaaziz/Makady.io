@@ -67,7 +67,7 @@
     <ion-searchbar style="padding-bottom: 0;" placeholder="{{'searchinvited' | translate }}" (ionInput)="onInputinvited(myInput)" (ionCancel)="onCancel()" [(ngModel)]="myInput" [hidden]="hide1"  [dir]="langdirection"></ion-searchbar>
 
     <ion-col class="nodata" col-12 style="margin-top: 50px;" *ngIf="inlistes.length === 0">
-        <p style="text-align: center;color:#e26c40;font-size: 1.4em;font-weight: bold;" [hidden]="hide1">{{'nolistes'| translate}}</p>
+        <p style="text-align: center;color:#e26c40;font-size: 1.4em;font-weight: bold;" [hidden]="hide1">{{'noInvitedlistes'| translate}}</p>
     </ion-col>
 
     <ion-col>
