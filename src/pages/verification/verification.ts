@@ -5,6 +5,7 @@ import { HelperProvider } from '../../providers/helper/helper';
 import { TabsPage } from '../tabs/tabs';
 import { MainproviderProvider } from '../../providers/mainprovider/mainprovider';
 import { Storage } from '@ionic/storage';
+import { LoginPage } from '../login/login';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class VerificationPage {
   @ViewChild('focusInput2') myInput2;
   @ViewChild('focusInput3') myInput3;
   langdirection: any;
-  password: any;
+  password:any;
   input1: any = " ";
   input2: any = " ";
   input3: any = " ";
@@ -37,6 +38,12 @@ export class VerificationPage {
   pageType:string;
   isRegister:boolean;
   remember:boolean = false;
+  confirmPassword:any;
+  invalidLength:boolean = false;
+  dontmatch:string = "";
+  isEmpty2:boolean = false;
+  isEmpty3:boolean = false;
+
 
   constructor(public provider: MainproviderProvider,
               public helper: HelperProvider, 
@@ -246,13 +253,19 @@ export class VerificationPage {
     console.log(this.emailcode);
     console.log(this.password);
     console.log(this.username);
-    this.provider.updatepass(this.username, this.emailcode, this.password, (data) => {
+    this.provider.updatepass(this.username, this.emailcode, this.password,data => {
       console.log(JSON.stringify(data));
-      this.navCtrl.setRoot(TabsPage);
+      data = JSON.parse(data);
 
-    }, (data) => {
+      if(data.success) {
+        this.helper.presentToast(this.translate.instant("newPasswordSuccess"));
+        this.navCtrl.setRoot(LoginPage);
+      } 
+      // this.navCtrl.setRoot(TabsPage);
 
-    })
+    },error => {
+      console.log(error);
+    });
   }
 
   resend() {
@@ -304,4 +317,46 @@ export class VerificationPage {
   //     this.input1 = this.input2 = this.input3 = this.input4 = "";
   //   } 
   // }
+
+  onChange2() {
+    this.invalidLength = false;
+    this.isEmpty2 = false;
+    this.dontmatch = "";
+
+    if(!this.password) {
+      this.isEmpty2 = true;
+
+    } else if(this.password.length < 4) {
+      this.invalidLength = true;
+    } 
+    
+    if(this.confirmPassword && this.confirmPassword !== this.password) 
+      this.dontmatch = this.translate.instant('dontmatch');
+  }
+
+  onChange3() {
+    this.dontmatch = "";
+    this.isEmpty3 = false;
+
+    if(!this.confirmPassword) {
+      this.isEmpty3 = true;
+    
+    } else if(this.confirmPassword !== this.password) {
+      this.dontmatch = this.translate.instant('dontmatch');
+    }  
+  }
+
+  onBlur2() {
+    this.isEmpty2 = false;
+
+    if(!this.password) 
+      this.isEmpty2 = true;
+  }
+
+  onBlur3() {
+    this.isEmpty3 = false;
+
+    if(!this.confirmPassword) 
+      this.isEmpty3 = true;
+  }
 }

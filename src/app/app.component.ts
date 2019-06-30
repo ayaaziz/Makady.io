@@ -303,7 +303,8 @@ export class MyApp {
         },
         {
           text: this.translate.instant('cancel'),
-          role: 'cancel'
+          // role: 'cancel'
+          role:'destructive'
         }
       ]
     });
