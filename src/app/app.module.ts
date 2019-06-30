@@ -48,6 +48,7 @@ import { Push } from '@ionic-native/push';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RefreshTokenInterceptor } from '../providers/refresh-token.interceptor';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
+import { StoresPage } from '../pages/stores/stores';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -75,7 +76,8 @@ export function createTranslateLoader(http: HttpClient) {
     HomePage,
     SignupPage,
     TabsPage,
-    EditProfilePage
+    EditProfilePage,
+    StoresPage
   ],
   imports: [
     ProgressBarModule,
@@ -117,7 +119,8 @@ export function createTranslateLoader(http: HttpClient) {
     SettingsPage,
     HomePage,
     TabsPage,
-    EditProfilePage
+    EditProfilePage,
+    StoresPage
   ],
   providers: [
     Camera,

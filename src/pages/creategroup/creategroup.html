@@ -26,6 +26,17 @@
     <ion-col col-12>
       <ion-input [(ngModel)]="name" type="text" placeholder="{{'Group Name' | translate}}" [dir]="langdirection" style="padding:0 10px;border:1px solid lightgray;border-radius: 10px;"></ion-input>
     </ion-col>
+    <ion-col>
+      <div class="error-message" *ngIf="isInvalidNameEmpty">
+        {{'fieldrequired'| translate}}
+      </div>
+      <div class="error-message" *ngIf="isInvalidNameLength">
+        {{'menuNameLength'| translate}}.
+      </div>
+      <div class="error-message" *ngIf="menuNameTakenValidation">
+        {{menuNameTakenValidation}}
+      </div>
+    </ion-col>
   </ion-row>
   
   <ion-row>

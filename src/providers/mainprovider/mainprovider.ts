@@ -589,7 +589,7 @@ export class MainproviderProvider {
       loader.present();
       let headers = new HttpHeaders();
       let parameter={
-        'name':name,
+        'name_en':name,
         'users_ids':ids
       }
       headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
@@ -922,7 +922,8 @@ export class MainproviderProvider {
       loader.present();
       let headers = new HttpHeaders();
       let parameter={
-        'name':name,
+        // 'name':name,
+        "name_en":name,
         'users_ids':ids
       }
 
@@ -956,7 +957,7 @@ export class MainproviderProvider {
       });
       loader.present();
       let headers = new HttpHeaders();
-      let parameter={
+      let parameter = {
         'name':name,
         'users_ids':ids,
         'removed_ids':removedIds,
@@ -1583,6 +1584,34 @@ export class MainproviderProvider {
    
       headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'socialLinks';
+      
+      this.http.get(serviceUrl, { headers: headers })
+        .subscribe(
+          data => {
+            loader.dismiss();
+            successCallback(JSON.stringify(data))
+          },
+          err => {
+            loader.dismiss();
+            failureCallback(err);
+            console.log(err.message);
+          }
+        )
+    } else {
+      this.helper.presentToast(this.translate.instant("offline"));
+    }
+  }
+
+  getStores(successCallback,failureCallback) {
+    if(navigator.onLine) {
+      let loader = this.loadingCtrl.create({
+        content: "",
+      });
+      loader.present();
+      let headers = new HttpHeaders();
+   
+      headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
+      let serviceUrl = this.helper.serviceurl + 'Stores';
       
       this.http.get(serviceUrl, { headers: headers })
         .subscribe(

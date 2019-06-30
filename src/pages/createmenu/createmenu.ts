@@ -6,6 +6,7 @@ import { Platform } from 'ionic-angular/platform/platform';
 import { Storage } from '@ionic/storage';
 import { MainproviderProvider } from '../../providers/mainprovider/mainprovider';
 import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
+import { a } from '@angular/core/src/render3';
 
 @Component({
   selector: 'page-createmenu',
@@ -15,13 +16,16 @@ export class CreatemenuPage {
   langdirection:any
   friends:any=[]
   check:any
-  name:any
+  name:any = "";
   id:any=""
   page:any
   menuid:any
   menuname:any;
   friendsInMenu:any = [];
   removedIds:any = "";
+  isInvalidNameEmpty:boolean = false;
+  isInvalidNameLength:boolean = false;
+  menuNameTakenValidation:string = "";
 
   constructor(public ViewCtrl:ViewController,
     public toastCtrl:ToastController,
@@ -99,13 +103,20 @@ export class CreatemenuPage {
     this.removedIds=this.removedIds+','+id;   
   }
 
-  create()
-  {
-    if(this.name.length < 4){
-      this.presentToast(this.translate.instant("groupNameErr"));
-      return
-    }
+  create() {
+    this.isInvalidNameEmpty = false;
+    this.isInvalidNameLength = false;      
+    this.menuNameTakenValidation = "";
 
+    if(this.name.length === 0) {
+      this.isInvalidNameEmpty = true;
+      return;
+
+    } else if(this.name.length < 4) {
+        this.isInvalidNameLength = true;      
+        return;
+    }
+  
    if(this.id.charAt(0) == ',' )
    {
      this.id = this.id.substr(1);
@@ -119,11 +130,19 @@ export class CreatemenuPage {
         {
           this.provider.editmenu(this.name,this.id,this.removedIds,this.menuid,val,data => {
           console.log(JSON.stringify(data))
-          this.name="";
-          this.check=false;
-          this.presentToast(this.translate.instant('edited'));
-          this.navCtrl.setRoot(ShoppinglistPage);
+          data = JSON.parse(data);
 
+          if(data.success) {
+            this.name="";
+            this.check = false;
+            this.presentToast(this.translate.instant('edited'));
+            this.navCtrl.setRoot(ShoppinglistPage);
+          } else {
+            if(data.errors.name_en == "The name en has already been taken.") {
+              this.menuNameTakenValidation = this.translate.instant("menuNameTaken");
+            }
+          }
+          
           },error => {
             console.log(error);
           })
@@ -134,18 +153,31 @@ export class CreatemenuPage {
     this.storage.get("makadyaccess").then((val)=>{
       if(val)
       {
-        this.provider.createmenu(this.name,this.id,val,(data)=>{
-        console.log(JSON.stringify(data))
-        this.name=""
-        this.check=false
-        this.presentToast(this.translate.instant('created'))
-        this.navCtrl.setRoot(ShoppinglistPage)
+        this.provider.createmenu(this.name,this.id,val,data => {
+          
+          console.log(JSON.stringify(data));
+          data = JSON.parse(data);
 
-        },(data)=>{})
+          if(data.success) {
+            this.name="";
+            this.check = false;
+            this.presentToast(this.translate.instant('created'));
+            this.navCtrl.setRoot(ShoppinglistPage);     
+          
+          } else {
+      
+            if(data.errors.name_en == "The name en has already been taken.") {
+              this.menuNameTakenValidation = this.translate.instant("menuNameTaken");
+            }
+          }
+        },error => {
+          console.log(error);
+        });
       }
     })
   }
   }
+
   presentToast(msg)
   {
     let toast = this.toastCtrl.create({

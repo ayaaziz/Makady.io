@@ -35,41 +35,45 @@ export class FriendlistPage {
   }
 
   loadData() {
-    // this.langdirection=this.helper.langdirection;
-    this.storage.get("makadyaccess").then((val) => {
-      if(val) {
-        this.provider.friendrequests(val,(data) => {
-          console.log(JSON.stringify(data));
-          let parsedData=JSON.parse(data);
-          this.friends=parsedData.friends;
 
-          if(this.friends.length == 0) {
-            this.hide = false;
-          
-          } else {
-            this.friends.forEach(element => {
-              let date = moment(new Date().toUTCString())
-              element.created_at = date.from(moment.utc(element.created_at));
-            });
-            this.hide = true;
-          }
-        },(data)=>{
+    setTimeout(() => {
+      // this.langdirection=this.helper.langdirection;
+      this.storage.get("makadyaccess").then((val) => {
+        if(val) {
+          this.provider.friendrequests(val,(data) => {
+            console.log(JSON.stringify(data));
+            let parsedData=JSON.parse(data);
+            this.friends=parsedData.friends;
 
-        });
-      }
-    });
+            if(this.friends.length == 0) {
+              this.hide = false;
+            
+            } else {
+              this.friends.forEach(element => {
+                let date = moment(new Date().toUTCString())
+                element.created_at = date.from(moment.utc(element.created_at));
+              });
+              this.hide = true;
+            }
+          },(data)=>{
 
-      
-    this.provider.getRequestsSent(data => {
-      console.log(JSON.stringify(data));
-      let parsedData=JSON.parse(data);
-      this.requestsSent = parsedData.friends;
+          });
+        }
+      });
 
-    },error => {
-      console.log(error);
-    });
+        
+      this.provider.getRequestsSent(data => {
+        console.log(JSON.stringify(data));
+        let parsedData=JSON.parse(data);
+        this.requestsSent = parsedData.friends;
 
-    console.log('ionViewDidLoad FriendlistPage');
+      },error => {
+        console.log(error);
+      });
+
+      console.log('ionViewDidLoad FriendlistPage');
+
+    },500);
   }
 
   accept(id) {

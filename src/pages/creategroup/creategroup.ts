@@ -12,17 +12,19 @@ import { GroupsPage } from '../groups/groups';
   templateUrl: 'creategroup.html',
 })
 export class CreategroupPage {
-langdirection:any
-friends:any=[]
-check:any
-name:any = ""
-id:any=""
-page:any
-groupid:any
+langdirection:any;
+friends:any = [];
+check:any;
+name:any = "";
+id:any="";
+page:any;
+groupid:any;
 groupname:any;
 friendsInGroup:any = [];
-// pageType:string;
 removedIds:any = "";
+isInvalidNameEmpty:boolean = false;
+isInvalidNameLength:boolean = false;
+menuNameTakenValidation:string = "";
 
   constructor(public ViewCtrl:ViewController,public toastCtrl:ToastController,public storage:Storage,public provider:MainproviderProvider,public platform:Platform,public helper:HelperProvider,public translate:TranslateService,public navCtrl: NavController, public navParams: NavParams) {
     this.page = this.navParams.get("page");
@@ -97,8 +99,25 @@ removedIds:any = "";
     this.removedIds=this.removedIds+','+id;   
   }
 
-  create()
-  {
+  create() {
+
+    this.isInvalidNameEmpty = false;
+    this.isInvalidNameLength = false;      
+    this.menuNameTakenValidation = "";
+
+    if(this.name.length === 0) {
+      this.isInvalidNameEmpty = true;
+      return;
+
+    } else if(this.name.length < 4) {
+        this.isInvalidNameLength = true;      
+        return;
+    
+    } else if(!this.id && this.page !== "edit") {
+      this.helper.presentToast(this.translate.instant("mustAddFriends"));
+      return;
+    } 
+
     if(this.id.charAt(0) == ',' )
    {
      this.id = this.id.substr(1);
@@ -110,38 +129,61 @@ removedIds:any = "";
         if(val)
         {
 
-          if(this.name.length < 4){
-            this.presentToast(this.translate.instant("groupnamelength"))
-          } else {
-            this.provider.editgroup(this.name,this.id,this.removedIds,this.groupid,val,(data)=>{
-              console.log(JSON.stringify(data))
-              this.name=""
-              this.check=false
-              this.presentToast(this.translate.instant('edited'))
-              this.navCtrl.pop();
-              },(data)=>{
-    
+          // if(this.name.length < 4){
+          //   this.presentToast(this.translate.instant("groupnamelength"))
+          // } else {
+            this.provider.editgroup(this.name,this.id,this.removedIds,this.groupid,val,data => {
+      
+              console.log(JSON.stringify(data));
+              data = JSON.parse(data);
+
+              if(data.success) {
+                this.name="";
+                this.check = false;
+                this.presentToast(this.translate.instant('edited'));
+                this.navCtrl.pop();
+              
+              } else {
+                if(data.errors.name_en == "The name en has already been taken.") {
+                  this.menuNameTakenValidation = this.translate.instant("menuNameTaken");
+                }
+              }
+
+              },error => {
+                console.log(error);
               });
-          }
+          // }
         }
       })
     }
-    else{
+    else {
     this.storage.get("makadyaccess").then((val)=>{
       if(val)
       {
-        if(this.name.length < 4){
-          this.presentToast(this.translate.instant("groupnamelength"))
-        } else {
-          this.provider.creategroup(this.name,this.id,val,(data)=>{
+        // if(this.name.length < 4){
+        //   this.presentToast(this.translate.instant("groupnamelength"))
+        // } else {
+
+          this.provider.creategroup(this.name,this.id,val,data => {
+            
             console.log(JSON.stringify(data));
-            this.name="";
-            this.check=false;
-            this.presentToast(this.translate.instant('created'));
-            this.navCtrl.pop();
-    
-            },(data)=>{})
-        }
+            data = JSON.parse(data);
+
+            if(data.success) {
+              this.name = "";
+              this.check = false;
+              this.presentToast(this.translate.instant('created'));
+              this.navCtrl.pop();
+              
+            } else {
+              if(data.errors.name_en == "The name en has already been taken.") {
+                this.menuNameTakenValidation = this.translate.instant("menuNameTaken");
+              }
+            }
+          },error => {
+            console.log(error);
+          })
+        // }
       }
     })
   }

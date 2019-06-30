@@ -16,7 +16,7 @@ import { CategoriesPage } from '../pages/categories/categories';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { SettingsProvider } from '../providers/settings/settings';
 import { GroupsPage } from '../pages/groups/groups';
-import { FriendsPage } from '../pages/friends/friends';
+import { StoresPage } from '../pages/stores/stores';
 
 
 @Component({
@@ -245,6 +245,12 @@ export class MyApp {
 
   offers() {
     this.navctrl.setRoot(TabsPage, { tabIndex: 1 });
+  }
+
+  stores() {
+    this.navctrl.setRoot(TabsPage).then(()=> {
+      this.navctrl.push(StoresPage);
+    });
   }
 
   friends() {

@@ -55,143 +55,136 @@ x:number = 10;
   }
 
   loadData() {
-    // const spinner = this.loadingCtrl.create();
-    // spinner.present();
-    
-
-
-    // this.storage.get("user_info").then((val)=>{
-    //   if(val)
-    //   { 
-    //     //alert( val.user.id)
-    //     // this.helper.user_id = val.user.id
-    //   }})
-      this.chartdata = []
-      this.data = []
-      this.price = 0
-      this.names = []
-    this.storage.get("makadyaccess").then((val)=>{
-      if(val)
-      {
-        this.provider.home(val,(data)=>{
-          
-          // spinner.dismiss();
-
-          let dataparsed = JSON.parse(data);
-          this.data = dataparsed.data;
-          console.log(""+JSON.stringify(this.data));
-          if(this.data.length > 0) {
-
-            //get total price
-            this.data.forEach(element => {
-              this.price += parseInt(element.price);
-            });
-
-           this.data.forEach((element,index) => {
-            // this.price += parseInt(element.price);
-            this.chartdata.push(element.quantity);
-            this.names.push(element.name);
-        
-            //add new properties(color,percentage) for each element in array
-           
-            if(index === 0) element.color = "#7FD3B9";
-            else if(index === 1) element.color = "#DB7F7F";
-            else if(index === 2) element.color = "#D3A1D2";
-            else if(index === 3) element.color = "#FF9EB3";
+   
+    setTimeout(() => {
+      
+        this.chartdata = []
+        this.data = []
+        this.price = 0
+        this.names = []
+       this.storage.get("makadyaccess").then((val)=>{
+        if(val)
+        {
+          this.provider.home(val,(data)=>{
             
+            // spinner.dismiss();
 
-            element.percentage = Math.floor((element.price * 100) / this.price);
+            let dataparsed = JSON.parse(data);
+            this.data = dataparsed.data;
+            console.log(""+JSON.stringify(this.data));
+            if(this.data.length > 0) {
 
-            this.pieChartEl	= new Chart(this.polarChart.nativeElement,
-              {
-                 type: 'polarArea',
-                 data: {
-                    
-                     datasets: [{
-                         label                 : '',
-                         data                  : this.chartdata,
-                         duration              : 10,
-                         easing                : 'easeInQuart',
-                         backgroundColor       : ['rgba(0, 187,129, .5)',
-                                                  'rgba(185, 17, 17,.5)',
-                                                  'rgba(165, 96, 164,.5)',
-                                                  'rgba(255, 99, 132, .5)'],
-                     }],
-                  labels:this.names
-                 },
-                
-        
-                 options : {
-                //   pieceLabel: {
-                //     render: this.cer //show values
-                //  },
-                  responsive: true,
-                    maintainAspectRatio: false,
-                    legend         : {
-                      labels:{ boxWidth    : 12},
-                      display     : true,
-                      position    :'bottom',
-                      fontSize    : 15,
-                      padding     : 1,
-                      top         : 0,
-                    
-                   },
-                
-                 }
+              //get total price
+              this.data.forEach(element => {
+                this.price += parseInt(element.price);
               });
-        
-       
-        
-              this.chartLoadingEl = this.pieChartEl.generateLegend();
-          }
+
+            this.data.forEach((element,index) => {
+              // this.price += parseInt(element.price);
+              this.chartdata.push(element.quantity);
+              this.names.push(element.name);
           
-        );
-      }
-      else {
-        this.pieChartEl	= new Chart(this.polarChart.nativeElement,
-          {
-             type: 'polarArea',
-             data: {
-                
-                //  datasets: [{
-                //      label                 : '',
-                //     //  data                  : [0],
-                //      duration              : 10,
-                //      easing                : 'easeInQuart'
-                //  }]
-             },
+              //add new properties(color,percentage) for each element in array
             
-    
-             options : {
-            //   pieceLabel: {
-            //     render: this.cer //show values
-            //  },
-              responsive: true,
-                maintainAspectRatio: false,
-                legend         : {
-                  labels:{ boxWidth    : 12},
-                  display     : true,
-                  position    :'bottom',
-                  fontSize    : 15,
-                  padding     : 1,
-                  top         : 0,
-                
-               },
+              if(index === 0) element.color = "#7FD3B9";
+              else if(index === 1) element.color = "#DB7F7F";
+              else if(index === 2) element.color = "#D3A1D2";
+              else if(index === 3) element.color = "#FF9EB3";
+              
+
+              element.percentage = Math.floor((element.price * 100) / this.price);
+
+              this.pieChartEl	= new Chart(this.polarChart.nativeElement,
+                {
+                  type: 'polarArea',
+                  data: {
+                      
+                      datasets: [{
+                          label                 : '',
+                          data                  : this.chartdata,
+                          duration              : 10,
+                          easing                : 'easeInQuart',
+                          backgroundColor       : ['rgba(0, 187,129, .5)',
+                                                    'rgba(185, 17, 17,.5)',
+                                                    'rgba(165, 96, 164,.5)',
+                                                    'rgba(255, 99, 132, .5)'],
+                      }],
+                    labels:this.names
+                  },
+                  
+          
+                  options : {
+                  //   pieceLabel: {
+                  //     render: this.cer //show values
+                  //  },
+                    responsive: true,
+                      maintainAspectRatio: false,
+                      legend         : {
+                        labels:{ boxWidth    : 12},
+                        display     : true,
+                        position    :'bottom',
+                        fontSize    : 15,
+                        padding     : 1,
+                        top         : 0,
+                      
+                    },
+                  
+                  }
+                });
+          
+        
+          
+                this.chartLoadingEl = this.pieChartEl.generateLegend();
+            }
             
-             }
-          });
-    
-          this.chartLoadingEl = this.pieChartEl.generateLegend();
-      }
-  
+          );
+        }
+        else {
+          this.pieChartEl	= new Chart(this.polarChart.nativeElement,
+            {
+              type: 'polarArea',
+              data: {
+                  
+                  //  datasets: [{
+                  //      label                 : '',
+                  //     //  data                  : [0],
+                  //      duration              : 10,
+                  //      easing                : 'easeInQuart'
+                  //  }]
+              },
+              
+      
+              options : {
+              //   pieceLabel: {
+              //     render: this.cer //show values
+              //  },
+                responsive: true,
+                  maintainAspectRatio: false,
+                  legend         : {
+                    labels:{ boxWidth    : 12},
+                    display     : true,
+                    position    :'bottom',
+                    fontSize    : 15,
+                    padding     : 1,
+                    top         : 0,
+                  
+                },
+              
+              }
+            });
+      
+            this.chartLoadingEl = this.pieChartEl.generateLegend();
+        }
     
       
-        },(error)=>{
-          // spinner.dismiss();
-        })
         
-      }
-    })
+          },(error)=>{
+            // spinner.dismiss();
+          })
+          
+        }
+      })
+    },500);
     
   }
 

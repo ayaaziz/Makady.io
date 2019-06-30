@@ -37,21 +37,25 @@ export class OffersPage {
   }
 
   loadData() {
-    this.langdirection=this.helper.langdirection;
-    this.storage.get("makadyaccess").then((val) => {
-      if(val) {
-        this.provider.offers("",val,(data)=>{
-          console.log(JSON.stringify(data));
-          let parsedData=JSON.parse(data);
-          this.offers=parsedData.data;
-          this.offers.forEach(element => {      
-            element["count"] = this.count;
-          });
+    setTimeout(() => {
 
-          this.allOffers = this.offers;
-        },(error)=>{});
-      }
-    });
+      this.langdirection=this.helper.langdirection;
+      this.storage.get("makadyaccess").then((val) => {
+        if(val) {
+          this.provider.offers("",val,(data)=>{
+            console.log(JSON.stringify(data));
+            let parsedData=JSON.parse(data);
+            this.offers=parsedData.data;
+            this.offers.forEach(element => {      
+              element["count"] = this.count;
+            });
+
+            this.allOffers = this.offers;
+          },(error)=>{});
+        }
+      });
+    },500);
+
   }
 
   onInput(input) {

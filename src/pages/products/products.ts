@@ -48,24 +48,28 @@ export class ProductsPage {
   }
 
   loadData() {
-    this.storage.get("makadyaccess").then((val) => {
-      if(val) {
-        this.provider.getproducts(this.categoryId,"",val,(data) => {
-          let parsedData=JSON.parse(data);
-          this.products=parsedData.data;
-          this.products.forEach(element => {
-            element["count"]=this.count;
+
+    setTimeout(() => {
+      this.storage.get("makadyaccess").then((val) => {
+        if(val) {
+          this.provider.getproducts(this.categoryId,"",val,(data) => {
+            let parsedData=JSON.parse(data);
+            this.products=parsedData.data;
+            this.products.forEach(element => {
+              element["count"]=this.count;
+
+            });
+
+            this.allProducts = this.products;
+
+            console.log(parsedData);
+          },(error) => {
 
           });
+        }
+      });
+    },500);
 
-          this.allProducts = this.products;
-
-          console.log(parsedData);
-        },(error) => {
-
-        });
-      }
-    });
   }
 
   onInput(input) {

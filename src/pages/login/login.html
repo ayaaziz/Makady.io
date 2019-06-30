@@ -15,6 +15,7 @@
       <ion-icon item-start name="md-person"></ion-icon>
       <ion-input [dir]="langdirection" type="text" formControlName='username' placeholder="{{'username'| translate}}" ></ion-input>
     </ion-item>
+    
     <ion-row *ngIf="loginForm.controls['username'].errors?.required &&
       loginForm.controls['username'].touched">
       <ion-col>

@@ -247,6 +247,14 @@ p.group-text {
     margin: 0 auto;
 }
 
+p.menu-text {
+    white-space: nowrap;
+    width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
 // .item.item-block.item-ios:not(:last-child),
 // button.item.item-block.item-md:not(:last-child) {
 //     border-bottom: 8px solid #e26c40;
@@ -279,4 +287,13 @@ button.lang-icon {
     &::before {
         content: "*";
     }
+}
+
+//to change searchbar placeholder position when translate
+[dir="ltr"] input.searchbar-input { 
+    direction: ltr;
+}
+
+[dir="rtl"] input.searchbar-input { 
+    direction: rtl;
 }

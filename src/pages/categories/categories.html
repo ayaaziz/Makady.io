@@ -18,6 +18,11 @@
     </ion-refresher-content>
   </ion-refresher>
 
+  <div style="position: relative;">
+    <ion-searchbar [dir]="langdirection" style="margin-top: 0px;" placeholder="{{ 'searchcategories' | translate }}" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput">
+    </ion-searchbar>
+  </div>
+
   <ion-row  class="nodata" *ngIf="products.length === 0">
     <ion-col>
       <p style="text-align: center;color:#e26c40;font-size: 1.4em;font-weight: bold;">{{'noproducts'| translate}}</p>

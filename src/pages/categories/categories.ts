@@ -16,6 +16,7 @@ langdirection:any;
 products:any = [];
 count:any=1;
 userMenuId:number;
+allCategories:any = [];
 
   constructor(public provider:MainproviderProvider,
               public ViewCtrl:ViewController,
@@ -33,24 +34,39 @@ userMenuId:number;
   }
 
   loadData() {
-    this.userMenuId = this.navParam.get("fromUserList");
-    this.langdirection=this.helper.langdirection;
-    this.storage.get("makadyaccess").then((val) => {
-      if(val) {
-        this.provider.products(val,(data) => {
-          console.log(JSON.stringify(data));
-          let Dataparsed= JSON.parse(data);
-          this.products = Dataparsed.data;
-        
-        },(error)=>{});
-      }
-    });
+
+    setTimeout(() => {
+      this.userMenuId = this.navParam.get("fromUserList");
+      this.langdirection=this.helper.langdirection;
+      this.storage.get("makadyaccess").then((val) => {
+        if(val) {
+          this.provider.products(val,(data) => {
+            console.log(JSON.stringify(data));
+            let Dataparsed= JSON.parse(data);
+            this.products = Dataparsed.data;
+
+            this.allCategories = this.products;
+          
+          },(error)=>{});
+        }
+      });
+    },500);
   }
 
   show(id,catName) {
     // this.navCtrl.push(ProductsPage,{id:id,"categoryName":catName});
 
     this.navCtrl.push(ProductsPage,{id:id,"categoryName":catName,"fromUserList":this.userMenuId});    
+  }
+
+  onInput(input) { 
+    if(input) {
+      this.products = this.allCategories.filter(element => {
+        return element.category_name.toLowerCase().indexOf(input.toLowerCase()) > -1;
+      });
+    } else {
+      this.products = this.allCategories;
+    }
   }
 
   doRefresh(event) {

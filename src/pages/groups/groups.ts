@@ -38,38 +38,41 @@ export class GroupsPage {
   }
 
   loadData() {
-    this.storage.get("Makadyuser_name").then((val1)=>{
-      if(val1)
-      {
-       this.username=val1;
-      }
-    });
-     this.langdirection=this.helper.langdirection
-     this.storage.get("makadyaccess").then((val)=>{
-      if(val)
-      {
-        this.provider.friends(val,data => {
-          
-          let parsedData = JSON.parse(data);
 
-          parsedData.groups.forEach(group => {
-            group.members = group.members.slice(0,4);
-            console.log("group length: "+ group.members.length);
-          });
-          
-          this.groups = parsedData.groups;
+    setTimeout(() => {
+      this.storage.get("Makadyuser_name").then((val1)=>{
+        if(val1)
+        {
+        this.username=val1;
+        }
+      });
+      this.langdirection=this.helper.langdirection
+      this.storage.get("makadyaccess").then((val)=>{
+        if(val)
+        {
+          this.provider.friends(val,data => {
+            
+            let parsedData = JSON.parse(data);
 
-          this.allGroups = this.groups;
+            parsedData.groups.forEach(group => {
+              group.members = group.members.slice(0,4);
+              console.log("group length: "+ group.members.length);
+            });
+            
+            this.groups = parsedData.groups;
 
-          console.log("groupsss"+JSON.stringify(this.groups));
-  
-       
-      
-        },error => {
+            this.allGroups = this.groups;
 
-        })
-      }
-    });
+            console.log("groupsss"+JSON.stringify(this.groups));
+    
+        
+        
+          },error => {
+
+          })
+        }
+      });
+    },500);
   }
   
 onInput(input) {

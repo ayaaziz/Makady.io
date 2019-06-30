@@ -35,28 +35,32 @@ export class FriendsPage {
   }
 
   loadData() {
-    this.storage.get("makadyaccess").then((val)=>{
-      if(val)
-      {
-        this.provider.friends(val,data => {
-          console.log(JSON.stringify(data))
-          let parsedData=JSON.parse(data)
-          this.friends=parsedData.friends;
-          console.log("friends: "+JSON.stringify(this.friends));
 
-          this.allFriends = this.friends;
-        
-          parsedData.groups.forEach(group => {
-            group.members = group.members.slice(0,4);
+    setTimeout(() => {
+      this.storage.get("makadyaccess").then((val)=>{
+        if(val)
+        {
+          this.provider.friends(val,data => {
+            console.log(JSON.stringify(data))
+            let parsedData=JSON.parse(data)
+            this.friends=parsedData.friends;
+            console.log("friends: "+JSON.stringify(this.friends));
+
+            this.allFriends = this.friends;
+          
+            parsedData.groups.forEach(group => {
+              group.members = group.members.slice(0,4);
+            });
+
+            this.groups = parsedData.groups;
+
+          },error => {
+            console.log(error);
           });
+        }
+      });
+    },500);
 
-          this.groups = parsedData.groups;
-
-        },error => {
-          console.log(error);
-        });
-      }
-    });
   }
 
 

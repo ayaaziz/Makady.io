@@ -173,5 +173,12 @@
      "noInvitedlistes":"لم يتم دعوتك في أي قائمة",
      "yes":"نعم",
      "no":"لا",
-     "nopurchasedproducts":"لم يتم شراء أي منتجات بعد"  
+     "nopurchasedproducts":"لم يتم شراء أي منتجات بعد",
+     "menuNameLength":"يجب ألا يقل عدد حروف الاسم عن 4 حروف",
+     "menuNameTaken":"هذا الاسم موجود بالفعل",
+     "mustAddFriends":"يجب إضافة شخص واحد على الأقل إلى المجموعة",
+     "stores":"المتاجر",
+     "searchstores":"ابحث عن متجر",
+     "nostores":"لا يوجد متاجر",
+     "searchcategories":"ابحث عن فئة"
 }

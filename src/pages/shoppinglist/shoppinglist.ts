@@ -24,6 +24,8 @@ export class ShoppinglistPage {
   userId:number;
   allLists:any = [];
   allInvitedLists:any = [];
+  isInvitedEmpty:boolean = false;
+  isListEmpty:boolean = false;
 
   constructor(public alertCtrl:AlertController,
               public platform:Platform,
@@ -46,26 +48,28 @@ export class ShoppinglistPage {
     this.hide1=true;
     this.langdirection = this.helper.langdirection;
    
-    
-    this.storage.get("makadyaccess").then((val) => {
-      if(val) {
-        this.provider.menus(1,"",val,(data) => {
-          console.log(JSON.stringify(data));
-          let parsedData = JSON.parse(data);
-          this.listes = parsedData.data;
+    setTimeout(() => {
+      this.storage.get("makadyaccess").then((val) => {
+        if(val) {
+          this.provider.menus(1,"",val,(data) => {
+            console.log(JSON.stringify(data));
+            let parsedData = JSON.parse(data);
+            this.listes = parsedData.data;
 
-          this.allLists = this.listes;
-        
-          if(this.listes.length==0) {
-            this.hide = false;
-            this.show = true;
+            this.allLists = this.listes;
           
-          } else {
-            this.hide = true;
-          }
-        },(data)=>{});
-      }
-    });
+            if(this.listes.length === 0) {
+              this.hide = false;
+              this.show = true;
+              this.isListEmpty = true;
+            
+            } else {
+              this.hide = true;
+            }
+          },(data)=>{});
+        }
+      });
+    },500);
   }
 
   onInput(input) {
@@ -134,26 +138,32 @@ export class ShoppinglistPage {
     this.listes = [];
     this.hide1 = false;
     this.hide2 = true;
-    this.storage.get("makadyaccess").then((val) => {
-      if(val) {
-        this.provider.menus(2,"",val,(data) => {
-          console.log(JSON.stringify(data));
-          let parsedData=JSON.parse(data);
-          this.inlistes=parsedData.data;
 
-          this.allInvitedLists = this.inlistes;
+    setTimeout(() => {  
+      this.storage.get("makadyaccess").then((val) => {
+        if(val) {
+          this.provider.menus(2,"",val,(data) => {
+            console.log(JSON.stringify(data));
+            let parsedData=JSON.parse(data);
+            this.inlistes=parsedData.data;
 
-          if(this.inlistes.length==0) {
-            this.show = false;
-            this.hide = false;
-          
-          } else {
-            this.show = true;
-          }
-     
-        },(data)=>{});
-      }
-    });
+            this.allInvitedLists = this.inlistes;
+
+            if(this.inlistes.length === 0) {
+              this.show = false;
+              this.hide = false;
+              this.isInvitedEmpty = true;
+            
+            } else {
+              this.show = true;
+            }
+      
+          },(data)=>{});
+        }
+      });
+
+    },500);
+
   }
 
   getlist() { 
@@ -162,25 +172,27 @@ export class ShoppinglistPage {
     this.hide1 = true;
     this.show = true;
     this.hide = false;
-    this.storage.get("makadyaccess").then((val) => {
-      if(val) {
-        this.provider.menus(1,"",val,(data) => {
-          console.log(JSON.stringify(data));
-          let parsedData=JSON.parse(data);
-          this.listes=parsedData.data;
 
-          this.allLists = this.listes;
+    this.loadData();
+    // this.storage.get("makadyaccess").then((val) => {
+    //   if(val) {
+    //     this.provider.menus(1,"",val,(data) => {
+    //       console.log(JSON.stringify(data));
+    //       let parsedData=JSON.parse(data);
+    //       this.listes=parsedData.data;
+
+    //       this.allLists = this.listes;
         
-          if(this.listes.length==0) {
-            this.hide=false;
-            this.show=false;
+    //       if(this.listes.length==0) {
+    //         this.hide=false;
+    //         this.show=false;
           
-          } else {
-            this.hide=true;
-          }
-        },(data)=>{});
-      }
-    });
+    //       } else {
+    //         this.hide=true;
+    //       }
+    //     },(data)=>{});
+    //   }
+    // });
   }
 
   deletelist(id,type:string) {
@@ -259,7 +271,11 @@ export class ShoppinglistPage {
 
     console.log('Begin async operation');
 
-    this.loadData();
+    if(this.hide1) { //lists
+      this.getlist();      
+    } else { //invited lists
+      this.getinvited();
+    }
 
     setTimeout(() => {
       console.log('Async operation has ended');
