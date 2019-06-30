@@ -180,5 +180,7 @@
      "stores":"المتاجر",
      "searchstores":"ابحث عن متجر",
      "nostores":"لا يوجد متاجر",
-     "searchcategories":"ابحث عن فئة"
+     "searchcategories":"ابحث عن فئة",
+     "newSameOld":"كلمة السر الجديدة مماثلة لكلمة السر الحالية",
+     "incorrectUserName":"الاسم غير صحيح"
 }

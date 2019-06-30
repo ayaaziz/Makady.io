@@ -28,7 +28,7 @@
     "total":"Total money spent this month",
     "passwordback":"To get your password back",
     "enteremail":"Please Enter Your Username",
-    "enteryouremail":"Enter Your Username ",
+    "enteryouremail":"Please, Enter Your Username ",
     "send":"Send",
     "invalidemail":"Invalid Email address",
     "code":"Verification Code",
@@ -153,7 +153,7 @@
      "emailrequired":"Email is required.",
      "phonerequired":"Phone is required.",
      "profileEdited":"Profile edited successfully",
-     "incorrectOld":"Old password is incorrect",
+     "incorrectOld":"Current password is incorrect",
      "firstaddList":"You have no Shopping Lists, Please add new List",
      "pwdLength":"The password must be at least 4 characters",
      "makady":"Makady",
@@ -176,5 +176,7 @@
      "stores":"Stores",
      "searchstores":"Search stores",
      "nostores":"No stores",
-     "searchcategories":"Search categories"  
+     "searchcategories":"Search categories",
+     "newSameOld":"The new password is same as the current password",
+     "incorrectUserName":"Incorrect username"  
 }

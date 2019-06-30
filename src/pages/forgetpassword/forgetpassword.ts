@@ -34,13 +34,19 @@ username:any;
       this.provider.forgetpass(this.Email,"forgetPassword",(data) => {
         console.log(JSON.stringify(data));
         let dataparsed = JSON.parse(data);
-        this.username = dataparsed.data.username;
-        this.emailcode = dataparsed.data.email_code;
-        console.log(this.emailcode);
-        console.log(this.username);
-        this.navCtrl.push(VerificationPage,{"pageType":"forgetPass","username":this.username,"emailcode":this.emailcode});
 
-      },(error)=>{
+        if(dataparsed.success) {
+          this.username = dataparsed.data.username;
+          this.emailcode = dataparsed.data.email_code;
+          console.log(this.emailcode);
+          console.log(this.username);
+          this.navCtrl.push(VerificationPage,{"pageType":"forgetPass","username":this.username,"emailcode":this.emailcode});
+        
+        } else {
+          this.helper.presentToast(this.translate.instant("incorrectUserName"));
+        }
+       
+      },error => {
         console.log(error);
       });
     }
@@ -55,6 +61,7 @@ username:any;
 
     setTimeout(() => {
       console.log('Async operation has ended');
+      this.Email = "";
       event.complete();
     });
   }
