@@ -43,6 +43,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { SettingsProvider } from '../providers/settings/settings';
 import {RoundProgressModule} from 'angular-svg-round-progressbar';
 import { Push } from '@ionic-native/push';
+import { Keyboard } from '@ionic-native/keyboard';
+
 
 //refresh token
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -139,7 +141,8 @@ export function createTranslateLoader(http: HttpClient) {
     BarcodeScanner,
     TwitterConnect,
     SettingsProvider,
-    Push
+    Push,
+    Keyboard
   ]
 })
 export class AppModule {}

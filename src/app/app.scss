@@ -297,3 +297,23 @@ button.lang-icon {
 [dir="rtl"] input.searchbar-input { 
     direction: rtl;
 }
+
+
+body.keyboard-is-open {
+
+    ion-tabs.tabs.tabs-md .tabbar {
+        display: none !important;
+        opacity: 0 !important;
+        z-index: -10 !important;
+        background-color: transparent !important;
+        position: fixed !important;
+        bottom: 0;
+
+    }
+
+    scroll-content {
+        margin-bottom: 0 !important;
+    }
+   
+  }
+  

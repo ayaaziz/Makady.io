@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav,NavController, ActionSheetController, Events } from 'ionic-angular';
+import { Platform, Nav,NavController, ActionSheetController, Events, ViewController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -17,6 +17,8 @@ import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { SettingsProvider } from '../providers/settings/settings';
 import { GroupsPage } from '../pages/groups/groups';
 import { StoresPage } from '../pages/stores/stores';
+import { Keyboard } from '@ionic-native/keyboard';
+
 
 
 @Component({
@@ -25,6 +27,7 @@ import { StoresPage } from '../pages/stores/stores';
 export class MyApp {
   @ViewChild(Nav) navctrl: Nav;
   @ViewChild("content") nav: NavController;
+  
   rootPage:any;
   userLang:any;
   photo:any;
@@ -32,8 +35,6 @@ export class MyApp {
   langdirection;
   side:string;
   userLoged: boolean = false;
-  // prodNotification: boolean = false;
-  // offersNotification: boolean = false;
   errorImg:string;
 
   constructor(public actionSheetCtrl: ActionSheetController,
@@ -49,21 +50,53 @@ export class MyApp {
               statusBar: StatusBar,
               splashScreen: SplashScreen,
               private push: Push,
-              private settingsService:SettingsProvider
+              private settingsService:SettingsProvider,
+              private keyboard:Keyboard
             ) {
 
     // this.errorImg = this.helper.userImagePath + "default_avatar.png";
-              
+           
+    // //to close any vew controller or action sheets when use android back button
+    this.platform.registerBackButtonAction(() => {
+    //   // const overlayView = this.app._appRoot._overlayPortal._views[0];
+    //   // if (overlayView && overlayView.dismiss) {
+    //   //   overlayView.dismiss();
+    //   // } else {
+    //   //   this.app.goBack();
+    //   // }
+    //   this.viewCtrl.dismiss();
+
+
+  
+        // var nav = this.getNav();
+        if (this.navctrl.canGoBack()) {
+          alert("11111");
+          
+          this.navctrl.pop();
+        }
+        else {
+          alert("222222");
+          this.navctrl.pop();
+          
+          // this.actionSheetCtrl
+          //... do something else...
+        }
+   
+    
+    }, 0);
+
+    
+
 
     platform.ready().then(() => {
 
-      // this.keyboard.onKeyboardShow().subscribe(() => {
-      //   document.body.classList.add('keyboard-is-open');
-      // });
+      this.keyboard.onKeyboardShow().subscribe(() => {
+        document.body.classList.add('keyboard-is-open');
+      });
 
-      // Keyboard.onKeyboardHide().subscribe(() => {
-      //     document.body.classList.remove('keyboard-is-open');
-      // });
+      this.keyboard.onKeyboardHide().subscribe(() => {
+          document.body.classList.remove('keyboard-is-open');
+      });
 
       this.event.subscribe("picChanged", pic => {                
         this.photo = this.helper.userImagePath + pic;

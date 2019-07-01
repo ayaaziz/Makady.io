@@ -230,6 +230,8 @@ export class VerificationPage {
   
           } else { //not matched
               this.helper.presentToast(this.translate.instant("notMatchedCode"));
+             
+              this.input1 = this.input2 = this.input3 = this.input4 = "";
                 
               setTimeout(() => {
                 this.inputOne = false;
@@ -238,7 +240,6 @@ export class VerificationPage {
                 this.inputFour = true;
                 this.myInput.setFocus();
               },500);
-              this.input1 = this.input2 = this.input3 = this.input4 = "";
           }
   
       } else {
