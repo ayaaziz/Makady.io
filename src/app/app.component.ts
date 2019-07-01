@@ -57,8 +57,21 @@ export class MyApp {
 
     platform.ready().then(() => {
 
+      // this.keyboard.onKeyboardShow().subscribe(() => {
+      //   document.body.classList.add('keyboard-is-open');
+      // });
+
+      // Keyboard.onKeyboardHide().subscribe(() => {
+      //     document.body.classList.remove('keyboard-is-open');
+      // });
+
       this.event.subscribe("picChanged", pic => {                
         this.photo = this.helper.userImagePath + pic;
+      });
+
+      this.event.subscribe("usernameChanged", userName => {                
+        this.username = userName;
+        this.storage.set("Makadyuser_name",userName);
       });
 
       this.event.subscribe("login", () => {
@@ -74,7 +87,8 @@ export class MyApp {
               if(val.user.verified == 1) {
                 
                 this.userLoged = true;
-                this.username = val.user.username;
+                // this.username = val.user.username;
+                this.event.publish("usernameChanged",val.user.username);
  
                 this.event.publish("picChanged",val.user.profile_pic);
                 console.log(this.photo);

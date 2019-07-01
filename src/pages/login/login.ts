@@ -106,9 +106,10 @@ export class LoginPage {
                 this.helper.accesstoken = Dataparsed.access_token;
                 this.storage.set("Makadyuser_name", this.username);
 
+   
                 this.storage.set("socialType",pdata.user.social_type);
                 
-                this.storage.set("user_info", pdata);
+                // this.storage.set("user_info", pdata);
                 // .then(() => {
                 //   this.event.publish("login");
                 // });
@@ -119,12 +120,21 @@ export class LoginPage {
                   if (this.remember) {
                     this.storage.set("Makadyusername", "true");
                   }
+               
+                  ////////
+                  this.storage.set("user_info", pdata)
+                  .then(() => {
+                    this.event.publish("login");
+                  });
+                  ////////
 
-                  this.event.publish("login");
                   this.navCtrl.setRoot(TabsPage);
 
                 } else { //not verified
-                    console.log("account not verified");                  
+                    console.log("account not verified");
+                    //////////  
+                    this.storage.set("user_info", pdata);                                    
+                    /////
                     this.navCtrl.push(VerificationPage,{"pageType":"AuthPage","username":pdata.user.username,"userId":pdata.user.id,"emailcode":pdata.user.email_code,"isRemembered":this.remember});                  
                 } 
               },

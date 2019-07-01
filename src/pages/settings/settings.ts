@@ -177,7 +177,7 @@ export class SettingsPage {
     console.log('ionViewDidLoad SettingsPage');
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.loadData();
   }
 

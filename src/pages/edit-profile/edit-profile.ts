@@ -123,6 +123,7 @@ export class EditProfilePage {
       
         if(data.success) {
           console.log("data.profile_pic: "+data.user.profile_pic);
+          this.event.publish("usernameChanged",data.user.username);          
           this.event.publish("picChanged",data.user.profile_pic);
           this.helper.presentToast(this.translate.instant('profileEdited'));
         }

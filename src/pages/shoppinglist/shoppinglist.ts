@@ -78,8 +78,15 @@ export class ShoppinglistPage {
       this.listes = this.allLists.filter(element => {
         return element.menu_name.toLowerCase().indexOf(input.toLowerCase()) > -1;
       });
+
     } else {
       this.listes = this.allLists;
+    }
+
+    if(this.listes.length === 0) {
+      this.isListEmpty = true;
+    } else {
+      this.isListEmpty = false;        
     }
 
     // this.listes=[];
@@ -111,8 +118,15 @@ export class ShoppinglistPage {
       this.inlistes = this.allInvitedLists.filter(element => {
         return element.menu_name.toLowerCase().indexOf(input.toLowerCase()) > -1;
       });
+
     } else {
       this.inlistes = this.allInvitedLists;
+    }
+
+    if(this.inlistes.length === 0) {
+      this.isInvitedEmpty = true;        
+    } else {
+      this.isInvitedEmpty = false;                
     }
     // this.listes=[];
 

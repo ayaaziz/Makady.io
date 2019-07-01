@@ -56,7 +56,7 @@ x:number = 10;
 
   loadData() {
    
-    setTimeout(() => {
+    // setTimeout(() => {
       
         this.chartdata = []
         this.data = []
@@ -65,13 +65,13 @@ x:number = 10;
        this.storage.get("makadyaccess").then((val)=>{
         if(val)
         {
+
           this.provider.home(val,(data)=>{
-            
             // spinner.dismiss();
 
             let dataparsed = JSON.parse(data);
             this.data = dataparsed.data;
-            console.log(""+JSON.stringify(this.data));
+            console.log("home data*******"+JSON.stringify(this.data));
             if(this.data.length > 0) {
 
               //get total price
@@ -184,7 +184,7 @@ x:number = 10;
           
         }
       })
-    },500);
+    // },500);
     
   }
 
