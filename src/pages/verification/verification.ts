@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Events, Platform } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { HelperProvider } from '../../providers/helper/helper';
 import { TabsPage } from '../tabs/tabs';
@@ -52,7 +52,8 @@ export class VerificationPage {
               public navParams: NavParams,
               private loadingCtrl:LoadingController,
               private event:Events,
-              private storage:Storage) {
+              private storage:Storage,
+              private platform:Platform) {
 
               this.username = this.navParams.get("username");
               this.emailcode = this.navParams.get("emailcode");
@@ -62,6 +63,12 @@ export class VerificationPage {
               this.pageType = this.navParams.get("pageType");
               this.isRegister = this.navParams.get("register");
               this.remember = this.navParams.get("isRemembered");
+
+              let backAction =  platform.registerBackButtonAction(() => {
+                console.log("second");
+                this.navCtrl.pop();
+                backAction();
+              },2)
   }
 
   ionViewWillEnter() {

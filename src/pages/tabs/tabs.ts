@@ -4,7 +4,7 @@ import { HomePage } from '../home/home';
 import { GroupsPage } from '../groups/groups';
 import { NavParams } from 'ionic-angular/navigation/nav-params';
 import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
-import { Events } from 'ionic-angular';
+import { Events, Platform, AlertController, NavController, Nav } from 'ionic-angular';
 import { MainproviderProvider } from '../../providers/mainprovider/mainprovider';
 import { Storage } from '@ionic/storage';
 import { FriendlistPage } from '../friendlist/friendlist';
@@ -29,7 +29,31 @@ export class TabsPage {
               public params: NavParams,
               public event:Events,
               public storage:Storage,
-              public helper:HelperProvider) {
+              public helper:HelperProvider,
+              private platform:Platform,
+              private alertCtrl:AlertController) {
+
+                platform.registerBackButtonAction(() => {
+                  console.log("backPressed 1");
+            
+                  const alert = this.alertCtrl.create({
+                    title: 'App termination',
+                    message: 'Do you want to close the app?',
+                    buttons: [{
+                        text: 'Cancel',
+                        role: 'cancel',
+                        handler: () => {
+                            console.log('Application exit prevented!');
+                        }
+                    },{
+                        text: 'Close App',
+                        handler: () => {
+                            this.platform.exitApp(); // Close this application
+                        }
+                    }]
+                });
+                alert.present();
+                },1);
 
 
   let tabIndex2 = this.params.get('tabIndex');

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, PopoverController, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, PopoverController, Events, Platform } from 'ionic-angular';
 import { MainproviderProvider } from '../../providers/mainprovider/mainprovider';
 import { TranslateService } from '@ngx-translate/core';
 import { HelperProvider } from '../../providers/helper/helper';
@@ -40,12 +40,19 @@ defaultImgUrl:string;
               public helper:HelperProvider,
               public navCtrl: NavController,
               public navParams: NavParams,
-              public event:Events) {
+              public event:Events,
+              private platform:Platform) {
 
       this.name=this.navParams.get("name")
       this.id=this.navParams.get("id");
      
       this.defaultImgUrl = this.helper.productImagePath;
+
+      let backAction =  platform.registerBackButtonAction(() => {
+        console.log("second");
+        this.navCtrl.pop();
+        backAction();
+      },2)
   }
   toggleSection(x){
     this.buy = "";

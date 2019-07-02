@@ -6,6 +6,8 @@ import { Platform } from 'ionic-angular/platform/platform';
 import { MainproviderProvider } from '../../providers/mainprovider/mainprovider';
 import { Storage } from '@ionic/storage';
 import { FriendlistPage } from '../friendlist/friendlist';
+import { FormControl } from '@angular/forms';
+import { debounceTime } from "rxjs/operators";
 
 @Component({
   selector: 'page-offers',
@@ -20,6 +22,8 @@ export class OffersPage {
  procount:any;
  isResult:boolean = false;
  allOffers:any = [];
+ searchControl: FormControl;
+ searching: any = false;
 
   constructor(public toastCtrl:ToastController,
               public Alert:AlertController,
@@ -30,10 +34,17 @@ export class OffersPage {
               public translate:TranslateService,
               public navCtrl: NavController) {
 
+                this.searchControl = new FormControl();
+
               }
 
   ionViewDidLoad() {
     this.loadData();
+
+    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+      this.searching = false;
+      this.onInput(search);
+    });
   }
 
   loadData() {
@@ -56,6 +67,10 @@ export class OffersPage {
       });
     },500);
 
+  }
+
+  onSearchInput() {
+    this.searching = true;
   }
 
   onInput(input) {

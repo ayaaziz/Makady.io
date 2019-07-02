@@ -44,6 +44,7 @@ import { SettingsProvider } from '../providers/settings/settings';
 import {RoundProgressModule} from 'angular-svg-round-progressbar';
 import { Push } from '@ionic-native/push';
 import { Keyboard } from '@ionic-native/keyboard';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 //refresh token
@@ -86,6 +87,7 @@ export function createTranslateLoader(http: HttpClient) {
     IonicStorageModule.forRoot(),  
     HttpClientModule,
     NgxQRCodeModule,
+    ReactiveFormsModule,
     BrowserModule,
     RoundProgressModule,
     IonicModule.forRoot(MyApp,{

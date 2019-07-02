@@ -5,6 +5,8 @@ import { HelperProvider } from '../../providers/helper/helper';
 import { Platform } from 'ionic-angular/platform/platform';
 import { Storage } from '@ionic/storage';
 import { MainproviderProvider } from '../../providers/mainprovider/mainprovider';
+import { FormControl } from '@angular/forms';
+import { debounceTime } from "rxjs/operators";
 
 @Component({
   selector: 'page-stores',
@@ -14,6 +16,8 @@ export class StoresPage {
 langdirection:any;
 stores:any = [];
 allStores:any = [];
+searchControl: FormControl;
+searching: any = false;
 
   constructor(public provider:MainproviderProvider,
               public ViewCtrl:ViewController,
@@ -24,10 +28,27 @@ allStores:any = [];
               public navCtrl: NavController,
               public navParam:NavParams) {
 
+                this.searchControl = new FormControl();
+
+              let backAction =  platform.registerBackButtonAction(() => {
+                console.log("second");
+                this.navCtrl.pop();
+                backAction();
+              },2)
+
   }
 
   ionViewDidLoad() {
     this.loadData();
+
+    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+      this.searching = false;
+      this.onInput(search);
+    });
+  }
+
+  onSearchInput() {
+    this.searching = true;
   }
 
   loadData() {

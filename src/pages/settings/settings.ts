@@ -61,6 +61,12 @@ export class SettingsPage {
                 if(this.langdirection == "rtl")
                   this.scaleClass="scaleClass";
 
+                  let backAction =  platform.registerBackButtonAction(() => {
+                    console.log("second");
+                    this.navCtrl.pop();
+                    backAction();
+                  },2)
+
   }
  
   getimg()

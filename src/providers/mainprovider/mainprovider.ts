@@ -921,7 +921,7 @@ export class MainproviderProvider {
       });
       loader.present();
       let headers = new HttpHeaders();
-      let parameter={
+      let parameter = {
         // 'name':name,
         "name_en":name,
         'users_ids':ids

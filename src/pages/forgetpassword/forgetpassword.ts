@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams ,ToastController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams ,ToastController, Platform} from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { HelperProvider } from '../../providers/helper/helper';
 import { VerificationPage } from '../verification/verification';
@@ -21,9 +21,16 @@ username:any;
               public toastCtrl:ToastController,
               public translate :TranslateService,
               public navCtrl: NavController,
-              public navParams: NavParams) {
+              public navParams: NavParams,
+              private platform:Platform) {
 
               this.langdirection=this.helper.langdirection;
+
+              let backAction =  platform.registerBackButtonAction(() => {
+                console.log("second");
+                this.navCtrl.pop();
+                backAction();
+              },2)
   }
 
   send() {

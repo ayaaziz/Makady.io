@@ -28,6 +28,8 @@ export class FriendlistPage {
               public navCtrl: NavController,
               public navParams: NavParams,
               public event:Events) {
+
+                
   }
 
   ionViewDidLoad() {

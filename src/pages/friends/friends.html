@@ -19,8 +19,12 @@
     </ion-refresher-content>
   </ion-refresher>
 
-  <ion-searchbar [dir]="langdirection" placeholder="{{ 'searchfriend' | translate }}" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput"></ion-searchbar>
+  <ion-searchbar [dir]="langdirection" placeholder="{{ 'searchfriend' | translate }}" [formControl]="searchControl"
+  (ionChange)="onSearchInput()"  (ionCancel)="onCancel()" [(ngModel)]="myInput"></ion-searchbar>
   
+  <div *ngIf="searching" class="spinner-container">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
   <!-- <p style="text-align: center;color:#3d3d3d;font-size: 1.8rem;font-weight: bold;" *ngIf="groups.length === 0">{{'nogroups'| translate}}</p> -->
 
   <ion-row class="nodata" style="margin-top: 10px;" *ngIf="groups.length === 0">

@@ -6,6 +6,8 @@ import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { ListdetailsPage } from '../listdetails/listdetails';
 import { CreatemenuPage } from '../createmenu/createmenu';
+import { FormControl } from '@angular/forms';
+import { debounceTime } from "rxjs/operators";
 
 @Component({
   selector: 'page-shoppinglist',
@@ -26,6 +28,9 @@ export class ShoppinglistPage {
   allInvitedLists:any = [];
   isInvitedEmpty:boolean = false;
   isListEmpty:boolean = false;
+  searchControl: FormControl;
+  searchControl2: FormControl;
+  searching: any = false;
 
   constructor(public alertCtrl:AlertController,
               public platform:Platform,
@@ -37,10 +42,27 @@ export class ShoppinglistPage {
               public navParams: NavParams,
               public event:Events) {
 
+                this.searchControl = new FormControl();
+                this.searchControl2 = new FormControl();                
+
   }
 
   ionViewWillEnter() {
     this.loadData();
+
+    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+      this.searching = false;
+      this.onInput(search);
+    });
+
+    this.searchControl2.valueChanges.debounceTime(700).subscribe(search => {
+      this.searching = false;
+      this.onInputinvited(search);
+    });
+  }
+
+  onSearchInput() {
+    this.searching = true;
   }
 
   loadData() {

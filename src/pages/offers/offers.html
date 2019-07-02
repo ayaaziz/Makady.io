@@ -19,7 +19,12 @@
     </ion-refresher-content>
   </ion-refresher>
 
-  <ion-searchbar [dir]="langdirection" style="padding:0;margin-bottom: 20px;" placeholder="{{ 'searchproduct' | translate }}" (ionInput)="onInput(myInput)"  (ionCancel)="onCancel()" [(ngModel)]="myInput"></ion-searchbar>
+  <ion-searchbar [dir]="langdirection" style="padding:0;margin-bottom: 20px;" placeholder="{{ 'searchproduct' | translate }}" [formControl]="searchControl"
+  (ionChange)="onSearchInput()"  (ionCancel)="onCancel()" [(ngModel)]="myInput"></ion-searchbar>
+
+  <div *ngIf="searching" class="spinner-container">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
  
   <ion-row class="nodata" *ngIf="offers.length === 0">
     <ion-col>

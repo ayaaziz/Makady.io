@@ -5,6 +5,8 @@ import { MainproviderProvider } from '../../providers/mainprovider/mainprovider'
 import { HelperProvider } from '../../providers/helper/helper';
 import { Storage } from '@ionic/storage';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { FormControl } from '@angular/forms';
+import { debounceTime } from "rxjs/operators";
 
 
 @Component({
@@ -23,6 +25,8 @@ export class ProductsPage {
   productDetails:any;
   userMenuId:number;
   allProducts:any = [];
+  searchControl: FormControl;
+  searching: any = false;
 
   constructor(public alertCtrl:AlertController,
               public toastCtrl:ToastController,
@@ -43,9 +47,31 @@ export class ProductsPage {
     this.categoryId = this.navParams.get("id");
     this.categoryName = this.navParams.get("categoryName");
 
-    this.loadData();
+    this.searchControl = new FormControl();
 
+
+    let backAction =  platform.registerBackButtonAction(() => {
+      console.log("second");
+      this.navCtrl.pop();
+      backAction();
+    },2)
+    
   }
+
+  ionViewDidLoad() {
+
+    this.loadData();    
+
+    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+      this.searching = false;
+      this.onInput(search);
+    });
+  }
+
+  onSearchInput() {
+    this.searching = true;
+  }
+
 
   loadData() {
 

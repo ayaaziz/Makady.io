@@ -6,6 +6,8 @@ import { Platform } from 'ionic-angular/platform/platform';
 import { MainproviderProvider } from '../../providers/mainprovider/mainprovider';
 import { Storage } from '@ionic/storage';
 import { BarcodeScanner  } from '@ionic-native/barcode-scanner';
+import { FormControl } from '@angular/forms';
+import { debounceTime } from "rxjs/operators";
 
 @Component({
   selector: 'page-friends',
@@ -16,6 +18,10 @@ export class FriendsPage {
   friends:any=[];
   groups:any=[];
   allFriends:any = [];
+
+  searchControl: FormControl;
+  searching: any = false;
+
   
   constructor(public alertCtrl:AlertController,
               public barcodeScanner:BarcodeScanner,
@@ -29,7 +35,9 @@ export class FriendsPage {
               public navParams: NavParams,
               public event:Events) {
 
-    this.langdirection=this.helper.langdirection
+    this.langdirection=this.helper.langdirection;
+
+    this.searchControl = new FormControl();
  
   
   }
@@ -66,6 +74,15 @@ export class FriendsPage {
 
   ionViewWillEnter() {
     this.loadData();
+
+    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+      this.searching = false;
+      this.onInput(search);
+    });
+  }
+
+  onSearchInput() {
+    this.searching = true;
   }
 
   delete(id)
@@ -160,7 +177,7 @@ export class FriendsPage {
               this.helper.presentToast(this.translate.instant("friendrequestsent"));
             }
             else {       
-              this.helper.presentToast(data.errors);
+              console.log(data.errors);
             }
             console.log(JSON.stringify(data));
 

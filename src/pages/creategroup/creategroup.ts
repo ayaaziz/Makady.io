@@ -30,6 +30,13 @@ menuNameTakenValidation:string = "";
     this.page = this.navParams.get("page");
     this.groupid = this.navParams.get("groupid");
     this.groupname = this.navParams.get("name");
+
+
+    let backAction =  platform.registerBackButtonAction(() => {
+      console.log("second");
+      this.navCtrl.pop();
+      backAction();
+    },2)
   }
 
   loadData() {

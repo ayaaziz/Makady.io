@@ -7,6 +7,8 @@ import { CreategroupPage } from '../creategroup/creategroup';
 import { Storage } from '@ionic/storage';
 import { MainproviderProvider } from '../../providers/mainprovider/mainprovider';
 import { FriendlistPage } from '../friendlist/friendlist';
+import { FormControl } from '@angular/forms';
+import { debounceTime } from "rxjs/operators";
 
 
 @Component({
@@ -21,6 +23,8 @@ export class GroupsPage {
   // hide:any=false
   username:any;
   allGroups:any = [];
+  searchControl: FormControl;
+  searching: any = false;
 
   constructor(public alertCtrl:AlertController,
               public storage:Storage,
@@ -31,10 +35,23 @@ export class GroupsPage {
               public navCtrl: NavController,
               public navParams: NavParams,
               public ViewCtrl:ViewController) {
+
+              this.searchControl = new FormControl();
+
+              let backAction =  platform.registerBackButtonAction(() => {
+                console.log("second");
+                this.navCtrl.pop();
+                backAction();
+              },2)
   }
 
   ionViewWillEnter() {
     this.loadData();
+
+    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+      this.searching = false;
+      this.onInput(search);
+    });
   }
 
   loadData() {
@@ -73,6 +90,10 @@ export class GroupsPage {
         }
       });
     },500);
+  }
+
+  onSearchInput() {
+    this.searching = true;
   }
   
 onInput(input) {

@@ -6,6 +6,8 @@ import { Platform } from 'ionic-angular/platform/platform';
 import { Storage } from '@ionic/storage';
 import { MainproviderProvider } from '../../providers/mainprovider/mainprovider';
 import { ProductsPage } from '../products/products';
+import { FormControl } from '@angular/forms';
+import { debounceTime } from "rxjs/operators";
 
 @Component({
   selector: 'page-categories',
@@ -17,6 +19,8 @@ products:any = [];
 count:any=1;
 userMenuId:number;
 allCategories:any = [];
+searchControl: FormControl;
+searching: any = false;
 
   constructor(public provider:MainproviderProvider,
               public ViewCtrl:ViewController,
@@ -27,10 +31,25 @@ allCategories:any = [];
               public navCtrl: NavController,
               public navParam:NavParams) {
 
+          let backAction =  platform.registerBackButtonAction(() => {
+            console.log("second");
+            this.navCtrl.pop();
+            backAction();
+          },2)
+
+          this.searchControl = new FormControl();
+
   }
 
   ionViewDidLoad() {
     this.loadData();
+
+
+    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+      this.searching = false;
+      this.onInput(search);
+
+    });
   }
 
   loadData() {
@@ -57,6 +76,10 @@ allCategories:any = [];
     // this.navCtrl.push(ProductsPage,{id:id,"categoryName":catName});
 
     this.navCtrl.push(ProductsPage,{id:id,"categoryName":catName,"fromUserList":this.userMenuId});    
+  }
+
+  onSearchInput() {
+    this.searching = true;
   }
 
   onInput(input) { 

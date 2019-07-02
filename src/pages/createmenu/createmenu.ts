@@ -37,10 +37,16 @@ export class CreatemenuPage {
     public navCtrl: NavController, 
     public navParams: NavParams) {
 
-        this.page=this.navParams.get("page")
+        this.page=this.navParams.get("page");
         this.menuid = this.navParams.get("menuid");
         // alert(this.menuid);
-        this.menuname=this.navParams.get("name")
+        this.menuname=this.navParams.get("name");
+
+        let backAction =  platform.registerBackButtonAction(() => {
+          console.log("second");
+          this.navCtrl.pop();
+          backAction();
+        },2)
   }
 
   loadData() {

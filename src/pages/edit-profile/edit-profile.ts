@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, ActionSheetController, ViewController, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ActionSheetController, ViewController, Events, Platform } from 'ionic-angular';
 import { MainproviderProvider } from '../../providers/mainprovider/mainprovider';
 import { Storage } from '@ionic/storage';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -30,7 +30,8 @@ export class EditProfilePage {
               public translate:TranslateService,
               public helper:HelperProvider, 
               public actionSheetCtrl: ActionSheetController,
-              public ViewCtrl:ViewController) {
+              public ViewCtrl:ViewController,
+              private platform:Platform) {
 
                 this.langdirection = this.helper.langdirection;
                 this.user = this.navParams.get("user");
@@ -38,7 +39,14 @@ export class EditProfilePage {
                 console.log("profile data......: "+JSON.stringify(this.user));
                 this.userImageUrl =  this.helper.userImagePath + this.user.user.profile_pic;
 
-                this.initializeForm();             
+                this.initializeForm();    
+                
+                
+                let backAction =  platform.registerBackButtonAction(() => {
+                  console.log("second");
+                  this.navCtrl.pop();
+                  backAction();
+                },2)
               }
 
 
