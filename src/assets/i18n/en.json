@@ -179,5 +179,8 @@
      "searchcategories":"Search categories",
      "newSameOld":"The new password is same as the current password",
      "incorrectUserName":"Incorrect username",
-     "newPasswordSuccess":"Your new password saved successfully, Now you can login with your new password"  
+     "newPasswordSuccess":"Your new password saved successfully, Now you can login with your new password",
+     "terminateApp":"App termination",
+     "closeApp":"Do you want to close the app?",
+     "confirmCloseApp":"Close App"  
 }

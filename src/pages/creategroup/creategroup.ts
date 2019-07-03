@@ -96,14 +96,21 @@ menuNameTakenValidation:string = "";
     this.loadData();
   }
   
-  checkfriend(id)
-  {
+  checkfriend(id,ev) {
+    
+    // alert(this.id);
+    console.log("event......"+ev.value);
+
+    if(ev.value) {
       this.id=this.id+','+id;
-      // alert(this.id);
+    }
   }
 
-  unCheckFriend(id) {
-    this.removedIds=this.removedIds+','+id;   
+  unCheckFriend(id,ev) {
+
+    if(!ev.value) {
+      this.removedIds=this.removedIds+','+id;   
+    }
   }
 
   create() {
@@ -125,13 +132,19 @@ menuNameTakenValidation:string = "";
       return;
     } 
 
-    if(this.id.charAt(0) == ',' )
-   {
+    if(this.id.charAt(0) == ',' ) {
+      alert("added");
      this.id = this.id.substr(1);
-    //  alert(this.id);     
-   }
-    if(this.page=="edit")
-    {
+     alert(this.id);     
+    }
+
+    if(this.removedIds.charAt(0) == ',' ) {
+      alert("removed");      
+      this.removedIds = this.removedIds.substr(1);
+      alert(this.removedIds);     
+     }
+
+    if(this.page=="edit") {
       this.storage.get("makadyaccess").then((val)=>{
         if(val)
         {

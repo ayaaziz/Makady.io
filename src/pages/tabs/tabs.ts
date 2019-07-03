@@ -33,27 +33,27 @@ export class TabsPage {
               private platform:Platform,
               private alertCtrl:AlertController) {
 
-                platform.registerBackButtonAction(() => {
-                  console.log("backPressed 1");
+                // platform.registerBackButtonAction(() => {
+                //   console.log("backPressed 1");
             
-                  const alert = this.alertCtrl.create({
-                    title: 'App termination',
-                    message: 'Do you want to close the app?',
-                    buttons: [{
-                        text: 'Cancel',
-                        role: 'cancel',
-                        handler: () => {
-                            console.log('Application exit prevented!');
-                        }
-                    },{
-                        text: 'Close App',
-                        handler: () => {
-                            this.platform.exitApp(); // Close this application
-                        }
-                    }]
-                });
-                alert.present();
-                },1);
+                //   const alert = this.alertCtrl.create({
+                //     title: 'App termination',
+                //     message: 'Do you want to close the app?',
+                //     buttons: [{
+                //         text: 'Cancel',
+                //         role: 'cancel',
+                //         handler: () => {
+                //             console.log('Application exit prevented!');
+                //         }
+                //     },{
+                //         text: 'Close App',
+                //         handler: () => {
+                //             this.platform.exitApp(); // Close this application
+                //         }
+                //     }]
+                // });
+                // alert.present();
+                // },1);
 
 
   let tabIndex2 = this.params.get('tabIndex');

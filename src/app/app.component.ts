@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav,NavController, ActionSheetController, Events, ViewController } from 'ionic-angular';
+import { Platform, Nav,NavController, ActionSheetController, Events, ViewController, App, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -51,41 +51,64 @@ export class MyApp {
               splashScreen: SplashScreen,
               private push: Push,
               private settingsService:SettingsProvider,
-              private keyboard:Keyboard
-            ) {
+              private keyboard:Keyboard,
+              private app:App,
+              private alertCtrl:AlertController) {
 
     // this.errorImg = this.helper.userImagePath + "default_avatar.png";
            
-    // //to close any vew controller or action sheets when use android back button
-    this.platform.registerBackButtonAction(() => {
-    //   // const overlayView = this.app._appRoot._overlayPortal._views[0];
-    //   // if (overlayView && overlayView.dismiss) {
-    //   //   overlayView.dismiss();
-    //   // } else {
-    //   //   this.app.goBack();
-    //   // }
-    //   this.viewCtrl.dismiss();
 
+         platform.registerBackButtonAction(() => {
+          console.log("backPressed");
 
-  
-        // var nav = this.getNav();
-        if (this.navctrl.canGoBack()) {
-          alert("11111");
-          
-          this.navctrl.pop();
+          const overlayView = this.app._appRoot._overlayPortal._views[0];
+
+          let nav = app.getActiveNavs()[0];
+          let activeView = nav.getActive();  
+        
+          if (overlayView && overlayView.dismiss) {
+            overlayView.dismiss();
+          } else if (this.menu.isOpen()) {
+            
+            console.log("Menu is open!", "loggedInMenu");
+            this.menu.close();
+            console.log("this.menu.isOpen(): " + JSON.stringify(this.menu.isOpen()));   
+            return;
+          } else {
+         
+            if(activeView.name === "HomePage") {
+              const alert = this.alertCtrl.create({
+                title: this.translate.instant('terminateApp'),
+                message: this.translate.instant('closeApp'),
+                buttons: [
+                {
+                  text: this.translate.instant('confirmCloseApp'),
+                  handler: () => {
+                      this.platform.exitApp(); // Close this application
+                  }
+                },
+                {
+                  text: this.translate.instant('cancel'),
+                  role: 'cancel',
+                  handler: () => {
+                    console.log('Application exit prevented!');
+                  }
+                }
+              ]
+            });
+            alert.present();
+
+          }
+          //  else if(activeView.name === "FrindsPage" 
+          // || activeView.name === "ProductsPage") {
+
+          // }
+          else {
+            // alert("any thing else");
+            this.app.goBack();
+          }
         }
-        else {
-          alert("222222");
-          this.navctrl.pop();
-          
-          // this.actionSheetCtrl
-          //... do something else...
-        }
-   
-    
-    }, 0);
-
-    
+      });
 
 
     platform.ready().then(() => {

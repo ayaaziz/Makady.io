@@ -623,7 +623,7 @@ export class MainproviderProvider {
       loader.present();
       let headers = new HttpHeaders();
       let parameter={
-        'name':name,
+        'name_en':name,
         'users_ids':ids,
         "removed_ids":removedIds,
         'group_id':groupid
@@ -958,7 +958,7 @@ export class MainproviderProvider {
       loader.present();
       let headers = new HttpHeaders();
       let parameter = {
-        'name':name,
+        'name_en':name,
         'users_ids':ids,
         'removed_ids':removedIds,
         'menu_id':menuid
