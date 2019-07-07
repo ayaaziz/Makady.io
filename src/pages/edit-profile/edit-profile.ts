@@ -41,12 +41,6 @@ export class EditProfilePage {
 
                 this.initializeForm();    
                 
-                
-                let backAction =  platform.registerBackButtonAction(() => {
-                  console.log("second");
-                  this.navCtrl.pop();
-                  backAction();
-                },2)
               }
 
 

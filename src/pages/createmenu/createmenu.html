@@ -25,7 +25,7 @@
     </ion-col>
     <ion-col col-12>
       <ion-item no-lines>
-        <ion-input [(ngModel)]="name" type="text" placeholder="{{'menuName' | translate}}" [dir]="langdirection" style="padding:0 10px;border:1px solid lightgray;border-radius: 10px;"></ion-input>     
+        <ion-input [(ngModel)]="name" (ionChange)="onChange()" (ionBlur)="onBlur()" type="text" placeholder="{{'menuName' | translate}}" [dir]="langdirection" style="padding:0 10px;border:1px solid lightgray;border-radius: 10px;"></ion-input>     
       </ion-item>
     </ion-col>
     <ion-col>
@@ -68,7 +68,7 @@
           <p>{{item.phone}}</p>  
       </ion-col>
       <ion-col col-3>
-        <ion-checkbox checked (ionChange)="unCheckFriend(item.id)"></ion-checkbox>
+        <ion-checkbox checked (ionChange)="unCheckFriend(item.id,$event)"></ion-checkbox>
     </ion-col> 
   </ion-row>
 
@@ -83,7 +83,7 @@
           <p>{{item.phone}}</p>  
       </ion-col>
       <ion-col col-3>
-        <ion-checkbox (ionChange)="checkfriend(item.id)"></ion-checkbox>
+        <ion-checkbox (ionChange)="checkfriend(item.id,$event)"></ion-checkbox>
     </ion-col> 
   </ion-row>
   

@@ -90,6 +90,9 @@
               registerForm.controls['name'].touched">
               {{'fieldrequired'| translate}}
             </div>
+            <div class="error-message" *ngIf="registerForm.controls['name'].errors?.minlength">
+              {{'nameLength'| translate}}.
+            </div>
           </ion-col>
         </ion-row>
           

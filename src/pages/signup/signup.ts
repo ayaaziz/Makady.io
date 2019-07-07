@@ -76,7 +76,7 @@ export class SignupPage {
       'username': new FormControl(this.username,Validators.compose([Validators.required,Validators.minLength(4)])),
       'Password': new FormControl(this.Password,Validators.compose([Validators.required,Validators.minLength(4)])),
       'confirmPassword': new FormControl(this.confirmPassword,Validators.required),
-      'name': new FormControl(this.name,Validators.required),
+      'name': new FormControl(this.name,Validators.compose([Validators.required,Validators.minLength(4)])),
       'email': new FormControl(this.email,Validators.compose([Validators.required,Validators.email])),
       'phone': new FormControl(this.phone,Validators.compose([Validators.minLength(9),Validators.maxLength(12)]))
     });
@@ -198,7 +198,7 @@ export class SignupPage {
           // });
 
           //cal api to return verification code to the user email and return with code          
-          this.provider.forgetpass(data.user.username,"verification",data => {
+          this.provider.forgetpass(data.user.email,"verification",data => {
             if(data) {
               data = JSON.parse(data);
               console.log("registeration data: "+JSON.stringify(data));

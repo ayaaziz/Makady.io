@@ -298,28 +298,11 @@ button.lang-icon {
     direction: rtl;
 }
 
-
-body.keyboard-is-open {
-
-    ion-tabs.tabs.tabs-md .tabbar {
-        display: none !important;
-        opacity: 0 !important;
-        z-index: -10 !important;
-        background-color: transparent !important;
-        position: fixed !important;
-        bottom: 0;
-
-    }
-
-    scroll-content {
-        margin-bottom: 0 !important;
-    }   
-}
-
 .spinner-container {
     width: 100%;
     text-align: center;
     padding: 10px;
+    // color: #ccc
 }
 
 

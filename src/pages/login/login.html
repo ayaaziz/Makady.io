@@ -53,10 +53,15 @@
       <p style="color:gray;margin-right: 10px;color:gray;margin-left: 10px;" (click)="forget()">{{'forget' | translate}}</p>
     </ion-col>
     <ion-col col-6 style="display: flex;justify-content: center;">
-      <div style="display: inline-flex;align-items: center;">
+
+      <!-- <ion-item no-lines style="display: inline-flex;align-items: center;"> 
         <ion-checkbox [(ngModel)]="remember"></ion-checkbox>        
         <ion-label style="color:#f2622c;font-size: 1em;margin-right: 6px;margin-left: 6px;">{{'remember' | translate}}</ion-label>
-      </div>
+      </ion-item> -->
+      <ion-item no-lines>  
+        <ion-checkbox [(ngModel)]="remember"></ion-checkbox>        
+        <ion-label style="color:#f2622c;font-size: .7em;margin-right: 6px;margin-left: 6px;">{{'remember' | translate}}</ion-label>
+      </ion-item>
     </ion-col>
   </ion-row>
 

@@ -17,7 +17,6 @@ import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { SettingsProvider } from '../providers/settings/settings';
 import { GroupsPage } from '../pages/groups/groups';
 import { StoresPage } from '../pages/stores/stores';
-import { Keyboard } from '@ionic-native/keyboard';
 
 
 
@@ -51,75 +50,104 @@ export class MyApp {
               splashScreen: SplashScreen,
               private push: Push,
               private settingsService:SettingsProvider,
-              private keyboard:Keyboard,
               private app:App,
               private alertCtrl:AlertController) {
-
-    // this.errorImg = this.helper.userImagePath + "default_avatar.png";
            
 
-         platform.registerBackButtonAction(() => {
-          console.log("backPressed");
+                this.platform.registerBackButtonAction(() => {
+                  let activePortal = this.app._appRoot._loadingPortal.getActive() ||
+                      this.app._appRoot._modalPortal.getActive() ||
+                      this.app._appRoot._toastPortal.getActive() ||
+                      this.app._appRoot._overlayPortal.getActive();
+                  if (activePortal) {
+                    // alert("portal");
+                      activePortal.dismiss();
+                  } else if (this.menu.isOpen()) {
+                    // alert("menu");
+                    this.menu.close();
+                  } else {
+                      if(this.nav.canGoBack()) {
+                        // alert("go back");                        
+                        this.nav.pop();
+                      } else {
+                        // alert("nothing in stack");
+                        // alert(this.app.getActiveNavs()[0].getActive().name);
+                          // if (this.nav.getActive().name === 'TabsPage') {
+                          if (this.app.getActiveNavs()[0].getActive().name === 'HomePage') {
+                            const alert = this.alertCtrl.create({
+                              title: this.translate.instant('terminateApp'),
+                              message: this.translate.instant('closeApp'),
+                              buttons: [
+                              {
+                                text: this.translate.instant('confirmCloseApp'),
+                                handler: () => {
+                                    this.platform.exitApp(); // Close this application
+                                }
+                              },
+                              {
+                                text: this.translate.instant('cancel'),
+                                role: 'cancel',
+                                handler: () => {
+                                  console.log('Application exit prevented!');
+                                }
+                              }
+                            ]
+                          });
+                          alert.present();
+                        } else {
+                          this.app.goBack();
+                        }
+                      }
+                  }
+              });
+      //    platform.registerBackButtonAction(() => {
+      //     console.log("backPressed");
 
-          const overlayView = this.app._appRoot._overlayPortal._views[0];
+      //     const overlayView = this.app._appRoot._overlayPortal._views[0];
 
-          let nav = app.getActiveNavs()[0];
-          let activeView = nav.getActive();  
+      //     let nav = app.getActiveNavs()[0];
+      //     let activeView = nav.getActive();  
         
-          if (overlayView && overlayView.dismiss) {
-            overlayView.dismiss();
-          } else if (this.menu.isOpen()) {
+      //     if (overlayView && overlayView.dismiss) {
+      //       overlayView.dismiss();
+      //     } else if (this.menu.isOpen()) {
             
-            console.log("Menu is open!", "loggedInMenu");
-            this.menu.close();
-            console.log("this.menu.isOpen(): " + JSON.stringify(this.menu.isOpen()));   
-            return;
-          } else {
+      //       console.log("Menu is open!", "loggedInMenu");
+      //       this.menu.close();
+      //       console.log("this.menu.isOpen(): " + JSON.stringify(this.menu.isOpen()));   
+      //       return;
+      //     } else {
          
-            if(activeView.name === "HomePage") {
-              const alert = this.alertCtrl.create({
-                title: this.translate.instant('terminateApp'),
-                message: this.translate.instant('closeApp'),
-                buttons: [
-                {
-                  text: this.translate.instant('confirmCloseApp'),
-                  handler: () => {
-                      this.platform.exitApp(); // Close this application
-                  }
-                },
-                {
-                  text: this.translate.instant('cancel'),
-                  role: 'cancel',
-                  handler: () => {
-                    console.log('Application exit prevented!');
-                  }
-                }
-              ]
-            });
-            alert.present();
+      //       if(activeView.name === "HomePage") {
+      //         const alert = this.alertCtrl.create({
+      //           title: this.translate.instant('terminateApp'),
+      //           message: this.translate.instant('closeApp'),
+      //           buttons: [
+      //           {
+      //             text: this.translate.instant('confirmCloseApp'),
+      //             handler: () => {
+      //                 this.platform.exitApp(); // Close this application
+      //             }
+      //           },
+      //           {
+      //             text: this.translate.instant('cancel'),
+      //             role: 'cancel',
+      //             handler: () => {
+      //               console.log('Application exit prevented!');
+      //             }
+      //           }
+      //         ]
+      //       });
+      //       alert.present();
 
-          }
-          //  else if(activeView.name === "FrindsPage" 
-          // || activeView.name === "ProductsPage") {
-
-          // }
-          else {
-            // alert("any thing else");
-            this.app.goBack();
-          }
-        }
-      });
+      //     } else {
+      //       this.app.goBack();
+      //     }
+      //   }
+      // });
 
 
     platform.ready().then(() => {
-
-      this.keyboard.onKeyboardShow().subscribe(() => {
-        document.body.classList.add('keyboard-is-open');
-      });
-
-      this.keyboard.onKeyboardHide().subscribe(() => {
-          document.body.classList.remove('keyboard-is-open');
-      });
 
       this.event.subscribe("picChanged", pic => {                
         this.photo = this.helper.userImagePath + pic;
@@ -317,11 +345,11 @@ export class MyApp {
     this.navctrl.setRoot(TabsPage, { tabIndex: 1 });
   }
 
-  stores() {
-    this.navctrl.setRoot(TabsPage).then(()=> {
-      this.navctrl.push(StoresPage);
-    });
-  }
+  // stores() {
+  //   this.navctrl.setRoot(TabsPage).then(()=> {
+  //     this.navctrl.push(StoresPage);
+  //   });
+  // }
 
   friends() {
     this.navctrl.setRoot(TabsPage, { tabIndex: 4 });

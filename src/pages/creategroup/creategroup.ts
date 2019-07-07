@@ -25,18 +25,15 @@ removedIds:any = "";
 isInvalidNameEmpty:boolean = false;
 isInvalidNameLength:boolean = false;
 menuNameTakenValidation:string = "";
+addedIdArr:any = [];
+removedIdArr:any = [];
+
 
   constructor(public ViewCtrl:ViewController,public toastCtrl:ToastController,public storage:Storage,public provider:MainproviderProvider,public platform:Platform,public helper:HelperProvider,public translate:TranslateService,public navCtrl: NavController, public navParams: NavParams) {
     this.page = this.navParams.get("page");
     this.groupid = this.navParams.get("groupid");
     this.groupname = this.navParams.get("name");
 
-
-    let backAction =  platform.registerBackButtonAction(() => {
-      console.log("second");
-      this.navCtrl.pop();
-      backAction();
-    },2)
   }
 
   loadData() {
@@ -97,21 +94,34 @@ menuNameTakenValidation:string = "";
   }
   
   checkfriend(id,ev) {
-    
-    // alert(this.id);
-    console.log("event......"+ev.value);
-
     if(ev.value) {
-      this.id=this.id+','+id;
+      this.addedIdArr.push(id);
+     
+    } else {
+      let index = this.addedIdArr.indexOf(id);
+      if(index > -1) {
+        this.addedIdArr.splice(index,1);
+      }
     }
+
+    this.id = this.addedIdArr.join(',');
   }
 
   unCheckFriend(id,ev) {
 
     if(!ev.value) {
-      this.removedIds=this.removedIds+','+id;   
+      this.removedIdArr.push(id);
+    } else {
+      let index = this.removedIdArr.indexOf(id);
+      if(index > -1) {
+        this.removedIdArr.splice(index,1);
+      }
     }
+
+    this.removedIds = this.removedIdArr.join(',');       
   }
+
+  
 
   create() {
 
@@ -133,15 +143,11 @@ menuNameTakenValidation:string = "";
     } 
 
     if(this.id.charAt(0) == ',' ) {
-      alert("added");
-     this.id = this.id.substr(1);
-     alert(this.id);     
+     this.id = this.id.substr(1);     
     }
 
-    if(this.removedIds.charAt(0) == ',' ) {
-      alert("removed");      
-      this.removedIds = this.removedIds.substr(1);
-      alert(this.removedIds);     
+    if(this.removedIds.charAt(0) == ',' ) {    
+      this.removedIds = this.removedIds.substr(1);  
      }
 
     if(this.page=="edit") {
@@ -208,6 +214,26 @@ menuNameTakenValidation:string = "";
     })
   }
   }
+
+  onBlur() {
+    this.isInvalidNameEmpty = false;
+
+    if(!this.name) 
+      this.isInvalidNameEmpty = true;
+  }
+
+  onChange() {
+    this.isInvalidNameLength = false;
+    this.isInvalidNameEmpty = false;
+
+    if(!this.name) {
+      this.isInvalidNameEmpty = true;
+
+    } else if(this.name.length < 4) {
+      this.isInvalidNameLength = true;
+    } 
+  }
+  
   presentToast(msg)
   {
     let toast = this.toastCtrl.create({

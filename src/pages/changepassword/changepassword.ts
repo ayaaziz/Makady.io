@@ -25,12 +25,6 @@ export class ChangepasswordPage {
   constructor(public ViewCtrl:ViewController,public toastCtrl:ToastController,public translate:TranslateService,public storage:Storage,public platform:Platform,public provider:MainproviderProvider,public helper:HelperProvider,public navCtrl: NavController, public navParams: NavParams) {
     this.langdirection=this.helper.langdirection;   
     
-    
-    let backAction =  platform.registerBackButtonAction(() => {
-      console.log("second");
-      this.navCtrl.pop();
-      backAction();
-    },2)
   }
 
   change()

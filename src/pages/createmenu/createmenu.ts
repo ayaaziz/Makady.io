@@ -26,6 +26,8 @@ export class CreatemenuPage {
   isInvalidNameEmpty:boolean = false;
   isInvalidNameLength:boolean = false;
   menuNameTakenValidation:string = "";
+  addedIdArr:any = [];
+  removedIdArr:any = [];
 
   constructor(public ViewCtrl:ViewController,
     public toastCtrl:ToastController,
@@ -41,12 +43,6 @@ export class CreatemenuPage {
         this.menuid = this.navParams.get("menuid");
         // alert(this.menuid);
         this.menuname=this.navParams.get("name");
-
-        let backAction =  platform.registerBackButtonAction(() => {
-          console.log("second");
-          this.navCtrl.pop();
-          backAction();
-        },2)
   }
 
   loadData() {
@@ -100,13 +96,52 @@ export class CreatemenuPage {
     this.loadData();
   }
 
-  checkfriend(id)
-  {
-      this.id=this.id+','+id;
+  onBlur() {
+    this.isInvalidNameEmpty = false;
+
+    if(!this.name) 
+      this.isInvalidNameEmpty = true;
   }
 
-  unCheckFriend(id) {
-    this.removedIds=this.removedIds+','+id;   
+  onChange() {
+    this.isInvalidNameLength = false;
+    this.isInvalidNameEmpty = false;
+
+    if(!this.name) {
+      this.isInvalidNameEmpty = true;
+
+    } else if(this.name.length < 4) {
+      this.isInvalidNameLength = true;
+    } 
+  }
+
+  checkfriend(id,ev)
+  {
+      // this.id=this.id+','+id
+      if(ev.value) {
+        this.addedIdArr.push(id);
+      } else {
+        let index = this.addedIdArr.indexOf(id);
+        if(index > -1) {
+          this.addedIdArr.splice(index,1);
+        }
+      }
+  
+      this.id = this.addedIdArr.join(',');;
+  }
+
+  unCheckFriend(id,ev) {
+    // this.removedIds=this.removedIds+','+id;   
+    if(!ev.value) {
+      this.removedIdArr.push(id);
+    } else {
+      let index = this.removedIdArr.indexOf(id);
+      if(index > -1) {
+        this.removedIdArr.splice(index,1);
+      }
+    }
+
+    this.removedIds = this.removedIdArr.join(',');  
   }
 
   create() {

@@ -48,11 +48,6 @@ defaultImgUrl:string;
      
       this.defaultImgUrl = this.helper.productImagePath;
 
-      let backAction =  platform.registerBackButtonAction(() => {
-        console.log("second");
-        this.navCtrl.pop();
-        backAction();
-      },2)
   }
   toggleSection(x){
     this.buy = "";

@@ -25,7 +25,7 @@
     </ion-col>
     <ion-col col-12>
       <ion-item no-lines>
-        <ion-input [(ngModel)]="name" type="text" placeholder="{{'Group Name' | translate}}" [dir]="langdirection" style="padding:0 10px;border:1px solid lightgray;border-radius: 10px;"></ion-input>
+        <ion-input [(ngModel)]="name" (ionChange)="onChange()" (ionBlur)="onBlur()" type="text" placeholder="{{'Group Name' | translate}}" [dir]="langdirection" style="padding:0 10px;border:1px solid lightgray;border-radius: 10px;"></ion-input>
       </ion-item>
     </ion-col>
     <ion-col>
@@ -83,7 +83,7 @@
   </ion-row>
   
   <p style="text-align:center;">
-    <button ion-button style="background-color:#e26c40;color:white; width: 150px;border-radius: 10px;" (click)="create()">{{'save' | translate}}
+    <button ion-button style="background-color:#e26c40;color:white; width: 150px;border-radius: 10px;" [disabled]="isInvalidNameEmpty || isInvalidNameLength" (click)="create()">{{'save' | translate}}
     </button>
   </p>
 </ion-content>

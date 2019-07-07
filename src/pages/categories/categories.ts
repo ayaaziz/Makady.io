@@ -31,11 +31,11 @@ searching: any = false;
               public navCtrl: NavController,
               public navParam:NavParams) {
 
-          let backAction =  platform.registerBackButtonAction(() => {
-            console.log("second");
-            this.navCtrl.pop();
-            backAction();
-          },2)
+          // let backAction =  platform.registerBackButtonAction(() => {
+          //   console.log("second");
+          //   this.navCtrl.pop();
+          //   backAction();
+          // },2)
 
           this.searchControl = new FormControl();
 

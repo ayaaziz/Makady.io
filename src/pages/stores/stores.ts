@@ -30,12 +30,6 @@ searching: any = false;
 
                 this.searchControl = new FormControl();
 
-              let backAction =  platform.registerBackButtonAction(() => {
-                console.log("second");
-                this.navCtrl.pop();
-                backAction();
-              },2)
-
   }
 
   ionViewDidLoad() {

@@ -26,11 +26,6 @@ username:any;
 
               this.langdirection=this.helper.langdirection;
 
-              let backAction =  platform.registerBackButtonAction(() => {
-                console.log("second");
-                this.navCtrl.pop();
-                backAction();
-              },2)
   }
 
   send() {

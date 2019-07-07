@@ -48,13 +48,6 @@ export class ProductsPage {
     this.categoryName = this.navParams.get("categoryName");
 
     this.searchControl = new FormControl();
-
-
-    let backAction =  platform.registerBackButtonAction(() => {
-      console.log("second");
-      this.navCtrl.pop();
-      backAction();
-    },2)
     
   }
 

@@ -27,8 +27,8 @@
     "R.s":"SR ",
     "total":"Total money spent this month",
     "passwordback":"To get your password back",
-    "enteremail":"Please Enter Your Username",
-    "enteryouremail":"Please, Enter Your Username ",
+    "enteremail":"Please Enter Your Email Address",
+    "enteryouremail":"Please, Enter Your Email Address ",
     "send":"Send",
     "invalidemail":"Invalid Email address",
     "code":"Verification Code",
@@ -182,5 +182,6 @@
      "newPasswordSuccess":"Your new password saved successfully, Now you can login with your new password",
      "terminateApp":"App termination",
      "closeApp":"Do you want to close the app?",
-     "confirmCloseApp":"Close App"  
+     "confirmCloseApp":"Close App",
+     "nameLength":"The name must be at least 4 characters"  
 }

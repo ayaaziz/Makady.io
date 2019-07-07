@@ -97,7 +97,7 @@ export class MainproviderProvider {
   }
 
   //return emailcode
-  forgetpass(username,requestType,successCallback, failureCallback) {
+  forgetpass(email,requestType,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -106,7 +106,7 @@ export class MainproviderProvider {
       loader.present();
       let headers = new HttpHeaders();
       let parameter = {
-        'username':username,
+        'email':email,
         'type':requestType
       }
 

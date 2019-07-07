@@ -64,11 +64,6 @@ export class VerificationPage {
               this.isRegister = this.navParams.get("register");
               this.remember = this.navParams.get("isRemembered");
 
-              let backAction =  platform.registerBackButtonAction(() => {
-                console.log("second");
-                this.navCtrl.pop();
-                backAction();
-              },2)
   }
 
   ionViewWillEnter() {
