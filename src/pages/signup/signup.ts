@@ -264,5 +264,10 @@ export class SignupPage {
 
   onPwdTyping(ev) {
     this.Password = ev.value;
+
+    if(this.Password == this.confirmPassword) 
+      this.isMatched = true;
+    else
+      this.isMatched = false;
   }
 }

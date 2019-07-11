@@ -183,5 +183,7 @@
      "terminateApp":"App termination",
      "closeApp":"Do you want to close the app?",
      "confirmCloseApp":"Close App",
-     "nameLength":"The name must be at least 4 characters"  
+     "nameLength":"The name must be at least 4 characters",
+     "alreadyAdded":"you sent friend request before wait aya12 for acceptance!",
+     "alreadyFriend":"This user is already friend"
 }

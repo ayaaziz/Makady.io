@@ -68,7 +68,7 @@ export class GroupsPage {
 
             parsedData.groups.forEach(group => {
               group.members = group.members.slice(0,4);
-              console.log("group length: "+ group.members.length);
+              console.log("group length: "+ group.members.length);           
             });
             
             this.groups = parsedData.groups;

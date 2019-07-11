@@ -177,6 +177,12 @@ export class FriendsPage {
               this.helper.presentToast(this.translate.instant("friendrequestsent"));
             }
             else {       
+              if(data.errors == "you sent friend request before to this user") {
+                this.helper.presentToast(this.translate.instant("alreadyAdded"));
+              
+              } else if(data.errors == "you are already friend with this user") {
+                this.helper.presentToast(this.translate.instant("alreadyFriend"));                
+              }
               console.log(data.errors);
             }
             console.log(JSON.stringify(data));

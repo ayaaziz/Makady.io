@@ -37,13 +37,11 @@ page-edit-profile {
     }
 
 
-    ion-item.item-input:not(.item-input-has-focus):not(.input-has-value) .label-md[floating] {
+    ion-item.item-input:not(.item-input-has-focus):not(.input-has-value) .label-md[floating],
+    ion-item.item-input:not(.item-input-has-focus):not(.input-has-value) .label-ios[floating] {
         margin-left: 10px !important;
         margin-right: 10px !important;
         font-size: 15px;
         color: #BDBDBD;
-     }
-
-  
-    
+    }
 }

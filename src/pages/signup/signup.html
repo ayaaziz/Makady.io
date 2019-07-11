@@ -135,7 +135,7 @@
 
       <ion-row>
         <ion-col style="justify-content: center;display: flex;">
-          <button ion-button type="submit" [disabled]="!registerForm.valid" style="margin-top: 12px;color:white;background-color:#f2622c;border-radius: 15px;width: 100%;"> {{'registernow' | translate}}</button>
+          <button ion-button type="submit" [disabled]="!registerForm.valid || !isMatched" style="margin-top: 12px;color:white;background-color:#f2622c;border-radius: 15px;width: 100%;"> {{'registernow' | translate}}</button>
         </ion-col>
       </ion-row>
     </form>

@@ -1281,7 +1281,7 @@ export class MainproviderProvider {
         let parameter = {
           'username':name,
           'email': email,
-          'password':id,
+          // 'password':id,
           'lang':lang,
           'social_type':socialType      
         }
