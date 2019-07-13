@@ -75,17 +75,14 @@ export class TabsPage {
   }
 
   getFriendRequestsNo() {
-    this.storage.get("makadyaccess").then(val => {
-      if(val) {
-        this.provider.friendrequests(val,(data) => {
-          if(data) {
-            data = JSON.parse(data);
-            this.reqNo = data.friends.length;
-          }
-        },err =>{
-          console.log(err);
-        });
+ 
+    this.provider.friendrequests(data => {
+      if(data) {
+        data = JSON.parse(data);
+        this.reqNo = data.friends.length;
       }
+    },err =>{
+      console.log(err);
     });
   }
 }

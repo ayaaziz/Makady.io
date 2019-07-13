@@ -70,28 +70,24 @@ export class ShoppinglistPage {
     this.hide1=true;
     this.langdirection = this.helper.langdirection;
    
-    setTimeout(() => {
-      this.storage.get("makadyaccess").then((val) => {
-        if(val) {
-          this.provider.menus(1,"",val,(data) => {
-            console.log(JSON.stringify(data));
-            let parsedData = JSON.parse(data);
-            this.listes = parsedData.data;
+    this.provider.menus(1,"",data => {
+      console.log(JSON.stringify(data));
+      let parsedData = JSON.parse(data);
+      this.listes = parsedData.data;
 
-            this.allLists = this.listes;
-          
-            if(this.listes.length === 0) {
-              this.hide = false;
-              this.show = true;
-              this.isListEmpty = true;
-            
-            } else {
-              this.hide = true;
-            }
-          },(data)=>{});
-        }
-      });
-    },500);
+      this.allLists = this.listes;
+    
+      if(this.listes.length === 0) {
+        this.hide = false;
+        this.show = true;
+        this.isListEmpty = true;
+      
+      } else {
+        this.hide = true;
+      }
+    },error => {
+      console.log(error);
+    });
   }
 
   onInput(input) {
@@ -175,30 +171,26 @@ export class ShoppinglistPage {
     this.hide1 = false;
     this.hide2 = true;
 
-    setTimeout(() => {  
-      this.storage.get("makadyaccess").then((val) => {
-        if(val) {
-          this.provider.menus(2,"",val,(data) => {
-            console.log(JSON.stringify(data));
-            let parsedData=JSON.parse(data);
-            this.inlistes=parsedData.data;
+ 
+    this.provider.menus(2,"",data => {
+      console.log(JSON.stringify(data));
+      let parsedData=JSON.parse(data);
+      this.inlistes=parsedData.data;
 
-            this.allInvitedLists = this.inlistes;
+      this.allInvitedLists = this.inlistes;
 
-            if(this.inlistes.length === 0) {
-              this.show = false;
-              this.hide = false;
-              this.isInvitedEmpty = true;
-            
-            } else {
-              this.show = true;
-            }
+      if(this.inlistes.length === 0) {
+        this.show = false;
+        this.hide = false;
+        this.isInvitedEmpty = true;
       
-          },(data)=>{});
-        }
-      });
+      } else {
+        this.show = true;
+      }
 
-    },500);
+    },error => {
+      console.log(error);
+    });
 
   }
 
@@ -238,12 +230,9 @@ export class ShoppinglistPage {
         {
           text: this.translate.instant('yes'),
           handler: () => {
-            this.storage.get("makadyaccess").then((val) => {
-              if(val) {
-
                 //delete Menu, if it is user's Menu
                 if(type === "userList") {
-                  this.provider.deletemenu(id,val,(data) => {
+                  this.provider.deletemenu(id,data => {
                     console.log(JSON.stringify(data));
                     for(var i=0;i<this.listes.length;i++) {
                       if (this.listes[i].menu_id == id) {
@@ -264,21 +253,18 @@ export class ShoppinglistPage {
 
                     this.userId = data.user.id;
                     console.log("user id: "+ this.userId);
-                    this.provider.removeUserFromMenu(id,this.userId,val,data => {
+                    this.provider.removeUserFromMenu(id,this.userId,data => {
                       if(data) {
                         console.log("User Removed From Menu");
                         this.getinvited();
                       }
                     },
                     error => {
-                      
+                      console.log(error);
                     });
                   });
 
                 }
-           
-              }
-            });
           }
         },
         {

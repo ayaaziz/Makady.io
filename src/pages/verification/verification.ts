@@ -195,34 +195,30 @@ export class VerificationPage {
       
             if(this.pageType === "AuthPage") {  //from login or signup page
               //make this user verified 
-              this.storage.get("makadyaccess").then((val)=>{
-                if(val)
-                { 
-                  this.provider.setVerified(val, data => {
-                    data = JSON.parse(data);
-                    if(data.success) {
-                  
-                      if (this.remember) {
-                        this.storage.set("Makadyusername", "true");
-                      }
-  
-                      this.storage.get("user_info")
-                      .then(val => {
-                        val.user.verified = 1;
-                        this.storage.set("user_info",val)
-                        .then(() => {
-                          this.event.publish("login");
-                          this.navCtrl.setRoot(TabsPage);
-                        }); 
-                      });
-  
-                    }
-                  },error => {
-                    console.log(error);
+      
+              this.provider.setVerified(data => {
+                data = JSON.parse(data);
+                if(data.success) {
+              
+                  if (this.remember) {
+                    this.storage.set("Makadyusername", "true");
+                  }
+
+                  this.storage.get("user_info")
+                  .then(val => {
+                    val.user.verified = 1;
+                    this.storage.set("user_info",val)
+                    .then(() => {
+                      this.event.publish("login");
+                      this.navCtrl.setRoot(TabsPage);
+                    }); 
                   });
+
                 }
+              },error => {
+                console.log(error);
               });
-            
+                 
             } else { //from forgetpassword page
               
               //show new password page

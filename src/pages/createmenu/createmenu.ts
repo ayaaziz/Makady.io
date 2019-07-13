@@ -52,14 +52,11 @@ export class CreatemenuPage {
 
     }
     this.langdirection=this.helper.langdirection;
-    this.storage.get("makadyaccess").then((val)=>{
-     if(val)
-     {
   
       if(this.page === "edit") {
         
         //get friends not in menu
-        this.provider.getFriendsNotInMenu(this.menuid,val,data => {
+        this.provider.getFriendsNotInMenu(this.menuid,data => {
           data = JSON.parse(data);
           console.log(JSON.stringify(data));
           
@@ -80,7 +77,7 @@ export class CreatemenuPage {
          })
          
       } else {
-          this.provider.friends(val,data => { 
+          this.provider.friends(data => { 
           console.log(JSON.stringify(data));
           let parsedData = JSON.parse(data);
           this.friends = parsedData.friends;
@@ -88,8 +85,6 @@ export class CreatemenuPage {
           console.log(error);          
         })
       }
-     }
-   })
   }
   
   ionViewDidEnter() {
@@ -166,35 +161,27 @@ export class CreatemenuPage {
 
    if(this.page=="edit")
    {
-      this.storage.get("makadyaccess").then((val)=>{
-        if(val)
-        {
-          this.provider.editmenu(this.name,this.id,this.removedIds,this.menuid,val,data => {
-          console.log(JSON.stringify(data))
-          data = JSON.parse(data);
+    
+      this.provider.editmenu(this.name,this.id,this.removedIds,this.menuid,data => {
+      console.log(JSON.stringify(data))
+      data = JSON.parse(data);
 
-          if(data.success) {
-            this.name="";
-            this.check = false;
-            this.presentToast(this.translate.instant('edited'));
-            this.navCtrl.setRoot(ShoppinglistPage);
-          } else {
-            if(data.errors.name_en == "The name en has already been taken.") {
-              this.menuNameTakenValidation = this.translate.instant("menuNameTaken");
-            }
+      if(data.success) {
+        this.name="";
+        this.check = false;
+        this.presentToast(this.translate.instant('edited'));
+        this.navCtrl.setRoot(ShoppinglistPage);
+      } else {
+          if(data.errors.name_en == "The name en has already been taken.") {
+            this.menuNameTakenValidation = this.translate.instant("menuNameTaken");
           }
-          
-          },error => {
-            console.log(error);
-          })
-        }
+        }  
+      },error => {
+        console.log(error);
       })
-    }
-    else{
-    this.storage.get("makadyaccess").then((val)=>{
-      if(val)
-      {
-        this.provider.createmenu(this.name,this.id,val,data => {
+    
+    } else {
+        this.provider.createmenu(this.name,this.id,data => {
           
           console.log(JSON.stringify(data));
           data = JSON.parse(data);
@@ -214,9 +201,7 @@ export class CreatemenuPage {
         },error => {
           console.log(error);
         });
-      }
-    })
-  }
+    }
   }
 
   presentToast(msg)

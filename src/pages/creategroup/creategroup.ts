@@ -45,48 +45,43 @@ removedIdArr:any = [];
     }
   
     this.langdirection=this.helper.langdirection;
-    this.storage.get("makadyaccess").then((val)=> {
 
-    if(val) {
-
-      if(this.page === "edit") {
+    if(this.page === "edit") {
+      
+      //get friends not in group        
+      this.provider.getFriendsNotInGroup(this.groupid,data => {
+        data = JSON.parse(data);
+        console.log(JSON.stringify(data));
         
-        //get friends not in group        
-        this.provider.getFriendsNotInGroup(this.groupid,val,data => {
-          data = JSON.parse(data);
-          console.log(JSON.stringify(data));
-          
-          this.friends = data.friend;
-          },
-          error => {
-          console.log(error);
-          });
-
-
-        //get friends in group
-        this.provider.getFriendsInGroup(this.groupid,data => {
-          data = JSON.parse(data);
-          this.friendsInGroup = data.friend;
-          console.log("friendsInGroup......: "+JSON.stringify(this.friendsInGroup));
-          
-        },error => {
-          console.log(error);
-        })
-
-
-      } else {
-
-        this.provider.friends(val,(data)=>{
-          console.log(JSON.stringify(data))
-          let parsedData=JSON.parse(data)
-          this.friends=parsedData.friends
-        },(data)=>{
-
+        this.friends = data.friend;
+        },
+        error => {
+        console.log(error);
         });
 
-        }
-      }
-    })
+
+      //get friends in group
+      this.provider.getFriendsInGroup(this.groupid,data => {
+        data = JSON.parse(data);
+        this.friendsInGroup = data.friend;
+        console.log("friendsInGroup......: "+JSON.stringify(this.friendsInGroup));
+        
+      },error => {
+        console.log(error);
+      })
+
+
+    } else {
+
+      this.provider.friends(data => {
+        console.log(JSON.stringify(data))
+        let parsedData=JSON.parse(data)
+        this.friends=parsedData.friends
+      },error => {
+        console.log(error);
+      });
+
+    }
   }
 
   ionViewDidLoad() {
@@ -151,68 +146,57 @@ removedIdArr:any = [];
      }
 
     if(this.page=="edit") {
-      this.storage.get("makadyaccess").then((val)=>{
-        if(val)
-        {
+ 
+      // if(this.name.length < 4){
+      //   this.presentToast(this.translate.instant("groupnamelength"))
+      // } else {
+        this.provider.editgroup(this.name,this.id,this.removedIds,this.groupid,data => {
+  
+          console.log(JSON.stringify(data));
+          data = JSON.parse(data);
 
-          // if(this.name.length < 4){
-          //   this.presentToast(this.translate.instant("groupnamelength"))
-          // } else {
-            this.provider.editgroup(this.name,this.id,this.removedIds,this.groupid,val,data => {
-      
-              console.log(JSON.stringify(data));
-              data = JSON.parse(data);
-
-              if(data.success) {
-                this.name="";
-                this.check = false;
-                this.presentToast(this.translate.instant('edited'));
-                this.navCtrl.pop();
-              
-              } else {
-                if(data.errors.name_en == "The name en has already been taken.") {
-                  this.menuNameTakenValidation = this.translate.instant("menuNameTaken");
-                }
-              }
-
-              },error => {
-                console.log(error);
-              });
-          // }
-        }
-      })
-    }
-    else {
-    this.storage.get("makadyaccess").then((val)=>{
-      if(val)
-      {
-        // if(this.name.length < 4){
-        //   this.presentToast(this.translate.instant("groupnamelength"))
-        // } else {
-
-          this.provider.creategroup(this.name,this.id,val,data => {
-            
-            console.log(JSON.stringify(data));
-            data = JSON.parse(data);
-
-            if(data.success) {
-              this.name = "";
-              this.check = false;
-              this.presentToast(this.translate.instant('created'));
-              this.navCtrl.pop();
-              
-            } else {
-              if(data.errors.name_en == "The name en has already been taken.") {
-                this.menuNameTakenValidation = this.translate.instant("menuNameTaken");
-              }
+          if(data.success) {
+            this.name="";
+            this.check = false;
+            this.presentToast(this.translate.instant('edited'));
+            this.navCtrl.pop();
+          
+          } else {
+            if(data.errors.name_en == "The name en has already been taken.") {
+              this.menuNameTakenValidation = this.translate.instant("menuNameTaken");
             }
+          }
+
           },error => {
             console.log(error);
-          })
-        // }
-      }
-    })
-  }
+          });
+
+    } else {
+  
+    // if(this.name.length < 4){
+    //   this.presentToast(this.translate.instant("groupnamelength"))
+    // } else {
+
+      this.provider.creategroup(this.name,this.id,data => {
+        
+        console.log(JSON.stringify(data));
+        data = JSON.parse(data);
+
+        if(data.success) {
+          this.name = "";
+          this.check = false;
+          this.presentToast(this.translate.instant('created'));
+          this.navCtrl.pop();
+          
+        } else {
+          if(data.errors.name_en == "The name en has already been taken.") {
+            this.menuNameTakenValidation = this.translate.instant("menuNameTaken");
+          }
+        }
+      },error => {
+        console.log(error);
+      })
+    }
   }
 
   onBlur() {

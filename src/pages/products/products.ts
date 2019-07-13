@@ -68,27 +68,20 @@ export class ProductsPage {
 
   loadData() {
 
-    setTimeout(() => {
-      this.storage.get("makadyaccess").then((val) => {
-        if(val) {
-          this.provider.getproducts(this.categoryId,"",val,(data) => {
-            let parsedData=JSON.parse(data);
-            this.products=parsedData.data;
-            this.products.forEach(element => {
-              element["count"]=this.count;
+    this.provider.getproducts(this.categoryId,"",data => {
+      let parsedData=JSON.parse(data);
+      this.products=parsedData.data;
+      this.products.forEach(element => {
+        element["count"]=this.count;
 
-            });
-
-            this.allProducts = this.products;
-
-            console.log(parsedData);
-          },(error) => {
-
-          });
-        }
       });
-    },500);
 
+      this.allProducts = this.products;
+
+      console.log(parsedData);
+    },error => {
+      console.log(error);
+    });
   }
 
   onInput(input) {
@@ -156,46 +149,43 @@ export class ProductsPage {
 
     if(this.userMenuId) {
 
-      this.storage.get("makadyaccess").then((val) => {
-      
-        if(val) {
-          this.provider.addtomenu(this.userMenuId,this.categories,val,(data) => {
-            console.log(JSON.stringify(data));
-            let DataParsed=JSON.parse(data);
-            console.log("DataParsed: "+JSON.stringify(DataParsed));
-            if(DataParsed.menu_item) {
-              if(DataParsed.menu_item.length !=0) {
-                console.log("enterrrrrr");
-                let proid=DataParsed.menu_item[0].id;
-                let quantity= parseInt(DataParsed.menu_item[0].quantity);
-                
-                  let alert = this.alertCtrl.create({
-                    message: this.translate.instant('alreadyexist'),
-                    buttons: [
-                      {
-                        text: this.translate.instant('ok'),
-                        handler: () => {
-                          // this.update(proid);
-                          this.update(proid,quantity,this.categories)
-                        }
-                      },
-                      {
-                        text: this.translate.instant('cancel'),
-                        role: 'cancel',
-                        handler: () => {
-                          console.log('Cancel clicked');
-                        }
-                      }
-                    ]
-                  });
-                  alert.present();
-                } 
-            } else {
-                this.helper.presentToast(this.translate.instant('productadded'));
-            }
-          },(error)=>{})
+      this.provider.addtomenu(this.userMenuId,this.categories,(data) => {
+        console.log(JSON.stringify(data));
+        let DataParsed=JSON.parse(data);
+        console.log("DataParsed: "+JSON.stringify(DataParsed));
+        if(DataParsed.menu_item) {
+          if(DataParsed.menu_item.length !=0) {
+            console.log("enterrrrrr");
+            let proid=DataParsed.menu_item[0].id;
+            let quantity= parseInt(DataParsed.menu_item[0].quantity);
+            
+              let alert = this.alertCtrl.create({
+                message: this.translate.instant('alreadyexist'),
+                buttons: [
+                  {
+                    text: this.translate.instant('ok'),
+                    handler: () => {
+                      // this.update(proid);
+                      this.update(proid,quantity,this.categories)
+                    }
+                  },
+                  {
+                    text: this.translate.instant('cancel'),
+                    role: 'cancel',
+                    handler: () => {
+                      console.log('Cancel clicked');
+                    }
+                  }
+                ]
+              });
+              alert.present();
+            } 
+        } else {
+            this.helper.presentToast(this.translate.instant('productadded'));
         }
-      });
+      },(error)=>{
+        console.log(error);
+      })
 
     } else {
       this.doRadio();
@@ -203,9 +193,8 @@ export class ProductsPage {
   }
 
    doRadio() {  
-    this.storage.get("makadyaccess").then((val) => {
-      if(val) {
-        this.provider.menus(1,"",val,(data) => {
+
+        this.provider.menus(1,"",data => {
             console.log(JSON.stringify(data));
             let parsedData=JSON.parse(data);
 
@@ -225,7 +214,7 @@ export class ProductsPage {
                 alert.dismiss();
                 console.log(typeof(data));
                 console.log(JSON.stringify(data));
-                this.provider.addtomenu(data,this.categories,val,(data) => {
+                this.provider.addtomenu(data,this.categories,data => {
                   console.log(JSON.stringify(data));
                   let DataParsed=JSON.parse(data);
                   console.log("DataParsed: "+JSON.stringify(DataParsed));
@@ -257,7 +246,9 @@ export class ProductsPage {
                     } else {
                       this.helper.presentToast(this.translate.instant('productadded'));
                     }
-                },(error)=>{})
+                },(error)=>{
+                  console.log(error);
+                })
                 return false;
               }
             });
@@ -281,21 +272,17 @@ export class ProductsPage {
 
 
         },(error)=>{})
-      }
-    });
   }
 
   update(id, quantity, categories) {
-    this.storage.get("makadyaccess").then((val) => {
-      if(val) {
-        this.provider.updateproduct(id,parseInt(this.categories[0].quantity) + quantity,val,(data)=>{
-          let ParseData=JSON.parse(data)
-          if(ParseData.success==true)
-          {
-          this.helper.presentToast(this.translate.instant('countincreased'));
-          }
-        },(error)=>{});
+    this.provider.updateproduct(id,parseInt(this.categories[0].quantity) + quantity,(data)=>{
+      let ParseData=JSON.parse(data)
+      if(ParseData.success==true)
+      {
+      this.helper.presentToast(this.translate.instant('countincreased'));
       }
+    },(error)=>{
+      console.log(error);
     });
   }
 
@@ -304,25 +291,21 @@ export class ProductsPage {
 
       let prodCode = barData.text;
       console.log("prodCode: "+prodCode);
-      this.storage.get("makadyaccess").then(val => {
-        if(val) {
-          this.provider.searchProdByBarCode(this.categoryId,prodCode,val,prodData => {
-            console.log(JSON.stringify(prodData));
-            
-            if(prodData.success) {
-                this.products = prodData.data;
-                this.products.forEach(element => {
-                  element["count"] = this.count;
-                });
+      this.provider.searchProdByBarCode(this.categoryId,prodCode,prodData => {
+        console.log(JSON.stringify(prodData));
+        
+        if(prodData.success) {
+            this.products = prodData.data;
+            this.products.forEach(element => {
+              element["count"] = this.count;
+            });
 
-            } else {
-              console.log(prodData.errors);
-            }
-          },err => {
-            console.log(this.translate.instant('serverErr'))
-          });
+        } else {
+          console.log(prodData.errors);
         }
-    })
+      },err => {
+        console.log(this.translate.instant('serverErr'))
+      });
     }, (err) => {
         console.log('Error: ', err);
     });

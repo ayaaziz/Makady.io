@@ -185,7 +185,7 @@ export class SignupPage {
          this.storage.set("makadyaccess",parsedData.access_token);
 
          
-         this.provider.getuser(parsedData.access_token, (data) => {
+         this.provider.getuser(data => {
           data = JSON.parse(data);
           console.log(JSON.stringify(data));
           this.helper.accesstoken=parsedData.access_token;

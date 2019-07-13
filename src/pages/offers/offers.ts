@@ -48,24 +48,21 @@ export class OffersPage {
   }
 
   loadData() {
-    setTimeout(() => {
-
-      this.langdirection=this.helper.langdirection;
-      this.storage.get("makadyaccess").then((val) => {
-        if(val) {
-          this.provider.offers("",val,(data)=>{
-            console.log(JSON.stringify(data));
-            let parsedData=JSON.parse(data);
-            this.offers=parsedData.data;
-            this.offers.forEach(element => {      
-              element["count"] = this.count;
-            });
-
-            this.allOffers = this.offers;
-          },(error)=>{});
-        }
+    
+    this.langdirection=this.helper.langdirection;
+  
+    this.provider.offers("",data => {
+      console.log(JSON.stringify(data));
+      let parsedData=JSON.parse(data);
+      this.offers=parsedData.data;
+      this.offers.forEach(element => {      
+        element["count"] = this.count;
       });
-    },500);
+
+      this.allOffers = this.offers;
+    },(error)=>{
+      console.log(error);
+    });
 
   }
 
@@ -137,9 +134,7 @@ export class OffersPage {
 
    doRadio() {
     
-    this.storage.get("makadyaccess").then((val) => {
-      if(val) {
-        this.provider.menus(1,"",val,(data) => {
+        this.provider.menus(1,"",(data) => {
           console.log(JSON.stringify(data));
           let parsedData=JSON.parse(data);
           console.log(JSON.stringify(parsedData.data));
@@ -158,7 +153,7 @@ export class OffersPage {
             handler: data => {
               alert.dismiss();
               console.log(JSON.stringify(data));
-              this.provider.addtomenu(data,this.categories,val,(data) => {
+              this.provider.addtomenu(data,this.categories,data => {
                 console.log(JSON.stringify(data));
                 let DataParsed=JSON.parse(data);
                 if(DataParsed.success==false && DataParsed.menu_item.length !=0) {
@@ -188,27 +183,27 @@ export class OffersPage {
                 else {
                   this.helper.presentToast(this.translate.instant('productadded'));
                 }
-              },(error)=>{})
+              },error => {
+                console.log(error);
+              })
               return false;
             }
           });
           alert.present()
-        },(error)=>{})
-      }
-    });
+        },error => {
+          console.log(error);
+        })
   }
  
   update(id, quantity, categories) {
-    this.storage.get("makadyaccess").then((val) => {
-      if(val) {
-        this.provider.updateproduct(id, parseInt(this.categories[0].quantity) + quantity,val,(data) => {
-          data = JSON.parse(data);
-          if(data.success) {
-            this.helper.presentToast(this.translate.instant('countincreased'));
-          }
-        },(data)=>{})
+    this.provider.updateproduct(id, parseInt(this.categories[0].quantity) + quantity,data => {
+      data = JSON.parse(data);
+      if(data.success) {
+        this.helper.presentToast(this.translate.instant('countincreased'));
       }
-    });
+    },error => {
+      console.log(error);
+    })
   }
 
   doRefresh(event) {

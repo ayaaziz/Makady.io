@@ -234,7 +234,7 @@ export class MainproviderProvider {
 
 
 
-  // changelang(lang,access,successCallback, failureCallback) {
+  // changelang(lang,successCallback, failureCallback) {
   //   let loader = this.loadingCtrl.create({
   //     content: "",
   //   });
@@ -262,7 +262,7 @@ export class MainproviderProvider {
   // }
 
 
-  checkpass(pass,access,successCallback, failureCallback) {
+  checkpass(pass,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -294,7 +294,7 @@ export class MainproviderProvider {
     }
   }
 
-  changepass(pass,newpass,confirm,access,successCallback, failureCallback) {
+  changepass(pass,newpass,confirm,successCallback, failureCallback) {
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
         content: "",
@@ -329,7 +329,7 @@ export class MainproviderProvider {
   }
 
 
-  getuser(access,successCallback, failureCallback) {
+  getuser(successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -358,7 +358,7 @@ export class MainproviderProvider {
     }
   }
 
-  products(access,successCallback, failureCallback) {
+  products(successCallback, failureCallback) {
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
         content: "",
@@ -388,7 +388,7 @@ export class MainproviderProvider {
   }
 
 
-  getproducts(id,search,access,successCallback, failureCallback) {
+  getproducts(id,search,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -420,7 +420,7 @@ export class MainproviderProvider {
     }
   }
 
-  offers(search,access,successCallback, failureCallback) {
+  offers(search,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -453,7 +453,7 @@ export class MainproviderProvider {
   }
 
 
-  friends(access,successCallback, failureCallback) {
+  friends(successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -483,7 +483,7 @@ export class MainproviderProvider {
     }
   }
 
-  deletefriends(id,access,successCallback, failureCallback) {
+  deletefriends(id,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -515,7 +515,7 @@ export class MainproviderProvider {
     }
   }
 
-  addfriends(id,access,successCallback, failureCallback) {
+  addfriends(id,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -547,7 +547,7 @@ export class MainproviderProvider {
     }
   }
 
-  deletegroups(id,access,successCallback, failureCallback) {
+  deletegroups(id,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -579,7 +579,7 @@ export class MainproviderProvider {
     }
   }
 
-  searchgroups(name,access,successCallback, failureCallback) {
+  searchgroups(name,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -612,7 +612,7 @@ export class MainproviderProvider {
   }
 
 
-  creategroup(name,ids,access,successCallback, failureCallback) {
+  creategroup(name,ids,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -646,7 +646,7 @@ export class MainproviderProvider {
   }
 
 
-  editgroup(name,ids,removedIds,groupid,access,successCallback, failureCallback) {
+  editgroup(name,ids,removedIds,groupid,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -660,7 +660,7 @@ export class MainproviderProvider {
         "removed_ids":removedIds,
         'group_id':groupid
       }
-      console.log(access)
+ 
       console.log(parameter)
       headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
       let serviceUrl = this.helper.serviceurl + 'editGroup';
@@ -683,7 +683,7 @@ export class MainproviderProvider {
     }
   }
 
-  menus(type,search,access,successCallback, failureCallback) {
+  menus(type,search,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -718,7 +718,7 @@ export class MainproviderProvider {
   }
 
 
-  deletemenu(id,access,successCallback, failureCallback) {
+  deletemenu(id,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -751,7 +751,7 @@ export class MainproviderProvider {
   }
 
 
-  addtomenu(id,products,access,successCallback, failureCallback) {
+  addtomenu(id,products,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -785,7 +785,7 @@ export class MainproviderProvider {
     }
   }
 
-  home(access,successCallback, failureCallback) {
+  home(successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -816,7 +816,7 @@ export class MainproviderProvider {
     }
   }
 
-  friendrequests(access,successCallback, failureCallback) {
+  friendrequests(successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -846,7 +846,7 @@ export class MainproviderProvider {
     }
   }
 
-  acceptfriendrequests(id,access,successCallback, failureCallback) {
+  acceptfriendrequests(id,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -880,7 +880,7 @@ export class MainproviderProvider {
 
 
   //////xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx///////
-  updateproduct(id,quantity,access,successCallback, failureCallback) {
+  updateproduct(id,quantity,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -914,7 +914,7 @@ export class MainproviderProvider {
     }
   }
 
-  getMenudetails(id,access,successCallback, failureCallback) {
+  getMenudetails(id,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -945,7 +945,7 @@ export class MainproviderProvider {
     }
   }
 
-  createmenu(name,ids,access,successCallback, failureCallback) {
+  createmenu(name,ids,successCallback, failureCallback) {
     
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -981,7 +981,7 @@ export class MainproviderProvider {
     }
   }
 
-  editmenu(name,ids,removedIds,menuid,access,successCallback, failureCallback) {
+  editmenu(name,ids,removedIds,menuid,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -1017,7 +1017,7 @@ export class MainproviderProvider {
   }
 
  
-  addproduct(id,useid,quantity,price,access,successCallback, failureCallback) {
+  addproduct(id,useid,quantity,price,successCallback, failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -1057,7 +1057,7 @@ export class MainproviderProvider {
   // *****************************New Apis*************************//
   
   //api name: "getProductByBarCode"
-  searchProdByBarCode(categoryId,prodBarCode,access,successCallback,failureCallback) {
+  searchProdByBarCode(categoryId,prodBarCode,successCallback,failureCallback) {
 
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -1088,7 +1088,7 @@ export class MainproviderProvider {
     }
   }
 
-  // searchProductByName(categoryId,prodBarCode,access,successCallback,failureCallback) {
+  // searchProductByName(categoryId,prodBarCode,successCallback,failureCallback) {
   //   if(navigator.onLine) {
   //     let loader = this.loadingCtrl.create({
   //       content: "",
@@ -1118,7 +1118,7 @@ export class MainproviderProvider {
   //   }
   // }
 
-  changeProfilePicture(access,pic,ext,successCallback,failureCallback) {
+  changeProfilePicture(pic,ext,successCallback,failureCallback) {
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
         content: "",
@@ -1149,7 +1149,7 @@ export class MainproviderProvider {
   }
 
   //api name: "updateVerificationStatus"
-  setVerified(access,successCallback,failureCallback) {
+  setVerified(successCallback,failureCallback) {
   
     if(navigator.onLine) {
       let spinner = this.loadingCtrl.create();
@@ -1188,7 +1188,7 @@ export class MainproviderProvider {
 
   //api name: "notificationStatus"
   //tell server if product notifications/offers notification opened or closed
-  notificationStatus(access,userId,notificationType,statusNo,successCallback,failureCallback) {
+  notificationStatus(userId,notificationType,statusNo,successCallback,failureCallback) {
 
     if(navigator.onLine) {
       let spinner = this.loadingCtrl.create();
@@ -1223,7 +1223,7 @@ export class MainproviderProvider {
   }
 
   //api name: "searchFriends" (ask esraa)
-  searchFriends(access,searchTxt,successCallback,failureCallback) {
+  searchFriends(searchTxt,successCallback,failureCallback) {
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
         content: "",
@@ -1339,7 +1339,7 @@ export class MainproviderProvider {
       }
   }
 
-  removeUserFromMenu(menuId,userId,access,successCallback,failureCallback) {
+  removeUserFromMenu(menuId,userId,successCallback,failureCallback) {
  
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
@@ -1374,7 +1374,7 @@ export class MainproviderProvider {
     }
   }
 
-  getFriendsNotInMenu(menuId,access,successCallback, failureCallback) {
+  getFriendsNotInMenu(menuId,successCallback, failureCallback) {
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
         content: "",
@@ -1440,7 +1440,7 @@ export class MainproviderProvider {
     }
   }
 
-  getFriendsNotInGroup(groupId,access,successCallback, failureCallback) {
+  getFriendsNotInGroup(groupId,successCallback, failureCallback) {
     if(navigator.onLine) {
       let loader = this.loadingCtrl.create({
         content: "",

@@ -44,31 +44,23 @@ export class FriendsPage {
 
   loadData() {
 
-    setTimeout(() => {
-      this.storage.get("makadyaccess").then((val)=>{
-        if(val)
-        {
-          this.provider.friends(val,data => {
-            console.log(JSON.stringify(data))
-            let parsedData=JSON.parse(data)
-            this.friends=parsedData.friends;
-            console.log("friends: "+JSON.stringify(this.friends));
+    this.provider.friends(data => {
+      console.log(JSON.stringify(data))
+      let parsedData=JSON.parse(data)
+      this.friends=parsedData.friends;
+      console.log("friends: "+JSON.stringify(this.friends));
 
-            this.allFriends = this.friends;
-          
-            parsedData.groups.forEach(group => {
-              group.members = group.members.slice(0,4);
-            });
-
-            this.groups = parsedData.groups;
-
-          },error => {
-            console.log(error);
-          });
-        }
+      this.allFriends = this.friends;
+    
+      parsedData.groups.forEach(group => {
+        group.members = group.members.slice(0,4);
       });
-    },500);
 
+      this.groups = parsedData.groups;
+
+    },error => {
+      console.log(error);
+    });
   }
 
 
@@ -93,18 +85,15 @@ export class FriendsPage {
         {
           text: this.translate.instant('yes'),
           handler: () => {
-            this.storage.get("makadyaccess").then((val)=>{
-              if(val)
-              {
-                this.provider.deletefriends(id,val,(data)=>{
-                  console.log(JSON.stringify(data))
-                  for(var i=0;i<this.friends.length;i++) {
-                    if (this.friends[i].id == id) {
-                      this.friends.splice(i, 1);
-                    }
-                  }
-                },(data)=>{})
+            this.provider.deletefriends(id,data => {
+              console.log(JSON.stringify(data))
+              for(var i=0;i<this.friends.length;i++) {
+                if (this.friends[i].id == id) {
+                  this.friends.splice(i, 1);
+                }
               }
+            },error => {
+              console.log(error);
             })
           }
         },
@@ -169,30 +158,27 @@ export class FriendsPage {
       let user_id = barcodeData.text;
       console.log("scan friend id: "+user_id);
 
-      this.storage.get("makadyaccess").then((val)=>{
-        if(val) {
-          this.provider.addfriends(user_id,val,(data)=> {
-            data = JSON.parse(data)
-            if(data.success) {
-              this.helper.presentToast(this.translate.instant("friendrequestsent"));
-            }
-            else {       
-              if(data.errors == "you sent friend request before to this user") {
-                this.helper.presentToast(this.translate.instant("alreadyAdded"));
-              
-              } else if(data.errors == "you are already friend with this user") {
-                this.helper.presentToast(this.translate.instant("alreadyFriend"));                
-              }
-              console.log(data.errors);
-            }
-            console.log(JSON.stringify(data));
+      this.provider.addfriends(user_id,data => {
+        data = JSON.parse(data)
+        if(data.success) {
+          this.helper.presentToast(this.translate.instant("friendrequestsent"));
+        }
+        else {       
+          if(data.errors == "you sent friend request before to this user") {
+            this.helper.presentToast(this.translate.instant("alreadyAdded"));
+          
+          } else if(data.errors == "you are already friend with this user") {
+            this.helper.presentToast(this.translate.instant("alreadyFriend"));                
+          }
+          console.log(data.errors);
+        }
+        console.log(JSON.stringify(data));
 
-          },error => {
-            console.log(error);
-            console.log(this.translate.instant('serverErr'));
-          });
-    }
-  })
+      },error => {
+        console.log(error);
+        console.log(this.translate.instant('serverErr'));
+      });
+
     }, (err) => {
         console.log('Error: ', err);
     });

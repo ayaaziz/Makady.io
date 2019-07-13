@@ -31,56 +31,38 @@ export class ChangepasswordPage {
   {
     this.incorrectOldPwd = "";
 
-    // if(this.confirm=="" || this.current=="" || this.new=="" )
-    // {
-    //   this.isEmpty = true;
-    //   return;
-    // }
-    // else if(!(this.new==this.confirm))
-    // {
-    //   this.presentToast(this.translate.instant('dontmatch'))
+    this.provider.checkpass(this.current,data => {
+      console.log(JSON.stringify(data));
+      let dataparsed=JSON.parse(data);
 
-    // }
-    // else{
-    this.storage.get("makadyaccess").then((val)=>{
-      if(val)
-      {
-        this.provider.checkpass(this.current,val,(data)=>{
+      if(!dataparsed.success) {
+          // this.incorrectOldPwd  = this.translate.instant("incorrectOld");
+          this.helper.presentToast(this.translate.instant("incorrectOld"));
+      } else {
+        this.provider.changepass(this.current,this.new,this.confirm,data => {
           console.log(JSON.stringify(data));
-          let dataparsed=JSON.parse(data);
+          data = JSON.parse(data);
 
-          if(!dataparsed.success) {
-              // this.incorrectOldPwd  = this.translate.instant("incorrectOld");
-              this.helper.presentToast(this.translate.instant("incorrectOld"));
+          if(data.success) {
+            this.current = "";
+            this.new = "";
+            this.confirm = "";
+            this.helper.presentToast(this.translate.instant('changed'));
+            this.navCtrl.pop();
+          
           } else {
-            this.provider.changepass(this.current,this.new,this.confirm,val,data => {
-              console.log(JSON.stringify(data));
-              data = JSON.parse(data);
-
-              if(data.success) {
-                this.current = "";
-                this.new = "";
-                this.confirm = "";
-                this.helper.presentToast(this.translate.instant('changed'));
-                this.navCtrl.pop();
-              
-              } else {
-                if(data.error.password == "new password same old password") {
-                  this.helper.presentToast(this.translate.instant("newSameOld"));
-                }
-              } 
-             
-            },error =>{
-              console.log(error);
-            });
-          }
-        },error => {
+            if(data.error.password == "new password same old password") {
+              this.helper.presentToast(this.translate.instant("newSameOld"));
+            }
+          } 
+          
+        },error =>{
           console.log(error);
         });
-
       }
-    })
-  // }
+    },error => {
+      console.log(error);
+    });
   }
 
   onChange1() {

@@ -53,23 +53,18 @@ searching: any = false;
   }
 
   loadData() {
+    this.userMenuId = this.navParam.get("fromUserList");
+    this.langdirection=this.helper.langdirection;
+      this.provider.products(data => {
+        console.log(JSON.stringify(data));
+        let Dataparsed= JSON.parse(data);
+        this.products = Dataparsed.data;
 
-    setTimeout(() => {
-      this.userMenuId = this.navParam.get("fromUserList");
-      this.langdirection=this.helper.langdirection;
-      this.storage.get("makadyaccess").then((val) => {
-        if(val) {
-          this.provider.products(val,(data) => {
-            console.log(JSON.stringify(data));
-            let Dataparsed= JSON.parse(data);
-            this.products = Dataparsed.data;
-
-            this.allCategories = this.products;
-          
-          },(error)=>{});
-        }
+        this.allCategories = this.products;
+      
+      },error => {
+        console.log(error);
       });
-    },500);
   }
 
   show(id,catName) {

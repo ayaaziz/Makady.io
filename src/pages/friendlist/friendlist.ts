@@ -37,30 +37,25 @@ export class FriendlistPage {
   }
 
   loadData() {
-
-    setTimeout(() => {
       // this.langdirection=this.helper.langdirection;
-      this.storage.get("makadyaccess").then((val) => {
-        if(val) {
-          this.provider.friendrequests(val,(data) => {
-            console.log(JSON.stringify(data));
-            let parsedData=JSON.parse(data);
-            this.friends=parsedData.friends;
+  
+      this.provider.friendrequests((data) => {
+        console.log(JSON.stringify(data));
+        let parsedData=JSON.parse(data);
+        this.friends=parsedData.friends;
 
-            if(this.friends.length == 0) {
-              this.hide = false;
-            
-            } else {
-              this.friends.forEach(element => {
-                let date = moment(new Date().toUTCString())
-                element.created_at = date.from(moment.utc(element.created_at));
-              });
-              this.hide = true;
-            }
-          },(data)=>{
-
+        if(this.friends.length == 0) {
+          this.hide = false;
+        
+        } else {
+          this.friends.forEach(element => {
+            let date = moment(new Date().toUTCString())
+            element.created_at = date.from(moment.utc(element.created_at));
           });
+          this.hide = true;
         }
+      },error => {
+        console.log(error);
       });
 
         
@@ -74,41 +69,36 @@ export class FriendlistPage {
       });
 
       console.log('ionViewDidLoad FriendlistPage');
-
-    },500);
   }
 
   accept(id) {
-    this.storage.get("makadyaccess").then((val) => {
-      if(val) {
-        this.provider.acceptfriendrequests(id,val,(data) => {
-          console.log(JSON.stringify(data));
-          this.helper.presentToast(this.translate.instant('added'));
-          for(var i=0;i<this.friends.length;i++) {
-            if (this.friends[i].user_id == id) {
-              this.friends.splice(i, 1);
-            }
-          }
-          this.event.publish("removeRequest");
-
-        },(data)=>{});
+ 
+    this.provider.acceptfriendrequests(id,data => {
+      console.log(JSON.stringify(data));
+      this.helper.presentToast(this.translate.instant('added'));
+      for(var i=0;i<this.friends.length;i++) {
+        if (this.friends[i].user_id == id) {
+          this.friends.splice(i, 1);
+        }
       }
+      this.event.publish("removeRequest");
+
+    },error => {
+      console.log(error);
     });
   }
 
   cancel(id) {
-    this.storage.get("makadyaccess").then((val) => {
-      if(val) {
-        this.provider.deletefriends(id,val,(data) => {
-          console.log(JSON.stringify(data));
-          for(var i=0;i<this.friends.length;i++) {
-            if (this.friends[i].user_id == id) {
-              this.friends.splice(i, 1);
-            }
-          }
-          this.event.publish("removeRequest");
-        },(data)=>{});
+    this.provider.deletefriends(id,data => {
+      console.log(JSON.stringify(data));
+      for(var i=0;i<this.friends.length;i++) {
+        if (this.friends[i].user_id == id) {
+          this.friends.splice(i, 1);
+        }
       }
+      this.event.publish("removeRequest");
+    },error => {
+      console.log(error);
     });
   }
 

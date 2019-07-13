@@ -62,11 +62,8 @@ x:number = 10;
         this.data = []
         this.price = 0
         this.names = []
-       this.storage.get("makadyaccess").then((val)=>{
-        if(val)
-        {
-
-          this.provider.home(val,(data)=>{
+ 
+          this.provider.home(data => {
             // spinner.dismiss();
 
             let dataparsed = JSON.parse(data);
@@ -176,16 +173,9 @@ x:number = 10;
             this.chartLoadingEl = this.pieChartEl.generateLegend();
         }
     
-      
-        
-          },(error)=>{
-            // spinner.dismiss();
-          })
-          
-        }
-      })
-    // },500);
-    
+      },error => {
+        console.log(error);
+      })   
   }
 
   doRefresh(event) {

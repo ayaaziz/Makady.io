@@ -51,40 +51,35 @@ export class GroupsPage {
 
   loadData() {
 
-    setTimeout(() => {
       this.storage.get("Makadyuser_name").then((val1)=>{
         if(val1)
         {
         this.username=val1;
         }
       });
-      this.langdirection=this.helper.langdirection
-      this.storage.get("makadyaccess").then((val)=>{
-        if(val)
-        {
-          this.provider.friends(val,data => {
-            
-            let parsedData = JSON.parse(data);
+      this.langdirection=this.helper.langdirection;
+   
+      this.provider.friends(data => {
+        
+        let parsedData = JSON.parse(data);
 
-            parsedData.groups.forEach(group => {
-              group.members = group.members.slice(0,4);
-              console.log("group length: "+ group.members.length);           
-            });
-            
-            this.groups = parsedData.groups;
+        parsedData.groups.forEach(group => {
+          group.members = group.members.slice(0,4);
+          console.log("group length: "+ group.members.length);           
+        });
+        
+        this.groups = parsedData.groups;
 
-            this.allGroups = this.groups;
+        this.allGroups = this.groups;
 
-            console.log("groupsss"+JSON.stringify(this.groups));
+        console.log("groupsss"+JSON.stringify(this.groups));
+
     
-        
-        
-          },error => {
+    
+      },error => {
+        console.log(error);
+      })
 
-          })
-        }
-      });
-    },500);
   }
 
   onSearchInput() {
@@ -123,19 +118,18 @@ deletegroup(id)
         text: this.translate.instant('yes'),
         handler: () => {
        
-          this.storage.get("makadyaccess").then((val)=>{
-            if(val)
-            {
-        this.provider.deletegroups(id,val,(data)=>{
+       
+        this.provider.deletegroups(id,(data)=>{
           console.log(JSON.stringify(data))
           for(var i=0;i<this.groups.length;i++) {
             if (this.groups[i].group_id == id) {
               this.groups.splice(i, 1);
             }
           }
-        },(data)=>{})
-            }
-          })
+        },error => {
+          console.log(error);
+        })
+        
         }
       },
       {

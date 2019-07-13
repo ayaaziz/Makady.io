@@ -97,7 +97,7 @@ export class LoginPage {
           if (Dataparsed.success == false) {
             this.helper.presentToast(this.translate.instant('loginerror'));
           } else { 
-              this.provider.getuser(Dataparsed.access_token, (data) => {
+              this.provider.getuser(data => {
                 let pdata = JSON.parse(data);
                 console.log("parsed data: "+JSON.stringify(pdata));
                 console.log("social: "+pdata.user.social_type);
@@ -204,7 +204,7 @@ export class LoginPage {
               //set refreshtoken in localstorage
               localStorage.setItem('reefdfdfvcvcmakady',data.refresh_token);
 
-              this.provider.getuser(data.access_token,data => {
+              this.provider.getuser(data => {
                 this.helper.user_id = data.user.id;
 
               },error => {
@@ -278,7 +278,7 @@ export class LoginPage {
         //set refreshtoken in localstorage
         localStorage.setItem('reefdfdfvcvcmakady',data.refresh_token); 
 
-        this.provider.getuser(data.access_token,data => {
+        this.provider.getuser(data => {
           this.helper.user_id = data.user.id;
 
         },error => {
@@ -351,7 +351,7 @@ export class LoginPage {
                   //set refreshtoken in localstorage
                   localStorage.setItem('reefdfdfvcvcmakady',data.refresh_token);
 
-                  this.provider.getuser(data.access_token,data => {
+                  this.provider.getuser(data => {
                     this.helper.user_id = data.user.id;
     
                   },error => {

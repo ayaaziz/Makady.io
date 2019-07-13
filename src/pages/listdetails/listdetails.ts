@@ -68,55 +68,50 @@ defaultImgUrl:string;
 
   ionViewDidEnter() {
     this.langdirection=this.helper.langdirection;
-    this.storage.get("makadyaccess").then((val)=>{
-      if(val)
-      {
-        this.provider.getMenudetails(this.id,val,data => {
-          if(data) {
-            console.log(JSON.stringify(data));
-            let parsedData=JSON.parse(data);
-            this.members=parsedData.members;
-            this.services = parsedData.data.menu_items;
-            
-            this.services.forEach(element => {
-              element.open = true;
-            });
-            console.log("this.services"+this.services)
-          
-            this.services.forEach(element => {
-              let quantity=0;
-              let purchase=0;
-              element.products.forEach(element1 => {
-                quantity += parseInt(element1.total_quantity);
-                purchase += element1.total_quantity_purchase;
-                element1.price = ''; 
-                element1.quant_count = '';
-            
-                //each product required quantity
-                element1.require_quan = parseInt(element1.total_quantity) - element1.total_quantity_purchase;
-                // alert("product quantity: "+parseInt(element1.total_quantity) +"- "+"product quantity purchased: "+ element1.total_quantity_purchase)
-                console.log(element1.require_quan);
-              });
-              
-                element.name = element.category_name;
 
-                //total quantity and total purchace of service
-                element.quantity = quantity;
-                element.purchase = purchase;
-                element.required_quantity = quantity - purchase;
-                
-              
-            });
-          }
-        },error =>{})
+    this.provider.getMenudetails(this.id,data => {
+      if(data) {
+        console.log(JSON.stringify(data));
+        let parsedData=JSON.parse(data);
+        this.members=parsedData.members;
+        this.services = parsedData.data.menu_items;
+        
+        this.services.forEach(element => {
+          element.open = true;
+        });
+        console.log("this.services"+this.services)
+      
+        this.services.forEach(element => {
+          let quantity=0;
+          let purchase=0;
+          element.products.forEach(element1 => {
+            quantity += parseInt(element1.total_quantity);
+            purchase += element1.total_quantity_purchase;
+            element1.price = ''; 
+            element1.quant_count = '';
+        
+            //each product required quantity
+            element1.require_quan = parseInt(element1.total_quantity) - element1.total_quantity_purchase;
+            // alert("product quantity: "+parseInt(element1.total_quantity) +"- "+"product quantity purchased: "+ element1.total_quantity_purchase)
+            console.log(element1.require_quan);
+          });
+          
+            element.name = element.category_name;
+
+            //total quantity and total purchace of service
+            element.quantity = quantity;
+            element.purchase = purchase;
+            element.required_quantity = quantity - purchase;
+                  
+        });
       }
+    },error =>{
+      console.log(error);
     })
+
   }
   save(id,i,j)
   {
-    this.storage.get("makadyaccess").then((val)=>{
-      if(val)
-      {
        // alert(i +" "+j)
         if(!this.services[i].products[j].quant_count){
           this.helper.presentToast(this.translate.instant("mustinsertPurchased"));
@@ -141,7 +136,7 @@ defaultImgUrl:string;
           return
         }
 
-    this.provider.addproduct(id,this.helper.user_id,quant_count,price,val,(data) => {
+    this.provider.addproduct(id,this.helper.user_id,quant_count,price,(data) => {
       
      if(data.success){
        this.helper.presentToast(this.translate.instant("purchaseSaved"));
@@ -154,11 +149,10 @@ defaultImgUrl:string;
        console.log(JSON.stringify(data.errors));
      }
     }
-    ,(data)=>{
+    ,error => {
      this.helper.presentToast(this.translate.instant('serverErr'))
     })
-  }
-})
+
   }
   openpop(id,name)
   {

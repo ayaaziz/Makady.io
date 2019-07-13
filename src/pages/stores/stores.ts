@@ -48,18 +48,16 @@ searching: any = false;
   loadData() {
     this.langdirection=this.helper.langdirection;
 
-    setTimeout(() => {
-      this.provider.getStores(data => {
-        console.log(JSON.stringify(data));
-        data = JSON.parse(data);
-        this.stores = data.data;
-      
-        this.allStores = this.stores;
-        },error => {
-          console.log(error);
-        });
-        
-      },500);
+    this.provider.getStores(data => {
+      console.log(JSON.stringify(data));
+      data = JSON.parse(data);
+      this.stores = data.data;
+    
+      this.allStores = this.stores;
+      },error => {
+        console.log(error);
+      });
+   
     }
 
   // show(id,catName) {

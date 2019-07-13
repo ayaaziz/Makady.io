@@ -138,21 +138,19 @@ export class SettingsPage {
   }
 
   loadData() {
-    this.storage.get("makadyaccess").then((val) => { 
-      if(val) {
-        this.provider.getuser(val,(data) => {
-          console.log(JSON.stringify(data));
-          let Dataparsed=JSON.parse(data);
-          if(Dataparsed.success) {
-            this.createdCode = (Dataparsed.user.id).toString();
-            this.username = Dataparsed.user.username;
-            console.log(this.createdCode);
-          } 
-        },
-        (error) => {});
-      }
-    });
 
+    this.provider.getuser(data => {
+      console.log(JSON.stringify(data));
+      let Dataparsed=JSON.parse(data);
+      if(Dataparsed.success) {
+        this.createdCode = (Dataparsed.user.id).toString();
+        this.username = Dataparsed.user.username;
+        console.log(this.createdCode);
+      } 
+    },
+    (error) => {
+      console.log(error);
+    });
 
     //get social links
     this.provider.getSocialLinks(data => {
@@ -193,33 +191,28 @@ export class SettingsPage {
 
   changelang()
   {
-    this.storage.get("makadyaccess").then((val)=>{
-      if(val)
+      if(this.helper.langdirection == "ltr")
       {
-        if(this.helper.langdirection == "ltr")
-        {
-          this.translate.setDefaultLang('ar');  
-          this.translate.use('ar');    
-          this.platform.setDir('rtl', true);
-          this.helper.langdirection = "rtl"; 
-          this.scaleClass="scaleClass";
-          this.storage.set('Mlanguage', 'ar').then(resp=>{
-            console.log("resp set('language',: ",resp);
+        this.translate.setDefaultLang('ar');  
+        this.translate.use('ar');    
+        this.platform.setDir('rtl', true);
+        this.helper.langdirection = "rtl"; 
+        this.scaleClass="scaleClass";
+        this.storage.set('Mlanguage', 'ar').then(resp=>{
+          console.log("resp set('language',: ",resp);
+        });
+        this.navCtrl.setRoot(TabsPage);
+      
+      } else {
+          this.translate.setDefaultLang('en');
+          this.translate.use('en');
+          this.platform.setDir('ltr', true);
+          this.helper.langdirection = "ltr";
+          this.storage.set('Mlanguage', 'en').then(resp=>{
+            console.log("resp set('language',: ",resp)
           });
           this.navCtrl.setRoot(TabsPage);
-       
-        } else {
-            this.translate.setDefaultLang('en');
-            this.translate.use('en');
-            this.platform.setDir('ltr', true);
-            this.helper.langdirection = "ltr";
-            this.storage.set('Mlanguage', 'en').then(resp=>{
-              console.log("resp set('language',: ",resp)
-            });
-            this.navCtrl.setRoot(TabsPage);
-        }
       }
-    })
   }
 
   changepass()
@@ -290,19 +283,14 @@ export class SettingsPage {
 
   editProfile() {
 
-    this.storage.get("makadyaccess").then((val)=>{
-      if(val) {
-        this.provider.getuser(val,data => {
-          data = JSON.parse(data);
-          console.log("prof data....: "+JSON.stringify(data));  
+    this.provider.getuser(data => {
+      data = JSON.parse(data);
+      console.log("prof data....: "+JSON.stringify(data));  
 
-          this.navCtrl.push(EditProfilePage,{"user":data});
-        },error => {
-          console.log(error);
-        });
-      }
+      this.navCtrl.push(EditProfilePage,{"user":data});
+    },error => {
+      console.log(error);
     });
-
   }
 
   doRefresh(event) {
