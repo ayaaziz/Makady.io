@@ -38,15 +38,26 @@ export class TabsPage {
               private alertCtrl:AlertController,
               private keyboard:Keyboard) {
 
-                this.platform.ready().then(() => {
-                  this.keyboard.onKeyboardShow().subscribe(() => {
-                    this.footer.nativeElement.hidden = true;                
-                  });
-                  this.keyboard.onKeyboardHide().subscribe(() => {
-                    this.footer.nativeElement.hidden = false;                                                                  
-                  });
-                });
+                // this.platform.ready().then(() => {
+                //   this.keyboard.onKeyboardShow().subscribe(() => {
+                //     // this.footer.nativeElement.hidden = true;    
+                //     // this.hideTabs = true;            
+                //   });
+                //   this.keyboard.onKeyboardHide().subscribe(() => {
+                //     // this.footer.nativeElement.hidden = false;                                                                  
+                //     // this.hideTabs = false;            
+                //   });
+                // });
 
+                platform.ready().then(() => {
+                  this.keyboard.onKeyboardShow().subscribe(() => {
+                      document.body.classList.add('keyboard-is-open');
+                  });
+      
+                  this.keyboard.onKeyboardHide().subscribe(() => {
+                      document.body.classList.remove('keyboard-is-open');
+                  });
+      });
               
 
   let tabIndex2 = this.params.get('tabIndex');

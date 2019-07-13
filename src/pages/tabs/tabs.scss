@@ -8,3 +8,19 @@
   margin-top: -4px !important;
 }
 
+body.keyboard-is-open ion-tabbar {
+  display: none;
+}
+
+body.keyboard-is-open scroll-content {
+  margin-bottom: 0 !important;
+}
+
+body.keyboard-is-open .tabbar {
+  display: none;
+}
+
+body.keyboard-is-open .scroll-content {
+  margin-bottom: 0 !important;
+}
+

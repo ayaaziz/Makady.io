@@ -51,9 +51,15 @@
     </ion-col>
   </ion-row>
 
-  <ion-row *ngIf="friends.length === 0 && friendsInMenu.length === 0">
+  <!-- <ion-row *ngIf="friends.length === 0 && friendsInMenu.length === 0">
     <ion-col>
       <p style="text-align: center;color:#3d3d3d;font-size: 1.1em;font-weight: bold;">{{'nofriendsToAdd'| translate}}</p>      
+    </ion-col>
+  </ion-row> -->
+
+  <ion-row style="margin-top: 0" class="nodata" *ngIf="friends.length === 0 && friendsInMenu.length === 0">
+    <ion-col>
+      <p style="text-align: center;color:#e26c40;font-size: 1.2em;font-weight: bold;">{{'nofriendsToAdd'| translate}}</p>
     </ion-col>
   </ion-row>
 

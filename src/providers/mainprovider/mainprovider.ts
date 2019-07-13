@@ -200,6 +200,38 @@ export class MainproviderProvider {
     }
   }
 
+  // getRefreshToken(successCallback, failureCallback) {
+
+  //   if(navigator.onLine) {
+  //     let loader = this.loadingCtrl.create({
+  //       content: "",
+  //     });
+  //     loader.present();
+  //     let headers = new HttpHeaders();
+  //     let parameter = {
+  //       'refresh_token': "def502005fd926631da92f8d3defefd9f49653c6952e2dee92f42bbe3b9fdb92a751d58342b857a70a01d12eaba29d3ffc5108d19503f416a20b91e51b6bb07bba1db2e9d6605bc0363eb6f2cc5ccc7ee8f3776502d9d9275c883e25dd0bdf7db89fcbe03a2c166d099f40a5a379c93b4926e534822fe7363f3a46b2d14c48a8a1fc38fbccf511c6866fa64003e605516ce11a38faa1121599673537382626a752f41dbce5de679946c849d595948116a547cc6f3dacfed44bb0193a0856e343b2ce39715b5ec00503d8287abbcdee4670fc7ac7e172508ebaa11885f8740ea8073c243dccd3517605e41f74ba99ad95f5cf029bc4dfd9c6e5ee09918756670e25d24f11c999a800916fc6d0539d0c541b54a92c8fbb1df4b6e402ecab1049f56277cb09bd124882448fc73356069786537e336c41483e382980c9dac23b2419e24d64a0d69013539945d3e99001c8f33e43888457a9276da67f8d5e4ae5eda6"       
+  //     }
+
+  //     headers = headers.set('Authorization',"Bearer def502005fd926631da92f8d3defefd9f49653c6952e2dee92f42bbe3b9fdb92a751d58342b857a70a01d12eaba29d3ffc5108d19503f416a20b91e51b6bb07bba1db2e9d6605bc0363eb6f2cc5ccc7ee8f3776502d9d9275c883e25dd0bdf7db89fcbe03a2c166d099f40a5a379c93b4926e534822fe7363f3a46b2d14c48a8a1fc38fbccf511c6866fa64003e605516ce11a38faa1121599673537382626a752f41dbce5de679946c849d595948116a547cc6f3dacfed44bb0193a0856e343b2ce39715b5ec00503d8287abbcdee4670fc7ac7e172508ebaa11885f8740ea8073c243dccd3517605e41f74ba99ad95f5cf029bc4dfd9c6e5ee09918756670e25d24f11c999a800916fc6d0539d0c541b54a92c8fbb1df4b6e402ecab1049f56277cb09bd124882448fc73356069786537e336c41483e382980c9dac23b2419e24d64a0d69013539945d3e99001c8f33e43888457a9276da67f8d5e4ae5eda6");
+  //     let serviceUrl = this.helper.serviceurl + 'refreshToken';
+
+  //     this.http.post(serviceUrl, parameter, { headers: headers })
+  //       .subscribe(
+  //         data => {
+  //           loader.dismiss();
+  //           successCallback(JSON.stringify(data));
+  //         },
+  //         err => {
+  //           loader.dismiss();
+  //           failureCallback(err);        
+  //           console.log(err.message);     
+  //         }
+  //       )
+  //   } else {
+  //     this.helper.presentToast(this.translate.instant("offline"));
+  //   }
+  // }
+
 
 
   // changelang(lang,access,successCallback, failureCallback) {
