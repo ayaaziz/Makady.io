@@ -187,8 +187,8 @@ export class MyApp {
                     console.log("user_info social user: "+JSON.stringify(socialUser));
                     this.userLoged = true;
                     this.username = socialUser.name;
-                    // this.photo = socialUser.picture;
-                    this.event.publish("picChanged",socialUser.picture);
+                    this.photo = socialUser.picture;
+                    // this.event.publish("picChanged",socialUser.picture);
                     // this.helper.user_id = socialUser.user.id;
                     console.log(this.username + " - " + this.photo);
                   }
@@ -255,17 +255,12 @@ export class MyApp {
         if(data === null ) data = true; 
         this.helper.prodNotification = data;    
         
-        this.storage.get("makadyaccess").then(access => {
-          if(access) {
-            this.provider.notificationStatus(access,this.helper.user_id,2,data ? 1:0,data => {
-              console.log(data);
-            },
-            error => {
-              console.log(error);
-            });
-          }
-        });
-       
+        this.provider.notificationStatus(this.helper.user_id,2,data ? 1:0,data => {
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });  
       });      
 
        //************************** Offers Notification Settings ************************//
@@ -273,17 +268,14 @@ export class MyApp {
        .then(data => {
           if(data === null) data = true;
           this.helper.offersNotification = data;   
-          
-          this.storage.get("makadyaccess").then(access => {
-            if(access) {
-              this.provider.notificationStatus(access,this.helper.user_id,3,data ? 1:0,data => {
-                console.log(data);
-              },
-              error => {
-                console.log(error);
-              });
-            }
+                
+          this.provider.notificationStatus(this.helper.user_id,3,data ? 1:0,data => {
+            console.log(data);
+          },
+          error => {
+            console.log(error);
           });
+        
        });
     });
   }
@@ -430,29 +422,24 @@ export class MyApp {
     //  let imgdata = encodeURIComponent(imageData);
       // this.photo = base64Image;
 
-       
+      //update image in db
+      this.provider.changeProfilePicture(imageData,'jpeg',data => {
+        if(data) {
 
-          //update image in db
-          this.storage.get("makadyaccess").then(access => {
-            if(access) {
-              this.provider.changeProfilePicture(access,imageData,'jpeg',data => {
-                if(data) {
+          //update image in storage
+          this.storage.get('user_info').then((val) => {
+            if (val) { 
+              val.user.profile_pic = data.user.profile_pic;
+              this.storage.set("user_info", val);
+            }});
 
-                  //update image in storage
-                  this.storage.get('user_info').then((val) => {
-                    if (val) { 
-                      val.user.profile_pic = data.user.profile_pic;
-                      this.storage.set("user_info", val);
-                    }});
-
-                  this.helper.presentToast(this.translate.instant("picchanged"));
-                }
-              },
-              error => {
-                
-              });
-            }
-          });
+          this.helper.presentToast(this.translate.instant("picchanged"));
+        }
+      },
+      error => {
+        console.log(error);
+      });
+        
         
         
 

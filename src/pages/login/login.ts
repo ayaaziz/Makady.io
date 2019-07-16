@@ -13,6 +13,8 @@ import { TwitterConnect } from '@ionic-native/twitter-connect';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { VerificationPage } from '../verification/verification';
 
+
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'

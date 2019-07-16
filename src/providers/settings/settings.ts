@@ -26,16 +26,13 @@ export class SettingsProvider {
       this.storage.set('productNotificationStatus',isToggleChecked);
       this.helper.prodNotification = isToggleChecked;
 
-      this.storage.get("makadyaccess").then(access => {
-        if(access) {
-          this.provider.notificationStatus(access,this.helper.user_id,2,isToggleChecked ? 1:0,data => {
-            console.log(data);
-          },
-          error => {
-            console.log(error);
-          });
-        }
+      this.provider.notificationStatus(this.helper.user_id,2,isToggleChecked ? 1:0,data => {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
       });
+
   }
 
   //get the notification status
@@ -51,15 +48,11 @@ export class SettingsProvider {
     this.storage.set('offersNotificationStatus',isToggleChecked);
     this.helper.offersNotification = isToggleChecked;
 
-    this.storage.get("makadyaccess").then(access => {
-      if(access) {
-        this.provider.notificationStatus(access,this.helper.user_id,3,isToggleChecked ? 1:0,data => {
-          console.log(data);
-        },
-        error => {
-          console.log(error);
-        });
-      }
+    this.provider.notificationStatus(this.helper.user_id,3,isToggleChecked ? 1:0,data => {
+      console.log(data);
+    },
+    error => {
+      console.log(error);
     });
   }
 
