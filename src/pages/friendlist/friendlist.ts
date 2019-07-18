@@ -50,7 +50,7 @@ export class FriendlistPage {
         } else {
           this.friends.forEach(element => {
             let date = moment(new Date().toUTCString())
-            element.created_at = date.from(moment.utc(element.created_at));
+            element.updated_at = date.from(moment.utc(element.updated_at));
           });
           this.hide = true;
         }

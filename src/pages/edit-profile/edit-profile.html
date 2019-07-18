@@ -16,7 +16,7 @@
   <ion-row>
     <div class="takePhoto">
       <img style="text-align:center;" src="{{userImageUrl}}" class="circle-pic"
-      onerror="this.onerror=null;this.src='assets/imgs/user.png';">
+      onerror="this.onerror=null;this.src='assets/imgs/user.png';" (click)="selectImage()">
       <ion-icon name="ios-camera" (click)="selectImage()"></ion-icon>
     </div>
   </ion-row>
