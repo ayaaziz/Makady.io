@@ -22,6 +22,7 @@ export class HelperProvider {
   userImagePath:string = "http://itrootsdemos.com/makady/phase1/public/uploads/images/users/";
   productImagePath:string = "http://itrootsdemos.com/makady/phase1/public/uploads/images/products/";
 
+ public deviceType = ""
   constructor(public toastCtrl:ToastController, 
               public http: HttpClient,
               public storage:Storage,

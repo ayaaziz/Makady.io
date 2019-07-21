@@ -37,7 +37,7 @@ export class MainproviderProvider {
         'profile_pic_ext': ext,
         'social_type':social_type,
         'firebase_id':id,
-        'type':type,
+        'type':this.helper.type,
         'lang':lang
       }
       headers = headers.set('Content-Type', 'application/json');
@@ -1315,7 +1315,9 @@ export class MainproviderProvider {
           'email': email,
           // 'password':id,
           'lang':lang,
-          'social_type':socialType      
+          'social_type':socialType  ,
+          'firebase_id':this.helper.registerationId,
+          'type':this.helper.type    
         }
            
         headers = headers.set('Content-Type', 'application/json');
