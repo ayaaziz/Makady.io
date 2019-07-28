@@ -370,7 +370,7 @@ export class MyApp {
       localStorage.clear();
       
       this.storage.remove("user_info");
-      this.navctrl.push(LoginPage);
+      this.navctrl.setRoot(LoginPage);
     
       console.log(JSON.stringify(data))
     },(data)=>{})
