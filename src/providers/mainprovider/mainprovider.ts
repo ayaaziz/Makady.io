@@ -557,7 +557,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'addFriend';
     
       this.http.post(serviceUrl, parameter,{ headers: headers })
-      .timeout(10000)  
+      // .timeout(10000)  
         .subscribe(
           data => {
             loader.dismiss();
@@ -566,8 +566,10 @@ export class MainproviderProvider {
           },
           err => {
             loader.dismiss();
-            failureCallback(err);
-                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }          
+            // failureCallback(err);
+            // if(err.name == "TimeoutError") {       
+                    // this.helper.presentToast(this.translate.instant("timeoutError"));        
+                  //  }          
           }
         )
     } else {

@@ -186,5 +186,6 @@
      "nameLength":"The name must be at least 4 characters",
      "alreadyAdded":"you sent friend request before wait aya12 for acceptance!",
      "alreadyFriend":"This user is already friend",
-     "timeoutError":"TimeOut!, Please try again"
+     "timeoutError":"TimeOut!, Please try again",
+     "friendSendToYou":"This user already sent you a friend request"
 }

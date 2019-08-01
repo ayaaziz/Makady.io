@@ -159,6 +159,7 @@ export class FriendsPage {
       console.log("scan friend id: "+user_id);
 
       this.provider.addfriends(user_id,data => {
+
         data = JSON.parse(data)
         if(data.success) {
           console.log("friendrequestsent");
@@ -172,7 +173,10 @@ export class FriendsPage {
           } else if(data.errors == "you are already friend with this user") {
             console.log("alreadyFriend");                        
             this.helper.presentToast(this.translate.instant("alreadyFriend"));                
-          }
+          
+          } else if(data.errors == "This user sent you friend request check your inbox") {
+            this.helper.presentToast(this.translate.instant("friendSendToYou"));                
+          } 
           console.log(data.errors);
         }
         console.log(JSON.stringify(data));
