@@ -100,54 +100,21 @@ export class MyApp {
                       }
                   }
               });
-      //    platform.registerBackButtonAction(() => {
-      //     console.log("backPressed");
-
-      //     const overlayView = this.app._appRoot._overlayPortal._views[0];
-
-      //     let nav = app.getActiveNavs()[0];
-      //     let activeView = nav.getActive();  
-        
-      //     if (overlayView && overlayView.dismiss) {
-      //       overlayView.dismiss();
-      //     } else if (this.menu.isOpen()) {
-            
-      //       console.log("Menu is open!", "loggedInMenu");
-      //       this.menu.close();
-      //       console.log("this.menu.isOpen(): " + JSON.stringify(this.menu.isOpen()));   
-      //       return;
-      //     } else {
-         
-      //       if(activeView.name === "HomePage") {
-      //         const alert = this.alertCtrl.create({
-      //           title: this.translate.instant('terminateApp'),
-      //           message: this.translate.instant('closeApp'),
-      //           buttons: [
-      //           {
-      //             text: this.translate.instant('confirmCloseApp'),
-      //             handler: () => {
-      //                 this.platform.exitApp(); // Close this application
-      //             }
-      //           },
-      //           {
-      //             text: this.translate.instant('cancel'),
-      //             role: 'cancel',
-      //             handler: () => {
-      //               console.log('Application exit prevented!');
-      //             }
-      //           }
-      //         ]
-      //       });
-      //       alert.present();
-
-      //     } else {
-      //       this.app.goBack();
-      //     }
-      //   }
-      // });
-
-
+      
     platform.ready().then(() => {
+
+      this.event.subscribe("out", () => {
+        this.userLoged = false;
+        this.storage.remove("Makadyusername");
+        this.storage.remove("Mlanguage");
+  
+        this.storage.remove("Makadyuser_name");
+        this.storage.remove("makadyaccess");
+        localStorage.clear();
+        
+        this.storage.remove("user_info");
+        this.navctrl.setRoot(LoginPage);
+      })
 
       this.event.subscribe("picChanged", pic => {                
         this.photo = this.helper.userImagePath + pic;

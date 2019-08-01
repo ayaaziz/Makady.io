@@ -161,13 +161,16 @@ export class FriendsPage {
       this.provider.addfriends(user_id,data => {
         data = JSON.parse(data)
         if(data.success) {
+          console.log("friendrequestsent");
           this.helper.presentToast(this.translate.instant("friendrequestsent"));
         }
         else {       
           if(data.errors == "you sent friend request before to this user") {
+            console.log("alreadyAdded");            
             this.helper.presentToast(this.translate.instant("alreadyAdded"));
           
           } else if(data.errors == "you are already friend with this user") {
+            console.log("alreadyFriend");                        
             this.helper.presentToast(this.translate.instant("alreadyFriend"));                
           }
           console.log(data.errors);

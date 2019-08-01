@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 import { HelperProvider } from '../helper/helper';
 import { LoadingController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
-
+import 'rxjs/add/operator/timeout';
 
 
 @Injectable()
@@ -44,6 +44,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'user_register';
       //
       this.http.post(serviceUrl, parameter, { headers: headers })
+      .timeout(10000)  
         .subscribe(
           data => {
             loader.dismiss();
@@ -52,7 +53,11 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);
+
+            console.log("errrrrror::::: "+ err);
+            if(err == "TimeoutError") {
+                  if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }  
+            }
           }
         )
     } else {
@@ -63,6 +68,7 @@ export class MainproviderProvider {
   login(username,password,id,successCallback, failureCallback) {
   
     if(navigator.onLine) {
+
       let loader = this.loadingCtrl.create({
         content: "",
       });
@@ -78,6 +84,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + "user_login";
       
       this.http.post(serviceUrl, parameter, { headers: headers })
+      .timeout(10000)  
         .subscribe(
           data => {
             loader.dismiss();
@@ -88,10 +95,13 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);          
+ 
+            if(err.name == "TimeoutError") {
+              this.helper.presentToast(this.translate.instant("timeoutError"));
+            }         
           }
         )
-    } else {
+    } else {    
       this.helper.presentToast(this.translate.instant("offline"));
     }
   }
@@ -114,6 +124,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'forgetPassword';
     
       this.http.post(serviceUrl, parameter, { headers: headers })
+      .timeout(10000)  
         .subscribe(
           data => {
             loader.dismiss();
@@ -125,7 +136,9 @@ export class MainproviderProvider {
             loader.dismiss();
 
             failureCallback(err);
-            console.log(err.message);        
+            if(err.name == "TimeoutError") {
+              this.helper.presentToast(this.translate.instant("timeoutError"));
+            }         
           }
         )
       } else {
@@ -151,6 +164,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'updateForgetPassword';
       //
       this.http.post(serviceUrl, parameter, { headers: headers })
+      .timeout(10000)  
         .subscribe(
           data => {
             loader.dismiss();
@@ -160,7 +174,9 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);    
+            if(err.name == "TimeoutError") {
+              this.helper.presentToast(this.translate.instant("timeoutError"));
+            }  
           }
         )
     } else {
@@ -184,6 +200,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'logoutDevice';
       //
       this.http.post(serviceUrl, parameter, { headers: headers })
+      .timeout(10000)  
         .subscribe(
           data => {
             loader.dismiss();
@@ -192,7 +209,9 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);        
-            console.log(err.message);     
+            if(err.name == "TimeoutError") {       
+              this.helper.presentToast(this.translate.instant("timeoutError"));          
+            }       
           }
         )
     } else {
@@ -278,6 +297,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'checkPassword';
       //
       this.http.post(serviceUrl, parameter, { headers: headers })
+      .timeout(10000)  
       .subscribe(
         data => {
           loader.dismiss();
@@ -287,7 +307,7 @@ export class MainproviderProvider {
         err => {
           loader.dismiss();
           failureCallback(err);
-          console.log(err.message);       
+              if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }         
         })
     } else {
       this.helper.presentToast(this.translate.instant("offline"));
@@ -311,6 +331,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'changePassword';
       //
       this.http.post(serviceUrl, parameter, { headers: headers })
+      .timeout(10000)  
         .subscribe(
           data => {
             loader.dismiss();
@@ -320,7 +341,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);          
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }            
           }
         )
     } else {
@@ -342,6 +363,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'getUser';
       //
       this.http.get(serviceUrl, { headers: headers })
+      .timeout(10000)  
         .subscribe(
           data => {
             loader.dismiss();
@@ -350,7 +372,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);         
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }           
           }
         )
     } else {
@@ -370,6 +392,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'categories';
       //
       this.http.get(serviceUrl, { headers: headers })
+      .timeout(10000)  
         .subscribe(
           data => {
             loader.dismiss();
@@ -379,7 +402,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);         
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }           
           }
         )
     } else {
@@ -404,6 +427,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'getCategoryProducts';
       //
       this.http.post(serviceUrl,parameter, { headers: headers })
+      .timeout(10000)  
       .subscribe(
         data => {
           loader.dismiss();
@@ -412,7 +436,7 @@ export class MainproviderProvider {
         err => {
           loader.dismiss();
           failureCallback(err);
-          console.log(err.message);         
+              if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }           
         }
       )
     } else {
@@ -435,6 +459,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'offers';
       //
       this.http.post(serviceUrl,parameter, { headers: headers })
+      .timeout(10000)  
         .subscribe(
           data => {
             loader.dismiss();
@@ -444,7 +469,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);         
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }           
           }
         )
     } else {
@@ -466,6 +491,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'friends';
     
       this.http.get(serviceUrl, { headers: headers })
+      .timeout(10000)  
         .subscribe(
           data => {
             loader.dismiss();
@@ -475,7 +501,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);         
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }           
           }
         )
     } else {
@@ -498,6 +524,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'deleteFriend';
       //
       this.http.post(serviceUrl, parameter,{ headers: headers })
+      .timeout(10000)  
         .subscribe(
           data => {
             loader.dismiss();
@@ -507,7 +534,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);          
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }            
           }
         )
     } else {
@@ -530,6 +557,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'addFriend';
     
       this.http.post(serviceUrl, parameter,{ headers: headers })
+      .timeout(10000)  
         .subscribe(
           data => {
             loader.dismiss();
@@ -539,7 +567,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);        
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }          
           }
         )
     } else {
@@ -562,6 +590,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'deleteGroup';
   
       this.http.post(serviceUrl, parameter,{ headers: headers })
+      .timeout(10000)  
         .subscribe(
           data => {
             loader.dismiss();
@@ -571,7 +600,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);            
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }              
           }
         )
     } else {
@@ -594,6 +623,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'searchGroup';
     
       this.http.post(serviceUrl, parameter,{ headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -603,7 +633,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);         
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }           
           }
         )
     } else {
@@ -628,6 +658,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'createGroup';
       //
       this.http.post(serviceUrl, parameter,{ headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -637,7 +668,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);         
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }           
           }
         )
     } else {
@@ -666,6 +697,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'editGroup';
       //
       this.http.post(serviceUrl, parameter,{ headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -675,7 +707,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);        
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }          
           }
         )
     } else {
@@ -700,6 +732,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'menus';
       //
       this.http.post(serviceUrl, parameter,{ headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -709,7 +742,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);       
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }         
           }
         )
     } else {
@@ -733,6 +766,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'deleteMenu';
       //
       this.http.post(serviceUrl, parameter,{ headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -742,7 +776,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);        
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }          
           }
         )
     } else {
@@ -768,6 +802,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'addMenuProduct';
       //
       this.http.post(serviceUrl, parameter,{ headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -777,7 +812,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);        
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }          
           }
         )
     } else {
@@ -799,6 +834,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'home';
       //
       this.http.get(serviceUrl, { headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -808,7 +844,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);         
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }           
           }
         )
     } else {
@@ -829,6 +865,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'getFriendRequest';
       //
       this.http.get(serviceUrl, { headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -838,7 +875,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);       
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }         
           }
         )
     } else {
@@ -861,6 +898,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'acceptFriendRequest';
      
       this.http.post(serviceUrl,parameter, { headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -870,7 +908,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);      
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }        
           }
         )
     } else {
@@ -897,6 +935,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'updateMenuProduct';
       //
       this.http.post(serviceUrl,parameter, { headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -906,7 +945,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);        
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }          
           }
         )
     } else {
@@ -929,6 +968,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'getMenu';
    
       this.http.post(serviceUrl,parameter,{ headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -937,7 +977,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);           
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }             
           }
         )
     } else {
@@ -964,6 +1004,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'createMenu';
       //
       this.http.post(serviceUrl, parameter,{ headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -973,7 +1014,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);          
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }            
           }
         )
     } else {
@@ -999,6 +1040,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'editMenu';
       //
       this.http.post(serviceUrl, parameter,{ headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -1008,7 +1050,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);        
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }          
           }
         )
     } else {
@@ -1036,6 +1078,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'addMenuUserProduct';
       //
       this.http.post(serviceUrl, parameter,{ headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -1045,7 +1088,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);        
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }          
           }
         )
     } else {
@@ -1073,6 +1116,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'getProductByBarCode';
 
       this.http.post(serviceUrl, parameter,{ headers: headers })
+      .timeout(10000)        
         .subscribe(data => {
             loader.dismiss();
             successCallback(data);
@@ -1080,7 +1124,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);         
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }           
           });
 
     } else {
@@ -1133,6 +1177,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'changeProfilePic';
 
       this.http.post(serviceUrl, parameter,{ headers: headers })
+      .timeout(10000)        
         .subscribe(data => {
             loader.dismiss();
             successCallback(data);
@@ -1140,7 +1185,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);      
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }        
           });
 
     } else {
@@ -1165,6 +1210,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'updateVerificationStatus';
 
       this.http.post(serviceUrl, parameter, { headers: headers })
+      .timeout(10000)        
       .subscribe(
         data => {
           spinner.dismiss();
@@ -1175,7 +1221,7 @@ export class MainproviderProvider {
           spinner.dismiss();
 
           failureCallback(err);
-         console.log(err.message); 
+              if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }   
         });
 
       // //test
@@ -1205,6 +1251,7 @@ export class MainproviderProvider {
 
       let serviceUrl = this.helper.serviceurl + 'notificationStatus';
       this.http.post(serviceUrl, parameter,{ headers: headers })
+      .timeout(10000)        
       .subscribe(data => {
           spinner.dismiss();
           successCallback(data);
@@ -1212,7 +1259,7 @@ export class MainproviderProvider {
         err => {
           spinner.dismiss();
           failureCallback(err);
-          console.log(err.message);        
+              if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }          
         });
   
 
@@ -1237,6 +1284,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'searchFriend';
 
       this.http.post(serviceUrl,parameter, { headers: headers })
+      .timeout(10000)        
       .subscribe(
         data => {
           loader.dismiss();
@@ -1245,7 +1293,7 @@ export class MainproviderProvider {
         err => {
           loader.dismiss();
           failureCallback(err);
-          console.log(err.message);       
+              if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }         
         }
       )
     } else {
@@ -1325,6 +1373,7 @@ export class MainproviderProvider {
         let serviceUrl = this.helper.serviceurl + 'social_login';
 
         this.http.post(serviceUrl,parameter, { headers: headers })
+      .timeout(10000)          
         .subscribe(
           data => {
             loader.dismiss();
@@ -1333,7 +1382,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);      
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }        
           }
         )
       } else {
@@ -1359,6 +1408,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'RemoveMenuUser';
  
       this.http.post(serviceUrl, parameter,{ headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -1368,7 +1418,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);    
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }      
           }
         )
     } else {
@@ -1392,6 +1442,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'FriendsNotInMenu';
     
       this.http.post(serviceUrl, parameter ,{ headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -1401,7 +1452,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);       
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }         
           }
         )
     } else {
@@ -1425,6 +1476,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'FriendsInMenu';
     
       this.http.post(serviceUrl, parameter ,{ headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -1434,7 +1486,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);       
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }         
           }
         )
     } else {
@@ -1458,6 +1510,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'FriendsNotInGroup';
     
       this.http.post(serviceUrl, parameter ,{ headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -1467,7 +1520,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);       
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }         
           }
         )
     } else {
@@ -1491,6 +1544,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'FriendsInGroup';
     
       this.http.post(serviceUrl, parameter ,{ headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -1500,7 +1554,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);       
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }         
           }
         )
     } else {
@@ -1523,6 +1577,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'FriendsIRequest';
     
       this.http.get(serviceUrl ,{ headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -1532,7 +1587,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);       
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }         
           }
         )
     } else {
@@ -1556,6 +1611,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'CancelFriendRequest';
     
       this.http.post(serviceUrl, parameter ,{ headers: headers })
+      .timeout(10000)  
         .subscribe(
           data => {
             loader.dismiss();
@@ -1565,7 +1621,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);       
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }         
           }
         )
     } else {
@@ -1592,6 +1648,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'EditProfile';
       
       this.http.post(serviceUrl, parameter, { headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -1600,7 +1657,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }  
           }
         )
     } else {
@@ -1620,6 +1677,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'socialLinks';
       
       this.http.get(serviceUrl, { headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -1628,7 +1686,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }  
           }
         )
     } else {
@@ -1648,6 +1706,7 @@ export class MainproviderProvider {
       let serviceUrl = this.helper.serviceurl + 'Stores';
       
       this.http.get(serviceUrl, { headers: headers })
+      .timeout(10000)        
         .subscribe(
           data => {
             loader.dismiss();
@@ -1656,7 +1715,7 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-            console.log(err.message);
+                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }  
           }
         )
     } else {

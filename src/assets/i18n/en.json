@@ -185,5 +185,6 @@
      "confirmCloseApp":"Close App",
      "nameLength":"The name must be at least 4 characters",
      "alreadyAdded":"you sent friend request before wait aya12 for acceptance!",
-     "alreadyFriend":"This user is already friend"
+     "alreadyFriend":"This user is already friend",
+     "timeoutError":"TimeOut!, Please try again"
 }

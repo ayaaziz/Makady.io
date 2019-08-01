@@ -65,15 +65,7 @@ export class HelperProvider {
   }
 
   out() {
-    this.userLoged = false;
-    this.storage.remove("Makadyusername");
-    this.storage.remove("Mlanguage");
-
-    this.storage.remove("Makadyuser_name");
-    this.storage.remove("makadyaccess");
-    localStorage.clear();
-    
-    this.storage.remove("user_info");
+    this.event.publish("out");
   }
 
   changelang() {
