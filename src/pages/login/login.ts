@@ -179,14 +179,7 @@ export class LoginPage {
               "email": user.email
             }
             // this.storage.set("facebook_user",facebookUser)
-            this.storage.set("user_info",facebookUser)
-            .then(() => {
-              this.event.publish("login");
-              this.navCtrl.setRoot(TabsPage);
-            });
-            console.log(facebookUser);
-
-            this.storage.set("Makadyusername", "true");
+           
             //api to save in db and return access_token
             // this.provider.userLoginWithSocial(userId,1,user.name,user.email,this.lang,user.picture,0,"0000-00-00",data => {
             this.provider.userLoginWithSocial("1002",1,user.name,user.email,this.lang,user.picture,0,"0000-00-00",data => {            
@@ -199,6 +192,13 @@ export class LoginPage {
               //return with access
               data = JSON.parse(data);
 
+              alert(data.error)
+              
+              if(data.error) {
+                this.helper.presentToast(this.translate.instant("invaliadCredentials"));
+                return;
+              }
+
               console.log(data);
               this.storage.set("makadyaccess",data.access_token);   
               //set token in localstorage
@@ -207,6 +207,16 @@ export class LoginPage {
               localStorage.setItem('reefdfdfvcvcmakady',data.refresh_token);
 
               this.provider.getuser(data => {
+
+                this.storage.set("Makadyusername", "true");                
+
+                this.storage.set("user_info",facebookUser)
+                .then(() => {
+                  this.event.publish("login");
+                  this.navCtrl.setRoot(TabsPage);
+                });
+                console.log(facebookUser);
+    
                 this.helper.user_id = data.user.id;
 
               },error => {
@@ -260,19 +270,21 @@ export class LoginPage {
 
       this.storage.set("socialType",3);
       // this.storage.set("google_user",google_user)
-      this.storage.set("user_info",google_user)
-      .then(() => {
-        this.event.publish("login");
-        this.navCtrl.setRoot(TabsPage);
-      });
+      // this.storage.set("user_info",google_user)
+      // .then(() => {
+      //   this.event.publish("login");
+      //   this.navCtrl.setRoot(TabsPage);
+      // });
       console.log(google_user);
-      this.storage.set("Makadyusername", "true");
+     
 
       //api to save in db and return access_token
-      this.provider.userLoginWithSocial(user.id,3,user.name,user.email,this.lang,user.imageUrl,0,"0000-00-00",data => {
+      
+      // this.provider.userLoginWithSocial(user.id,3,user.name,user.email,this.lang,user.imageUrl,0,"0000-00-00",data => {
+      this.provider.userLoginWithSocial(user.id,3,user.displayName,user.email,this.lang,user.imageUrl,0,"0000-00-00",data => {
       
         data = JSON.parse(data);
-        console.log(data);
+        console.log("data from socialLogin provider: "+ data);
 
         this.storage.set("makadyaccess",data.access_token); 
         //set token in localstorage
@@ -281,6 +293,15 @@ export class LoginPage {
         localStorage.setItem('reefdfdfvcvcmakady',data.refresh_token); 
 
         this.provider.getuser(data => {
+          console.log("data***** "+data);
+          this.storage.set("Makadyusername", "true");
+
+          this.storage.set("user_info",google_user)
+          .then(() => {
+            this.event.publish("login");
+            this.navCtrl.setRoot(TabsPage);
+          });
+          
           this.helper.user_id = data.user.id;
 
         },error => {
@@ -332,13 +353,6 @@ export class LoginPage {
                 "picture": user.profile_image_url_https,
               }
               // this.storage.set("twitter_user",twitterUser)
-              this.storage.set("user_info",twitterUser)
-              .then(() => {
-                this.event.publish("login");
-                this.navCtrl.setRoot(TabsPage);
-              });
-              console.log(twitterUser);
-              this.storage.set("Makadyusername", "true");
                 
               // // this.loginservice.userLoginWithSocial(user.id, 2, user.name, user.profile_image_url_https, 0, "0000-00-00", (data) => this.socialLoginSuccessCallback(data), (data) => this.socialLoginFailureCallback(data))
 
@@ -354,6 +368,15 @@ export class LoginPage {
                   localStorage.setItem('reefdfdfvcvcmakady',data.refresh_token);
 
                   this.provider.getuser(data => {
+
+                    this.storage.set("Makadyusername", "true");                    
+
+                    this.storage.set("user_info",twitterUser)
+                    .then(() => {
+                      this.event.publish("login");
+                      this.navCtrl.setRoot(TabsPage);
+                    });
+                    console.log(twitterUser);
                     this.helper.user_id = data.user.id;
     
                   },error => {
