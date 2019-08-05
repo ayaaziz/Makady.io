@@ -351,7 +351,7 @@ export class LoginPage {
               // // this.loginservice.userLoginWithSocial(user.id, 2, user.name, user.profile_image_url_https, 0, "0000-00-00", (data) => this.socialLoginSuccessCallback(data), (data) => this.socialLoginFailureCallback(data))
 
               // // setTimeout(() => {
-                this.provider.userLoginWithSocial(user.id,2,user.name,"",this.lang,user.profile_image_url_https,0,"0000-00-00",data => {
+                this.provider.userLoginWithSocial(user.id,2,user.name,user.name+"@twitter.com",this.lang,user.profile_image_url_https,0,"0000-00-00",data => {
                   //return with access
                   data = JSON.parse(data);
                   console.log(data);
