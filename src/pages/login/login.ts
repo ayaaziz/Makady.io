@@ -190,16 +190,10 @@ export class LoginPage {
             'social_type '+1);
 
               //return with access
-              data = JSON.parse(data);
-
-              alert(data.error)
               
-              if(data.error) {
-                this.helper.presentToast(this.translate.instant("invaliadCredentials"));
-                return;
-              }
+              data = JSON.parse(data);
+              console.log("current social data: "+data);              
 
-              console.log(data);
               this.storage.set("makadyaccess",data.access_token);   
               //set token in localstorage
               localStorage.setItem('kdkvfkhggssomakady', data.access_token);

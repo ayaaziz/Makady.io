@@ -1384,7 +1384,9 @@ export class MainproviderProvider {
           err => {
             loader.dismiss();
             failureCallback(err);
-                if(err.name == "TimeoutError") {               this.helper.presentToast(this.translate.instant("timeoutError"));             }        
+            if(err.name == "TimeoutError") {              
+              this.helper.presentToast(this.translate.instant("timeoutError"));  
+            }                                                   
           }
         )
       } else {
