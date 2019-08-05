@@ -17,6 +17,8 @@ export class HelperProvider {
   userLoged: boolean = false;
   registerationId:string = "fdgdgdg66553rhask";
   scaleClass:any = "";
+  socialType:number;
+  
   
   serviceurl:any="http://itrootsdemos.com/makady/phase1/api/";
   userImagePath:string = "http://itrootsdemos.com/makady/phase1/public/uploads/images/users/";

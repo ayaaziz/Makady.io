@@ -139,7 +139,7 @@ export class OffersPage {
           let parsedData=JSON.parse(data);
           console.log(JSON.stringify(parsedData.data));
           if(parsedData.data.length == 0) {
-            this.helper.presentToast("firstaddList");
+            this.helper.presentToast(this.translate.instant("firstaddList"));
             return;
           }
           let alert = this.Alert.create();

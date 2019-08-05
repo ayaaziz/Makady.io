@@ -202,6 +202,8 @@ export class LoginPage {
 
               this.provider.getuser(data => {
 
+                data = JSON.parse(data);
+                
                 this.storage.set("Makadyusername", "true");                
 
                 this.storage.set("user_info",facebookUser)
@@ -287,7 +289,9 @@ export class LoginPage {
         localStorage.setItem('reefdfdfvcvcmakady',data.refresh_token); 
 
         this.provider.getuser(data => {
-          console.log("data***** "+data);
+
+          data = JSON.parse(data);      
+          console.log("data***** "+JSON.stringify(data));
           this.storage.set("Makadyusername", "true");
 
           this.storage.set("user_info",google_user)
@@ -351,7 +355,7 @@ export class LoginPage {
               // // this.loginservice.userLoginWithSocial(user.id, 2, user.name, user.profile_image_url_https, 0, "0000-00-00", (data) => this.socialLoginSuccessCallback(data), (data) => this.socialLoginFailureCallback(data))
 
               // // setTimeout(() => {
-                this.provider.userLoginWithSocial(user.id,2,user.name,user.name+"@twitter.com",this.lang,user.profile_image_url_https,0,"0000-00-00",data => {
+                this.provider.userLoginWithSocial(user.id,2,user.name,user.email?user.email:user.name+"@twitter.com",this.lang,user.profile_image_url_https,0,"0000-00-00",data => {
                   //return with access
                   data = JSON.parse(data);
                   console.log(data);
@@ -363,6 +367,7 @@ export class LoginPage {
 
                   this.provider.getuser(data => {
 
+                    data = JSON.parse(data);
                     this.storage.set("Makadyusername", "true");                    
 
                     this.storage.set("user_info",twitterUser)
@@ -371,6 +376,7 @@ export class LoginPage {
                       this.navCtrl.setRoot(TabsPage);
                     });
                     console.log(twitterUser);
+                    console.log("twitter returned data from api getUser: "+JSON.stringify(data));
                     this.helper.user_id = data.user.id;
     
                   },error => {

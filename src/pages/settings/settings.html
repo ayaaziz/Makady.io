@@ -40,7 +40,7 @@
 			</ion-row>
 		</ion-item>
 
-		<ion-item  (click)="changepass()">
+		<ion-item *ngIf="this.helper.socialType == 4" (click)="changepass()">
 			<ion-row >
 				<ion-icon name="ios-unlock" style="color:#e26c40"></ion-icon>
 				<p style="color:#e26c40;margin-left: 8px;margin-right: 8px;margin-top: 2px;">{{'changpass' | translate}}</p>
@@ -66,7 +66,7 @@
 				<ion-toggle (ionChange)="onToggleOffersNotification($event)" [checked]="offersNotificationStatus"></ion-toggle>
 		</ion-item>
 	
-		<ion-item  (click)="editProfile()">
+		<ion-item *ngIf="this.helper.socialType == 4" (click)="editProfile()">
 			<ion-row >
 				<ion-icon name="ios-person" style="color:#e26c40"></ion-icon>
 				<p style="color:#e26c40;margin-left: 8px;margin-right: 8px;margin-top: 2px;">{{'editProfile' | translate}}</p>

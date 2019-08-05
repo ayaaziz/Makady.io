@@ -129,6 +129,7 @@ export class MyApp {
         this.storage.get("socialType")
         .then(social => {
           console.log("sooocial: "+JSON.stringify(social));
+          this.helper.socialType = social;
           if(social == 4) {
             this.storage.get("user_info")
             .then(val => {
