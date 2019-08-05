@@ -51,12 +51,12 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
             return next.handle(cloneRequest);     
           })
           .catch( err => {
-            // this.helper.out()
+            this.helper.out()
             return Observable.throw(errorResponse);
           })
       }
       else if (errorResponse.status === 401  && errorResponse.url == this.helper.serviceurl+`api/refresh`){
-        // this.helper.out()
+        this.helper.out()
         return;
       }
       else{
