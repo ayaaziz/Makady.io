@@ -188,5 +188,6 @@
      "alreadyFriend":"This user is already friend",
      "timeoutError":"TimeOut!, Please try again",
      "friendSendToYou":"This user already sent you a friend request",
-     "invaliadCredentials":"Incorrect credentials"
+     "invaliadCredentials":"Incorrect credentials",
+     "inactiveUser":"Admin has deactivated your account!"
 }

@@ -97,7 +97,11 @@ export class LoginPage {
           localStorage.setItem('reefdfdfvcvcmakady',Dataparsed.refresh_token);
 
           if (Dataparsed.success == false) {
-            this.helper.presentToast(this.translate.instant('loginerror'));
+            if(Dataparsed.errors == "User not active") {
+              this.helper.presentToast(this.translate.instant('inactiveUser'));              
+            } else {
+              this.helper.presentToast(this.translate.instant('loginerror'));
+            }
           } else { 
               this.provider.getuser(data => {
                 let pdata = JSON.parse(data);
