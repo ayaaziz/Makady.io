@@ -193,10 +193,17 @@ export class LoginPage {
             'lang '+this.lang,
             'social_type '+1);
 
-              //return with access
-              
+            
+              //return with access   
               data = JSON.parse(data);
-              console.log("current social data: "+data);              
+              console.log("current social data: "+data);        
+
+              if(data.success == false) {
+                if(data.errors.email) {
+                  this.helper.presentToast(this.translate.instant("accountExist"));
+                  return;
+                }
+              }      
 
               this.storage.set("makadyaccess",data.access_token);   
               //set token in localstorage
@@ -286,6 +293,13 @@ export class LoginPage {
         data = JSON.parse(data);
         console.log("data from socialLogin provider: "+ data);
 
+        if(data.success == false) {
+          if(data.errors.email) {
+            this.helper.presentToast(this.translate.instant("accountExist"));
+            return;
+          }
+        }  
+
         this.storage.set("makadyaccess",data.access_token); 
         //set token in localstorage
         localStorage.setItem('kdkvfkhggssomakady', data.access_token);
@@ -360,9 +374,19 @@ export class LoginPage {
 
               // // setTimeout(() => {
                 this.provider.userLoginWithSocial(user.id,2,user.name,user.email?user.email:user.name+"@twitter.com",this.lang,user.profile_image_url_https,0,"0000-00-00",data => {
+                  
                   //return with access
                   data = JSON.parse(data);
                   console.log(data);
+
+
+                  if(data.success == false) {
+                    if(data.errors.email) {
+                      this.helper.presentToast(this.translate.instant("accountExist"));
+                      return;
+                    }
+                  }  
+
                   this.storage.set("makadyaccess",data.access_token); 
                   //set token in localstorage
                   localStorage.setItem('kdkvfkhggssomakady', data.access_token);

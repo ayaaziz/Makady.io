@@ -189,5 +189,6 @@
      "timeoutError":"TimeOut!, Please try again",
      "friendSendToYou":"This user already sent you a friend request",
      "invaliadCredentials":"Incorrect credentials",
-     "inactiveUser":"Admin has deactivated your account!"
+     "inactiveUser":"Admin has deactivated your account!",
+     "accountExist":"There is already account with this email"
 }
