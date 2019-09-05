@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "566883177794",
+    "firebase_url": "https://makadynotification-e7132.firebaseio.com",
+    "project_id": "makadynotification-e7132",
+    "storage_bucket": "makadynotification-e7132.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:566883177794:android:430722a0cd960132",
+        "android_client_info": {
+          "package_name": "net.ITRoots.Makady"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "566883177794-m25ltalfnb56vr30dfbgtcn6p1c54to8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_TMO35OkJrXmm7-OUX5GR0mtYUEjkVQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "566883177794-m25ltalfnb56vr30dfbgtcn6p1c54to8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "566883177794-dnk0g8f61h5nej8pb56r55dkcfa85jje.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "net.ITRoots.Makady"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>566883177794-dnk0g8f61h5nej8pb56r55dkcfa85jje.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.566883177794-dnk0g8f61h5nej8pb56r55dkcfa85jje</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBY6VIp9mv8LGV4ChQEHSur8p37VPCcdaQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>566883177794</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>net.ITRoots.Makady</string>
+	<key>PROJECT_ID</key>
+	<string>makadynotification-e7132</string>
+	<key>STORAGE_BUCKET</key>
+	<string>makadynotification-e7132.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:566883177794:ios:430722a0cd960132</string>
+	<key>DATABASE_URL</key>
+	<string>https://makadynotification-e7132.firebaseio.com</string>
+</dict>
+</plist>
