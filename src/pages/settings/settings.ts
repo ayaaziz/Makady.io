@@ -203,6 +203,12 @@ export class SettingsPage {
         });
         this.navCtrl.setRoot(TabsPage);
       
+        this.provider.changelang(2,data=> {
+          console.log("success");
+        },error=> {
+          console.log("error");
+        });
+
       } else {
           this.translate.setDefaultLang('en');
           this.translate.use('en');
@@ -212,6 +218,12 @@ export class SettingsPage {
             console.log("resp set('language',: ",resp)
           });
           this.navCtrl.setRoot(TabsPage);
+
+          this.provider.changelang(1,data=> {
+            console.log("success");
+          },error=> {
+            console.log("error");
+          });
       }
   }
 

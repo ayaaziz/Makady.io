@@ -186,7 +186,7 @@ export class LoginPage {
            
             //api to save in db and return access_token
             // this.provider.userLoginWithSocial(userId,1,user.name,user.email,this.lang,user.picture,0,"0000-00-00",data => {
-            this.provider.userLoginWithSocial("1002",1,user.name,user.email,this.lang,user.picture,0,"0000-00-00",data => {            
+            this.provider.userLoginWithSocial("1002",1,user.name,user.email?user.email:"facebook"+Date.now()+"@facebook.com",this.lang,user.picture,0,"0000-00-00",data => {            
             console.log('username '+user.name,
             'email '+ user.email,
             'password '+userId,

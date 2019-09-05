@@ -253,32 +253,32 @@ export class MainproviderProvider {
 
 
 
-  // changelang(lang,successCallback, failureCallback) {
-  //   let loader = this.loadingCtrl.create({
-  //     content: "",
-  //   });
-  //   loader.present();
-  //   let headers = new HttpHeaders();
-  //   let parameter = {
-  //     'lang':lang     
-  //   }
-  //   headers = headers.set('Authorization', 'Bearer '+access);
-  //   let serviceUrl = this.helper.serviceurl + 'changeLanguage';
-  //   //
-  //   this.http.post(serviceUrl, parameter, { headers: headers })
-  //     .subscribe(
-  //       data => {
-  //         loader.dismiss();
+  changelang(lang,successCallback, failureCallback) {
+    let loader = this.loadingCtrl.create({
+      content: "",
+    });
+    loader.present();
+    let headers = new HttpHeaders();
+    let parameter = {
+      'lang':lang     
+    }
+    headers = headers.set('Authorization', 'Bearer '+localStorage.getItem('kdkvfkhggssomakady'));
+    let serviceUrl = this.helper.serviceurl + 'changeLanguage';
+ 
+    this.http.post(serviceUrl, parameter, { headers: headers })
+      .subscribe(
+        data => {
+          loader.dismiss();
 
-  //         successCallback(JSON.stringify(data))
-  //       },
-  //       err => {
-  //         loader.dismiss();
+          successCallback(JSON.stringify(data))
+        },
+        err => {
+          loader.dismiss();
 
-  //         failureCallback(err);
-  //       }
-  //     )
-  // }
+          failureCallback(err);
+        }
+      )
+  }
 
 
   checkpass(pass,successCallback, failureCallback) {

@@ -3,15 +3,15 @@
     <div style="text-align: center;">
       <div class="takePhoto">
         <img style="text-align:center;" src="{{photo}}" class="circle-pic"
-        onerror="this.onerror=null;this.src='assets/imgs/user.png';" (click)="getimg()"> 
-        <ion-icon name="ios-camera" (click)="getimg()"></ion-icon>
+        onerror="this.onerror=null;this.src='assets/imgs/user.png';"> 
+        <ion-icon name="ios-camera" (click)="getimg()" *ngIf="this.helper.socialType === 4"></ion-icon>
       </div>
       <div>
         <h4 style="display: inline-block;color:#666;text-align: center;">{{username}}</h4>
       </div>
     </div>
     <ion-list no-lines style="margin-top: 20px;">
-      <!-- <button menuClose ion-item (click)="openhome()" style="margin-bottom: -8px;"> -->
+      <!-- <button menuClose ion-item ( click)="openhome()" style="margin-bottom: -8px;"> -->
       <button menuClose ion-item (click)="openhome()" style="margin-bottom: -8px;">        
         <ion-row  style="margin-right: 0px;">
           <ion-icon name="ios-home" style="font-size:21px;color:#f2622c;"></ion-icon>
