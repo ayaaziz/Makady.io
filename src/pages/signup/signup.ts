@@ -214,7 +214,7 @@ export class SignupPage {
          })
        }
       },error => {
-        alert(error.message);
+        // alert(error.message);
       });
     }
   }

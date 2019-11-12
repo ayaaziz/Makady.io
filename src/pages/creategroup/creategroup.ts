@@ -43,6 +43,7 @@ removedIdArr:any = [];
     } else {
       // this.pageType = "Create";      
     }
+    
   
     this.langdirection=this.helper.langdirection;
 
