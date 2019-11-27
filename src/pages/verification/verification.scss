@@ -11,4 +11,17 @@ page-verification {
         color: gray !important;
         width: calc(100% - 8px - 8px);
     }
+
+    .button{
+        height: 30px;
+        width: 120px;
+        background: #f2622c;
+      }
+      .sure_button{
+        align-content: center;
+        text-align: center;
+        margin-top: 20px;
+        width: 100%;
+    
+      }
 }
