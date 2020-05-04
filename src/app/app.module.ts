@@ -45,6 +45,8 @@ import {RoundProgressModule} from 'angular-svg-round-progressbar';
 import { Push } from '@ionic-native/push';
 import { Keyboard } from '@ionic-native/keyboard';
 import { ReactiveFormsModule } from '@angular/forms';
+// import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+import { ZBar, ZBarOptions } from '@ionic-native/zbar';
 
 
 
@@ -145,7 +147,9 @@ export function createTranslateLoader(http: HttpClient) {
     TwitterConnect,
     SettingsProvider,
     Push,
-    Keyboard
+    Keyboard,
+    // QRScanner,
+    ZBar
   ]
 })
 export class AppModule {}

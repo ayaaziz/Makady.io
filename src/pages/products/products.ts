@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from "rxjs/operators";
+import { ZBar, ZBarOptions } from '@ionic-native/zbar';
 
 
 @Component({
@@ -39,7 +40,8 @@ export class ProductsPage {
               public helper:HelperProvider,
               public navCtrl: NavController,
               public navParams: NavParams,
-              public barcodeScanner:BarcodeScanner) {
+              public barcodeScanner:BarcodeScanner,
+              private zbar: ZBar) {
 
 
     this.userMenuId = this.navParams.get("fromUserList");
@@ -287,9 +289,17 @@ export class ProductsPage {
   }
 
   searchByBarcode() {
-    this.barcodeScanner.scan().then(barData => {
 
-      let prodCode = barData.text;
+    let options: ZBarOptions = {
+      flash: 'off',
+      drawSight: false
+    }
+
+    // this.barcodeScanner.scan().then(barData => {
+      this.zbar.scan(options).then(barData => {
+      // let prodCode = barData.text;
+      let prodCode = barData;
+
       console.log("prodCode: "+prodCode);
       this.provider.searchProdByBarCode(this.categoryId,prodCode,prodData => {
         console.log(JSON.stringify(prodData));

@@ -8,6 +8,8 @@ import { Storage } from '@ionic/storage';
 import { BarcodeScanner  } from '@ionic-native/barcode-scanner';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from "rxjs/operators";
+// import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+import { ZBar, ZBarOptions } from '@ionic-native/zbar';
 
 @Component({
   selector: 'page-friends',
@@ -33,7 +35,9 @@ export class FriendsPage {
               public translate:TranslateService,
               public navCtrl: NavController,
               public navParams: NavParams,
-              public event:Events) {
+              public event:Events,
+              // private qrScanner: QRScanner,
+              private zbar: ZBar) {
 
     this.langdirection=this.helper.langdirection;
 
@@ -153,9 +157,20 @@ export class FriendsPage {
 //    }
 // })
 // .catch((e: any) => console.log('Error is', e));
-    this.barcodeScanner.scan().then(barcodeData => {
 
-      let user_id = barcodeData.text;
+
+    let options: ZBarOptions = {
+      flash: 'off',
+      drawSight: false
+    }
+
+    // this.barcodeScanner.scan().then(barcodeData => {
+      this.zbar.scan(options).then(barcodeData => {
+      // let user_id = barcodeData.text;
+      let user_id = barcodeData;
+
+      console.log("barcodeData "+ barcodeData);
+
       console.log("scan friend id: "+user_id);
 
       this.provider.addfriends(user_id,data => {
