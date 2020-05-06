@@ -42,9 +42,10 @@
     "angular-svg-round-progressbar": "^2.0.0",
     "angular2-moment": "^1.9.0",
     "chart.js": "^2.7.3",
+    "cordova": "^8.1.2",
     "cordova-android": "8.0.0",
     "cordova-browser": "6.0.0",
-    "cordova-ios": "5.0.1",
+    "cordova-ios": "^5.0.1",
     "cordova-plugin-camera": "^4.0.3",
     "cordova-plugin-cszbar": "^1.3.4",
     "cordova-plugin-device": "^2.0.2",
@@ -106,7 +107,11 @@
         "APP_NAME": "Makady",
         "FACEBOOK_ANDROID_SDK_VERSION": "4.38.1"
       },
-      "cordova-plugin-cszbar": {}
+      "cordova-plugin-cszbar": {},
+      "cordova-plugin-googleplus": {
+        "REVERSED_CLIENT_ID": "566883177794-m25ltalfnb56vr30dfbgtcn6p1c54to8.apps.googleusercontent.com",
+        "PLAY_SERVICES_VERSION": "11.8.0"
+      }
     },
     "platforms": [
       "android",
