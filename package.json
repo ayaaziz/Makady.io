@@ -66,7 +66,7 @@
     "ionicons": "3.0.0",
     "ngx-qrcode2": "0.0.9",
     "phonegap-plugin-multidex": "^1.0.0",
-    "phonegap-plugin-push": "2.2.3",
+    "phonegap-plugin-push": "^2.2.3",
     "plotly.js": "^1.54.0",
     "rxjs": "5.5.11",
     "sw-toolbox": "3.6.0",
@@ -111,6 +111,10 @@
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "566883177794-m25ltalfnb56vr30dfbgtcn6p1c54to8.apps.googleusercontent.com",
         "PLAY_SERVICES_VERSION": "11.8.0"
+      },
+      "phonegap-plugin-push": {
+        "ANDROID_SUPPORT_V13_VERSION": "27.+",
+        "FCM_VERSION": "11.6.2"
       }
     },
     "platforms": [
