@@ -22,7 +22,7 @@
     "alldata":"Please Enter all data",
     "restno":"Register Now!",
     "money":"The Money Spent",
-    "invalidphone":"The telephone number must be at least 9 and not more than 12 digits",
+    "invalidphone":"The telephone number must be 14 digits",
     "dontmatch":"Confirm Password Don't Match with Password",
     "R.s":"SR ",
     "total":"Total money spent this month",

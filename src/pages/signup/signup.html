@@ -119,11 +119,16 @@
                   
         <ion-item no-lines style="border-radius: 10px;margin-top: 20px;border: 2px solid lightgray;margin-right: 15px;margin-left: 15px;width: 90%;">
           <ion-icon item-start name="ios-phone-portrait-outline"></ion-icon>
-          <ion-input type="number" [dir]="langdirection" formControlName="phone" placeholder=" {{'mobile' | translate}}" ></ion-input>
+          <!-- <ion-input type="number" [dir]="langdirection" formControlName="phone" placeholder=" {{'mobile' | translate}}" ></ion-input> -->
+          <ion-input type="number" [dir]="langdirection" formControlName="phone" placeholder="00966xxxxxxxxx"></ion-input>
         </ion-item> 
 
         <ion-row>
           <ion-col>
+              <div class="error-message" *ngIf="registerForm.controls['phone'].errors?.required &&
+              registerForm.controls['phone'].touched">
+              {{'fieldrequired'| translate}}
+            </div>
             <div class="error-message" *ngIf="registerForm.controls['phone'].errors?.minlength || 
               registerForm.controls['phone'].errors?.maxlength">
               {{'invalidphone'| translate}}

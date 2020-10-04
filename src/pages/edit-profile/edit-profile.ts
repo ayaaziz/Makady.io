@@ -50,7 +50,7 @@ export class EditProfilePage {
       'username': new FormControl(this.user.user.username,Validators.compose([Validators.required,Validators.minLength(4)])),
       'name': new FormControl(this.user.user.name,Validators.required),
       'email': new FormControl(this.user.user.email,Validators.compose([Validators.required,Validators.email])),
-      'phone': new FormControl(this.user.user.phone,Validators.compose([Validators.minLength(9),Validators.maxLength(12)]))
+      'phone': new FormControl(this.user.user.phone,Validators.compose([Validators.required,Validators.minLength(14),Validators.maxLength(14)]))
     });
 
   }

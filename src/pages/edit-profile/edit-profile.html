@@ -78,6 +78,10 @@
 
       <ion-row>
         <ion-col>
+          <div class="error-message" *ngIf="userForm.controls['phone'].errors?.required &&
+          userForm.controls['phone'].touched">
+            {{'fieldrequired'| translate}}
+          </div>
           <div class="error-message" *ngIf="userForm.controls['phone'].errors?.minlength || 
             userForm.controls['phone'].errors?.maxlength">
             {{'invalidphone'| translate}}

@@ -78,7 +78,7 @@ export class SignupPage {
       'confirmPassword': new FormControl(this.confirmPassword,Validators.required),
       'name': new FormControl(this.name,Validators.compose([Validators.required,Validators.minLength(4)])),
       'email': new FormControl(this.email,Validators.compose([Validators.required,Validators.email])),
-      'phone': new FormControl(this.phone,Validators.compose([Validators.minLength(9),Validators.maxLength(12)]))
+      'phone': new FormControl(this.phone,Validators.compose([Validators.required,Validators.minLength(14),Validators.maxLength(14)]))
     });
   }
 
